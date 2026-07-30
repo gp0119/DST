@@ -248,6 +248,7 @@ const explorerSource = await readFile(
   join(sourceRoot, "components/RecipeExplorer.vue"),
   "utf8",
 );
+const globalCss = await readFile(join(sourceRoot, "styles/global.css"), "utf8");
 check(
   explorerSource.includes('recipe.zh.toLocaleLowerCase("zh-CN").includes(needle)'),
   "搜索应只匹配中文料理名称",
@@ -255,6 +256,13 @@ check(
 check(
   !explorerSource.includes("recipe.en.toLocaleLowerCase"),
   "搜索不应匹配英文料理名称",
+);
+check(
+  globalCss.includes(".plot-grid.ten-grid > .plot-cell:nth-child(10)") &&
+    globalCss.includes("grid-template-columns: repeat(6, minmax(0, 1fr))") &&
+    (globalCss.match(/\.plot-grid\.ten-grid > \.plot-cell:nth-child/g) ?? [])
+      .length === 10,
+  "10 格农田应按 PDF 的 3+2+3+2 交错布局",
 );
 
 await access(join(distRoot, "index.html"));
