@@ -6,24 +6,12 @@ import cookbook from "../data/cookbook.json";
 
 const description =
   "《饥荒联机版》81 道烹饪锅料理速查：数值、保鲜、烹饪时间、制作条件、两套常用配料、特殊效果、沃利专属料理与角色最爱食物。";
-const farmingHref = `${import.meta.env.BASE_URL}farming/`;
 ---
 
 <BaseLayout
   title="饥荒联机版食谱大全 · 81 道料理离线速查"
   description={description}
 >
-  <header class="hero">
-    <div class="hero-inner">
-      <p class="eyebrow">Don't Starve Together · Offline Cookbook</p>
-      <h1>饥荒联机版<br />食谱大全</h1>
-      <a class="hero-secondary-link" href={farmingHref}>
-        查看巨大作物四季配比
-        <span aria-hidden="true">→</span>
-      </a>
-    </div>
-  </header>
-
   <main id="main" class="container">
     <RecipeExplorer client:load recipes={cookbook.recipes} />
 
@@ -41,59 +29,5 @@ const farmingHref = `${import.meta.env.BASE_URL}farming/`;
       </div>
     </section>
 
-    <section class="section" aria-labelledby="sources-title">
-      <p class="section-kicker">Data Notes</p>
-      <h2 id="sources-title">资料来源与口径</h2>
-      <p class="section-intro">
-        先按当前公开资料核对，再统一为适合速查的中文表达。遇到总表与单项页面不一致时，以更新较新的单项页面和交叉来源为准。
-      </p>
-      <div class="source-panel">
-        <h3>本页核对范围</h3>
-        <ul>
-          <li>
-            <a
-              href="https://dontstarve.wiki.gg/wiki/Dishes"
-              target="_blank"
-              rel="noreferrer">Don't Starve Wiki · Dishes</a
-            >：料理数值、保鲜、配方与近年调整。
-          </li>
-          <li>
-            <a
-              href="https://dontstarve.wiki.gg/wiki/Portable_Crock_Pot"
-              target="_blank"
-              rel="noreferrer">Portable Crock Pot</a
-            >：11 道沃利专属料理。
-          </li>
-          <li>
-            <a
-              href="https://dontstarve.wiki.gg/wiki/Food/DST#Favorite_Food"
-              target="_blank"
-              rel="noreferrer">Food / DST · Favorite Food</a
-            >：角色最爱食物与额外饱食规则。
-          </li>
-          <li>
-            <a
-              href="https://www.dstcraft.com/cookpot"
-              target="_blank"
-              rel="noreferrer">DST Craft · Crock Pot Simulator</a
-            >：按当前烹饪逻辑核验每道料理的两套四格材料组合。
-          </li>
-          <li>
-            <a
-              href="https://www.gamersky.com/handbook/202601/2071906.shtml"
-              target="_blank"
-              rel="noreferrer">2026 中文食谱汇总</a
-            >：用于交叉核对 70 + 11
-            的数量与常用中文名称；本页未复用其图片和版式。
-          </li>
-        </ul>
-        <p>
-          料理图标与游戏内容版权归 Klei Entertainment
-          所有；本页为非官方、非商业资料汇编。游戏更新后数值仍可能变化。
-        </p>
-      </div>
-    </section>
   </main>
-
-  <footer>Astro + Vue 3 离线版 · 图片位于 public/images · 数据核对于 2026-07-30</footer>
 </BaseLayout>

@@ -4,7 +4,7 @@ const combinedNineGridLayouts = {
     className: "single-nine",
     slots: [
       0, 0, 0,
-      0, 1, null,
+      0, null, 1,
       1, 1, 1,
     ],
   },

@@ -9,13 +9,6 @@ const description =
 ---
 
 <BaseLayout title="巨大作物四季配比 · 饥荒联机版种地速查" description={description}>
-  <header class="farm-hero">
-    <div class="farm-hero-inner">
-      <p class="eyebrow">Don't Starve Together · Giant Crops</p>
-      <h1>种地巨大化<br />四季配比</h1>
-    </div>
-  </header>
-
   <main id="main" class="container farming-main">
     <FarmingExplorer
       client:load
@@ -24,40 +17,5 @@ const description =
       ratioCatalog={farming.ratioCatalog}
       examples={farmingExamples.examples}
     />
-
-    <section class="section farming-sources" aria-labelledby="farming-sources-title">
-      <p class="section-kicker">Data Notes</p>
-      <h2 id="farming-sources-title">数据口径</h2>
-      <p class="section-intro">
-        参考资料第 2–5 页中的四季种植卡片已经逐张转录，包括 1、2、4 块农田以及 9、10
-        格布局；B 站参考图中的四季配比则按当前公开养分值重新计算。页面中的所有示例与完整配比三类养分阶段净变化均为 0。
-      </p>
-      <div class="source-panel">
-        <ul>
-          {
-            farming.sources.map((source) => (
-              <li>
-                {
-                  source.url ? (
-                    <a href={source.url} target="_blank" rel="noreferrer">
-                      {source.label}
-                    </a>
-                  ) : (
-                    <span>{source.label}</span>
-                  )
-                }
-                ：{source.use}。
-              </li>
-            ))
-          }
-        </ul>
-        <p>
-          种植格是便于查阅的配比示意。双田方案需让两块农田相邻，并把数量较少的作物靠近中线，以满足 1
-          格范围内至少 4 株同种作物的家族条件。
-        </p>
-      </div>
-    </section>
   </main>
-
-  <footer>巨大作物四季配比 · 数据核对于 {farming.checkedAt}</footer>
 </BaseLayout>

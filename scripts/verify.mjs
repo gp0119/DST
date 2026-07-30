@@ -226,6 +226,14 @@ for (const example of farmingExamples.examples) {
 
 const effectLayoutCases = [
   {
+    id: "spring-01",
+    slots: [
+      "potato", "potato", "potato",
+      "potato", null, "toma",
+      "toma", "toma", "toma",
+    ],
+  },
+  {
     id: "spring-02",
     slots: [
       "carrot", "carrot", "carrot",
