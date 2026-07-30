@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, nextTick, ref } from "vue";
 import { assetUrl } from "../lib/assets.js";
 import { generateRatioGroups } from "../lib/farmingCatalog.js";
 import { buildExampleFormations } from "../lib/farmingLayouts.js";
@@ -24,8 +24,7 @@ const props = defineProps({
 });
 
 const activeSeasonId = ref(props.seasons[0]?.id ?? "spring");
-const plotCountFilter = ref("all");
-const gridSizeFilter = ref("all");
+const cropFilter = ref("all");
 const activeSeason = computed(
   () =>
     props.seasons.find((season) => season.id === activeSeasonId.value) ??
@@ -52,26 +51,53 @@ const seasonExamples = computed(() =>
   ),
 );
 const filteredExamples = computed(() =>
-  seasonExamples.value.filter(
-    (example) =>
-      (plotCountFilter.value === "all" ||
-        example.plotCount === plotCountFilter.value) &&
-      (gridSizeFilter.value === "all" ||
-        example.gridSize === gridSizeFilter.value),
-  ),
+  seasonExamples.value
+    .filter(
+      (example) =>
+        (cropFilter.value === "all" ||
+          example.items.some(
+            (item) =>
+              item.cropId === cropFilter.value ||
+              item.alternatives?.includes(cropFilter.value),
+          )),
+    )
+    .sort((left, right) => left.plotCount - right.plotCount),
 );
 function crop(id) {
   return cropsById.value[id];
 }
 
-function selectSeason(id) {
-  activeSeasonId.value = id;
-  plotCountFilter.value = "all";
-  gridSizeFilter.value = "all";
+function startsPlotGroup(index) {
+  return (
+    index === 0 ||
+    filteredExamples.value[index - 1].plotCount !==
+      filteredExamples.value[index].plotCount
+  );
 }
 
-function filterCount(type, value) {
-  return seasonExamples.value.filter((example) => example[type] === value).length;
+async function selectSeason(id) {
+  activeSeasonId.value = id;
+  cropFilter.value = "all";
+  await nextTick();
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+}
+
+function cropFilterCount(cropId) {
+  return seasonExamples.value.filter((example) =>
+    example.items.some(
+      (item) =>
+        item.cropId === cropId || item.alternatives?.includes(cropId),
+    ),
+  ).length;
+}
+
+function displayedCropId(example, cropId) {
+  if (cropFilter.value === "all" || cropFilter.value === cropId) return cropId;
+
+  const item = example.items.find((entry) => entry.cropId === cropId);
+  return item?.alternatives?.includes(cropFilter.value)
+    ? cropFilter.value
+    : cropId;
 }
 
 function itemName(item) {
@@ -80,8 +106,8 @@ function itemName(item) {
     .join("/");
 }
 
-function exampleTitle(example) {
-  return example.items.map(itemName).join(" + ");
+function itemCropIds(item) {
+  return [item.cropId, ...(item.alternatives ?? [])];
 }
 
 function combinationLabel(entry) {
@@ -137,68 +163,72 @@ function combinationLabel(entry) {
       <section class="pdf-examples" aria-labelledby="pdf-examples-title">
         <header class="pdf-examples-heading">
           <div>
-            <p>PDF 种植示例</p>
+            <p>种植示例</p>
             <h3 id="pdf-examples-title">{{ activeSeason.name }}配比示例图</h3>
           </div>
           <span>{{ filteredExamples.length }} / {{ seasonExamples.length }} 组</span>
         </header>
 
         <div class="example-filters">
-          <div class="example-filter-group" aria-label="按农田数量筛选">
-            <strong>农田数量</strong>
+          <div class="example-filter-group crop-filter-group" aria-label="按作物筛选">
+            <strong>作物筛选</strong>
             <button
               type="button"
-              :aria-pressed="plotCountFilter === 'all'"
-              @click="plotCountFilter = 'all'"
+              :aria-pressed="cropFilter === 'all'"
+              @click="cropFilter = 'all'"
             >
               全部
             </button>
             <button
-              v-for="count in [1, 2, 4]"
-              :key="count"
+              v-for="item in seasonCrops"
+              :key="item.id"
+              class="crop-filter-button"
               type="button"
-              :aria-pressed="plotCountFilter === count"
-              :disabled="filterCount('plotCount', count) === 0"
-              @click="plotCountFilter = count"
+              :aria-label="`筛选${item.name}`"
+              :aria-pressed="cropFilter === item.id"
+              :disabled="cropFilterCount(item.id) === 0"
+              :title="`${item.name} · ${cropFilterCount(item.id)} 组`"
+              @click="cropFilter = item.id"
             >
-              {{ count }} 块地
-              <small>{{ filterCount("plotCount", count) }}</small>
-            </button>
-          </div>
-
-          <div class="example-filter-group" aria-label="按单田格数筛选">
-            <strong>单田规格</strong>
-            <button
-              type="button"
-              :aria-pressed="gridSizeFilter === 'all'"
-              @click="gridSizeFilter = 'all'"
-            >
-              全部
-            </button>
-            <button
-              v-for="size in [9, 10]"
-              :key="size"
-              type="button"
-              :aria-pressed="gridSizeFilter === size"
-              :disabled="filterCount('gridSize', size) === 0"
-              @click="gridSizeFilter = size"
-            >
-              {{ size }} 格
-              <small>{{ filterCount("gridSize", size) }}</small>
+              <img :src="assetUrl(item.image)" alt="" />
             </button>
           </div>
         </div>
 
         <div v-if="filteredExamples.length" class="pdf-example-grid">
           <article
-            v-for="example in filteredExamples"
+            v-for="(example, exampleIndex) in filteredExamples"
             :key="example.id"
             class="pdf-example-card"
+            :class="{ 'plot-group-start': startsPlotGroup(exampleIndex) }"
           >
             <header>
               <div>
-                <span>PDF 第 {{ example.sourcePage }} 页</span>
-                <h4>{{ exampleTitle(example) }}</h4>
+                <h4>
+                  <template
+                    v-for="(item, itemIndex) in example.items"
+                    :key="item.cropId"
+                  >
+                    <span
+                      v-if="itemIndex"
+                      class="example-title-plus"
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                    <span class="example-title-item">
+                      <span class="example-title-images" aria-hidden="true">
+                        <img
+                          v-for="cropId in itemCropIds(item)"
+                          :key="cropId"
+                          :src="assetUrl(crop(cropId).image)"
+                          alt=""
+                        />
+                      </span>
+                      <span>{{ itemName(item) }}</span>
+                    </span>
+                  </template>
+                </h4>
               </div>
               <strong>{{ example.ratio }}</strong>
             </header>
@@ -215,6 +245,7 @@ function combinationLabel(entry) {
                 v-for="formation in buildExampleFormations(example)"
                 :key="formation.id"
                 class="plot-unit pdf-example-plot"
+                :class="formation.className"
               >
                 <span class="plot-number">▦ {{ formation.label }}</span>
                 <div
@@ -230,8 +261,8 @@ function combinationLabel(entry) {
                   >
                     <img
                       v-if="cropId"
-                      :src="assetUrl(crop(cropId).image)"
-                      :alt="crop(cropId).name"
+                      :src="assetUrl(crop(displayedCropId(example, cropId)).image)"
+                      :alt="crop(displayedCropId(example, cropId)).name"
                       loading="lazy"
                     />
                     <i v-else aria-hidden="true"></i>
@@ -242,7 +273,10 @@ function combinationLabel(entry) {
 
             <div class="pdf-example-items">
               <span v-for="item in example.items" :key="item.cropId">
-                <img :src="assetUrl(crop(item.cropId).image)" alt="" />
+                <img
+                  :src="assetUrl(crop(displayedCropId(example, item.cropId)).image)"
+                  alt=""
+                />
                 {{ itemName(item) }}
                 <strong>{{ item.count }}</strong>
               </span>
@@ -251,7 +285,6 @@ function combinationLabel(entry) {
             <footer>
               <span>{{ example.plotCount }} 块地</span>
               <span>每块 {{ example.gridSize }} 格</span>
-              <span>养分闭环</span>
             </footer>
           </article>
         </div>

@@ -3,23 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import FarmingExplorer from "../components/FarmingExplorer.vue";
 import farming from "../data/farming.json";
 import farmingExamples from "../data/farming-examples.json";
-import { generateRatioGroups } from "../lib/farmingCatalog.js";
 
 const description =
   "《饥荒联机版》巨大作物四季配比速查：春夏秋冬 79 组当季配比、自循环养分比例、双田种植格与巨大化必要条件。";
-const completeRatioCount = farming.seasons.reduce(
-  (count, season) =>
-    count +
-    generateRatioGroups(season, farming.crops, farming.ratioCatalog).reduce(
-      (seasonCount, group) => seasonCount + group.entries.length,
-      0,
-    ),
-  0,
-);
-const seasonalExampleCount = farmingExamples.examples.reduce(
-  (count, example) => count + example.seasonIds.length,
-  0,
-);
 ---
 
 <BaseLayout title="巨大作物四季配比 · 饥荒联机版种地速查" description={description}>
@@ -27,44 +13,10 @@ const seasonalExampleCount = farmingExamples.examples.reduce(
     <div class="farm-hero-inner">
       <p class="eyebrow">Don't Starve Together · Giant Crops</p>
       <h1>种地巨大化<br />四季配比</h1>
-      <p class="hero-copy">
-        PDF 中的春、夏、秋、冬种植卡片已全部整理成示例田，可按 1、2、4 块农田和
-        9、10 格规格筛选，再查看完整养分闭环配比。
-      </p>
-      <div class="farm-hero-tags flex flex-wrap justify-center gap-2">
-        <span>4 个季节</span>
-        <span>{completeRatioCount} 组完整配比</span>
-        <span>{seasonalExampleCount} 个季节示例</span>
-        <span>1 / 2 / 4 块地筛选</span>
-        <span>9 / 10 格筛选</span>
-        <span>养分净变化为 0</span>
-        <span>本地作物图片</span>
-      </div>
     </div>
   </header>
 
   <main id="main" class="container farming-main">
-    <section class="giant-rules" aria-labelledby="giant-rules-title">
-      <div class="rules-heading">
-        <p class="section-kicker">Before Planting</p>
-        <h2 id="giant-rules-title">配比正确，还要满足这些条件</h2>
-        <p>
-          作物最终只有 0–1 点压力才会巨大化。下面的配比负责平衡养分，其他压力仍需在每个生长阶段处理。
-        </p>
-      </div>
-      <div class="rule-grid">
-        {
-          farming.rules.map((rule, index) => (
-            <article class="rule-card">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{rule.title}</h3>
-              <p>{rule.text}</p>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
     <FarmingExplorer
       client:load
       seasons={farming.seasons}
@@ -77,7 +29,7 @@ const seasonalExampleCount = farmingExamples.examples.reduce(
       <p class="section-kicker">Data Notes</p>
       <h2 id="farming-sources-title">数据口径</h2>
       <p class="section-intro">
-        PDF 第 2–5 页中的四季种植卡片已经逐张转录，包括 1、2、4 块农田以及 9、10
+        参考资料第 2–5 页中的四季种植卡片已经逐张转录，包括 1、2、4 块农田以及 9、10
         格布局；B 站参考图中的四季配比则按当前公开养分值重新计算。页面中的所有示例与完整配比三类养分阶段净变化均为 0。
       </p>
       <div class="source-panel">

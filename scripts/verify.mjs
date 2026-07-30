@@ -224,6 +224,114 @@ for (const example of farmingExamples.examples) {
   }
 }
 
+const effectLayoutCases = [
+  {
+    id: "spring-02",
+    slots: [
+      "carrot", "carrot", "carrot",
+      "carrot", "carrot",
+      "watermelon", "watermelon", "watermelon",
+      "watermelon", "watermelon",
+    ],
+  },
+  {
+    id: "spring-07",
+    slots: [
+      "potato", "potato", "potato", "potato", "potato", "potato",
+      "potato", "onion", "onion", "onion", "onion", "potato",
+      null, "garlic", "garlic", "garlic", "garlic", null,
+    ],
+  },
+  {
+    id: "spring-10",
+    slots: [
+      "toma", "toma", "toma", "toma", "toma", "toma",
+      "toma", "potato", "potato", "potato", "potato", "toma",
+      "toma", "potato", "dragonfruit", "dragonfruit", "potato", "toma",
+      "toma", "potato", "dragonfruit", "dragonfruit", "potato", "toma",
+      "toma", "potato", "potato", "potato", "potato", "toma",
+      "toma", "toma", "toma", "toma", "toma", "toma",
+    ],
+  },
+  {
+    id: "spring-11",
+    slots: [
+      null, "onion", "onion", "onion", "onion", null,
+      null, "garlic", "garlic", "garlic", "garlic", null,
+      "potato", "potato", "dragonfruit", "dragonfruit", "potato", "potato",
+      "potato", "potato", "dragonfruit", "dragonfruit", "potato", "potato",
+      null, "garlic", "garlic", "garlic", "garlic", null,
+      null, "onion", "onion", "onion", "onion", null,
+    ],
+  },
+  {
+    id: "spring-13",
+    slots: [
+      null, "watermelon", "watermelon", "watermelon", "watermelon", null,
+      "potato", "corn", "onion", "onion", "corn", "potato",
+      "potato", "corn", "onion", "onion", "corn", "potato",
+      "potato", "corn", "onion", "onion", "corn", "potato",
+      "potato", "corn", "onion", "onion", "corn", "potato",
+      null, "watermelon", "watermelon", "watermelon", "watermelon", null,
+    ],
+  },
+  {
+    id: "spring-15",
+    slots: [
+      "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit",
+      "toma", "onion", "garlic", "garlic", "onion", "toma",
+      "toma", "onion", "garlic", "garlic", "onion", "toma",
+      "toma", "onion", "garlic", "garlic", "onion", "toma",
+      "toma", "onion", "garlic", "garlic", "onion", "toma",
+      "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit",
+    ],
+  },
+  {
+    id: "spring-17",
+    slots: [
+      "corn", "corn", "carrot", "carrot", "corn", "corn",
+      "corn", "corn", "carrot", "carrot", "corn", "corn",
+      "dragonfruit", "dragonfruit", "onion", "onion", "dragonfruit", "dragonfruit",
+      "dragonfruit", "dragonfruit", "onion", "onion", "dragonfruit", "dragonfruit",
+      "corn", "corn", "carrot", "carrot", "corn", "corn",
+      "corn", "corn", "carrot", "carrot", "corn", "corn",
+    ],
+  },
+  {
+    id: "spring-special-4",
+    slots: [
+      "dragonfruit", "toma", "toma", "toma", "toma", "dragonfruit",
+      "dragonfruit", "toma", "toma", "toma", "toma", "dragonfruit",
+      "dragonfruit", "garlic", "onion", "onion", "garlic", "dragonfruit",
+      "dragonfruit", "garlic", "onion", "onion", "garlic", "dragonfruit",
+      "dragonfruit", "toma", "toma", "toma", "toma", "dragonfruit",
+      "dragonfruit", "toma", "toma", "toma", "toma", "dragonfruit",
+    ],
+  },
+  {
+    id: "winter-02",
+    slots: [
+      "potato", "potato", "garlic",
+      "potato", "potato",
+      "carrot", "carrot", "garlic",
+      "carrot", "carrot",
+      "garlic", "potato", "potato",
+      "potato", "potato",
+      "garlic", "carrot", "carrot",
+      "carrot", "carrot",
+    ],
+  },
+];
+
+for (const expected of effectLayoutCases) {
+  const example = farmingExamples.examples.find(({ id }) => id === expected.id);
+  const slots = buildExampleFormations(example).flatMap((formation) => formation.slots);
+  check(
+    JSON.stringify(slots) === JSON.stringify(expected.slots),
+    `${expected.id} 示例图与效果图阵型不一致`,
+  );
+}
+
 let seasonalExampleCount = 0;
 for (const season of farming.seasons) {
   const count = farmingExamples.examples.filter((example) =>

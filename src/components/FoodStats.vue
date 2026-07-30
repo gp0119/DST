@@ -53,6 +53,12 @@ function presentStat(value) {
   return { main: displayStat(text), detail: "", duration: "" };
 }
 
+function splitStat(text) {
+  return /^[+-]/.test(text)
+    ? { sign: text[0], number: text.slice(1) }
+    : { sign: "", number: text };
+}
+
 const stats = computed(() =>
   statDefinitions.map((definition) => {
     const value = props[definition.key];
@@ -62,8 +68,8 @@ const stats = computed(() =>
       ...definition,
       value,
       presentation,
+      mainParts: splitStat(presentation.main),
       classes: {
-        wide: presentation.main.length >= 6,
         negative: presentation.main.startsWith("-"),
       },
     };
@@ -82,7 +88,10 @@ const stats = computed(() =>
     >
       <img class="stat-icon" :src="assetUrl(stat.icon)" alt="" />
       <strong class="stat-value" :class="stat.classes">
-        {{ stat.presentation.main }}
+        <span v-if="stat.mainParts.sign" class="stat-sign" aria-hidden="true">
+          {{ stat.mainParts.sign }}
+        </span>
+        <span>{{ stat.mainParts.number }}</span>
       </strong>
       <small class="stat-detail" aria-hidden="true">
         <span>{{ stat.presentation.detail }}</span>

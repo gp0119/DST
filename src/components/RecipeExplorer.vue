@@ -58,8 +58,13 @@ function clearSearch() {
               placeholder="输入中文料理名称…"
             />
           </label>
-          <button class="clear-button" type="button" @click="clearSearch">
-            清除搜索
+          <button
+            class="clear-button"
+            type="button"
+            :disabled="!query"
+            @click="clearSearch"
+          >
+            清除
           </button>
         </div>
 
@@ -80,15 +85,6 @@ function clearSearch() {
         </div>
       </section>
     </div>
-
-    <details class="legend">
-      <summary>先看这里：条件里的“度”是什么意思？</summary>
-      <p>
-        “肉度、菜度、水果度”等是食材标签数值，不等于食材件数；例如小肉通常只有
-        0.5 肉度。每道料理列出两套常用完整 4
-        格配料，并核对了料理优先级。制作条件仍是最终判断依据；蘑菇蛋糕等固定配方没有真正的第二套替代材料。保鲜时间按默认世界、常温和满新鲜度计算。
-      </p>
-    </details>
 
     <section id="recipes" aria-label="全部料理">
       <div class="recipe-grid">
