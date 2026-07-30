@@ -1,283 +1,380 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#171914">
-  <meta name="description" content="《饥荒联机版》81 道烹饪锅料理速查：数值、保鲜、烹饪时间、制作条件、两套常用配料、特殊效果、沃利专属料理与角色最爱食物。">
-  <title>饥荒联机版食谱大全 · 81 道料理离线速查</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <a class="skip-link" href="#recipes">跳到食谱</a>
-  <header class="hero">
-    <div class="hero-inner">
-      <p class="eyebrow">Don't Starve Together · Offline Cookbook</p>
-      <h1>饥荒联机版<br>食谱大全</h1>
-      <p class="hero-copy">81 道烹饪锅配方离线速查。每张卡片包含料理图片、生命 / 饱食 / 理智、保鲜时间、两套常用四格配料、制作条件与特殊效果，并收录沃利专属料理和角色最爱食物。</p>
-      <div class="hero-stats" aria-label="内容统计">
-        <div class="hero-stat"><strong>81</strong><span>全部配方</span></div>
-        <div class="hero-stat"><strong>70</strong><span>普通配方</span></div>
-        <div class="hero-stat"><strong>11</strong><span>沃利专属</span></div>
-        <div class="hero-stat"><strong>2026.07</strong><span>核对时间</span></div>
-      </div>
-    </div>
-  </header>
-
-  <main id="main" class="container">
-    <div class="toolbar-wrap">
-      <section class="toolbar" aria-label="食谱搜索与筛选">
-        <div class="search-row">
-          <label class="search-shell">
-            <span hidden>搜索食谱</span>
-            <input id="search" type="search" lang="zh-CN" autocomplete="off" aria-label="中文搜索食谱" placeholder="输入中文料理名、配料、条件或效果…">
-          </label>
-          <button id="clear" class="clear-button" type="button">清除搜索</button>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171914" />
+    <meta
+      name="description"
+      content="《饥荒联机版》81 道烹饪锅料理速查：数值、保鲜、烹饪时间、制作条件、两套常用配料、特殊效果、沃利专属料理与角色最爱食物。"
+    />
+    <title>饥荒联机版食谱大全 · 81 道料理离线速查</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#recipes">跳到食谱</a>
+    <header class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Don't Starve Together · Offline Cookbook</p>
+        <h1>饥荒联机版<br />食谱大全</h1>
+        <p class="hero-copy">
+          81 道烹饪锅配方离线速查。每张卡片包含料理图片、生命 / 饱食 /
+          理智、保鲜时间、两套常用四格配料、制作条件与特殊效果，并收录沃利专属料理和角色最爱食物。
+        </p>
+        <div class="hero-stats" aria-label="内容统计">
+          <div class="hero-stat"><strong>81</strong><span>全部配方</span></div>
+          <div class="hero-stat"><strong>70</strong><span>普通配方</span></div>
+          <div class="hero-stat"><strong>11</strong><span>沃利专属</span></div>
+          <div class="hero-stat"><strong>2026.07</strong><span>核对时间</span></div>
         </div>
-        <div class="filter-row" role="group" aria-label="分类筛选">
-          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">全部</button>
-          <button class="filter-button" type="button" data-filter="heal" aria-pressed="false">高回血 · ≥30</button>
-          <button class="filter-button" type="button" data-filter="hunger" aria-pressed="false">高饱食 · ≥75</button>
-          <button class="filter-button" type="button" data-filter="sanity" aria-pressed="false">高理智 · ≥20</button>
-          <button class="filter-button" type="button" data-filter="effect" aria-pressed="false">特殊效果</button>
-          <button class="filter-button" type="button" data-filter="warly" aria-pressed="false">沃利专属</button>
-          <button class="filter-button" type="button" data-filter="special" aria-pressed="false">特殊产物</button>
-          <span id="result-count" class="result-count" aria-live="polite">81 / 81</span>
+      </div>
+    </header>
+
+    <main id="main" class="container">
+      <div class="toolbar-wrap">
+        <section class="toolbar" aria-label="食谱搜索与筛选">
+          <div class="search-row">
+            <label class="search-shell">
+              <span hidden>搜索食谱</span>
+              <input
+                id="search"
+                type="search"
+                lang="zh-CN"
+                autocomplete="off"
+                aria-label="中文搜索食谱"
+                placeholder="输入中文料理名、配料、条件或效果…"
+              />
+            </label>
+            <button id="clear" class="clear-button" type="button">清除搜索</button>
+          </div>
+          <div class="filter-row" role="group" aria-label="分类筛选">
+            <button class="filter-button" type="button" data-filter="all" aria-pressed="true">全部</button>
+            <button class="filter-button" type="button" data-filter="heal" aria-pressed="false">高回血 · ≥30</button>
+            <button class="filter-button" type="button" data-filter="hunger" aria-pressed="false">高饱食 · ≥75</button>
+            <button class="filter-button" type="button" data-filter="sanity" aria-pressed="false">高理智 · ≥20</button>
+            <button class="filter-button" type="button" data-filter="effect" aria-pressed="false">特殊效果</button>
+            <button class="filter-button" type="button" data-filter="warly" aria-pressed="false">沃利专属</button>
+            <button class="filter-button" type="button" data-filter="special" aria-pressed="false">特殊产物</button>
+            <span id="result-count" class="result-count" aria-live="polite">81 / 81</span>
+          </div>
+        </section>
+      </div>
+
+      <section id="recipes" aria-label="全部料理">
+        <div id="recipe-grid" class="recipe-grid"></div>
+        <div id="empty" class="empty-state">
+          <strong>没有找到对应料理</strong>
+          换个关键词，或切回“全部”试试。
         </div>
       </section>
-    </div>
 
-    <details class="legend">
-      <summary>先看这里：条件里的“度”是什么意思？</summary>
-      <p>“肉度、菜度、水果度”等是食材标签数值，不等于食材件数；例如小肉通常只有 0.5 肉度。“常用配料组合”均按完整 4 格列出，并核对了料理优先级。制作条件仍是最终判断依据；蘑菇蛋糕等固定配方没有真正的第二套替代材料。保鲜时间按默认世界、常温和满新鲜度计算。</p>
-    </details>
+      <section id="favorites" class="section">
+        <p class="section-kicker">Character Favorites</p>
+        <h2>人物最爱食物</h2>
+        <p class="section-intro">
+          角色吃到最爱食物时，会额外回复 15 点饱食度；额外回复受食物新鲜度影响。沃利没有最爱食物，芜猴是特殊形态而非普通可选角色。
+        </p>
+        <div id="favorite-grid" class="favorite-grid"></div>
+      </section>
 
-    <section id="recipes" aria-label="全部料理">
-      <div id="recipe-grid" class="recipe-grid"></div>
-      <div id="empty" class="empty-state">
-        <strong>没有找到对应料理</strong>
-        换个关键词，或切回“全部”试试。
-      </div>
-    </section>
+      <section class="section" aria-labelledby="sources-title">
+        <p class="section-kicker">Data Notes</p>
+        <h2 id="sources-title">资料来源与口径</h2>
+        <p class="section-intro">
+          先按当前公开资料核对，再统一为适合速查的中文表达。遇到总表与单项页面不一致时，以更新较新的单项页面和交叉来源为准。
+        </p>
+        <div class="source-panel">
+          <h3>本页核对范围</h3>
+          <ul>
+            <li>
+              <a href="https://dontstarve.wiki.gg/wiki/Dishes" target="_blank" rel="noreferrer">Don't Starve Wiki · Dishes</a
+              >：料理数值、保鲜、配方与近年调整。
+            </li>
+            <li>
+              <a href="https://dontstarve.wiki.gg/wiki/Portable_Crock_Pot" target="_blank" rel="noreferrer">Portable Crock Pot</a>：11
+              道沃利专属料理。
+            </li>
+            <li>
+              <a href="https://dontstarve.wiki.gg/wiki/Food/DST#Favorite_Food" target="_blank" rel="noreferrer">Food / DST · Favorite Food</a
+              >：角色最爱食物与额外饱食规则。
+            </li>
+            <li>
+              <a href="https://www.dstcraft.com/cookpot" target="_blank" rel="noreferrer">DST Craft · Crock Pot Simulator</a
+              >：按当前烹饪逻辑核验每道料理的两套四格材料组合。
+            </li>
+            <li>
+              <a href="https://www.gamersky.com/handbook/202601/2071906.shtml" target="_blank" rel="noreferrer">2026 中文食谱汇总</a>：用于交叉核对 70
+              + 11 的数量与常用中文名称；本页未复用其图片和版式。
+            </li>
+          </ul>
+          <p>料理图标与游戏内容版权归 Klei Entertainment 所有；本页为非官方、非商业资料汇编。游戏更新后数值仍可能变化。</p>
+        </div>
+      </section>
+    </main>
 
-    <section id="favorites" class="section">
-      <p class="section-kicker">Character Favorites</p>
-      <h2>人物最爱食物</h2>
-      <p class="section-intro">角色吃到最爱食物时，会额外回复 15 点饱食度；额外回复受食物新鲜度影响。沃利没有最爱食物，芜猴是特殊形态而非普通可选角色。</p>
-      <div id="favorite-grid" class="favorite-grid"></div>
-    </section>
+    <footer>项目离线版 · 图片位于 images 文件夹 · 数据核对于 2026-07-30</footer>
 
-    <section class="section" aria-labelledby="sources-title">
-      <p class="section-kicker">Data Notes</p>
-      <h2 id="sources-title">资料来源与口径</h2>
-      <p class="section-intro">先按当前公开资料核对，再统一为适合速查的中文表达。遇到总表与单项页面不一致时，以更新较新的单项页面和交叉来源为准。</p>
-      <div class="source-panel">
-        <h3>本页核对范围</h3>
-        <ul>
-          <li><a href="https://dontstarve.wiki.gg/wiki/Dishes" target="_blank" rel="noreferrer">Don't Starve Wiki · Dishes</a>：料理数值、保鲜、配方与近年调整。</li>
-          <li><a href="https://dontstarve.wiki.gg/wiki/Portable_Crock_Pot" target="_blank" rel="noreferrer">Portable Crock Pot</a>：11 道沃利专属料理。</li>
-          <li><a href="https://dontstarve.wiki.gg/wiki/Food/DST#Favorite_Food" target="_blank" rel="noreferrer">Food / DST · Favorite Food</a>：角色最爱食物与额外饱食规则。</li>
-          <li><a href="https://www.dstcraft.com/cookpot" target="_blank" rel="noreferrer">DST Craft · Crock Pot Simulator</a>：按当前烹饪逻辑核验每道料理的两套四格材料组合。</li>
-          <li><a href="https://www.gamersky.com/handbook/202601/2071906.shtml" target="_blank" rel="noreferrer">2026 中文食谱汇总</a>：用于交叉核对 70 + 11 的数量与常用中文名称；本页未复用其图片和版式。</li>
-        </ul>
-        <p>料理图标与游戏内容版权归 Klei Entertainment 所有；本页为非官方、非商业资料汇编。游戏更新后数值仍可能变化。</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>项目离线版 · 图片位于 images 文件夹 · 数据核对于 2026-07-30</footer>
-
-  <script>
-    fetch("./data.json")
-      .then(response => {
-        if (!response.ok) throw new Error("食谱数据加载失败");
-        return response.json();
-      })
-      .then(DATA => {
-    const tagLabels = {
-      heal: "高回血",
-      hunger: "高饱食",
-      sanity: "高理智",
-      effect: "特殊效果",
-      warly: "沃利专属",
-      special: "特殊产物"
-    };
-    const grid = document.querySelector("#recipe-grid");
-    const favoriteGrid = document.querySelector("#favorite-grid");
-    const search = document.querySelector("#search");
-    const clear = document.querySelector("#clear");
-    const empty = document.querySelector("#empty");
-    const resultCount = document.querySelector("#result-count");
-    const filterButtons = [...document.querySelectorAll("[data-filter]")];
-    let activeFilter = "all";
-
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function displayStat(value) {
-      const text = String(value);
-      if (text === "0" || text.startsWith("-") || text === "N/A") return text;
-      return "+" + text;
-    }
-
-    function statPresentation(value) {
-      const text = String(value);
-      const added = text.match(/^(.+?)\s+\+\s+([^/]+)(?:\/(.+))?$/);
-      if (added) {
-        return {
-          main: displayStat(added[1]),
-          detail: "另 " + displayStat(added[2]),
-          duration: added[3] ? added[3] + "内" : "",
-        };
-      }
-      const slash = text.indexOf("/");
-      if (slash > 0) {
-        return {
-          main: displayStat(text.slice(0, slash)),
-          detail: text.slice(slash + 1) + "内",
-          duration: "",
-        };
-      }
-      return { main: displayStat(text), detail: "", duration: "" };
-    }
-
-    function statClass(presentation) {
-      const classes = [];
-      if (presentation.main.length >= 6) classes.push("wide");
-      if (presentation.main.startsWith("-")) classes.push("negative");
-      return classes.join(" ");
-    }
-
-    function statMarkup(label, type, value, icon) {
-      const presentation = statPresentation(value);
-      const detail =
-        '<small class="stat-detail" aria-hidden="true">' +
-          '<span>' + escapeHtml(presentation.detail) + '</span>' +
-          '<span>' + escapeHtml(presentation.duration) + '</span>' +
-        '</small>';
-      return '<div class="stat ' + type + '" aria-label="' + label + ' ' + escapeHtml(displayStat(value)) + '">' +
-        '<img class="stat-icon" src="' + icon + '" alt="">' +
-        '<strong class="stat-value ' + statClass(presentation) + '">' + escapeHtml(presentation.main) + '</strong>' +
-        detail +
-      '</div>';
-    }
-
-    function recipeCard(recipe, index) {
-      const tags = recipe.tags
-        .map(tag => '<span class="tag ' + tag + '">' + tagLabels[tag] + '</span>')
-        .join("");
-      const combos = recipe.combos
-        .map(combo => {
-          const ingredients = combo.items.map(item =>
-            '<span class="ingredient-item">' +
-              '<img class="ingredient-image" src="' + item.image + '" alt="' + escapeHtml(item.name) + '" loading="lazy">' +
-              '<span class="ingredient-name" title="' + escapeHtml(item.name) + '">' + escapeHtml(item.name) + '</span>' +
-            '</span>'
-          ).join("");
-          return '<li class="combo-row" aria-label="' + escapeHtml(combo.text) + '"><div class="ingredient-grid">' + ingredients + '</div></li>';
+    <script>
+      fetch('./data.json')
+        .then((response) => {
+          if (!response.ok) throw new Error('食谱数据加载失败')
+          return response.json()
         })
-        .join("");
-      const characterAvatars = recipe.characters
-        .map(character =>
-          '<span class="character-avatar-wrap ' + (character.relationship === "专属料理" ? "exclusive" : "favorite") + '" title="' +
-            escapeHtml(character.name + " · " + character.relationship) + '">' +
-            '<img class="character-avatar" src="' + character.image + '" alt="' + escapeHtml(character.name + character.relationship) + '" loading="lazy">' +
-          '</span>'
-        )
-        .join("");
-      const effectClass = recipe.effect === "无特殊效果" ? "muted" : "effect";
-      return '<article class="recipe-card" data-index="' + index + '">' +
-        (characterAvatars ? '<div class="character-avatars" aria-label="关联人物">' + characterAvatars + '</div>' : '') +
-        '<div class="card-top">' +
-          '<div class="dish-panel">' +
-            '<img class="dish-image" src="' + recipe.image + '" alt="' + escapeHtml(recipe.zh) + '料理图标" loading="lazy">' +
-            '<div class="tag-list">' + tags + '</div>' +
-          '</div>' +
-          '<div class="recipe-main">' +
-            '<div class="card-head"><h2 class="dish-name">' + escapeHtml(recipe.zh) + '</h2></div>' +
-            '<div class="combo-block"><ol class="combo-list">' + combos + '</ol></div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="card-bottom">' +
-          '<div class="stats" aria-label="食用数值">' +
-            statMarkup("生命", "health", recipe.health, "images/ui/health.png") +
-            statMarkup("饱食", "hunger", recipe.hunger, "images/ui/hunger.png") +
-            statMarkup("精神", "sanity", recipe.sanity, "images/ui/sanity.png") +
-          '</div>' +
-          '<div class="card-details">' +
-            '<div class="perish-row"><span>保鲜时间</span><strong>' + escapeHtml(recipe.perish) + '</strong></div>' +
-            '<div class="cook-row"><span>烹饪时间</span><strong>' + escapeHtml(recipe.cook) + '</strong></div>' +
-            '<div class="info-block"><h3>制作条件</h3><p>' + escapeHtml(recipe.condition) + '</p></div>' +
-            '<div class="info-block ' + effectClass + '"><h3>特殊效果</h3><p>' + escapeHtml(recipe.effect) + '</p></div>' +
-          '</div>' +
-        '</div>' +
-      '</article>';
-    }
+        .then((DATA) => {
+          const tagLabels = {
+            heal: '高回血',
+            hunger: '高饱食',
+            sanity: '高理智',
+            effect: '特殊效果',
+            warly: '沃利专属',
+            special: '特殊产物',
+          }
+          const grid = document.querySelector('#recipe-grid')
+          const favoriteGrid = document.querySelector('#favorite-grid')
+          const search = document.querySelector('#search')
+          const clear = document.querySelector('#clear')
+          const empty = document.querySelector('#empty')
+          const resultCount = document.querySelector('#result-count')
+          const filterButtons = [...document.querySelectorAll('[data-filter]')]
+          let activeFilter = 'all'
 
-    function favoriteCard(item) {
-      const visual = item.image
-        ? '<img class="favorite-image" src="' + item.image + '" alt="' + escapeHtml(item.food) + '图标" loading="lazy">'
-        : '<div class="favorite-fallback" aria-hidden="true">—</div>';
-      const characterAvatar = item.characterImage
-        ? '<img class="favorite-character-avatar" src="' + item.characterImage + '" alt="" loading="lazy">'
-        : '';
-      return '<article class="favorite-card">' +
-        '<div class="favorite-visual">' + visual + characterAvatar + '</div>' +
-        '<div><h3 class="favorite-character">' + escapeHtml(item.character) + '</h3><p class="favorite-food">' + escapeHtml(item.food) + '</p></div>' +
-      '</article>';
-    }
+          function escapeHtml(value) {
+            return String(value)
+              .replaceAll('&', '&amp;')
+              .replaceAll('<', '&lt;')
+              .replaceAll('>', '&gt;')
+              .replaceAll('"', '&quot;')
+              .replaceAll("'", '&#039;')
+          }
 
-    grid.innerHTML = DATA.recipes.map(recipeCard).join("");
-    favoriteGrid.innerHTML = DATA.favorites.map(favoriteCard).join("");
-    const cards = [...grid.querySelectorAll(".recipe-card")];
+          function displayStat(value) {
+            const text = String(value)
+            if (text === '0' || text.startsWith('-') || text === 'N/A') return text
+            return '+' + text
+          }
 
-    function applyFilters() {
-      const query = search.value.trim().toLocaleLowerCase("zh-CN");
-      let shown = 0;
-      DATA.recipes.forEach((recipe, index) => {
-        const matchesFilter = activeFilter === "all" || recipe.tags.includes(activeFilter);
-        const haystack = [
-          recipe.zh,
-          recipe.cook,
-          ...recipe.combos.flatMap(combo => [combo.text, ...combo.items.map(item => item.name)]),
-          recipe.condition,
-          recipe.effect
-        ].join(" ").toLocaleLowerCase("zh-CN");
-        const matchesQuery = !query || haystack.includes(query);
-        const visible = matchesFilter && matchesQuery;
-        cards[index].hidden = !visible;
-        if (visible) shown++;
-      });
-      resultCount.textContent = shown + " / " + DATA.recipes.length;
-      empty.style.display = shown ? "none" : "block";
-    }
+          function statPresentation(value) {
+            const text = String(value)
+            const added = text.match(/^(.+?)\s+\+\s+([^/]+)(?:\/(.+))?$/)
+            if (added) {
+              return {
+                main: displayStat(added[1]),
+                detail: '另 ' + displayStat(added[2]),
+                duration: added[3] ? added[3] + '内' : '',
+              }
+            }
+            const slash = text.indexOf('/')
+            if (slash > 0) {
+              return {
+                main: displayStat(text.slice(0, slash)),
+                detail: text.slice(slash + 1) + '内',
+                duration: '',
+              }
+            }
+            return { main: displayStat(text), detail: '', duration: '' }
+          }
 
-    search.addEventListener("input", applyFilters);
-    clear.addEventListener("click", () => {
-      search.value = "";
-      search.focus();
-      applyFilters();
-    });
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        activeFilter = button.dataset.filter;
-        filterButtons.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
-        applyFilters();
-      });
-    });
+          function statClass(presentation) {
+            const classes = []
+            if (presentation.main.length >= 6) classes.push('wide')
+            if (presentation.main.startsWith('-')) classes.push('negative')
+            return classes.join(' ')
+          }
+
+          function statMarkup(label, type, value, icon) {
+            const presentation = statPresentation(value)
+            const detail =
+              '<small class="stat-detail" aria-hidden="true">' +
+              '<span>' +
+              escapeHtml(presentation.detail) +
+              '</span>' +
+              '<span>' +
+              escapeHtml(presentation.duration) +
+              '</span>' +
+              '</small>'
+            return (
+              '<div class="stat ' +
+              type +
+              '" aria-label="' +
+              label +
+              ' ' +
+              escapeHtml(displayStat(value)) +
+              '">' +
+              '<img class="stat-icon" src="' +
+              icon +
+              '" alt="">' +
+              '<strong class="stat-value ' +
+              statClass(presentation) +
+              '">' +
+              escapeHtml(presentation.main) +
+              '</strong>' +
+              detail +
+              '</div>'
+            )
+          }
+
+          function recipeCard(recipe, index) {
+            const tags = recipe.tags.map((tag) => '<span class="tag ' + tag + '">' + tagLabels[tag] + '</span>').join('')
+            const combos = recipe.combos
+              .map((combo) => {
+                const ingredients = combo.items
+                  .map(
+                    (item) =>
+                      '<span class="ingredient-item">' +
+                      '<img class="ingredient-image" src="' +
+                      item.image +
+                      '" alt="' +
+                      escapeHtml(item.name) +
+                      '" loading="lazy">' +
+                      '<span class="ingredient-name" title="' +
+                      escapeHtml(item.name) +
+                      '">' +
+                      escapeHtml(item.name) +
+                      '</span>' +
+                      '</span>'
+                  )
+                  .join('')
+                return '<li class="combo-row" aria-label="' + escapeHtml(combo.text) + '"><div class="ingredient-grid">' + ingredients + '</div></li>'
+              })
+              .join('')
+            const characterAvatars = recipe.characters
+              .map(
+                (character) =>
+                  '<span class="character-avatar-wrap ' +
+                  (character.relationship === '专属料理' ? 'exclusive' : 'favorite') +
+                  '" title="' +
+                  escapeHtml(character.name + ' · ' + character.relationship) +
+                  '">' +
+                  '<img class="character-avatar" src="' +
+                  character.image +
+                  '" alt="' +
+                  escapeHtml(character.name + character.relationship) +
+                  '" loading="lazy">' +
+                  '</span>'
+              )
+              .join('')
+            const effectClass = recipe.effect === '无特殊效果' ? 'muted' : 'effect'
+            return (
+              '<article class="recipe-card" data-index="' +
+              index +
+              '">' +
+              (characterAvatars ? '<div class="character-avatars" aria-label="关联人物">' + characterAvatars + '</div>' : '') +
+              '<div class="card-top">' +
+              '<div class="dish-panel">' +
+              '<img class="dish-image" src="' +
+              recipe.image +
+              '" alt="' +
+              escapeHtml(recipe.zh) +
+              '料理图标" loading="lazy">' +
+              '<div class="tag-list">' +
+              tags +
+              '</div>' +
+              '</div>' +
+              '<div class="recipe-main">' +
+              '<div class="card-head"><h2 class="dish-name">' +
+              escapeHtml(recipe.zh) +
+              '</h2></div>' +
+              '<div class="combo-block"><ol class="combo-list">' +
+              combos +
+              '</ol></div>' +
+              '</div>' +
+              '</div>' +
+              '<div class="card-bottom">' +
+              '<div class="stats" aria-label="食用数值">' +
+              statMarkup('生命', 'health', recipe.health, 'images/ui/health.png') +
+              statMarkup('饱食', 'hunger', recipe.hunger, 'images/ui/hunger.png') +
+              statMarkup('精神', 'sanity', recipe.sanity, 'images/ui/sanity.png') +
+              '</div>' +
+              '<div class="card-details">' +
+              '<div class="perish-row"><span>保鲜时间</span><strong>' +
+              escapeHtml(recipe.perish) +
+              '</strong></div>' +
+              '<div class="cook-row"><span>烹饪时间</span><strong>' +
+              escapeHtml(recipe.cook) +
+              '</strong></div>' +
+              '<div class="info-block"><h3>制作条件</h3><p>' +
+              escapeHtml(recipe.condition) +
+              '</p></div>' +
+              '<div class="info-block ' +
+              effectClass +
+              '"><h3>特殊效果</h3><p>' +
+              escapeHtml(recipe.effect) +
+              '</p></div>' +
+              '</div>' +
+              '</div>' +
+              '</article>'
+            )
+          }
+
+          function favoriteCard(item) {
+            const visual = item.image
+              ? '<img class="favorite-image" src="' + item.image + '" alt="' + escapeHtml(item.food) + '图标" loading="lazy">'
+              : '<div class="favorite-fallback" aria-hidden="true">—</div>'
+            const characterAvatar = item.characterImage
+              ? '<img class="favorite-character-avatar" src="' + item.characterImage + '" alt="" loading="lazy">'
+              : ''
+            return (
+              '<article class="favorite-card">' +
+              '<div class="favorite-visual">' +
+              visual +
+              characterAvatar +
+              '</div>' +
+              '<div><h3 class="favorite-character">' +
+              escapeHtml(item.character) +
+              '</h3><p class="favorite-food">' +
+              escapeHtml(item.food) +
+              '</p></div>' +
+              '</article>'
+            )
+          }
+
+          grid.innerHTML = DATA.recipes.map(recipeCard).join('')
+          favoriteGrid.innerHTML = DATA.favorites.map(favoriteCard).join('')
+          const cards = [...grid.querySelectorAll('.recipe-card')]
+
+          function applyFilters() {
+            const query = search.value.trim().toLocaleLowerCase('zh-CN')
+            let shown = 0
+            DATA.recipes.forEach((recipe, index) => {
+              const matchesFilter = activeFilter === 'all' || recipe.tags.includes(activeFilter)
+              const haystack = [
+                recipe.zh,
+                recipe.cook,
+                ...recipe.combos.flatMap((combo) => [combo.text, ...combo.items.map((item) => item.name)]),
+                recipe.condition,
+                recipe.effect,
+              ]
+                .join(' ')
+                .toLocaleLowerCase('zh-CN')
+              const matchesQuery = !query || haystack.includes(query)
+              const visible = matchesFilter && matchesQuery
+              cards[index].hidden = !visible
+              if (visible) shown++
+            })
+            resultCount.textContent = shown + ' / ' + DATA.recipes.length
+            empty.style.display = shown ? 'none' : 'block'
+          }
+
+          search.addEventListener('input', applyFilters)
+          clear.addEventListener('click', () => {
+            search.value = ''
+            search.focus()
+            applyFilters()
           })
-      .catch(() => {
-        const emptyState = document.querySelector("#empty");
-        emptyState.style.display = "block";
-        emptyState.innerHTML = "<strong>食谱数据加载失败</strong>请通过本地网页服务打开项目。";
-        document.querySelector("#result-count").textContent = "加载失败";
-      });
-  </script>
-</body>
+          filterButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+              activeFilter = button.dataset.filter
+              filterButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)))
+              applyFilters()
+            })
+          })
+        })
+        .catch(() => {
+          const emptyState = document.querySelector('#empty')
+          emptyState.style.display = 'block'
+          emptyState.innerHTML = '<strong>食谱数据加载失败</strong>请通过本地网页服务打开项目。'
+          document.querySelector('#result-count').textContent = '加载失败'
+        })
+    </script>
+  </body>
 </html>
