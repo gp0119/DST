@@ -2,6 +2,7 @@ import { access, readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateRatioGroups } from "../src/lib/farmingCatalog.js";
+import { buildExampleFormations } from "../src/lib/farmingLayouts.js";
 
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const dataPath = join(projectRoot, "src/data/cookbook.json");
@@ -162,6 +163,29 @@ for (const example of farmingExamples.examples) {
     example.items.every((item) => item.count * example.plotCount >= 4),
     `${example.id} 扩种后仍有作物不足 4 株`,
   );
+
+  const formations = buildExampleFormations(example);
+  const formationSlots = formations.flatMap((formation) => formation.slots);
+  const renderedCounts = formationSlots.reduce((countsByCrop, cropId) => {
+    if (cropId) countsByCrop[cropId] = (countsByCrop[cropId] ?? 0) + 1;
+    return countsByCrop;
+  }, {});
+  check(
+    formationSlots.length === example.gridSize * example.plotCount,
+    `${example.id} 最终示例图孔位数量不正确`,
+  );
+  check(
+    example.gridSize === 9
+      ? formations.length === 1
+      : formations.length === example.plotCount,
+    `${example.id} 最终示例图没有按相邻农田合并`,
+  );
+  for (const item of example.items) {
+    check(
+      renderedCounts[item.cropId] === item.count * example.plotCount,
+      `${example.id} 最终示例图中的 ${item.cropId} 数量不正确`,
+    );
+  }
 
   for (const seasonId of example.seasonIds) {
     check(seasonIds.has(seasonId), `${example.id} 引用了未知季节：${seasonId}`);

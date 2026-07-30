@@ -1080,18 +1080,77 @@ footer {
   gap: 6px;
   margin-top: 10px;
 }
-.pdf-example-plots.plot-count-1 {
-  grid-template-columns: minmax(0, 240px);
+.pdf-example-plots.combined-fields {
+  grid-template-columns: minmax(0, 360px);
+  justify-content: center;
+}
+.pdf-example-plots.single-ten-field {
+  grid-template-columns: minmax(0, 220px);
   justify-content: center;
 }
 .pdf-example-plot {
   padding: 6px;
 }
 .pdf-example-plot .plot-cell {
-  border-color: rgba(224, 188, 121, .16);
-  background: rgba(29, 20, 13, .4);
+  position: relative;
+  z-index: 1;
+  border: 0;
+  background: transparent;
 }
 .pdf-example-plot .plot-cell img {
+  width: 112%;
+  height: 112%;
+}
+.pdf-example-plot .plot-grid:not(.ten-grid) {
+  gap: 0;
+  padding: 7%;
+  overflow: hidden;
+  border: 1px solid rgba(205, 159, 91, .2);
+  border-radius: 10px 7px 11px 6px;
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(28, 18, 10, .13) 50%, transparent 51%),
+    repeating-linear-gradient(0deg, rgba(157, 107, 57, .09) 0 1px, transparent 1px 24%),
+    radial-gradient(ellipse at 48% 42%, #72573b 0, #5a432d 56%, #3e2c1e 100%);
+  box-shadow:
+    inset 0 0 18px rgba(24, 14, 8, .42),
+    inset 0 1px rgba(235, 194, 127, .12);
+}
+.pdf-example-plot .plot-grid:not(.ten-grid) .plot-cell {
+  margin: -7%;
+}
+.pdf-example-plot .plot-grid:not(.ten-grid) .plot-cell img {
+  width: 122%;
+  height: 122%;
+}
+.pdf-example-plot .plot-grid:not(.ten-grid) .plot-cell.empty {
+  visibility: hidden;
+}
+.pdf-example-plot .plot-grid.combined-two {
+  padding: 6% 5%;
+}
+.pdf-example-plot .plot-grid.combined-two .plot-cell {
+  aspect-ratio: 1.08;
+}
+.pdf-example-plot .plot-grid.combined-four {
+  padding: 5%;
+}
+.pdf-example-plot .plot-grid.combined-four .plot-cell {
+  margin: -12%;
+}
+.pdf-example-plot .plot-grid.combined-four .plot-cell img {
+  width: 128%;
+  height: 128%;
+}
+.pdf-example-plot .plot-grid.ten-grid {
+  padding: 3px;
+  border-radius: 9px;
+  background: rgba(30, 20, 12, .25);
+}
+.pdf-example-plot .plot-grid.ten-grid .plot-cell {
+  border: 1px solid rgba(224, 188, 121, .16);
+  background: rgba(29, 20, 13, .4);
+}
+.pdf-example-plot .plot-grid.ten-grid .plot-cell img {
   width: 86%;
   height: 86%;
 }
@@ -1165,7 +1224,7 @@ footer {
 }
 .plot-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--field-columns, 3), minmax(0, 1fr));
   gap: 3px;
 }
 .plot-grid.ten-grid {

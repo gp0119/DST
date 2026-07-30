@@ -2,6 +2,7 @@
 import { computed, ref } from "vue";
 import { assetUrl } from "../lib/assets.js";
 import { generateRatioGroups } from "../lib/farmingCatalog.js";
+import { buildExampleFormations } from "../lib/farmingLayouts.js";
 
 const props = defineProps({
   seasons: {
@@ -59,21 +60,6 @@ const filteredExamples = computed(() =>
         example.gridSize === gridSizeFilter.value),
   ),
 );
-const layoutTemplates = {
-  "9|4,4": [0, 1, 0, 1, null, 1, 0, 1, 0],
-  "10|5,5": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-  "9|3,3,3": [0, 0, 0, 1, 1, 1, 2, 2, 2],
-  "9|4,2,2": [0, 1, 0, 2, null, 2, 0, 1, 0],
-  "9|6,3": [0, 0, 1, 0, 0, 1, 0, 0, 1],
-  "9|5,3,1": [0, 1, 0, 1, 0, 1, 0, 2, 0],
-  "9|2,2,2,1": [0, 1, 2, 0, null, 1, 2, null, 3],
-  "9|2,2,2,2": [0, 1, 2, 3, null, 3, 2, 1, 0],
-  "9|3,2,2,2": [0, 1, 2, 3, 0, 1, 2, 3, 0],
-  "9|4,2,2,1": [0, 1, 0, 2, 3, 2, 0, 1, 0],
-  "10|4,4,2": [0, 0, 1, 1, 2, 0, 0, 1, 1, 2],
-  "9|4,3,1,1": [0, 1, 0, 2, 1, 3, 0, 1, 0],
-};
-
 function crop(id) {
   return cropsById.value[id];
 }
@@ -96,20 +82,6 @@ function itemName(item) {
 
 function exampleTitle(example) {
   return example.items.map(itemName).join(" + ");
-}
-
-function exampleLayout(example, plotIndex) {
-  const items = [...example.items].sort(
-    (left, right) =>
-      right.count - left.count || left.cropId.localeCompare(right.cropId),
-  );
-  const key = `${example.gridSize}|${items.map((item) => item.count).join(",")}`;
-  const template = layoutTemplates[key];
-  const positions = plotIndex % 2 ? [...template].reverse() : template;
-
-  return positions.map((itemIndex) =>
-    itemIndex === null ? null : items[itemIndex].cropId,
-  );
 }
 
 function combinationLabel(entry) {
@@ -233,20 +205,25 @@ function combinationLabel(entry) {
 
             <div
               class="pdf-example-plots"
-              :class="`plot-count-${example.plotCount}`"
+              :class="{
+                'combined-fields': example.gridSize === 9,
+                'single-ten-field': example.gridSize === 10 && example.plotCount === 1,
+                'multiple-ten-fields': example.gridSize === 10 && example.plotCount > 1,
+              }"
             >
               <div
-                v-for="plotIndex in example.plotCount"
-                :key="plotIndex"
+                v-for="formation in buildExampleFormations(example)"
+                :key="formation.id"
                 class="plot-unit pdf-example-plot"
               >
-                <span class="plot-number">▦ 田 {{ plotIndex }}</span>
+                <span class="plot-number">▦ {{ formation.label }}</span>
                 <div
                   class="plot-grid"
-                  :class="{ 'ten-grid': example.gridSize === 10 }"
+                  :class="formation.className"
+                  :style="{ '--field-columns': formation.columns }"
                 >
                   <span
-                    v-for="(cropId, slotIndex) in exampleLayout(example, plotIndex - 1)"
+                    v-for="(cropId, slotIndex) in formation.slots"
                     :key="slotIndex"
                     class="plot-cell"
                     :class="{ empty: !cropId }"
