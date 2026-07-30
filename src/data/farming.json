@@ -1,0 +1,234 @@
+{
+  "checkedAt": "2026-07-30",
+  "ratioCatalog": {
+    "patterns": [
+      [1, 1],
+      [1, 2],
+      [1, 1, 1],
+      [1, 1, 2],
+      [1, 2, 2]
+    ],
+    "expectedCounts": {
+      "spring": 42,
+      "summer": 12,
+      "autumn": 21,
+      "winter": 4
+    },
+    "exclusions": {
+      "spring": ["eggplant:1|potato:1|toma:2"],
+      "summer": [],
+      "autumn": ["eggplant:1|potato:1|toma:2"],
+      "winter": []
+    },
+    "note": "参考图春季 1:1:2 区域有一项图标无法按当前养分值归零；本页按养分闭环校正为大蒜、洋葱与两份土豆。"
+  },
+  "crops": [
+    {
+      "id": "toma",
+      "name": "番茄",
+      "image": "images/ingredients/tomato.png",
+      "seasons": ["spring", "summer", "autumn"],
+      "nutrients": [-2, -2, 4]
+    },
+    {
+      "id": "eggplant",
+      "name": "茄子",
+      "image": "images/ingredients/eggplant.png",
+      "seasons": ["spring", "autumn"],
+      "nutrients": [2, 2, -4]
+    },
+    {
+      "id": "potato",
+      "name": "土豆",
+      "image": "images/ingredients/potato.png",
+      "seasons": ["spring", "autumn", "winter"],
+      "nutrients": [2, 2, -4]
+    },
+    {
+      "id": "dragonfruit",
+      "name": "火龙果",
+      "image": "images/ingredients/dragonfruit.png",
+      "seasons": ["spring", "summer"],
+      "nutrients": [4, 4, -8]
+    },
+    {
+      "id": "pepper",
+      "name": "辣椒",
+      "image": "images/ingredients/pepper.png",
+      "seasons": ["summer", "autumn"],
+      "nutrients": [4, 4, -8]
+    },
+    {
+      "id": "carrot",
+      "name": "胡萝卜",
+      "image": "images/ingredients/carrot.png",
+      "seasons": ["spring", "autumn", "winter"],
+      "nutrients": [-4, 2, 2]
+    },
+    {
+      "id": "pumpkin",
+      "name": "南瓜",
+      "image": "images/ingredients/pumpkin.png",
+      "seasons": ["autumn", "winter"],
+      "nutrients": [-4, 2, 2]
+    },
+    {
+      "id": "onion",
+      "name": "洋葱",
+      "image": "images/ingredients/quagmire_onion.png",
+      "seasons": ["spring", "summer", "autumn"],
+      "nutrients": [-8, 4, 4]
+    },
+    {
+      "id": "pomegranate",
+      "name": "石榴",
+      "image": "images/ingredients/pomegranate.png",
+      "seasons": ["spring", "summer"],
+      "nutrients": [-8, 4, 4]
+    },
+    {
+      "id": "asparagus",
+      "name": "芦笋",
+      "image": "images/ingredients/asparagus.png",
+      "seasons": ["spring", "winter"],
+      "nutrients": [2, -4, 2]
+    },
+    {
+      "id": "corn",
+      "name": "玉米",
+      "image": "images/ingredients/corn.png",
+      "seasons": ["spring", "summer", "autumn"],
+      "nutrients": [2, -4, 2]
+    },
+    {
+      "id": "durian",
+      "name": "榴莲",
+      "image": "images/ingredients/durian.png",
+      "seasons": ["spring"],
+      "nutrients": [4, -8, 4]
+    },
+    {
+      "id": "garlic",
+      "name": "大蒜",
+      "image": "images/ingredients/garlic.png",
+      "seasons": ["spring", "summer", "autumn", "winter"],
+      "nutrients": [4, -8, 4]
+    },
+    {
+      "id": "watermelon",
+      "name": "西瓜",
+      "image": "images/ingredients/watermelon.png",
+      "seasons": ["spring", "summer"],
+      "nutrients": [4, -2, -2]
+    }
+  ],
+  "rules": [
+    {
+      "title": "必须当季",
+      "text": "所有作物都要处于喜爱季节，否则每个生长阶段都会积累季节压力。"
+    },
+    {
+      "title": "同种至少 4 株",
+      "text": "每株作物周围 1 格范围内，同种作物含自身至少 4 株。双田方案需要相邻摆放。"
+    },
+    {
+      "title": "养分先有底量",
+      "text": "页面方案让三类养分收支归零；首次开田仍建议先补足基础养分。"
+    },
+    {
+      "title": "保持湿润",
+      "text": "每个生长阶段都要确保地面湿润；无雨时通常每阶段浇一次即可。"
+    },
+    {
+      "title": "每阶段照料",
+      "text": "每个阶段交谈一次，或使用乐器、友好果蝇等范围照料手段。"
+    },
+    {
+      "title": "无杂草、不拥挤",
+      "text": "清除杂草与腐烂物；同一农田地块最多 10 株作物或杂草。"
+    }
+  ],
+  "seasons": [
+    {
+      "id": "spring",
+      "name": "春季",
+      "eyebrow": "SPRING",
+      "description": "选择最多，适合扩种火龙果与番茄，也可使用低维护的土豆组合。",
+      "cropIds": [
+        "toma",
+        "eggplant",
+        "potato",
+        "dragonfruit",
+        "carrot",
+        "onion",
+        "pomegranate",
+        "asparagus",
+        "corn",
+        "durian",
+        "garlic",
+        "watermelon"
+      ]
+    },
+    {
+      "id": "summer",
+      "name": "夏季",
+      "eyebrow": "SUMMER",
+      "description": "重点是水分管理；番茄搭配火龙果或辣椒，是最直接的 2:1 闭环。",
+      "cropIds": [
+        "toma",
+        "dragonfruit",
+        "pepper",
+        "onion",
+        "pomegranate",
+        "corn",
+        "garlic",
+        "watermelon"
+      ]
+    },
+    {
+      "id": "autumn",
+      "name": "秋季",
+      "eyebrow": "AUTUMN",
+      "description": "最适合建立长期主粮田，土豆、胡萝卜和大蒜组合可一路沿用到春季。",
+      "cropIds": [
+        "toma",
+        "eggplant",
+        "potato",
+        "pepper",
+        "carrot",
+        "pumpkin",
+        "onion",
+        "corn",
+        "garlic"
+      ]
+    },
+    {
+      "id": "winter",
+      "name": "冬季",
+      "eyebrow": "WINTER",
+      "description": "当季作物最少，但土豆、胡萝卜、南瓜、芦笋和大蒜能组成稳定闭环。",
+      "cropIds": ["potato", "carrot", "pumpkin", "asparagus", "garlic"]
+    }
+  ],
+  "sources": [
+    {
+      "label": "森芑 · 种地无脑作物搭配（2023 PDF）",
+      "use": "第 2–5 页的春夏秋冬示例卡、1/2/4 块农田数量与 9/10 格布局"
+    },
+    {
+      "label": "Bilibili · 作物种植配比大全",
+      "url": "https://www.bilibili.com/opus/683714761763848212",
+      "use": "按四季和 5 类比例整理的 79 组配比参考图"
+    },
+    {
+      "label": "Don't Starve Wiki · Farming/DST",
+      "url": "https://dontstarve.wiki.gg/wiki/Farming/DST",
+      "use": "压力条件、季节、作物养分与官方列出的常用组合"
+    },
+    {
+      "label": "Klei Forums · Giant Crop Cheat Sheet",
+      "url": "https://forums.kleientertainment.com/forums/topic/126274-giant-crop-cheat-sheet/",
+      "use": "四季巨大作物组合图的原始社区资料"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import cookbook from "../data/cookbook.json";
 
 const description =
   "《饥荒联机版》81 道烹饪锅料理速查：数值、保鲜、烹饪时间、制作条件、两套常用配料、特殊效果、沃利专属料理与角色最爱食物。";
+const farmingHref = `${import.meta.env.BASE_URL}farming/`;
 ---
 
 <BaseLayout
@@ -29,6 +30,10 @@ const description =
         <div class="hero-stat"><strong>11</strong><span>沃利专属</span></div>
         <div class="hero-stat"><strong>2026.07</strong><span>核对时间</span></div>
       </div>
+      <a class="hero-secondary-link" href={farmingHref}>
+        查看巨大作物四季配比
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
   </header>
 

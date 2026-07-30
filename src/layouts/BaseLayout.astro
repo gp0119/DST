@@ -5,6 +5,21 @@ const {
   title = "饥荒联机版食谱大全",
   description = "《饥荒联机版》81 道烹饪锅料理速查。",
 } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const currentPath = Astro.url.pathname;
+const links = [
+  {
+    href: base,
+    label: "料理食谱",
+    active: currentPath === base,
+  },
+  {
+    href: `${base}farming/`,
+    label: "巨大化配比",
+    active: currentPath.includes("/farming"),
+  },
+];
 ---
 
 <!doctype html>
@@ -18,7 +33,28 @@ const {
     <title>{title}</title>
   </head>
   <body>
-    <a class="skip-link" href="#recipes">跳到食谱</a>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <header class="site-nav">
+      <nav class="site-nav-inner" aria-label="主导航">
+        <a class="site-brand" href={base}>
+          <span>DST</span>
+          生存速查
+        </a>
+        <div class="site-links">
+          {
+            links.map((link) => (
+              <a
+                href={link.href}
+                class:list={{ active: link.active }}
+                aria-current={link.active ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+    </header>
     <slot />
   </body>
 </html>

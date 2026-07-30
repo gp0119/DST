@@ -1,13 +1,18 @@
 import { access, readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { generateRatioGroups } from "../src/lib/farmingCatalog.js";
 
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const dataPath = join(projectRoot, "src/data/cookbook.json");
+const farmingDataPath = join(projectRoot, "src/data/farming.json");
+const farmingExamplesPath = join(projectRoot, "src/data/farming-examples.json");
 const publicRoot = join(projectRoot, "public");
 const sourceRoot = join(projectRoot, "src");
 const distRoot = join(projectRoot, "dist");
 const data = JSON.parse(await readFile(dataPath, "utf8"));
+const farming = JSON.parse(await readFile(farmingDataPath, "utf8"));
+const farmingExamples = JSON.parse(await readFile(farmingExamplesPath, "utf8"));
 const packageJson = JSON.parse(await readFile(join(projectRoot, "package.json"), "utf8"));
 const failures = [];
 
@@ -33,6 +38,8 @@ check(data.favorites.length === 19, `人物最爱应为 19 项，实际为 ${dat
 check(Boolean(packageJson.dependencies.astro), "缺少 Astro 依赖");
 check(Boolean(packageJson.dependencies.vue), "缺少 Vue 3 依赖");
 check(Boolean(packageJson.dependencies.tailwindcss), "缺少 Tailwind CSS 依赖");
+check(farming.seasons.length === 4, "巨大作物页面应包含春夏秋冬 4 个季节");
+check(farming.crops.length === 14, `农作物应为 14 种，实际为 ${farming.crops.length}`);
 
 for (const recipe of data.recipes) {
   check(recipe.combos.length === 2, `${recipe.zh} 应有 2 套常用配料`);
@@ -52,8 +59,169 @@ for (const favorite of data.favorites) {
   if (favorite.image) imagePaths.add(favorite.image);
   if (favorite.characterImage) imagePaths.add(favorite.characterImage);
 }
+for (const crop of farming.crops) imagePaths.add(crop.image);
 ["images/ui/health.png", "images/ui/hunger.png", "images/ui/sanity.png"].forEach((path) =>
   imagePaths.add(path),
+);
+
+const cropsById = Object.fromEntries(farming.crops.map((crop) => [crop.id, crop]));
+let completeRatioCount = 0;
+for (const season of farming.seasons) {
+  for (const cropId of season.cropIds) {
+    check(Boolean(cropsById[cropId]), `${season.name}引用了未知作物：${cropId}`);
+    check(
+      cropsById[cropId]?.seasons.includes(season.id),
+      `${cropsById[cropId]?.name ?? cropId}不属于${season.name}`,
+    );
+  }
+
+  const ratioGroups = generateRatioGroups(
+    season,
+    farming.crops,
+    farming.ratioCatalog,
+  );
+  const seasonRatioCount = ratioGroups.reduce(
+    (count, group) => count + group.entries.length,
+    0,
+  );
+  completeRatioCount += seasonRatioCount;
+  check(
+    seasonRatioCount === farming.ratioCatalog.expectedCounts[season.id],
+    `${season.name}完整配比应为 ${farming.ratioCatalog.expectedCounts[season.id]} 组，实际为 ${seasonRatioCount} 组`,
+  );
+
+  for (const group of ratioGroups) {
+    for (const entry of group.entries) {
+      const balance = entry.items.reduce(
+        (result, item) => {
+          const crop = cropsById[item.cropId];
+          check(Boolean(crop), `${season.name}${group.ratio}引用了未知作物：${item.cropId}`);
+          check(
+            crop?.seasons.includes(season.id),
+            `${season.name}${group.ratio}包含非当季作物：${crop?.name}`,
+          );
+          crop?.nutrients.forEach((value, index) => {
+            result[index] += value * item.count;
+          });
+          return result;
+        },
+        [0, 0, 0],
+      );
+      check(
+        balance.every((value) => value === 0),
+        `${season.name}${group.ratio}“${entry.id}”养分不平衡：${balance.join("/")}`,
+      );
+    }
+  }
+}
+
+check(completeRatioCount === 79, `完整配比应为 79 组，实际为 ${completeRatioCount} 组`);
+check(
+  farming.seasons.every((season) => !("plans" in season)),
+  "旧的推荐方案数据应已移除",
+);
+
+const seasonIds = new Set(farming.seasons.map((season) => season.id));
+const exampleIds = new Set();
+const supportedLayouts = new Set([
+  "9|4,4",
+  "10|5,5",
+  "9|3,3,3",
+  "9|4,2,2",
+  "9|6,3",
+  "9|5,3,1",
+  "9|2,2,2,1",
+  "9|2,2,2,2",
+  "9|3,2,2,2",
+  "9|4,2,2,1",
+  "10|4,4,2",
+  "9|4,3,1,1",
+]);
+
+for (const example of farmingExamples.examples) {
+  check(!exampleIds.has(example.id), `PDF 示例 ID 重复：${example.id}`);
+  exampleIds.add(example.id);
+  check([1, 2, 4].includes(example.plotCount), `${example.id} 农田数量不是 1、2 或 4`);
+  check([9, 10].includes(example.gridSize), `${example.id} 单田规格不是 9 或 10 格`);
+  check(
+    example.items.reduce((count, item) => count + item.count, 0) <= example.gridSize,
+    `${example.id} 单田作物数量超过 ${example.gridSize} 格`,
+  );
+  const counts = example.items
+    .map((item) => item.count)
+    .sort((left, right) => right - left);
+  check(
+    counts.join(":") === example.ratio,
+    `${example.id} 的比例 ${example.ratio} 与作物数量 ${counts.join(":")} 不一致`,
+  );
+  check(
+    supportedLayouts.has(`${example.gridSize}|${counts.join(",")}`),
+    `${example.id} 缺少对应的示例田布局模板`,
+  );
+  check(
+    example.items.every((item) => item.count * example.plotCount >= 4),
+    `${example.id} 扩种后仍有作物不足 4 株`,
+  );
+
+  for (const seasonId of example.seasonIds) {
+    check(seasonIds.has(seasonId), `${example.id} 引用了未知季节：${seasonId}`);
+    const balance = example.items.reduce(
+      (result, item) => {
+        const crop = cropsById[item.cropId];
+        check(Boolean(crop), `${example.id} 引用了未知作物：${item.cropId}`);
+        check(
+          crop?.seasons.includes(seasonId),
+          `${example.id} 的 ${crop?.name ?? item.cropId} 不属于 ${seasonId}`,
+        );
+        crop?.nutrients.forEach((value, index) => {
+          result[index] += value * item.count;
+        });
+
+        for (const alternativeId of item.alternatives ?? []) {
+          const alternative = cropsById[alternativeId];
+          check(Boolean(alternative), `${example.id} 引用了未知替换作物：${alternativeId}`);
+          check(
+            alternative?.seasons.includes(seasonId),
+            `${example.id} 的替换作物 ${alternative?.name ?? alternativeId} 不属于 ${seasonId}`,
+          );
+          check(
+            alternative?.nutrients.join(",") === crop?.nutrients.join(","),
+            `${example.id} 的 ${alternative?.name ?? alternativeId} 不能等量替换 ${crop?.name}`,
+          );
+        }
+        return result;
+      },
+      [0, 0, 0],
+    );
+    check(
+      balance.every((value) => value === 0),
+      `${example.id} 在 ${seasonId} 的养分不平衡：${balance.join("/")}`,
+    );
+  }
+}
+
+let seasonalExampleCount = 0;
+for (const season of farming.seasons) {
+  const count = farmingExamples.examples.filter((example) =>
+    example.seasonIds.includes(season.id),
+  ).length;
+  seasonalExampleCount += count;
+  check(
+    count === farmingExamples.expectedCounts[season.id],
+    `${season.name} PDF 示例应为 ${farmingExamples.expectedCounts[season.id]} 组，实际为 ${count} 组`,
+  );
+}
+check(
+  [1, 2, 4].every((count) =>
+    farmingExamples.examples.some((example) => example.plotCount === count),
+  ),
+  "PDF 示例缺少 1、2 或 4 块农田筛选数据",
+);
+check(
+  [9, 10].every((size) =>
+    farmingExamples.examples.some((example) => example.gridSize === size),
+  ),
+  "PDF 示例缺少 9 或 10 格筛选数据",
 );
 
 for (const imagePath of imagePaths) {
@@ -91,6 +259,7 @@ check(
 
 await access(join(distRoot, "index.html"));
 await access(join(distRoot, "data.json"));
+await access(join(distRoot, "farming/index.html"));
 const distFiles = await walk(distRoot);
 const builtCss = await Promise.all(
   distFiles
@@ -108,5 +277,5 @@ if (failures.length) {
 }
 
 console.log(
-  `验证通过：${data.recipes.length} 道料理、${data.favorites.length} 项人物最爱、${imagePaths.size} 个本地图片引用。`,
+  `验证通过：${data.recipes.length} 道料理、${farming.seasons.length} 个季节、${farmingExamples.examples.length} 张 PDF 示例卡、${seasonalExampleCount} 个季节示例、${completeRatioCount} 组完整配比、${imagePaths.size} 个本地图片引用。`,
 );
