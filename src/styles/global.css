@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --night: #12140f;
   --forest: #1d2419;
@@ -523,7 +525,7 @@ h1 {
 }
 
 .empty-state {
-  display: none;
+  display: block;
   padding: 60px 20px 90px;
   text-align: center;
   color: #979988;

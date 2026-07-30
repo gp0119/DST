@@ -1,0 +1,36 @@
+---
+import { assetUrl } from "../lib/assets.js";
+
+const { item } = Astro.props;
+---
+
+<article class="favorite-card">
+  <div class="favorite-visual">
+    {
+      item.image ? (
+        <img
+          class="favorite-image"
+          src={assetUrl(item.image)}
+          alt={`${item.food}图标`}
+          loading="lazy"
+        />
+      ) : (
+        <div class="favorite-fallback" aria-hidden="true">—</div>
+      )
+    }
+    {
+      item.characterImage && (
+        <img
+          class="favorite-character-avatar"
+          src={assetUrl(item.characterImage)}
+          alt=""
+          loading="lazy"
+        />
+      )
+    }
+  </div>
+  <div>
+    <h3 class="favorite-character">{item.character}</h3>
+    <p class="favorite-food">{item.food}</p>
+  </div>
+</article>
