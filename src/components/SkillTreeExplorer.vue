@@ -1,13 +1,5 @@
 <script setup>
-  import {
-    computed,
-    nextTick,
-    onBeforeUnmount,
-    onMounted,
-    reactive,
-    ref,
-    watch,
-  } from 'vue'
+  import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
   import { assetUrl } from '../lib/assets.js'
 
   const props = defineProps({
@@ -163,16 +155,12 @@
   let pinch = null
   const activePointers = new Map()
 
-  const activeCharacter = computed(
-    () => props.characters.find((character) => character.id === activeCharacterId.value) ?? props.characters[0],
-  )
+  const activeCharacter = computed(() => props.characters.find((character) => character.id === activeCharacterId.value) ?? props.characters[0])
   const skillsById = computed(() => Object.fromEntries(activeCharacter.value.skills.map((skill) => [skill.id, skill])))
   const selectedIds = computed(() => new Set(selectedByCharacter.value[activeCharacter.value.id] ?? []))
   const selectedCount = computed(() => selectedIds.value.size)
   const remainingPoints = computed(() => props.maxPoints - selectedCount.value)
-  const focusedSkill = computed(
-    () => skillsById.value[focusedSkillId.value] ?? activeCharacter.value.skills[0],
-  )
+  const focusedSkill = computed(() => skillsById.value[focusedSkillId.value] ?? activeCharacter.value.skills[0])
   const hoveredSkill = computed(() => skillsById.value[hoveredSkillId.value])
   const dialogSkill = computed(() => skillsById.value[dialogSkillId.value])
   const treeLayout = computed(() => {
@@ -199,12 +187,8 @@
       return {
         id,
         label: groupLabels[id] ?? id,
-        x: anchor
-          ? anchor.wx + titleOverride.dx
-          : groupNodes.reduce((sum, node) => sum + node.wx, 0) / groupNodes.length,
-        y: anchor
-          ? anchor.wy + titleOverride.dy
-          : Math.min(...groupNodes.map((node) => node.wy)) - 53,
+        x: anchor ? anchor.wx + titleOverride.dx : groupNodes.reduce((sum, node) => sum + node.wx, 0) / groupNodes.length,
+        y: anchor ? anchor.wy + titleOverride.dy : Math.min(...groupNodes.map((node) => node.wy)) - 53,
       }
     })
 
@@ -308,9 +292,7 @@
       const next = pruneInvalid(current)
       const removedCount = selectedCount.value - next.size
       selectedByCharacter.value[activeCharacter.value.id] = [...next]
-      feedback.value = removedCount > 1
-        ? `已取消${skill.title}，并同步取消 ${removedCount - 1} 项后续技能。`
-        : `已取消${skill.title}。`
+      feedback.value = removedCount > 1 ? `已取消${skill.title}，并同步取消 ${removedCount - 1} 项后续技能。` : `已取消${skill.title}。`
       scheduleDraw()
       return
     }
@@ -396,11 +378,7 @@
     const bounds = treeLayout.value.bounds
     const treeWidth = bounds.maxX - bounds.minX
     const treeHeight = bounds.maxY - bounds.minY
-    const scale = clamp(
-      Math.min((viewport.width - 54) / treeWidth, (viewport.height - 54) / treeHeight),
-      0.64,
-      1.42,
-    )
+    const scale = clamp(Math.min((viewport.width - 54) / treeWidth, (viewport.height - 54) / treeHeight), 0.64, 1.42)
     viewport.scale = scale
     viewport.x = viewport.width / 2 - ((bounds.minX + bounds.maxX) / 2) * scale
     viewport.y = viewport.height / 2 - ((bounds.minY + bounds.maxY) / 2) * scale
@@ -413,16 +391,10 @@
     const nextWidth = Math.max(1, Math.round(rect.width))
     const nextHeight = Math.max(1, Math.round(rect.height))
     const nextDpr = Math.min(window.devicePixelRatio || 1, 2)
-    if (
-      nextWidth === viewport.width &&
-      nextHeight === viewport.height &&
-      nextDpr === viewport.dpr
-    ) return
+    if (nextWidth === viewport.width && nextHeight === viewport.height && nextDpr === viewport.dpr) return
 
     const hasView = viewport.width > 0 && viewport.height > 0
-    const centerWorld = hasView
-      ? screenToWorld({ x: viewport.width / 2, y: viewport.height / 2 })
-      : null
+    const centerWorld = hasView ? screenToWorld({ x: viewport.width / 2, y: viewport.height / 2 }) : null
     viewport.width = nextWidth
     viewport.height = nextHeight
     viewport.dpr = nextDpr
@@ -453,9 +425,7 @@
 
   function drawNodeLabel(context, node, color) {
     const title = node.title
-    const lines = title.length <= 7
-      ? [title]
-      : [title.slice(0, 7), `${title.slice(7, 13)}${title.length > 13 ? '…' : ''}`]
+    const lines = title.length <= 7 ? [title] : [title.slice(0, 7), `${title.slice(7, 13)}${title.length > 13 ? '…' : ''}`]
     context.fillStyle = color
     context.font = '700 9px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif'
     context.textAlign = 'center'
@@ -499,7 +469,7 @@
       Math.min(width, height) * 0.12,
       width * 0.5,
       height * 0.5,
-      Math.max(width, height) * 0.72,
+      Math.max(width, height) * 0.72
     )
     vignette.addColorStop(0, 'rgba(188, 151, 82, 0.045)')
     vignette.addColorStop(1, 'rgba(0, 0, 0, 0.48)')
@@ -535,20 +505,9 @@
 
         context.beginPath()
         context.moveTo(parent.wx, parent.wy + NODE_RADIUS - 2)
-        context.bezierCurveTo(
-          parent.wx,
-          middleY,
-          node.wx,
-          middleY,
-          node.wx,
-          node.wy - NODE_RADIUS + 2,
-        )
+        context.bezierCurveTo(parent.wx, middleY, node.wx, middleY, node.wx, node.wy - NODE_RADIUS + 2)
         context.lineWidth = (bothSelected ? 3.2 : 2) / scale
-        context.strokeStyle = bothSelected
-          ? '#ddb35d'
-          : available
-            ? 'rgba(196, 164, 97, 0.48)'
-            : 'rgba(102, 107, 94, 0.3)'
+        context.strokeStyle = bothSelected ? '#ddb35d' : available ? 'rgba(196, 164, 97, 0.48)' : 'rgba(102, 107, 94, 0.3)'
         context.setLineDash(available || bothSelected ? [] : [5 / scale, 5 / scale])
         context.stroke()
       }
@@ -579,14 +538,7 @@
 
       context.beginPath()
       context.arc(node.wx, node.wy, NODE_RADIUS - 5, 0, Math.PI * 2)
-      const inner = context.createRadialGradient(
-        node.wx - 6,
-        node.wy - 7,
-        1,
-        node.wx,
-        node.wy,
-        NODE_RADIUS,
-      )
+      const inner = context.createRadialGradient(node.wx - 6, node.wy - 7, 1, node.wx, node.wy, NODE_RADIUS)
       if (selected) {
         inner.addColorStop(0, 'rgba(255, 246, 205, 0.62)')
         inner.addColorStop(1, shadow ? '#65436a' : lunar ? '#3f7480' : '#96702f')
@@ -618,11 +570,7 @@
         context.fillText('✓', node.wx + 18, node.wy - 16.5)
       }
 
-      drawNodeLabel(
-        context,
-        node,
-        focused ? '#f2dfb7' : selected ? '#dbc28d' : available ? '#a9aa98' : '#65695e',
-      )
+      drawNodeLabel(context, node, focused ? '#f2dfb7' : selected ? '#dbc28d' : available ? '#a9aa98' : '#65695e')
       context.restore()
     }
 
@@ -729,7 +677,10 @@
 
     if (gesture?.pointerId === event.pointerId) {
       const movedDistance = Math.hypot(point.x - gesture.startX, point.y - gesture.startY)
-      if (movedDistance > 7) gesture.moved = true
+      if (movedDistance > 7) {
+        gesture.moved = true
+        if (gesture.mode === 'node') gesture.mode = 'pan'
+      }
       if (gesture.mode === 'pan') {
         viewport.x += point.x - gesture.lastX
         viewport.y += point.y - gesture.lastY
@@ -771,8 +722,6 @@
       if (skill && !gesture.moved && releasedOn?.id === skill.id) {
         if (gesture.pointerType === 'mouse') toggleSkill(skill)
         else openSkillDialog(skill)
-      } else if (skill && gesture.moved && selectedIds.value.has(skill.id) && releasedOn?.id !== skill.id) {
-        toggleSkill(skill)
       }
     }
     gesture = null
@@ -895,14 +844,6 @@
 
 <template>
   <div class="skill-explorer">
-    <header class="skill-page-heading">
-      <div>
-        <p class="eyebrow">INSIGHT CANVAS</p>
-        <h1>角色技能树</h1>
-      </div>
-      <p class="skill-data-note">正式版 {{ source.build }} · 12 位角色 · 308 项技能</p>
-    </header>
-
     <div class="skill-workspace">
       <aside class="character-rail" aria-label="选择角色">
         <button
@@ -943,12 +884,7 @@
         </div>
 
         <div ref="canvasShell" class="skill-canvas-shell">
-          <img
-            class="canvas-character-mark"
-            :src="assetUrl(activeCharacter.image)"
-            alt=""
-            aria-hidden="true"
-          />
+          <img class="canvas-character-mark" :src="assetUrl(activeCharacter.image)" alt="" aria-hidden="true" />
           <canvas
             ref="canvas"
             tabindex="0"
@@ -969,11 +905,7 @@
             <button type="button" aria-label="缩小技能树" @click="zoomFromCenter(0.86)">－</button>
           </div>
 
-          <div
-            v-if="tooltip.visible && hoveredSkill"
-            class="canvas-tooltip"
-            :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }"
-          >
+          <div v-if="tooltip.visible && hoveredSkill" class="canvas-tooltip" :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }">
             <small>{{ groupLabels[groupAliases[hoveredSkill.group] ?? hoveredSkill.group] ?? hoveredSkill.group }}</small>
             <strong>{{ hoveredSkill.title }}</strong>
             <p>{{ hoveredSkill.desc }}</p>
@@ -1012,12 +944,7 @@
           <span v-if="!conditionLabels(dialogSkill).length">无额外解锁条件</span>
         </div>
         <footer>
-          <button
-            type="button"
-            :class="{ selected: selectedIds.has(dialogSkill.id) }"
-            :disabled="!canSelect(dialogSkill)"
-            @click="applyDialogSkill"
-          >
+          <button type="button" :class="{ selected: selectedIds.has(dialogSkill.id) }" :disabled="!canSelect(dialogSkill)" @click="applyDialogSkill">
             {{ selectedIds.has(dialogSkill.id) ? '取消此技能' : '学习此技能' }}
           </button>
         </footer>

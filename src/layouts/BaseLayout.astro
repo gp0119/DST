@@ -59,7 +59,7 @@ const links = [
     />
     <title>{title}</title>
   </head>
-  <body>
+  <body class:list={{ "home-page": currentPath === basePath }}>
     <a class="skip-link" href="#main">跳到主要内容</a>
     <header class="site-nav">
       <nav class="site-nav-inner" aria-label="主导航">

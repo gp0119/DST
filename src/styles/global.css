@@ -38,6 +38,11 @@ body {
   overflow-x: hidden;
 }
 
+body.home-page {
+  display: flex;
+  flex-direction: column;
+}
+
 body::before {
   content: '';
   position: fixed;
@@ -122,6 +127,9 @@ img {
 }
 
 .home-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   width: min(1320px, calc(100% - 28px));
   margin: 0 auto;
   padding: clamp(32px, 5vw, 64px) 0 28px;
@@ -295,6 +303,7 @@ img {
 .home-footer {
   display: flex;
   justify-content: space-between;
+  margin-top: auto;
   padding: 22px 4px 4px;
   color: #595e51;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
