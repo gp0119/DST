@@ -123,8 +123,6 @@
   const POSITION_SCALE_X = 1.72
   const POSITION_SCALE_Y = 2.15
   const NODE_RADIUS = 23
-  const MIN_SCALE = 0.5
-  const MAX_SCALE = 2.35
 
   const canvas = ref(null)
   const canvasShell = ref(null)
@@ -137,7 +135,7 @@
   const focusedSkillId = ref(props.characters[0]?.skills[0]?.id ?? '')
   const hoveredSkillId = ref('')
   const dialogSkillId = ref('')
-  const feedback = ref('点击可用节点分配洞察；拖动画布浏览，滚轮或双指缩放。')
+  const feedback = ref('点击可用节点分配洞察；使用方向键浏览节点。')
   const viewport = reactive({
     width: 0,
     height: 0,
@@ -155,8 +153,6 @@
   let resizeObserver
   let drawFrame = 0
   let gesture = null
-  let pinch = null
-  const activePointers = new Map()
 
   const activeCharacter = computed(() => props.characters.find((character) => character.id === activeCharacterId.value) ?? props.characters[0])
   const skillsById = computed(() => Object.fromEntries(activeCharacter.value.skills.map((skill) => [skill.id, skill])))
@@ -393,7 +389,7 @@
     const bounds = treeLayout.value.bounds
     const treeWidth = bounds.maxX - bounds.minX
     const treeHeight = bounds.maxY - bounds.minY
-    const scale = clamp(Math.min((viewport.width - 54) / treeWidth, (viewport.height - 54) / treeHeight), 0.64, 1.42)
+    const scale = clamp(Math.min((viewport.width - 54) / treeWidth, (viewport.height - 54) / treeHeight), 0.32, 1.42)
     viewport.scale = scale
     viewport.x = viewport.width / 2 - ((bounds.minX + bounds.maxX) / 2) * scale
     viewport.y = viewport.height / 2 - ((bounds.minY + bounds.maxY) / 2) * scale
@@ -408,8 +404,6 @@
     const nextDpr = Math.min(window.devicePixelRatio || 1, 2)
     if (nextWidth === viewport.width && nextHeight === viewport.height && nextDpr === viewport.dpr) return
 
-    const hasView = viewport.width > 0 && viewport.height > 0
-    const centerWorld = hasView ? screenToWorld({ x: viewport.width / 2, y: viewport.height / 2 }) : null
     viewport.width = nextWidth
     viewport.height = nextHeight
     viewport.dpr = nextDpr
@@ -417,13 +411,7 @@
     canvas.value.height = Math.round(viewport.height * viewport.dpr)
     canvas.value.style.width = `${viewport.width}px`
     canvas.value.style.height = `${viewport.height}px`
-    if (centerWorld) {
-      viewport.x = viewport.width / 2 - centerWorld.x * viewport.scale
-      viewport.y = viewport.height / 2 - centerWorld.y * viewport.scale
-      scheduleDraw()
-    } else {
-      fitTree()
-    }
+    fitTree()
   }
 
   function drawPolygon(context, x, y, radius, sides = 8, rotation = Math.PI / 8) {
@@ -623,57 +611,20 @@
     return closest
   }
 
-  function updatePinch() {
-    const points = [...activePointers.values()]
-    if (points.length < 2) return
-    const [first, second] = points
-    const center = {
-      x: (first.x + second.x) / 2,
-      y: (first.y + second.y) / 2,
-    }
-    const distance = Math.hypot(second.x - first.x, second.y - first.y)
-
-    if (!pinch) {
-      pinch = {
-        distance,
-        scale: viewport.scale,
-        world: screenToWorld(center),
-      }
-      gesture = null
-      return
-    }
-
-    const nextScale = clamp(pinch.scale * (distance / Math.max(1, pinch.distance)), MIN_SCALE, MAX_SCALE)
-    viewport.scale = nextScale
-    viewport.x = center.x - pinch.world.x * nextScale
-    viewport.y = center.y - pinch.world.y * nextScale
-    scheduleDraw()
-  }
-
   function onPointerDown(event) {
     if (event.button === 2) return
     const point = pointFromEvent(event)
-    activePointers.set(event.pointerId, point)
     if (event.isTrusted) canvas.value.setPointerCapture?.(event.pointerId)
     tooltip.visible = false
-
-    if (activePointers.size > 1) {
-      updatePinch()
-      return
-    }
-
     const skill = skillAtPoint(point)
-    gesture = {
+    gesture = skill ? {
       pointerId: event.pointerId,
       pointerType: event.pointerType,
-      mode: skill ? 'node' : 'pan',
-      skillId: skill?.id ?? '',
+      skillId: skill.id,
       startX: point.x,
       startY: point.y,
-      lastX: point.x,
-      lastY: point.y,
       moved: false,
-    }
+    } : null
     if (skill) {
       focusedSkillId.value = skill.id
       hoveredSkillId.value = skill.id
@@ -683,26 +634,9 @@
 
   function onPointerMove(event) {
     const point = pointFromEvent(event)
-    if (activePointers.has(event.pointerId)) activePointers.set(event.pointerId, point)
-
-    if (activePointers.size > 1) {
-      updatePinch()
-      return
-    }
-
     if (gesture?.pointerId === event.pointerId) {
       const movedDistance = Math.hypot(point.x - gesture.startX, point.y - gesture.startY)
-      if (movedDistance > 7) {
-        gesture.moved = true
-        if (gesture.mode === 'node') gesture.mode = 'pan'
-      }
-      if (gesture.mode === 'pan') {
-        viewport.x += point.x - gesture.lastX
-        viewport.y += point.y - gesture.lastY
-        gesture.lastX = point.x
-        gesture.lastY = point.y
-        scheduleDraw()
-      }
+      if (movedDistance > 7) gesture.moved = true
       return
     }
 
@@ -722,16 +656,7 @@
 
   function onPointerUp(event) {
     const point = pointFromEvent(event)
-    const wasPinching = Boolean(pinch)
-    activePointers.delete(event.pointerId)
-
-    if (wasPinching) {
-      if (activePointers.size < 2) pinch = null
-      gesture = null
-      return
-    }
-
-    if (gesture?.pointerId === event.pointerId && gesture.mode === 'node') {
+    if (gesture?.pointerId === event.pointerId) {
       const skill = skillsById.value[gesture.skillId]
       const releasedOn = skillAtPoint(point)
       if (skill && !gesture.moved && releasedOn?.id === skill.id) {
@@ -742,34 +667,15 @@
     gesture = null
   }
 
-  function onPointerCancel(event) {
-    activePointers.delete(event.pointerId)
+  function onPointerCancel() {
     gesture = null
-    pinch = null
   }
 
   function onPointerLeave() {
-    if (activePointers.size) return
+    if (gesture) return
     hoveredSkillId.value = ''
     tooltip.visible = false
     scheduleDraw()
-  }
-
-  function zoomAt(point, factor) {
-    const world = screenToWorld(point)
-    const nextScale = clamp(viewport.scale * factor, MIN_SCALE, MAX_SCALE)
-    viewport.scale = nextScale
-    viewport.x = point.x - world.x * nextScale
-    viewport.y = point.y - world.y * nextScale
-    scheduleDraw()
-  }
-
-  function onWheel(event) {
-    zoomAt(pointFromEvent(event), Math.exp(-event.deltaY * 0.0015))
-  }
-
-  function zoomFromCenter(factor) {
-    zoomAt({ x: viewport.width / 2, y: viewport.height / 2 }, factor)
   }
 
   function onContextMenu(event) {
@@ -812,18 +718,6 @@
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
       if (focusedSkill.value) toggleSkill(focusedSkill.value)
-      return
-    }
-    if (event.key === '0') {
-      fitTree()
-      return
-    }
-    if (event.key === '+' || event.key === '=') {
-      zoomFromCenter(1.16)
-      return
-    }
-    if (event.key === '-') {
-      zoomFromCenter(0.86)
       return
     }
     const directions = {
@@ -967,7 +861,6 @@
           </div>
 
           <div class="canvas-actions">
-            <button type="button" title="居中显示整棵技能树" @click="fitTree">适应画布</button>
             <button type="button" class="danger" :disabled="selectedCount === 0" @click="resetCharacter">重置</button>
           </div>
         </div>
@@ -977,22 +870,16 @@
           <canvas
             ref="canvas"
             tabindex="0"
-            :aria-label="`${activeCharacter.name}技能树画布。已分配 ${selectedCount} 点洞察。使用方向键浏览节点，回车选择。`"
+            :aria-label="`${activeCharacter.name}技能树画布。已分配 ${selectedCount} 点洞察。点击技能点选择，或使用方向键浏览节点并按回车选择。`"
             aria-describedby="canvas-feedback"
             @pointerdown="onPointerDown"
             @pointermove="onPointerMove"
             @pointerup="onPointerUp"
             @pointercancel="onPointerCancel"
             @pointerleave="onPointerLeave"
-            @wheel.prevent="onWheel"
             @contextmenu.prevent="onContextMenu"
             @keydown="onKeydown"
           ></canvas>
-
-          <div class="canvas-zoom" aria-label="画布缩放">
-            <button type="button" aria-label="放大技能树" @click="zoomFromCenter(1.16)">＋</button>
-            <button type="button" aria-label="缩小技能树" @click="zoomFromCenter(0.86)">－</button>
-          </div>
 
           <div v-if="tooltip.visible && hoveredSkill" class="canvas-tooltip" :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }">
             <small>{{ groupLabels[groupAliases[hoveredSkill.group] ?? hoveredSkill.group] ?? hoveredSkill.group }}</small>
