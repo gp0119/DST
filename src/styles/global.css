@@ -835,6 +835,10 @@ img {
   --season-accent: #ce8ba3;
   padding: 12px 0 42px;
 }
+.mobile-filter-bar,
+.mobile-filter-backdrop {
+  display: none;
+}
 .farming-explorer[data-season='summer'] {
   --season-accent: #d8ad4e;
 }
@@ -1652,40 +1656,390 @@ img {
   .site-links a {
     padding-inline: 6px;
   }
-  .season-tabs {
-    gap: 3px;
-    padding: 5px;
+  body:has(.mobile-filter-backdrop) {
+    overflow: hidden;
   }
-  .season-panel {
-    border-radius: 17px;
+  .farming-explorer > .season-tabs,
+  .season-panel > .season-crop-strip,
+  .pdf-examples-heading > .plot-count-switch {
+    display: none;
   }
-  .season-crop-strip {
-    margin-top: 16px;
-  }
-  .pdf-examples {
-    padding: 11px;
-  }
-  .pdf-examples-heading {
+  .mobile-filter-bar {
+    position: sticky;
+    z-index: 12;
+    top: 5px;
     display: block;
   }
-  .plot-count-switch {
+  .mobile-filter-trigger {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
     width: 100%;
+    padding: 11px 12px 11px 14px;
+    color: #e8ddc0;
+    text-align: left;
+    border: 0;
+    border-radius: 14px;
+    background: rgba(12, 15, 11, 0.94);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(14px);
+  }
+  .mobile-filter-trigger > span:first-child {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+  }
+  .mobile-filter-trigger small {
+    color: var(--season-accent);
+    font: 900 8px/1 var(--font-sans);
+    letter-spacing: 0.14em;
+  }
+  .mobile-filter-trigger strong {
+    overflow: hidden;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mobile-filter-result {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #171914;
+    border-radius: 999px;
+    background: var(--season-accent);
+    padding: 7px 9px;
+    font: 900 9px/1 var(--font-sans);
+    white-space: nowrap;
+  }
+  .mobile-filter-result b {
+    font-size: 11px;
+  }
+  .mobile-filter-backdrop {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    display: grid;
+    align-items: end;
+    padding-top: 56px;
+    background: rgba(2, 4, 2, 0.72);
+    backdrop-filter: blur(6px);
+  }
+  .mobile-filter-drawer {
+    display: flex;
+    max-height: min(88dvh, 720px);
+    min-height: 0;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 22px 22px 0 0;
+    background:
+      radial-gradient(circle at 100% 0, color-mix(in srgb, var(--season-accent) 13%, transparent), transparent 22rem),
+      #151913;
+    box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.52);
+  }
+  .mobile-filter-drawer > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    padding: 16px 18px 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .mobile-filter-drawer > header small {
+    color: var(--season-accent);
+    font: 900 8px/1 var(--font-sans);
+    letter-spacing: 0.16em;
+  }
+  .mobile-filter-drawer h2 {
+    margin: 4px 0 0;
+    color: #eee1c3;
+    font-size: 22px;
+  }
+  .mobile-filter-drawer > header > button {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    padding: 0;
+    color: #b9b9a7;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    font-size: 23px;
+    line-height: 1;
+  }
+  .mobile-filter-content {
+    min-height: 0;
+    padding: 0 16px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .mobile-filter-group {
+    margin: 0;
+    padding: 15px 0;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .mobile-filter-group:last-child {
+    border-bottom: 0;
+  }
+  .mobile-filter-group legend {
+    margin-bottom: 10px;
+    padding: 0;
+    color: #8f9384;
+    font: 900 10px/1 var(--font-sans);
+  }
+  .mobile-season-options,
+  .mobile-plot-options {
+    display: grid;
+    gap: 6px;
+  }
+  .mobile-season-options {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .mobile-plot-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .mobile-season-options button,
+  .mobile-plot-options button {
+    padding: 10px 5px;
+    color: #a7aa9a;
+    border: 0;
+    border-radius: 10px;
+    background: rgba(5, 7, 5, 0.42);
+    font: 900 11px/1 var(--font-sans);
+  }
+  .mobile-season-options button[aria-pressed='true'],
+  .mobile-plot-options button[aria-pressed='true'] {
+    color: #171914;
+    background: var(--season-accent);
+  }
+  .mobile-crop-options {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .mobile-crop-options button {
+    display: grid;
+    min-width: 0;
+    place-items: center;
+    gap: 3px;
+    padding: 7px 3px;
+    color: #adaf9e;
+    border: 0;
+    border-radius: 11px;
+    background: transparent;
+  }
+  .mobile-crop-options button:first-child::before {
+    content: 'ALL';
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    color: #777c6e;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    font: 900 8px/1 var(--font-sans);
+    letter-spacing: 0.08em;
+  }
+  .mobile-crop-options button[aria-pressed='true'] {
+    color: var(--season-accent);
+    background: color-mix(in srgb, var(--season-accent) 14%, transparent);
+  }
+  .mobile-crop-options button[aria-pressed='true']::before {
+    color: #171914;
+    background: var(--season-accent);
+  }
+  .mobile-crop-options button:disabled {
+    opacity: 0.3;
+  }
+  .mobile-crop-options img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.34));
+  }
+  .mobile-crop-options strong {
+    overflow: hidden;
+    max-width: 100%;
+    font-size: 9px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mobile-crop-options small {
+    color: #74796c;
+    font-size: 7px;
+  }
+  .mobile-crop-options button[aria-pressed='true'] small {
+    color: color-mix(in srgb, var(--season-accent) 72%, #fff);
+  }
+  .mobile-filter-drawer > footer {
+    flex: 0 0 auto;
+    padding: 12px 16px max(12px, env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(14, 17, 13, 0.96);
+  }
+  .mobile-filter-apply {
+    width: 100%;
+    padding: 13px 16px;
+    color: #171914;
+    border: 0;
+    border-radius: 12px;
+    background: var(--season-accent);
+    font: 900 12px/1 var(--font-sans);
+  }
+  .recipe-mobile-filter-bar,
+  .recipe-filter-backdrop {
+    --season-accent: #d4ad5f;
+  }
+  .skill-mobile-filter-bar,
+  .skill-character-filter-backdrop {
+    --season-accent: #d1aa5d;
+  }
+  .recipe-mobile-filter-bar {
+    margin: 10px 0 12px;
+  }
+  .skill-mobile-filter-bar {
+    margin-bottom: 10px;
+  }
+  .recipe-explorer > .toolbar-wrap,
+  .skill-workspace > .character-rail {
+    display: none;
+  }
+  .mobile-recipe-search {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 7px;
+  }
+  .mobile-recipe-search input {
+    min-width: 0;
+    padding: 10px 12px;
+    color: #f3e9d2;
+    caret-color: var(--season-accent);
+    border: 1px solid rgba(212, 173, 95, 0.24);
+    border-radius: 10px;
+    outline: 0;
+    background: rgba(5, 7, 5, 0.48);
+  }
+  .mobile-recipe-search input:focus {
+    border-color: var(--season-accent);
+    box-shadow: 0 0 0 3px rgba(212, 173, 95, 0.12);
+  }
+  .mobile-recipe-search button {
+    padding: 0 13px;
+    color: #c8c1ae;
+    border: 0;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.07);
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .mobile-recipe-search button:disabled {
+    cursor: default;
+    opacity: 0.36;
+  }
+  .mobile-recipe-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .mobile-recipe-options button {
+    padding: 11px 8px;
+    color: #a8ab9b;
+    border: 0;
+    border-radius: 10px;
+    background: rgba(5, 7, 5, 0.42);
+    font-size: 10px;
+    font-weight: 800;
+  }
+  .mobile-recipe-options button[aria-pressed='true'] {
+    color: #171914;
+    background: var(--season-accent);
+  }
+  .mobile-character-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+    padding: 16px 0;
+  }
+  .mobile-character-options button {
+    display: grid;
+    min-width: 0;
+    place-items: center;
+    gap: 4px;
+    padding: 9px 4px 8px;
+    color: #a7aa9a;
+    border: 0;
+    border-radius: 12px;
+    background: rgba(5, 7, 5, 0.36);
+  }
+  .mobile-character-options button[aria-pressed='true'] {
+    color: #171914;
+    background: var(--season-accent);
+  }
+  .mobile-character-options img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: rgba(236, 221, 182, 0.88);
+  }
+  .mobile-character-options strong {
+    overflow: hidden;
+    max-width: 100%;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mobile-character-options small {
+    color: #767a6d;
+    font-size: 8px;
+  }
+  .mobile-character-options button[aria-pressed='true'] small {
+    color: rgba(23, 25, 20, 0.68);
+  }
+  .season-panel {
+    margin-top: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .pdf-examples {
+    padding: 0 2px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .pdf-examples-heading {
+    justify-content: flex-end;
+    margin-bottom: 12px;
   }
   .pdf-examples-heading > span {
-    display: inline-block;
-    margin-top: 7px;
+    margin: 0;
   }
   .pdf-example-card {
-    padding: 9px;
+    padding: 13px;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
   }
   .pdf-example-plots {
     gap: 0;
+    margin-top: 14px;
   }
   .pdf-example-plot {
     padding: 4px;
   }
   .plot-unit {
     padding: 4px;
+    border: 0;
+    box-shadow: inset 0 0 12px rgba(26, 16, 9, 0.24);
+  }
+  .pdf-example-items span {
+    padding-inline: 4px;
+    border: 0;
+    background: none;
   }
   .skill-page-heading h1 {
     font-size: 39px;

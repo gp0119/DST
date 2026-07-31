@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, nextTick, ref } from "vue";
 import RecipeCard from "./RecipeCard.vue";
 
 const props = defineProps({
@@ -21,6 +21,10 @@ const filters = [
 
 const query = ref("");
 const activeFilter = ref("all");
+const mobileFiltersOpen = ref(false);
+const mobileFilterButton = ref(null);
+const mobileFilterCloseButton = ref(null);
+const mobileSearchInput = ref(null);
 
 const filteredRecipes = computed(() => {
   const needle = query.value.trim().toLocaleLowerCase("zh-CN");
@@ -35,14 +39,139 @@ const filteredRecipes = computed(() => {
   });
 });
 
+const activeFilterLabel = computed(
+  () => filters.find((filter) => filter.value === activeFilter.value)?.label ?? "全部",
+);
+const mobileFilterSummary = computed(() => {
+  const label = activeFilter.value === "all" ? "全部料理" : activeFilterLabel.value;
+  return query.value.trim() ? `“${query.value.trim()}” · ${label}` : label;
+});
+
 function clearSearch() {
   query.value = "";
   document.querySelector("#search")?.focus();
 }
+
+async function clearMobileSearch() {
+  query.value = "";
+  await nextTick();
+  mobileSearchInput.value?.focus();
+}
+
+async function openMobileFilters() {
+  mobileFiltersOpen.value = true;
+  await nextTick();
+  mobileFilterCloseButton.value?.focus();
+}
+
+async function closeMobileFilters() {
+  mobileFiltersOpen.value = false;
+  await nextTick();
+  mobileFilterButton.value?.focus();
+}
 </script>
 
 <template>
-  <div>
+  <div class="recipe-explorer">
+    <div class="mobile-filter-bar recipe-mobile-filter-bar">
+      <button
+        ref="mobileFilterButton"
+        class="mobile-filter-trigger"
+        type="button"
+        aria-controls="mobile-recipe-filter-drawer"
+        :aria-expanded="mobileFiltersOpen"
+        @click="openMobileFilters"
+      >
+        <span>
+          <small>搜索与筛选</small>
+          <strong>{{ mobileFilterSummary }}</strong>
+        </span>
+        <span class="mobile-filter-result">
+          {{ filteredRecipes.length }} 道
+          <b aria-hidden="true">⌃</b>
+        </span>
+      </button>
+    </div>
+
+    <div
+      v-if="mobileFiltersOpen"
+      class="mobile-filter-backdrop recipe-filter-backdrop"
+      @pointerdown.self="closeMobileFilters"
+      @keydown.esc="closeMobileFilters"
+    >
+      <section
+        id="mobile-recipe-filter-drawer"
+        class="mobile-filter-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-recipe-filter-title"
+      >
+        <header>
+          <div>
+            <small>FILTERS</small>
+            <h2 id="mobile-recipe-filter-title">搜索与筛选</h2>
+          </div>
+          <button
+            ref="mobileFilterCloseButton"
+            type="button"
+            aria-label="关闭筛选"
+            @click="closeMobileFilters"
+          >
+            ×
+          </button>
+        </header>
+
+        <div class="mobile-filter-content">
+          <fieldset class="mobile-filter-group">
+            <legend>料理名称</legend>
+            <div class="mobile-recipe-search">
+              <input
+                ref="mobileSearchInput"
+                v-model="query"
+                type="search"
+                lang="zh-CN"
+                autocomplete="off"
+                aria-label="按中文料理名称搜索"
+                placeholder="输入中文料理名称…"
+              />
+              <button
+                type="button"
+                :disabled="!query"
+                @click="clearMobileSearch"
+              >
+                清除
+              </button>
+            </div>
+          </fieldset>
+
+          <fieldset class="mobile-filter-group">
+            <legend>分类</legend>
+            <div class="mobile-recipe-options">
+              <button
+                v-for="filter in filters"
+                :key="filter.value"
+                type="button"
+                :aria-pressed="activeFilter === filter.value"
+                @click="activeFilter = filter.value"
+              >
+                {{ filter.label }}
+              </button>
+            </div>
+          </fieldset>
+        </div>
+
+        <footer>
+          <button
+            type="button"
+            class="mobile-filter-apply"
+            @click="closeMobileFilters"
+          >
+            查看 {{ filteredRecipes.length }} 道料理
+          </button>
+        </footer>
+      </section>
+    </div>
+
     <div class="toolbar-wrap">
       <section class="toolbar" aria-label="食谱搜索与筛选">
         <div class="search-row">

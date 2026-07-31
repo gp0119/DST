@@ -22,6 +22,9 @@
   const cropFilter = ref('all')
   const plotCounts = [1, 2, 4]
   const activePlotCount = ref(1)
+  const mobileFiltersOpen = ref(false)
+  const mobileFilterButton = ref(null)
+  const mobileFilterCloseButton = ref(null)
   const activeSeason = computed(() => props.seasons.find((season) => season.id === activeSeasonId.value) ?? props.seasons[0])
   const cropsById = computed(() => Object.fromEntries(props.crops.map((crop) => [crop.id, crop])))
   const seasonCrops = computed(() => activeSeason.value.cropIds.map((id) => cropsById.value[id]))
@@ -30,15 +33,36 @@
     seasonExamples.value
       .filter((example) => cropFilter.value === 'all' || example.items.some((item) => item.cropId === cropFilter.value || item.alternatives?.includes(cropFilter.value)))
   )
+  const mobileFilterSummary = computed(() => {
+    const selectedCrop = cropFilter.value === 'all' ? '全部作物' : crop(cropFilter.value)?.name
+    return `${activeSeason.value.name} · ${selectedCrop} · ${activePlotCount.value} 块地`
+  })
+
   function crop(id) {
     return cropsById.value[id]
   }
 
-  async function selectSeason(id) {
+  function updateSeason(id) {
     activeSeasonId.value = id
     cropFilter.value = 'all'
+  }
+
+  async function selectSeason(id) {
+    updateSeason(id)
     await nextTick()
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }
+
+  async function openMobileFilters() {
+    mobileFiltersOpen.value = true
+    await nextTick()
+    mobileFilterCloseButton.value?.focus()
+  }
+
+  async function closeMobileFilters() {
+    mobileFiltersOpen.value = false
+    await nextTick()
+    mobileFilterButton.value?.focus()
   }
 
   function cropFilterCount(cropId) {
@@ -64,6 +88,98 @@
 
 <template>
   <div class="farming-explorer" :data-season="activeSeason.id">
+    <div class="mobile-filter-bar">
+      <button
+        ref="mobileFilterButton"
+        class="mobile-filter-trigger"
+        type="button"
+        aria-controls="mobile-farming-filter-drawer"
+        :aria-expanded="mobileFiltersOpen"
+        @click="openMobileFilters"
+      >
+        <span>
+          <small>筛选</small>
+          <strong>{{ mobileFilterSummary }}</strong>
+        </span>
+        <span class="mobile-filter-result">
+          {{ filteredExamples.length }} 组
+          <b aria-hidden="true">⌃</b>
+        </span>
+      </button>
+    </div>
+
+    <div v-if="mobileFiltersOpen" class="mobile-filter-backdrop" @pointerdown.self="closeMobileFilters" @keydown.esc="closeMobileFilters">
+      <section id="mobile-farming-filter-drawer" class="mobile-filter-drawer" role="dialog" aria-modal="true" aria-labelledby="mobile-filter-title">
+        <header>
+          <div>
+            <small>FILTERS</small>
+            <h2 id="mobile-filter-title">筛选配比</h2>
+          </div>
+          <button ref="mobileFilterCloseButton" type="button" aria-label="关闭筛选" @click="closeMobileFilters">×</button>
+        </header>
+
+        <div class="mobile-filter-content">
+          <fieldset class="mobile-filter-group">
+            <legend>季节</legend>
+            <div class="mobile-season-options">
+              <button
+                v-for="season in seasons"
+                :key="season.id"
+                type="button"
+                :aria-pressed="activeSeasonId === season.id"
+                @click="updateSeason(season.id)"
+              >
+                {{ season.name }}
+              </button>
+            </div>
+          </fieldset>
+
+          <fieldset class="mobile-filter-group">
+            <legend>作物</legend>
+            <div class="mobile-crop-options">
+              <button type="button" :aria-pressed="cropFilter === 'all'" @click="cropFilter = 'all'">
+                <strong>全部</strong>
+                <small>{{ seasonExamples.length }} 组</small>
+              </button>
+              <button
+                v-for="item in seasonCrops"
+                :key="item.id"
+                type="button"
+                :aria-pressed="cropFilter === item.id"
+                :disabled="cropFilterCount(item.id) === 0"
+                @click="cropFilter = item.id"
+              >
+                <img :src="assetUrl(item.image)" alt="" />
+                <strong>{{ item.name }}</strong>
+                <small>{{ cropFilterCount(item.id) }} 组</small>
+              </button>
+            </div>
+          </fieldset>
+
+          <fieldset class="mobile-filter-group">
+            <legend>地块数量</legend>
+            <div class="mobile-plot-options">
+              <button
+                v-for="count in plotCounts"
+                :key="count"
+                type="button"
+                :aria-pressed="activePlotCount === count"
+                @click="activePlotCount = count"
+              >
+                {{ count }} 块地
+              </button>
+            </div>
+          </fieldset>
+        </div>
+
+        <footer>
+          <button type="button" class="mobile-filter-apply" @click="closeMobileFilters">
+            查看 {{ filteredExamples.length }} 组配比
+          </button>
+        </footer>
+      </section>
+    </div>
+
     <div class="season-tabs" aria-label="按季节查看巨大作物配比">
       <button
         v-for="season in seasons"

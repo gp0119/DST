@@ -129,6 +129,9 @@
   const canvas = ref(null)
   const canvasShell = ref(null)
   const dialogCloseButton = ref(null)
+  const mobileCharactersOpen = ref(false)
+  const mobileCharacterButton = ref(null)
+  const mobileCharacterCloseButton = ref(null)
   const activeCharacterId = ref(props.characters[0]?.id ?? '')
   const selectedByCharacter = ref(Object.fromEntries(props.characters.map((character) => [character.id, []])))
   const focusedSkillId = ref(props.characters[0]?.skills[0]?.id ?? '')
@@ -212,6 +215,18 @@
     dialogSkillId.value = ''
     tooltip.visible = false
     feedback.value = '已切换角色；每位角色的模拟方案会分别保留。'
+  }
+
+  async function openMobileCharacters() {
+    mobileCharactersOpen.value = true
+    await nextTick()
+    mobileCharacterCloseButton.value?.focus()
+  }
+
+  async function closeMobileCharacters() {
+    mobileCharactersOpen.value = false
+    await nextTick()
+    mobileCharacterButton.value?.focus()
   }
 
   function skillName(id) {
@@ -844,6 +859,82 @@
 
 <template>
   <div class="skill-explorer">
+    <div class="mobile-filter-bar skill-mobile-filter-bar">
+      <button
+        ref="mobileCharacterButton"
+        class="mobile-filter-trigger"
+        type="button"
+        aria-controls="mobile-character-filter-drawer"
+        :aria-expanded="mobileCharactersOpen"
+        @click="openMobileCharacters"
+      >
+        <span>
+          <small>角色</small>
+          <strong>{{ activeCharacter.name }} · {{ activeCharacter.title }}</strong>
+        </span>
+        <span class="mobile-filter-result">
+          {{ selectedCount }} / {{ maxPoints }}
+          <b aria-hidden="true">⌃</b>
+        </span>
+      </button>
+    </div>
+
+    <div
+      v-if="mobileCharactersOpen"
+      class="mobile-filter-backdrop skill-character-filter-backdrop"
+      @pointerdown.self="closeMobileCharacters"
+      @keydown.esc="closeMobileCharacters"
+    >
+      <section
+        id="mobile-character-filter-drawer"
+        class="mobile-filter-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-character-filter-title"
+      >
+        <header>
+          <div>
+            <small>CHARACTERS</small>
+            <h2 id="mobile-character-filter-title">选择角色</h2>
+          </div>
+          <button
+            ref="mobileCharacterCloseButton"
+            type="button"
+            aria-label="关闭角色选择"
+            @click="closeMobileCharacters"
+          >
+            ×
+          </button>
+        </header>
+
+        <div class="mobile-filter-content">
+          <div class="mobile-character-options" aria-label="选择角色">
+            <button
+              v-for="character in characters"
+              :key="character.id"
+              type="button"
+              :aria-pressed="activeCharacter.id === character.id"
+              @click="selectCharacter(character.id)"
+            >
+              <img :src="assetUrl(character.image)" alt="" />
+              <strong>{{ character.name }}</strong>
+              <small>{{ selectedByCharacter[character.id].length }} / {{ maxPoints }}</small>
+            </button>
+          </div>
+        </div>
+
+        <footer>
+          <button
+            type="button"
+            class="mobile-filter-apply"
+            @click="closeMobileCharacters"
+          >
+            查看{{ activeCharacter.name }}技能树
+          </button>
+        </footer>
+      </section>
+    </div>
+
     <div class="skill-workspace">
       <aside class="character-rail" aria-label="选择角色">
         <button
