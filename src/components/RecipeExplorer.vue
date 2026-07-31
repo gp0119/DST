@@ -80,32 +80,29 @@ async function closeMobileFilters() {
         type="button"
         aria-controls="mobile-recipe-filter-drawer"
         :aria-expanded="mobileFiltersOpen"
+        :aria-label="`打开搜索与筛选：${mobileFilterSummary}，${filteredRecipes.length} 道`"
         @click="openMobileFilters"
       >
-        <span>
-          <small>搜索与筛选</small>
-          <strong>{{ mobileFilterSummary }}</strong>
-        </span>
-        <span class="mobile-filter-result">
-          {{ filteredRecipes.length }} 道
-          <b aria-hidden="true">⌃</b>
-        </span>
+        <svg class="mobile-filter-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 5h16l-6.5 7.3v5.2l-3 1.5v-6.7L4 5Z" />
+        </svg>
       </button>
     </div>
 
-    <div
-      v-if="mobileFiltersOpen"
-      class="mobile-filter-backdrop recipe-filter-backdrop"
-      @pointerdown.self="closeMobileFilters"
-      @keydown.esc="closeMobileFilters"
-    >
-      <section
-        id="mobile-recipe-filter-drawer"
-        class="mobile-filter-drawer"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="mobile-recipe-filter-title"
+    <Transition name="mobile-drawer">
+      <div
+        v-if="mobileFiltersOpen"
+        class="mobile-filter-backdrop recipe-filter-backdrop"
+        @pointerdown.self="closeMobileFilters"
+        @keydown.esc="closeMobileFilters"
       >
+        <section
+          id="mobile-recipe-filter-drawer"
+          class="mobile-filter-drawer"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-recipe-filter-title"
+        >
         <header>
           <div>
             <small>FILTERS</small>
@@ -169,8 +166,9 @@ async function closeMobileFilters() {
             查看 {{ filteredRecipes.length }} 道料理
           </button>
         </footer>
-      </section>
-    </div>
+        </section>
+      </div>
+    </Transition>
 
     <div class="toolbar-wrap">
       <section class="toolbar" aria-label="食谱搜索与筛选">

@@ -95,21 +95,18 @@
         type="button"
         aria-controls="mobile-farming-filter-drawer"
         :aria-expanded="mobileFiltersOpen"
+        :aria-label="`打开筛选：${mobileFilterSummary}，${filteredExamples.length} 组`"
         @click="openMobileFilters"
       >
-        <span>
-          <small>筛选</small>
-          <strong>{{ mobileFilterSummary }}</strong>
-        </span>
-        <span class="mobile-filter-result">
-          {{ filteredExamples.length }} 组
-          <b aria-hidden="true">⌃</b>
-        </span>
+        <svg class="mobile-filter-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 5h16l-6.5 7.3v5.2l-3 1.5v-6.7L4 5Z" />
+        </svg>
       </button>
     </div>
 
-    <div v-if="mobileFiltersOpen" class="mobile-filter-backdrop" @pointerdown.self="closeMobileFilters" @keydown.esc="closeMobileFilters">
-      <section id="mobile-farming-filter-drawer" class="mobile-filter-drawer" role="dialog" aria-modal="true" aria-labelledby="mobile-filter-title">
+    <Transition name="mobile-drawer">
+      <div v-if="mobileFiltersOpen" class="mobile-filter-backdrop" @pointerdown.self="closeMobileFilters" @keydown.esc="closeMobileFilters">
+        <section id="mobile-farming-filter-drawer" class="mobile-filter-drawer" role="dialog" aria-modal="true" aria-labelledby="mobile-filter-title">
         <header>
           <div>
             <small>FILTERS</small>
@@ -177,8 +174,9 @@
             查看 {{ filteredExamples.length }} 组配比
           </button>
         </footer>
-      </section>
-    </div>
+        </section>
+      </div>
+    </Transition>
 
     <div class="season-tabs" aria-label="按季节查看巨大作物配比">
       <button

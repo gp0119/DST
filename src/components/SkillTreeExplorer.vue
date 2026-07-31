@@ -866,32 +866,29 @@
         type="button"
         aria-controls="mobile-character-filter-drawer"
         :aria-expanded="mobileCharactersOpen"
+        :aria-label="`选择角色：${activeCharacter.name}，${selectedCount} / ${maxPoints} 洞察`"
         @click="openMobileCharacters"
       >
-        <span>
-          <small>角色</small>
-          <strong>{{ activeCharacter.name }} · {{ activeCharacter.title }}</strong>
-        </span>
-        <span class="mobile-filter-result">
-          {{ selectedCount }} / {{ maxPoints }}
-          <b aria-hidden="true">⌃</b>
-        </span>
+        <svg class="mobile-filter-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 5h16l-6.5 7.3v5.2l-3 1.5v-6.7L4 5Z" />
+        </svg>
       </button>
     </div>
 
-    <div
-      v-if="mobileCharactersOpen"
-      class="mobile-filter-backdrop skill-character-filter-backdrop"
-      @pointerdown.self="closeMobileCharacters"
-      @keydown.esc="closeMobileCharacters"
-    >
-      <section
-        id="mobile-character-filter-drawer"
-        class="mobile-filter-drawer"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="mobile-character-filter-title"
+    <Transition name="mobile-drawer">
+      <div
+        v-if="mobileCharactersOpen"
+        class="mobile-filter-backdrop skill-character-filter-backdrop"
+        @pointerdown.self="closeMobileCharacters"
+        @keydown.esc="closeMobileCharacters"
       >
+        <section
+          id="mobile-character-filter-drawer"
+          class="mobile-filter-drawer"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-character-filter-title"
+        >
         <header>
           <div>
             <small>CHARACTERS</small>
@@ -932,8 +929,9 @@
             查看{{ activeCharacter.name }}技能树
           </button>
         </footer>
-      </section>
-    </div>
+        </section>
+      </div>
+    </Transition>
 
     <div class="skill-workspace">
       <aside class="character-rail" aria-label="选择角色">
