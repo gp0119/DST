@@ -11,12 +11,14 @@ const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const dataPath = join(projectRoot, "src/data/cookbook.json");
 const farmingDataPath = join(projectRoot, "src/data/farming.json");
 const farmingExamplesPath = join(projectRoot, "src/data/farming-examples.json");
+const skillDataPath = join(projectRoot, "src/data/skills.json");
 const publicRoot = join(projectRoot, "public");
 const sourceRoot = join(projectRoot, "src");
 const distRoot = join(projectRoot, "dist");
 const data = JSON.parse(await readFile(dataPath, "utf8"));
 const farming = JSON.parse(await readFile(farmingDataPath, "utf8"));
 const farmingExamples = JSON.parse(await readFile(farmingExamplesPath, "utf8"));
+const skillTrees = JSON.parse(await readFile(skillDataPath, "utf8"));
 const packageJson = JSON.parse(await readFile(join(projectRoot, "package.json"), "utf8"));
 const failures = [];
 
@@ -44,6 +46,39 @@ check(Boolean(packageJson.dependencies.vue), "缺少 Vue 3 依赖");
 check(Boolean(packageJson.dependencies.tailwindcss), "缺少 Tailwind CSS 依赖");
 check(farming.seasons.length === 4, "巨大作物页面应包含春夏秋冬 4 个季节");
 check(farming.crops.length === 14, `农作物应为 14 种，实际为 ${farming.crops.length}`);
+check(skillTrees.maxPoints === 15, `角色技能点上限应为 15，实际为 ${skillTrees.maxPoints}`);
+check(skillTrees.characters.length === 12, `技能树角色应为 12 位，实际为 ${skillTrees.characters.length}`);
+
+const imagePaths = new Set();
+let skillCount = 0;
+for (const character of skillTrees.characters) {
+  const skillIds = new Set(character.skills.map((skill) => skill.id));
+  skillCount += character.skills.length;
+  imagePaths.add(character.image);
+  check(
+    skillIds.size === character.skills.length,
+    `${character.name}存在重复技能 ID`,
+  );
+  for (const skill of character.skills) {
+    check(Boolean(skill.title), `${character.name}的 ${skill.id} 缺少中文名称`);
+    check(Boolean(skill.desc), `${character.name}的 ${skill.id} 缺少中文说明`);
+    check(Boolean(skill.group), `${character.name}的 ${skill.id} 缺少分组`);
+    check(
+      Number.isFinite(skill.x) && Number.isFinite(skill.y),
+      `${character.name}的 ${skill.id} 缺少游戏技能树坐标`,
+    );
+    for (const parent of skill.parents) {
+      check(skillIds.has(parent), `${character.name}的 ${skill.id} 引用了未知前置技能：${parent}`);
+    }
+    for (const requirement of [
+      ...(skill.requirements.requiredSkills ?? []),
+      ...(skill.requirements.excludesSkills ?? []),
+    ]) {
+      check(skillIds.has(requirement), `${character.name}的 ${skill.id} 引用了未知条件技能：${requirement}`);
+    }
+  }
+}
+check(skillCount === 308, `角色技能应为 308 项，实际为 ${skillCount}`);
 
 for (const recipe of data.recipes) {
   check(recipe.combos.length === 2, `${recipe.zh} 应有 2 套常用配料`);
@@ -53,7 +88,6 @@ for (const recipe of data.recipes) {
   }
 }
 
-const imagePaths = new Set();
 for (const recipe of data.recipes) {
   imagePaths.add(recipe.image);
   recipe.combos.flatMap((combo) => combo.items).forEach((item) => imagePaths.add(item.image));
@@ -513,6 +547,7 @@ check(
 await access(join(distRoot, "index.html"));
 await access(join(distRoot, "data.json"));
 await access(join(distRoot, "farming/index.html"));
+await access(join(distRoot, "skills/index.html"));
 const distFiles = await walk(distRoot);
 const builtCss = await Promise.all(
   distFiles
@@ -530,5 +565,5 @@ if (failures.length) {
 }
 
 console.log(
-  `验证通过：${data.recipes.length} 道料理、${farming.seasons.length} 个季节、${farmingExamples.examples.length} 张示例卡、${seasonalExampleCount} 个季节示例、${completeRatioCount} 组完整配比、${imagePaths.size} 个本地图片引用。`,
+  `验证通过：${data.recipes.length} 道料理、${farming.seasons.length} 个季节、${farmingExamples.examples.length} 张示例卡、${seasonalExampleCount} 个季节示例、${completeRatioCount} 组完整配比、${skillTrees.characters.length} 位技能树角色、${skillCount} 项技能、${imagePaths.size} 个本地图片引用。`,
 );

@@ -1,0 +1,5330 @@
+{
+  "source": {
+    "build": "722832",
+    "updatedAt": "2026-04-21",
+    "note": "技能名称与描述取自游戏简体中文本地化，节点坐标与解锁结构取自同版本技能树脚本。"
+  },
+  "maxPoints": 15,
+  "characters": [
+    {
+      "id": "wilson",
+      "slug": "wilson",
+      "name": "威尔逊",
+      "title": "绅士科学家",
+      "image": "images/characters/wilson.png",
+      "skills": [
+        {
+          "id": "wilson_alchemy_1",
+          "title": "转化",
+          "desc": "将3条树枝转化为原木。\n将1根原木转化为2条树枝。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -58,
+          "y": 176
+        },
+        {
+          "id": "wilson_alchemy_2",
+          "title": "一级宝石转化",
+          "desc": "将2颗红宝石转化为1颗蓝宝石。\n将2颗蓝宝石转化为1颗红宝石。\n将1颗蓝宝石和1颗红宝石转化为1颗紫宝石。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [
+            "wilson_alchemy_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -58,
+          "y": 122
+        },
+        {
+          "id": "wilson_alchemy_5",
+          "title": "二级宝石转化",
+          "desc": "将3颗紫宝石转化为1颗橙宝石。\n将3颗橙宝石转化为1颗黄宝石。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [
+            "wilson_alchemy_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -58,
+          "y": 84
+        },
+        {
+          "id": "wilson_alchemy_6",
+          "title": "三级宝石转化",
+          "desc": "将3颗黄宝石转化为一颗绿宝石。\n将6颗不同颜色的宝石转化为一颗彩虹宝石。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [
+            "wilson_alchemy_5"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -58,
+          "y": 46
+        },
+        {
+          "id": "wilson_alchemy_3",
+          "title": "一级矿石转化",
+          "desc": "将3块石头转化为1颗燧石。\n将2颗燧石转化为石头。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [
+            "wilson_alchemy_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -96,
+          "y": 122
+        },
+        {
+          "id": "wilson_alchemy_7",
+          "title": "二级矿石转化",
+          "desc": "将3颗硝石转化为一块金块。\n将2块金块转化为硝石。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [
+            "wilson_alchemy_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -96,
+          "y": 84
+        },
+        {
+          "id": "wilson_alchemy_8",
+          "title": "三级矿石转化",
+          "desc": "将2块石砖转化为大理石。\n将大理石转化为石砖。\n将2块大理石转化为月岩。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [
+            "wilson_alchemy_7"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -96,
+          "y": 46
+        },
+        {
+          "id": "wilson_alchemy_4",
+          "title": "一级腐朽转化",
+          "desc": "将3块小肉转化为1块肉。\n将1块肉转化为2块小肉。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [
+            "wilson_alchemy_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -20,
+          "y": 122
+        },
+        {
+          "id": "wilson_alchemy_9",
+          "title": "二级腐朽转化",
+          "desc": "将2份胡须转化为皮弗娄牛毛。\n将2份皮弗娄牛毛转化为胡须。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [
+            "wilson_alchemy_4"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -20,
+          "y": 84
+        },
+        {
+          "id": "wilson_alchemy_10",
+          "title": "腐朽转化III",
+          "desc": "将6份腐烂物转化为粪肥。\n将2根犬牙转化为骨头碎片。\n将2块骨头碎片转化为犬牙。",
+          "group": "alchemy",
+          "tags": [
+            "alchemy"
+          ],
+          "parents": [
+            "wilson_alchemy_9"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -20,
+          "y": 46
+        },
+        {
+          "id": "wilson_torch_1",
+          "title": "一级火炬寿命",
+          "desc": "小幅延长火炬燃烧时间。",
+          "group": "torch",
+          "tags": [
+            "torch",
+            "torch1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -208,
+          "y": 176
+        },
+        {
+          "id": "wilson_torch_2",
+          "title": "二级火炬寿命",
+          "desc": "中幅延长火炬燃烧时间。",
+          "group": "torch",
+          "tags": [
+            "torch",
+            "torch1"
+          ],
+          "parents": [
+            "wilson_torch_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -208,
+          "y": 138
+        },
+        {
+          "id": "wilson_torch_3",
+          "title": "三级火炬寿命",
+          "desc": "大幅延长火炬燃烧时间。",
+          "group": "torch",
+          "tags": [
+            "torch",
+            "torch1"
+          ],
+          "parents": [
+            "wilson_torch_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -208,
+          "y": 100
+        },
+        {
+          "id": "wilson_torch_4",
+          "title": "一级火炬范围",
+          "desc": "小幅提升火炬亮度。",
+          "group": "torch",
+          "tags": [
+            "torch",
+            "torch1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -170,
+          "y": 176
+        },
+        {
+          "id": "wilson_torch_5",
+          "title": "二级火炬范围",
+          "desc": "中幅提升火炬亮度。",
+          "group": "torch",
+          "tags": [
+            "torch",
+            "torch1"
+          ],
+          "parents": [
+            "wilson_torch_4"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -170,
+          "y": 138
+        },
+        {
+          "id": "wilson_torch_6",
+          "title": "三级火炬范围",
+          "desc": "大幅提升火炬亮度。",
+          "group": "torch",
+          "tags": [
+            "torch",
+            "torch1"
+          ],
+          "parents": [
+            "wilson_torch_5"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -170,
+          "y": 100
+        },
+        {
+          "id": "wilson_torch_7",
+          "title": "丢火炬",
+          "desc": "得益于科学制定的抛物线，着陆时总能以正确的一头朝上。",
+          "group": "torch",
+          "tags": [
+            "torch"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "torch1",
+                "count": 3
+              }
+            ]
+          },
+          "x": -190,
+          "y": 20
+        },
+        {
+          "id": "wilson_beard_1",
+          "title": "一级胡须保温",
+          "desc": "从你的胡须获得高保温性能。",
+          "group": "beard",
+          "tags": [
+            "beard",
+            "beard1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 66,
+          "y": 176
+        },
+        {
+          "id": "wilson_beard_2",
+          "title": "二级胡须保温",
+          "desc": "从你的胡须获得更高的保温性能。",
+          "group": "beard",
+          "tags": [
+            "beard",
+            "beard1"
+          ],
+          "parents": [
+            "wilson_beard_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 66,
+          "y": 138
+        },
+        {
+          "id": "wilson_beard_3",
+          "title": "三级胡须保温",
+          "desc": "从你的胡须获得最高的保温性能。",
+          "group": "beard",
+          "tags": [
+            "beard",
+            "beard1"
+          ],
+          "parents": [
+            "wilson_beard_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 66,
+          "y": 100
+        },
+        {
+          "id": "wilson_beard_4",
+          "title": "一级胡须生长",
+          "desc": "小幅加快你的宏伟胡须的生长速度。",
+          "group": "beard",
+          "tags": [
+            "beard",
+            "beard1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 104,
+          "y": 176
+        },
+        {
+          "id": "wilson_beard_5",
+          "title": "二级胡须生长",
+          "desc": "中幅加快你的宏伟胡须的生长速度。",
+          "group": "beard",
+          "tags": [
+            "beard",
+            "beard1"
+          ],
+          "parents": [
+            "wilson_beard_4"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 104,
+          "y": 138
+        },
+        {
+          "id": "wilson_beard_6",
+          "title": "三级胡须生长",
+          "desc": "大幅加快你的宏伟胡须的生长速度。",
+          "group": "beard",
+          "tags": [
+            "beard",
+            "beard1"
+          ],
+          "parents": [
+            "wilson_beard_5"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 104,
+          "y": 100
+        },
+        {
+          "id": "wilson_beard_7",
+          "title": "胡须贮藏术",
+          "desc": "在你的胡须中存放食物。",
+          "group": "beard",
+          "tags": [
+            "beard"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "beard1",
+                "count": 3
+              }
+            ]
+          },
+          "x": 82,
+          "y": 20
+        },
+        {
+          "id": "wilson_allegiance_shadow",
+          "title": "暗影廷臣",
+          "desc": "女王会用暗影转化术的秘密犒赏你的忠诚。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minPoints": 12,
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 182,
+          "y": 38
+        },
+        {
+          "id": "wilson_allegiance_lunar",
+          "title": "月光创新者",
+          "desc": "神秘的创始人将以月光转换术的秘密来回报你的好奇心。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minPoints": 12,
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 226,
+          "y": 38
+        }
+      ]
+    },
+    {
+      "id": "willow",
+      "slug": "willow",
+      "name": "薇洛",
+      "title": "纵火者",
+      "image": "images/characters/willow.png",
+      "skills": [
+        {
+          "id": "willow_controlled_burn_1",
+          "title": "可控燃烧",
+          "desc": "你放的火不会蔓延，可燃烧的战利品只会冒烟。\n火把和薇洛的打火机等物品有100%概率点燃目标。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -207,
+          "y": 176
+        },
+        {
+          "id": "willow_controlled_burn_2",
+          "title": "燃烧周期",
+          "desc": "延长生物的燃烧时间。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [
+            "willow_controlled_burn_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -207,
+          "y": 137
+        },
+        {
+          "id": "willow_controlled_burn_3",
+          "title": "烈火斗士",
+          "desc": "随着时间的推移，你的火焰会对生物造成更多伤害。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [
+            "willow_controlled_burn_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -207,
+          "y": 98
+        },
+        {
+          "id": "willow_attuned_lighter",
+          "title": "饥饿打火机",
+          "desc": "通过用打火机吸收火焰（包括冒烟的状态）来灭火。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -145,
+          "y": 91
+        },
+        {
+          "id": "willow_embers",
+          "title": "余烬照料者",
+          "desc": "收集并使用余烬来释放多种意念控火术上。\n你可以用打火机从被烧焦的生物上收集余烬\n使用余烬来为打火机充能。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [
+            "willow_attuned_lighter"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -145,
+          "y": 52
+        },
+        {
+          "id": "willow_fire_burst",
+          "title": "自燃术",
+          "desc": "使用余烬点燃你附近的生物。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [
+            "willow_embers"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -216,
+          "y": 9
+        },
+        {
+          "id": "willow_fire_ball",
+          "title": "火球术",
+          "desc": "使用余烬制造一个火球，产生光和热。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [
+            "willow_embers"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -172,
+          "y": 9
+        },
+        {
+          "id": "willow_fire_frenzy",
+          "title": "狂热焚烧",
+          "desc": "60秒内，攻击燃烧目标时增加25%的武器伤害。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [
+            "willow_embers"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -128,
+          "y": 9
+        },
+        {
+          "id": "willow_lightradius_1",
+          "title": "一级明亮打火机",
+          "desc": "略微增加打火机的亮度。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -138,
+          "y": 176
+        },
+        {
+          "id": "willow_lightradius_2",
+          "title": "二级明亮打火机",
+          "desc": "大量增加打火机的亮度。",
+          "group": "lighter",
+          "tags": [
+            "lighter"
+          ],
+          "parents": [
+            "willow_lightradius_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -138,
+          "y": 137
+        },
+        {
+          "id": "willow_bernieregen_1",
+          "title": "一级打补丁",
+          "desc": "伯尼会缓慢回血。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie4",
+            "bernie8"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -38,
+          "y": 166
+        },
+        {
+          "id": "willow_bernieregen_2",
+          "title": "二级打补丁",
+          "desc": "加快伯尼回血速度。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie4",
+            "bernie8"
+          ],
+          "parents": [
+            "willow_bernieregen_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -38,
+          "y": 127
+        },
+        {
+          "id": "willow_berniesanity_1",
+          "title": "一级理智小熊",
+          "desc": "伯尼会在更高的理智阈值下活起来。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie4",
+            "bernie8"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 6,
+          "y": 166
+        },
+        {
+          "id": "willow_berniesanity_2",
+          "title": "二级理智小熊",
+          "desc": "伯尼活起来的理智阈值进一步提高。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie4",
+            "bernie8"
+          ],
+          "parents": [
+            "willow_berniesanity_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 6,
+          "y": 127
+        },
+        {
+          "id": "willow_bernieai",
+          "title": "头脑发热",
+          "desc": "无论薇洛的理智高低，伯尼都会激活并攻击敌对的月亮和暗影阵营的生物。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie4",
+            "bernie8"
+          ],
+          "parents": [
+            "willow_berniesanity_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 6,
+          "y": 88
+        },
+        {
+          "id": "willow_berniespeed_1",
+          "title": "一级加速剂",
+          "desc": "伯尼移动地稍微快一点。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie4",
+            "bernie8"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 50,
+          "y": 166
+        },
+        {
+          "id": "willow_berniespeed_2",
+          "title": "二级加速剂",
+          "desc": "伯尼移动地快很多。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie4",
+            "bernie8"
+          ],
+          "parents": [
+            "willow_berniespeed_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 50,
+          "y": 127
+        },
+        {
+          "id": "willow_berniehealth_1",
+          "title": "一级坚硬填料",
+          "desc": "伯尼的总生命值得到一点提高。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie8"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "bernie4",
+                "count": 4
+              }
+            ]
+          },
+          "x": -40,
+          "y": 49
+        },
+        {
+          "id": "willow_berniehealth_2",
+          "title": "二级坚硬填料",
+          "desc": "伯尼的总生命值得到大量提高。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie8"
+          ],
+          "parents": [
+            "willow_berniehealth_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -40,
+          "y": 14
+        },
+        {
+          "id": "willow_burnignbernie",
+          "title": "燃烧伯尼",
+          "desc": "点燃伯尼会在短时间内给他带来火焰光环。\n攻击被点燃的伯尼的敌人会受到反伤。",
+          "group": "bernie",
+          "tags": [
+            "bernie",
+            "bernie4"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "bernie8",
+                "count": 8
+              }
+            ]
+          },
+          "x": 48,
+          "y": 49
+        },
+        {
+          "id": "willow_allegiance_shadow_fire",
+          "title": "暗焰纵火犯",
+          "desc": "女王会馈赠给你暗焰的能力来奖励你的忠诚。\n召唤出多个燃烧暗黑火焰的卷须来追击敌方目标。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ],
+            "minTags": [
+              {
+                "tag": "lighter",
+                "count": 7
+              }
+            ]
+          },
+          "x": 214,
+          "y": 109
+        },
+        {
+          "id": "willow_allegiance_shadow_bernie",
+          "title": "暗影伯尼",
+          "desc": "利用黑暗加强伯尼的位面攻击和防御力，特别是针对月亮敌人。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ],
+            "minTags": [
+              {
+                "tag": "bernie",
+                "count": 6
+              }
+            ]
+          },
+          "x": 146,
+          "y": 109
+        },
+        {
+          "id": "willow_allegiance_lunar_fire",
+          "title": "月焰纵火犯",
+          "desc": "神秘创始人会馈赠给你月焰的配方来奖励你的好奇心。\n使用余烬来发射冰冷的月焰。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ],
+            "minTags": [
+              {
+                "tag": "lighter",
+                "count": 7
+              }
+            ]
+          },
+          "x": 214,
+          "y": 8
+        },
+        {
+          "id": "willow_allegiance_lunar_bernie",
+          "title": "月亮伯尼",
+          "desc": "祈求月亮加强伯尼的位面攻击和防御力，特别是针对暗影敌人。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ],
+            "minTags": [
+              {
+                "tag": "bernie",
+                "count": 6
+              }
+            ]
+          },
+          "x": 146,
+          "y": 8
+        }
+      ]
+    },
+    {
+      "id": "wolfgang",
+      "slug": "wolfgang",
+      "name": "沃尔夫冈",
+      "title": "大力士",
+      "image": "images/characters/wolfgang.png",
+      "skills": [
+        {
+          "id": "wolfgang_critwork_1",
+          "title": "杂务锻炼 I",
+          "desc": "工作时一击秒杀的几率提高至5%。",
+          "group": "might",
+          "tags": [
+            "might"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -212,
+          "y": 170
+        },
+        {
+          "id": "wolfgang_critwork_2",
+          "title": "杂务锻炼 II",
+          "desc": "工作时一击秒杀的几率提高至10%。",
+          "group": "might",
+          "tags": [
+            "might"
+          ],
+          "parents": [
+            "wolfgang_critwork_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -212,
+          "y": 132
+        },
+        {
+          "id": "wolfgang_critwork_3",
+          "title": "杂务锻炼 III",
+          "desc": "工作时一击秒杀的几率提高至15%。",
+          "group": "might",
+          "tags": [
+            "might"
+          ],
+          "parents": [
+            "wolfgang_critwork_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -212,
+          "y": 94
+        },
+        {
+          "id": "wolfgang_autogym",
+          "title": "健身房精通",
+          "desc": "完善您的健身房锻炼。\n小游戏将自动完成。",
+          "group": "training",
+          "tags": [
+            "autogym"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -125,
+          "y": 170
+        },
+        {
+          "id": "wolfgang_normal_coach",
+          "title": "沃尔夫冈教练",
+          "desc": "学习制作训练哨。\n在训练时，普通形态下的沃尔夫冈会提高朋友的理智并增加随从的伤害。",
+          "group": "training",
+          "tags": [
+            "training"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -87,
+          "y": 170
+        },
+        {
+          "id": "wolfgang_normal_speed",
+          "title": "练腿日",
+          "desc": "正常形态下获得 +10% 速度提升。",
+          "group": "training",
+          "tags": [
+            "training"
+          ],
+          "parents": [
+            "wolfgang_normal_coach"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -87,
+          "y": 132
+        },
+        {
+          "id": "wolfgang_dumbbell_crafting",
+          "title": "哑铃开发者",
+          "desc": "学习制作几个新的哑铃。",
+          "group": "training",
+          "tags": [
+            "dumbbell_craft"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -49,
+          "y": 170
+        },
+        {
+          "id": "wolfgang_dumbbell_throwing_1",
+          "title": "重击手 I",
+          "desc": "投掷哑铃的伤害增加 50%。",
+          "group": "training",
+          "tags": [
+            "dumbbell_throwing"
+          ],
+          "parents": [
+            "wolfgang_dumbbell_crafting"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -49,
+          "y": 132
+        },
+        {
+          "id": "wolfgang_dumbbell_throwing_2",
+          "title": "重击手 II",
+          "desc": "使投掷哑铃的伤害提高 100%。",
+          "group": "training",
+          "tags": [
+            "dumbbell_throwing"
+          ],
+          "parents": [
+            "wolfgang_dumbbell_throwing_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -49,
+          "y": 94
+        },
+        {
+          "id": "wolfgang_overbuff_1",
+          "title": "突破极限 I",
+          "desc": "使用健身房来突破您的力量值极限。\n力量值最高可达 110。",
+          "group": "training",
+          "tags": [
+            "overbuff"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -11,
+          "y": 170
+        },
+        {
+          "id": "wolfgang_overbuff_2",
+          "title": "突破极限 II",
+          "desc": "使用健身房来突破您的力量值极限。\n 力量值最高可达 120。",
+          "group": "training",
+          "tags": [
+            "overbuff"
+          ],
+          "parents": [
+            "wolfgang_overbuff_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -11,
+          "y": 132
+        },
+        {
+          "id": "wolfgang_overbuff_3",
+          "title": "突破极限 III",
+          "desc": "使用健身房来突破您的力量值极限。\n 力量值最高可达 130。",
+          "group": "training",
+          "tags": [
+            "overbuff"
+          ],
+          "parents": [
+            "wolfgang_overbuff_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -11,
+          "y": 94
+        },
+        {
+          "id": "wolfgang_overbuff_4",
+          "title": "突破极限 IV",
+          "desc": "使用健身房来突破您的力量值极限。\n 力量值最高可达 140。",
+          "group": "training",
+          "tags": [
+            "overbuff"
+          ],
+          "parents": [
+            "wolfgang_overbuff_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -11,
+          "y": 56
+        },
+        {
+          "id": "wolfgang_overbuff_5",
+          "title": "突破极限 V",
+          "desc": "使用健身房来突破您的力量值极限。\n 力量值最高可达 150。",
+          "group": "training",
+          "tags": [
+            "overbuff"
+          ],
+          "parents": [
+            "wolfgang_overbuff_4"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -11,
+          "y": 18
+        },
+        {
+          "id": "wolfgang_planardamage_1",
+          "title": "威力武器 I",
+          "desc": "充分发挥位面近战武器的威力。\n在强大状态时，位面近战武器的位面伤害+5。",
+          "group": "planardamage",
+          "tags": [
+            "planardamage"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 90,
+          "y": 170
+        },
+        {
+          "id": "wolfgang_planardamage_2",
+          "title": "威力武器 II",
+          "desc": "充分发挥位面近战武器的威力。\n在强大状态时，位面近战武器的位面伤害+10。",
+          "group": "planardamage",
+          "tags": [
+            "planardamage"
+          ],
+          "parents": [
+            "wolfgang_planardamage_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 90,
+          "y": 132
+        },
+        {
+          "id": "wolfgang_planardamage_3",
+          "title": "威力武器 III",
+          "desc": "充分发挥位面近战武器的威力。\n在强大状态时，位面近战武器的位面伤害+15。",
+          "group": "planardamage",
+          "tags": [
+            "planardamage"
+          ],
+          "parents": [
+            "wolfgang_planardamage_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 90,
+          "y": 94
+        },
+        {
+          "id": "wolfgang_planardamage_4",
+          "title": "威力武器 IV",
+          "desc": "充分发挥位面近战武器的威力。\n在强大状态时，位面近战武器的位面伤害+20。",
+          "group": "planardamage",
+          "tags": [
+            "planardamage"
+          ],
+          "parents": [
+            "wolfgang_planardamage_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 90,
+          "y": 56
+        },
+        {
+          "id": "wolfgang_planardamage_5",
+          "title": "威力武器 V",
+          "desc": "充分发挥位面近战武器的威力。\n在强大状态时，位面近战武器的位面伤害+25。",
+          "group": "planardamage",
+          "tags": [
+            "planardamage"
+          ],
+          "parents": [
+            "wolfgang_planardamage_4"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 90,
+          "y": 18
+        },
+        {
+          "id": "wolfgang_allegiance_shadow_1",
+          "title": "暗影守卫 I",
+          "desc": "女王将以毁灭性的力量奖励你的忠诚。\n强壮形态下，与月亮阵营的生物战斗时，总伤害增加 +10%。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 181,
+          "y": 94
+        },
+        {
+          "id": "wolfgang_allegiance_shadow_2",
+          "title": "暗影守卫 II",
+          "desc": "女王将以毁灭性的力量奖励你的忠诚。\n强壮形态下，与月亮阵营的生物战斗时，总伤害增加 +20%。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [
+            "wolfgang_allegiance_shadow_1"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 181,
+          "y": 56
+        },
+        {
+          "id": "wolfgang_allegiance_shadow_3",
+          "title": "暗影守卫 III",
+          "desc": "女王将以毁灭性的力量奖励你的忠诚。\n强壮形态下，与月亮阵营的生物战斗时，总伤害增加+30%。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [
+            "wolfgang_allegiance_shadow_2"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 181,
+          "y": 18
+        },
+        {
+          "id": "wolfgang_allegiance_lunar_1",
+          "title": "月亮战略家 I",
+          "desc": "神秘创始人将通过揭露敌人的弱点来奖励你的好奇心。\n强壮形态下，与暗影阵营生物战斗时，总伤害增加+10%。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 219,
+          "y": 94
+        },
+        {
+          "id": "wolfgang_allegiance_lunar_2",
+          "title": "月亮战略家 II",
+          "desc": "神秘创始人将通过揭露敌人的弱点来奖励你的好奇心。\n强壮形态下，与暗影阵营生物战斗时总伤害增加 +20%。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [
+            "wolfgang_allegiance_lunar_1"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 219,
+          "y": 56
+        },
+        {
+          "id": "wolfgang_allegiance_lunar_3",
+          "title": "月亮战略家 III",
+          "desc": "神秘创始人将通过揭露敌人的弱点来奖励你的好奇心。\n强壮形态下，与暗影阵营生物战斗时总伤害增加 +30%。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [
+            "wolfgang_allegiance_lunar_2"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 219,
+          "y": 18
+        }
+      ]
+    },
+    {
+      "id": "wendy",
+      "slug": "wendy",
+      "name": "温蒂",
+      "title": "失去亲人的女孩",
+      "image": "images/characters/wendy.png",
+      "skills": [
+        {
+          "id": "wendy_sisturn_1",
+          "title": "一级受佑姐妹骨灰罐",
+          "desc": "寒冷的死亡气息能让花瓣在姐妹骨灰罐中保存得更久。",
+          "group": "sisturn_upgrades",
+          "tags": [
+            "sisturn"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 103,
+          "y": 173
+        },
+        {
+          "id": "wendy_sisturn_2",
+          "title": "二级受佑姐妹骨灰罐",
+          "desc": "温蒂对可怕事物的抵抗力增强了，她会把这种自信传递给附近的其他人。",
+          "group": "sisturn_upgrades",
+          "tags": [
+            "sisturn"
+          ],
+          "parents": [
+            "wendy_sisturn_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 144,
+          "y": 156
+        },
+        {
+          "id": "wendy_sisturn_3",
+          "title": "三级受佑姐妹骨灰罐",
+          "desc": "月树花使阿比盖尔的人性更加接近永恒领域。\n她像其他冒险家一样，对永恒领域中巨兽的抵抗力更高。但在被召唤后，她的幽灵治疗效果会减缓。",
+          "group": "sisturn_upgrades",
+          "tags": [
+            "sisturn"
+          ],
+          "parents": [
+            "wendy_sisturn_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 185,
+          "y": 136
+        },
+        {
+          "id": "wendy_potion_container",
+          "title": "野餐盒",
+          "desc": "温蒂可以制作一个篮子来装阿比盖尔的所有药剂和哀悼荣耀。",
+          "group": "potion_upgrades",
+          "tags": [
+            "potion"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -57,
+          "y": 185
+        },
+        {
+          "id": "wendy_potion_revive",
+          "title": "恐怖经历",
+          "desc": "温蒂学会酿造一种新的幽灵药剂，它能帮助阿比盖尔迅速回忆起自己的潜能。",
+          "group": "potion_upgrades",
+          "tags": [
+            "potion"
+          ],
+          "parents": [
+            "wendy_potion_container"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -20,
+          "y": 190
+        },
+        {
+          "id": "wendy_potion_duration",
+          "title": "药效强劲",
+          "desc": "原来持续一天的药剂现在可以持续两天。",
+          "group": "potion_upgrades",
+          "tags": [
+            "potion"
+          ],
+          "parents": [
+            "wendy_potion_revive"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 18,
+          "y": 190
+        },
+        {
+          "id": "wendy_potion_yield",
+          "title": "额外产出",
+          "desc": "有时，温蒂可以从同样的原料中多挤出一些药剂。",
+          "group": "potion_upgrades",
+          "tags": [
+            "potion"
+          ],
+          "parents": [
+            "wendy_potion_duration"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 57,
+          "y": 185
+        },
+        {
+          "id": "wendy_avenging_ghost",
+          "title": "鬼魂复仇",
+          "desc": "当温蒂或她的朋友被杀死后，她们的鬼魂会复仇，并能在短时间内对活人的世界造成破坏。",
+          "group": "avengingghost",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -47,
+          "y": 137
+        },
+        {
+          "id": "wendy_smallghost_1",
+          "title": "一级小惊吓任务",
+          "desc": "小惊吓丢失的玩具并不远。",
+          "group": "smallghost",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -173,
+          "y": 133
+        },
+        {
+          "id": "wendy_smallghost_2",
+          "title": "二级小惊吓任务",
+          "desc": "小惊吓想起更多丢失的玩具要找。",
+          "group": "smallghost",
+          "tags": [],
+          "parents": [
+            "wendy_smallghost_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -137,
+          "y": 154
+        },
+        {
+          "id": "wendy_smallghost_3",
+          "title": "三级小惊吓任务",
+          "desc": "小惊吓会产出更多的哀悼荣耀。",
+          "group": "smallghost",
+          "tags": [],
+          "parents": [
+            "wendy_smallghost_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -101,
+          "y": 173
+        },
+        {
+          "id": "wendy_ghostflower_butterfly",
+          "title": "一级哀悼荣耀",
+          "desc": "用蝴蝶与飞蛾开启复活之旅。",
+          "group": "ghostflower",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -168,
+          "y": 71
+        },
+        {
+          "id": "wendy_ghostflower_hat",
+          "title": "二级哀悼荣耀",
+          "desc": "将自己置身在鬼魅般的大自然中，感受药剂的力量，尽管药效并不完整。",
+          "group": "ghostflower",
+          "tags": [],
+          "parents": [
+            "wendy_ghostflower_butterfly"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -132,
+          "y": 97
+        },
+        {
+          "id": "wendy_ghostflower_grave",
+          "title": "三级哀悼荣耀",
+          "desc": "你可以把朋友带回来，但前提似乎是他们必须已经进入了永恒领域。",
+          "group": "ghostflower",
+          "tags": [],
+          "parents": [
+            "wendy_ghostflower_hat"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -96,
+          "y": 115
+        },
+        {
+          "id": "wendy_gravestone_1",
+          "title": "坟墓美化",
+          "desc": "温蒂可以用花装饰坟墓，让居住的鬼魂开心起来。\n温蒂不再害怕邪恶花。",
+          "group": "gravestone",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 10,
+          "y": 143
+        },
+        {
+          "id": "wendy_makegravemounds",
+          "title": "温蒂手作墓碑",
+          "desc": "温蒂可以用墓碑安抚骷髅的亡魂。\n她还可以制作灵魂容器，为友善的鬼影提供新的归宿。",
+          "group": "gravestone",
+          "tags": [],
+          "parents": [
+            "wendy_gravestone_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 49,
+          "y": 136
+        },
+        {
+          "id": "wendy_ghostcommand_1",
+          "title": "一级幽灵团队",
+          "desc": "温蒂可以提醒阿比盖尔，她是一个幽灵，可以从敌人视野消失，从而逃脱厄运。",
+          "group": "ghost_command",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 98,
+          "y": 118
+        },
+        {
+          "id": "wendy_ghostcommand_2",
+          "title": "二级幽灵团队",
+          "desc": "阿比盖尔可以冲刺到温蒂需要援助的任何地方。",
+          "group": "ghost_command",
+          "tags": [],
+          "parents": [
+            "wendy_ghostcommand_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 138,
+          "y": 100
+        },
+        {
+          "id": "wendy_ghostcommand_3",
+          "title": "三级幽灵团队",
+          "desc": "阿比盖尔可以利用她作为幽灵的力量来惊吓和作祟。",
+          "group": "ghost_command",
+          "tags": [],
+          "parents": [
+            "wendy_ghostcommand_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 177,
+          "y": 73
+        },
+        {
+          "id": "wendy_shadow_1",
+          "title": "一级暗影姐妹情",
+          "desc": "阿比盖尔与暗影调和，获得一定的位面防御。",
+          "group": "wendy_alliegience",
+          "tags": [
+            "allegiance",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": -9,
+          "y": 32
+        },
+        {
+          "id": "wendy_shadow_2",
+          "title": "二级暗影姐妹情",
+          "desc": "温蒂可以制作一种注入了暗影魔法的超级药剂，为阿比盖尔提升惊扰伤害。\n超级药剂的效果可以与普通药剂叠加。",
+          "group": "wendy_alliegience",
+          "tags": [
+            "allegiance",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [
+            "wendy_shadow_1"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 32.27,
+          "y": 32
+        },
+        {
+          "id": "wendy_shadow_3",
+          "title": "三级暗影姐妹情",
+          "desc": "每当温蒂使用谋杀动作时，都会释放黑暗魔法，短时间内为阿比盖尔注入更多力量。",
+          "group": "wendy_alliegience",
+          "tags": [
+            "allegiance",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [
+            "wendy_shadow_2"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 73,
+          "y": 32
+        },
+        {
+          "id": "wendy_lunar_1",
+          "title": "一级月亮姐妹情",
+          "desc": "阿比盖尔与月能调和，获得一定的位面防御。",
+          "group": "wendy_alliegience",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": -9,
+          "y": 70
+        },
+        {
+          "id": "wendy_lunar_2",
+          "title": "二级月亮姐妹情",
+          "desc": "温蒂可以制作一种注入了月能的超级药剂，在持续时间内为阿比盖尔提升位面伤害。\n超级药剂的效果可以与普通药剂叠加。",
+          "group": "wendy_alliegience",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [
+            "wendy_lunar_1"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 32.27,
+          "y": 70
+        },
+        {
+          "id": "wendy_lunar_3",
+          "title": "三级月亮姐妹情",
+          "desc": "温蒂可以在盈月或满月时使用月晷，为阿比盖尔充满月能，变身为虚影。在残月或新月期间，月晷可以让阿比盖尔恢复幽灵状态。\n\t",
+          "group": "wendy_alliegience",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [
+            "wendy_lunar_2"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 73,
+          "y": 70
+        }
+      ]
+    },
+    {
+      "id": "wx78",
+      "slug": "wx78",
+      "name": "WX-78",
+      "title": "没有灵魂的机器人",
+      "image": "images/characters/wx78.png",
+      "skills": [
+        {
+          "id": "wx78_circuitry_betterunplug",
+          "title": "改装权",
+          "desc": "获得从栏位堆叠中拔出任意电路的能力，且电路在拔出时减少一半的耐久损耗。",
+          "group": "circuitry",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -211,
+          "y": 33
+        },
+        {
+          "id": "wx78_circuitry_bettercharge",
+          "title": "瓦特提升",
+          "desc": "被动充电速度大幅提升，并且在拔出带有两个及以上插槽的已充电电路时，减少1格电量消耗。",
+          "group": "circuitry",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -92,
+          "y": 33
+        },
+        {
+          "id": "wx78_circuitry_alphabuffs_1",
+          "title": "一级阿尔法电路改装",
+          "desc": "处理器电路在原有效果基础上获得新效果。胃增益电路得到强化。",
+          "group": "circuitry",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -195,
+          "y": 101
+        },
+        {
+          "id": "wx78_circuitry_alphabuffs_2",
+          "title": "二级阿尔法电路改装",
+          "desc": "强化电路，处理器电路和豆增压电路在原有效果基础上获得新效果。胃增益电路得到强化。",
+          "group": "circuitry",
+          "tags": [],
+          "parents": [
+            "wx78_circuitry_alphabuffs_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -195,
+          "y": 141
+        },
+        {
+          "id": "wx78_circuitry_betabuffs_1",
+          "title": "一级贝塔电路改装",
+          "desc": "热能电路、制冷电路、光电电路、合唱盒电路和增程电路在原有效果基础上获得新效果。",
+          "group": "circuitry",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -155,
+          "y": 83
+        },
+        {
+          "id": "wx78_circuitry_betabuffs_2",
+          "title": "二级贝塔电路改装",
+          "desc": "加速电路，电气化电路和照明电路在原有效果基础上获得新效果。",
+          "group": "circuitry",
+          "tags": [],
+          "parents": [
+            "wx78_circuitry_betabuffs_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -155,
+          "y": 123
+        },
+        {
+          "id": "wx78_circuitry_gammabuffs_1",
+          "title": "一级伽马电路改装",
+          "desc": "棋圣电路、再消化电路和声波激发电路在原有效果基础上获得新效果。",
+          "group": "circuitry",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -115,
+          "y": 101
+        },
+        {
+          "id": "wx78_circuitry_gammabuffs_2",
+          "title": "二级伽马电路改装",
+          "desc": "格挡电路和旋转周期电路在原有效果基础上获得新效果。",
+          "group": "circuitry",
+          "tags": [],
+          "parents": [
+            "wx78_circuitry_gammabuffs_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -115,
+          "y": 141
+        },
+        {
+          "id": "wx78_circuitry_slot_1",
+          "title": "差一错误",
+          "desc": "为你的所有电路栏增加一个额外插槽。",
+          "group": "circuitry",
+          "tags": [],
+          "parents": [
+            "wx78_circuitry_alphabuffs_2",
+            "wx78_circuitry_betabuffs_2",
+            "wx78_circuitry_gammabuffs_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -155,
+          "y": 163
+        },
+        {
+          "id": "wx78_extrabody_1",
+          "title": "一级冷备",
+          "desc": "学习制作一个可靠的备份底盘。",
+          "group": "extrabody",
+          "tags": [
+            "wx78_maxbody"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 3,
+          "y": 20
+        },
+        {
+          "id": "wx78_ghostrevive_1",
+          "title": "一级寄居械",
+          "desc": "附体备份底盘可将你的意识转移至其中，但会消耗所有电量。",
+          "group": "ghostrevive",
+          "tags": [],
+          "parents": [
+            "wx78_extrabody_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 3,
+          "y": 87
+        },
+        {
+          "id": "wx78_ghostrevive_2",
+          "title": "二级寄居械",
+          "desc": "满电死亡后，如果没达到备份底盘上限，则会自动留下一个备份底盘。",
+          "group": "ghostrevive",
+          "tags": [],
+          "parents": [
+            "wx78_ghostrevive_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 43,
+          "y": 105
+        },
+        {
+          "id": "wx78_ghostrevive_3",
+          "title": "三级寄居械",
+          "desc": "使用备份底盘复活会回满生命值。",
+          "group": "ghostrevive",
+          "tags": [],
+          "parents": [
+            "wx78_ghostrevive_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 43,
+          "y": 145
+        },
+        {
+          "id": "wx78_extrabody_2",
+          "title": "二级冷备",
+          "desc": "最多可制作两个备份底盘。",
+          "group": "extrabody",
+          "tags": [
+            "wx78_maxbody"
+          ],
+          "parents": [
+            "wx78_ghostrevive_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -37,
+          "y": 105
+        },
+        {
+          "id": "wx78_extrabody_3",
+          "title": "三级冷备",
+          "desc": "最多可制作三个备份底盘。",
+          "group": "extrabody",
+          "tags": [
+            "wx78_maxbody"
+          ],
+          "parents": [
+            "wx78_extrabody_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -37,
+          "y": 145
+        },
+        {
+          "id": "wx78_remotebodyswap",
+          "title": "远程传输",
+          "desc": "可远程传输意识至地图上的任意备份底盘。",
+          "group": "remotebodyswap",
+          "tags": [],
+          "parents": [
+            "wx78_extrabody_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 3,
+          "y": 167
+        },
+        {
+          "id": "wx78_bodycircuits",
+          "title": "温备",
+          "desc": "备份底盘的贝塔电路在断电时仍保持激活。",
+          "group": "bodycircuits",
+          "tags": [],
+          "parents": [
+            "wx78_ghostrevive_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 3,
+          "y": 127
+        },
+        {
+          "id": "wx78_scoutdrone_1",
+          "title": "野外勘测",
+          "desc": "学习制作一架旋翼测绘机用于探索和测绘未知区域。",
+          "group": "scoutdrone",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 134,
+          "y": 106
+        },
+        {
+          "id": "wx78_extradronerange",
+          "title": "信号放大器",
+          "desc": "扩大生物扫描分析仪的扫描半径、增加旋翼测绘机、生物扫描分析仪、自动抓取机和破绽放大机的作用范围。",
+          "group": "extradronerange",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 221,
+          "y": 105
+        },
+        {
+          "id": "wx78_deliverydrone_1",
+          "title": "一级运输",
+          "desc": "学习制作一个便携储存单元,可将物品发送到任意已探明的位置。",
+          "group": "deliverydrone",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 114,
+          "y": 66
+        },
+        {
+          "id": "wx78_deliverydrone_2",
+          "title": "二级运输",
+          "desc": "学习制作一个更大的便携储存单元。",
+          "group": "deliverydrone",
+          "tags": [],
+          "parents": [
+            "wx78_deliverydrone_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 74,
+          "y": 27
+        },
+        {
+          "id": "wx78_zapdrone_1",
+          "title": "一级遥控机械爱好者",
+          "desc": "学习制作一架电刑机，可远程电击敌人。",
+          "group": "zapdrone",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 154,
+          "y": 66
+        },
+        {
+          "id": "wx78_zapdrone_2",
+          "title": "二级遥控机械爱好者",
+          "desc": "学习制作一架电容更大的电刑机。",
+          "group": "zapdrone",
+          "tags": [],
+          "parents": [
+            "wx78_zapdrone_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 196,
+          "y": 30
+        },
+        {
+          "id": "wx78_allegiance_lunar",
+          "title": "月能载体",
+          "desc": "利用神秘创始人“借来”的技术，使虚影附身你的备份底盘，并成为你的幽灵机械仆从。",
+          "group": "allegiance",
+          "tags": [
+            "lunar_favor",
+            "allegiance"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 122,
+          "y": 185
+        },
+        {
+          "id": "wx78_allegiance_shadow",
+          "title": "暗影仆从",
+          "desc": "允许将特定暗影组件插入你的电路，使底盘在有无附身状态下均获得对应的能力。",
+          "group": "allegiance",
+          "tags": [
+            "shadow_favor",
+            "allegiance"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 225,
+          "y": 182
+        }
+      ]
+    },
+    {
+      "id": "woodie",
+      "slug": "woodie",
+      "name": "伍迪",
+      "title": "伐木工",
+      "image": "images/characters/woodie.png",
+      "skills": [
+        {
+          "id": "woodie_curse_weremeter_1",
+          "title": "变形计时 I",
+          "desc": "动物形态的持续时间稍长一些。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "weremeter"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -207,
+          "y": 171
+        },
+        {
+          "id": "woodie_curse_weremeter_2",
+          "title": "变形计时 II",
+          "desc": "动物形态的持续时间更长一些。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "weremeter"
+          ],
+          "parents": [
+            "woodie_curse_weremeter_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -207,
+          "y": 132
+        },
+        {
+          "id": "woodie_curse_weremeter_3",
+          "title": "变形计时 III",
+          "desc": "动物形态的持续时间要长得多。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "weremeter"
+          ],
+          "parents": [
+            "woodie_curse_weremeter_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -207,
+          "y": 93
+        },
+        {
+          "id": "woodie_curse_master",
+          "title": "拥抱诅咒",
+          "desc": "食用俗气雕像不会造成生命值或理智值损失。\n变回人形后不再是空腹状态。",
+          "group": "curse",
+          "tags": [
+            "cursemaster"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "curse",
+                "count": 6
+              }
+            ]
+          },
+          "x": -207,
+          "y": 15
+        },
+        {
+          "id": "woodie_curse_beaver_1",
+          "title": "海狸人 I",
+          "desc": "海狸人形态下的采矿速度更快。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "beaver"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -142,
+          "y": 171
+        },
+        {
+          "id": "woodie_curse_beaver_2",
+          "title": "海狸人 II",
+          "desc": "海狸人形态下砍伐速度更快。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "beaver"
+          ],
+          "parents": [
+            "woodie_curse_beaver_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -142,
+          "y": 132
+        },
+        {
+          "id": "woodie_curse_beaver_3",
+          "title": "海狸人 III",
+          "desc": "以海狸人形态砍伐、开采和破坏坚硬的材料。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "beaver",
+            "recoilimmune"
+          ],
+          "parents": [
+            "woodie_curse_beaver_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -142,
+          "y": 93
+        },
+        {
+          "id": "woodie_curse_epic_beaver",
+          "title": "海狸人精通",
+          "desc": "海狸人学会用尾巴拍打地面，摧毁周围的一切。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "beaver_epic"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "beaver",
+                "count": 3
+              }
+            ],
+            "excludesTags": [
+              "moose_epic",
+              "goose_epic"
+            ]
+          },
+          "x": -142,
+          "y": 15
+        },
+        {
+          "id": "woodie_curse_moose_1",
+          "title": "鹿人 I",
+          "desc": "鹿人形态能更好的抵抗障碍物，并且走得更快一些。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "moose"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -97.5,
+          "y": 171
+        },
+        {
+          "id": "woodie_curse_moose_2",
+          "title": "鹿人 II",
+          "desc": "以鹿人形态缓慢恢复生命值。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "moose"
+          ],
+          "parents": [
+            "woodie_curse_moose_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -97.5,
+          "y": 132
+        },
+        {
+          "id": "woodie_curse_moose_3",
+          "title": "鹿人 III",
+          "desc": "鹿人形态下可以取消冲锋。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "moose"
+          ],
+          "parents": [
+            "woodie_curse_moose_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -97.5,
+          "y": 93
+        },
+        {
+          "id": "woodie_curse_epic_moose",
+          "title": "鹿人精通",
+          "desc": "鹿人学会在每第三次攻击时发出强力的位面重击，并获得对位面伤害的天然防御。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "moose_epic"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "moose",
+                "count": 3
+              }
+            ],
+            "excludesTags": [
+              "beaver_epic",
+              "goose_epic"
+            ]
+          },
+          "x": -97.5,
+          "y": 15
+        },
+        {
+          "id": "woodie_curse_goose_1",
+          "title": "鹅人 I",
+          "desc": "鹅人形态时跑得更快。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "goose"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -54,
+          "y": 171
+        },
+        {
+          "id": "woodie_curse_goose_2",
+          "title": "鹅人 II",
+          "desc": "在鹅人形态下变得完全防水。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "goose"
+          ],
+          "parents": [
+            "woodie_curse_goose_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -54,
+          "y": 132
+        },
+        {
+          "id": "woodie_curse_goose_3",
+          "title": "鹅人 III",
+          "desc": "鹅人形态下，每隔一段时间都能闪避一次攻击。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "goose"
+          ],
+          "parents": [
+            "woodie_curse_goose_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -54,
+          "y": 93
+        },
+        {
+          "id": "woodie_curse_epic_goose",
+          "title": "鹅人精通",
+          "desc": "鹅人学会飞来飞去探索世界，但这有点失控。",
+          "group": "curse",
+          "tags": [
+            "curse",
+            "goose_epic"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "goose",
+                "count": 3
+              }
+            ],
+            "excludesTags": [
+              "beaver_epic",
+              "moose_epic"
+            ]
+          },
+          "x": -54,
+          "y": 15
+        },
+        {
+          "id": "woodie_human_lucy_1",
+          "title": "木工",
+          "desc": "使用露西更有效地制作木板。",
+          "group": "human",
+          "tags": [
+            "human",
+            "lucy"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 71,
+          "y": 48
+        },
+        {
+          "id": "woodie_human_lucy_2",
+          "title": "帽子雕刻",
+          "desc": "使用露西雕刻一顶漂亮的硬木帽子以提供保护。",
+          "group": "human",
+          "tags": [
+            "human",
+            "lucy"
+          ],
+          "parents": [
+            "woodie_human_lucy_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 43,
+          "y": 9
+        },
+        {
+          "id": "woodie_human_lucy_3",
+          "title": "拐杖雕刻",
+          "desc": "使用露西雕刻一根木手杖，方便移动。",
+          "group": "human",
+          "tags": [
+            "human",
+            "lucy"
+          ],
+          "parents": [
+            "woodie_human_lucy_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 102,
+          "y": 9
+        },
+        {
+          "id": "woodie_human_quickpicker_1",
+          "title": "快速捡拾者 I",
+          "desc": "采集东西的速度要稍快一些。",
+          "group": "human",
+          "tags": [
+            "human",
+            "quickpicker"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 35,
+          "y": 171
+        },
+        {
+          "id": "woodie_human_quickpicker_2",
+          "title": "快速捡拾者 II",
+          "desc": "采集东西的速度相对快点。",
+          "group": "human",
+          "tags": [
+            "human",
+            "quickpicker"
+          ],
+          "parents": [
+            "woodie_human_quickpicker_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 35,
+          "y": 134
+        },
+        {
+          "id": "woodie_human_quickpicker_3",
+          "title": "快速捡拾者 III",
+          "desc": "采集东西的速度要快得多。",
+          "group": "human",
+          "tags": [
+            "human",
+            "quickpicker"
+          ],
+          "parents": [
+            "woodie_human_quickpicker_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 35,
+          "y": 97
+        },
+        {
+          "id": "woodie_human_treeguard_1",
+          "title": "树精守卫伐木者 I",
+          "desc": "对树精守卫造成更多的伤害。",
+          "group": "human",
+          "tags": [
+            "human",
+            "treeguard"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 107,
+          "y": 171
+        },
+        {
+          "id": "woodie_human_treeguard_2",
+          "title": "树精守卫伐木者 II",
+          "desc": "对树精守卫造成非常多的伤害。",
+          "group": "human",
+          "tags": [
+            "human",
+            "treeguard"
+          ],
+          "parents": [
+            "woodie_human_treeguard_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 107,
+          "y": 134
+        },
+        {
+          "id": "woodie_human_treeguard_max",
+          "title": "树精守卫伐木者 III",
+          "desc": "学习制作树精守卫雕像，这是一个极其易燃的雕像。\n燃烧时会吸引树精守卫。",
+          "group": "human",
+          "tags": [
+            "human",
+            "treeguard"
+          ],
+          "parents": [
+            "woodie_human_treeguard_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 107,
+          "y": 97
+        },
+        {
+          "id": "woodie_allegiance_shadow",
+          "title": "暗影牧人",
+          "desc": "女王将通过召唤她的影子生物来奖励你的忠诚。\n（但只有处于动物形态时有效。）",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minPoints": 12,
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 176,
+          "y": 38
+        },
+        {
+          "id": "woodie_allegiance_lunar",
+          "title": "月亮叛徒",
+          "desc": "神秘创始人将通过阻止月亮的能力来触发你的诅咒以奖励你的好奇心。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minPoints": 12,
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 223,
+          "y": 38
+        }
+      ]
+    },
+    {
+      "id": "wormwood",
+      "slug": "wormwood",
+      "name": "沃姆伍德",
+      "title": "孤独者",
+      "image": "images/characters/wormwood.png",
+      "skills": [
+        {
+          "id": "wormwood_identify_plants2",
+          "title": "种子侦探",
+          "desc": "学会辨识刚刚种下的种子，以确定它们会长成什么样子。",
+          "group": "gathering",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 8,
+          "y": 0
+        },
+        {
+          "id": "wormwood_saplingcrafting",
+          "title": "树苗制造",
+          "desc": "牺牲生命值来制作月亮树苗。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_identify_plants2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -92,
+          "y": 10
+        },
+        {
+          "id": "wormwood_berrybushcrafting",
+          "title": "浆果丛制造",
+          "desc": "牺牲生命值来制作浆果丛。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_saplingcrafting"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -142,
+          "y": 10
+        },
+        {
+          "id": "wormwood_juicyberrybushcrafting",
+          "title": "多汁浆果丛制造",
+          "desc": "牺牲生命值来制作多汁的浆果丛。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_berrybushcrafting"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -162,
+          "y": 58
+        },
+        {
+          "id": "wormwood_reedscrafting",
+          "title": "猴尾草制造",
+          "desc": "牺牲生命值来制作猴尾草。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_berrybushcrafting"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -192,
+          "y": 10
+        },
+        {
+          "id": "wormwood_lureplantbulbcrafting",
+          "title": "食人花制造",
+          "desc": "牺牲生命值来制作食人花。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_reedscrafting"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -222,
+          "y": 58
+        },
+        {
+          "id": "wormwood_mushroomplanter_ratebonus1",
+          "title": "蘑菇精通I",
+          "desc": "种植在蘑菇农场中的蘑菇生长得稍快一些。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_identify_plants2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -27,
+          "y": 70
+        },
+        {
+          "id": "wormwood_mushroomplanter_ratebonus2",
+          "title": "蘑菇精通 II",
+          "desc": "种植在蘑菇农场中的蘑菇生长得更快。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_mushroomplanter_ratebonus1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -82,
+          "y": 100
+        },
+        {
+          "id": "wormwood_mushroomplanter_upgrade",
+          "title": "蘑菇增产器",
+          "desc": "在蘑菇农场中种植的蘑菇产量更高。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_mushroomplanter_ratebonus2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -82,
+          "y": 155
+        },
+        {
+          "id": "wormwood_moon_cap_eating",
+          "title": "月亮蘑菇云",
+          "desc": "了解如何在蘑菇农场中种植月亮蘑菇，并在食用它们时释放诱导睡眠的孢子。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_mushroomplanter_upgrade"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -62,
+          "y": 200
+        },
+        {
+          "id": "wormwood_syrupcrafting",
+          "title": "可怜的树液",
+          "desc": "学习制作泻根糖浆来诱导其他生物排便。",
+          "group": "crafting",
+          "tags": [
+            "crafting"
+          ],
+          "parents": [
+            "wormwood_mushroomplanter_ratebonus2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -22,
+          "y": 135
+        },
+        {
+          "id": "wormwood_allegiance_lunar_plant_gear_1",
+          "title": "月亮守卫 I",
+          "desc": "使用亮茄盔甲时，把攻击你的敌人定在原地。\n将荆棘外壳与亮茄盔甲融合，即可打造出荆棘茄甲。",
+          "group": "allegiance2",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "lunar",
+            "minTags": [
+              {
+                "tag": "blooming",
+                "count": 5
+              }
+            ],
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 219.5,
+          "y": 193
+        },
+        {
+          "id": "wormwood_allegiance_lunar_plant_gear_2",
+          "title": "月亮守卫 II",
+          "desc": "使用亮茄近战武器攻击时，召唤藤蔓加入战斗。",
+          "group": "allegiance2",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [
+            "wormwood_allegiance_lunar_plant_gear_1"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 219.5,
+          "y": 233
+        },
+        {
+          "id": "wormwood_blooming_speed1",
+          "title": "成长冲刺 I",
+          "desc": "稍快一点达到完全盛开状态。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_identify_plants2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 108,
+          "y": 10
+        },
+        {
+          "id": "wormwood_blooming_speed2",
+          "title": "成长冲刺 II",
+          "desc": "更快地达到完全盛开状态。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_blooming_speed1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 158,
+          "y": 10
+        },
+        {
+          "id": "wormwood_blooming_overheatprotection",
+          "title": "遮荫植物",
+          "desc": "开花时获得更好的过热保护。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_blooming_speed2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 168,
+          "y": 60
+        },
+        {
+          "id": "wormwood_blooming_max_upgrade",
+          "title": "花朵力量",
+          "desc": "沃姆伍德的施肥效果增加30%。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_blooming_speed2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 208,
+          "y": 10
+        },
+        {
+          "id": "wormwood_blooming_photosynthesis",
+          "title": "光合作用",
+          "desc": "完全盛开时在日光下，生命值会慢慢恢复。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_blooming_max_upgrade"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 223,
+          "y": 60
+        },
+        {
+          "id": "wormwood_blooming_farmrange1",
+          "title": "农场工人",
+          "desc": "在完全盛开期间，可以在更大范围内照料农田植物。\n更快地收获农田植物。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_identify_plants2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 63,
+          "y": 89
+        },
+        {
+          "id": "wormwood_quick_selffertilizer",
+          "title": "肥料护理",
+          "desc": "更快地使用肥料包治疗。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_blooming_farmrange1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 103,
+          "y": 125
+        },
+        {
+          "id": "wormwood_bugs",
+          "title": "平易近蜂",
+          "desc": "除非被激怒，否则蜜蜂和蝴蝶会容忍沃姆伍德。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_quick_selffertilizer"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 51,
+          "y": 160
+        },
+        {
+          "id": "wormwood_blooming_trapbramble",
+          "title": "荆棘陷阱专家",
+          "desc": "完全盛开时，自动重置附近的荆棘陷阱。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_quick_selffertilizer"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 145,
+          "y": 155
+        },
+        {
+          "id": "wormwood_armor_bramble",
+          "title": "荆棘外壳专家",
+          "desc": "你每打出三次连击，并不受到伤害时，都会触发荆棘外壳的尖刺爆发。",
+          "group": "gathering",
+          "tags": [
+            "blooming"
+          ],
+          "parents": [
+            "wormwood_blooming_trapbramble"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 128,
+          "y": 197
+        },
+        {
+          "id": "wormwood_allegiance_lunar_mutations_1",
+          "title": "月亮耕耘者 I",
+          "desc": "利用你的月亮根须将胡萝卜转化为胡萝卜鼠。\n你创造出的胡萝卜鼠会叼回它们在地上找到的食物。",
+          "group": "allegiance1",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "lunar",
+            "minTags": [
+              {
+                "tag": "crafting",
+                "count": 5
+              }
+            ],
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": -194,
+          "y": 190
+        },
+        {
+          "id": "wormwood_allegiance_lunar_mutations_2",
+          "title": "月亮耕耘者 II",
+          "desc": "发掘你的月之根须，将荧光果变成球状光虫。\n你创造的球状光虫会跟随你。\n球状光虫越聚集，发出的光亮就越大。",
+          "group": "allegiance1",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [
+            "wormwood_allegiance_lunar_mutations_1"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": -221,
+          "y": 233
+        },
+        {
+          "id": "wormwood_allegiance_lunar_mutations_3",
+          "title": "月亮耕耘者 III",
+          "desc": "发掘你的月之根须，将火龙果变成沙拉蝾螈！\n你创造的沙拉蝾螈会攻击你在攻击的事物。\n变身的沙拉蝾螈达到最大数量后会获得生命值加成。",
+          "group": "allegiance1",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [
+            "wormwood_allegiance_lunar_mutations_1"
+          ],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": -167,
+          "y": 233
+        }
+      ]
+    },
+    {
+      "id": "wathgrithr",
+      "slug": "wigfrid",
+      "name": "薇格弗德",
+      "title": "表演艺术家",
+      "image": "images/characters/wigfrid.png",
+      "skills": [
+        {
+          "id": "wathgrithr_arsenal_spear_1",
+          "title": "一级布拉基的祝福",
+          "desc": "使用战斗长矛攻击时，灵感获得率会得到一点提高。",
+          "group": "arsenal",
+          "tags": [
+            "spear",
+            "inspirationgain"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -53.5,
+          "y": 180
+        },
+        {
+          "id": "wathgrithr_arsenal_spear_2",
+          "title": "二级布拉基的祝福",
+          "desc": "使用战斗长矛攻击时，灵感获得率会得到相当的提升。",
+          "group": "arsenal",
+          "tags": [
+            "spear",
+            "inspirationgain"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_spear_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -53.5,
+          "y": 142
+        },
+        {
+          "id": "wathgrithr_arsenal_spear_3",
+          "title": "奔雷矛",
+          "desc": "学会制作奔雷矛：一件电能武器，对潮湿目标造成更大伤害。",
+          "group": "arsenal",
+          "tags": [
+            "spear"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_spear_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -53.5,
+          "y": 104
+        },
+        {
+          "id": "wathgrithr_arsenal_spear_4",
+          "title": "一级奔雷矛加强",
+          "desc": "奔雷矛将施展特殊攻击。\n只要打到一个目标，这次攻击就会修复充能奔雷矛。",
+          "group": "arsenal",
+          "tags": [
+            "spear"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_spear_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -110.5,
+          "y": 123
+        },
+        {
+          "id": "wathgrithr_arsenal_spear_5",
+          "title": "二级奔雷矛加强",
+          "desc": "使用约束静电升级奔雷矛,造成+20位面伤害。",
+          "group": "arsenal",
+          "tags": [
+            "spear"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_spear_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -110.5,
+          "y": 85
+        },
+        {
+          "id": "wathgrithr_arsenal_helmet_1",
+          "title": "一级硬头盔",
+          "desc": "薇格弗德佩戴的战斗头盔耐久度会得到一点提升。",
+          "group": "arsenal",
+          "tags": [
+            "helmet",
+            "helmetcondition"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -13.5,
+          "y": 180
+        },
+        {
+          "id": "wathgrithr_arsenal_helmet_2",
+          "title": "二级硬头盔",
+          "desc": "薇格弗德佩戴的战斗头盔耐久度会得到相当的提升。",
+          "group": "arsenal",
+          "tags": [
+            "helmet",
+            "helmetcondition"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_helmet_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -13.5,
+          "y": 142
+        },
+        {
+          "id": "wathgrithr_arsenal_helmet_3",
+          "title": "统帅头盔",
+          "desc": "学会制作统帅头盔：可以抵抗击退攻击。",
+          "group": "arsenal",
+          "tags": [
+            "helmet"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_helmet_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -13.5,
+          "y": 104
+        },
+        {
+          "id": "wathgrithr_arsenal_helmet_4",
+          "title": "一级统帅头盔加强",
+          "desc": "统帅头盔现在提供对位面伤害的防护。",
+          "group": "arsenal",
+          "tags": [
+            "helmet"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_helmet_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 43.5,
+          "y": 123
+        },
+        {
+          "id": "wathgrithr_arsenal_helmet_5",
+          "title": "二级统帅头盔加强",
+          "desc": "薇格弗德的自然恢复功能会在她满血战斗时修复她的统帅头盔。",
+          "group": "arsenal",
+          "tags": [
+            "helmet"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_helmet_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 43.5,
+          "y": 85
+        },
+        {
+          "id": "wathgrithr_arsenal_shield_1",
+          "title": "战斗圆盾",
+          "desc": "学会制作战斗圆盾。该盾牌可用于攻击、阻挡攻击，并在装备后提供额外保护。",
+          "group": "arsenal",
+          "tags": [
+            "shield"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_spear_3",
+            "wathgrithr_arsenal_helmet_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -33.5,
+          "y": 57
+        },
+        {
+          "id": "wathgrithr_arsenal_shield_2",
+          "title": "一级战斗圆盾加强",
+          "desc": "战斗圆盾阻挡攻击的持续时间会延长。",
+          "group": "arsenal",
+          "tags": [
+            "shield"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_shield_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -53.5,
+          "y": 10
+        },
+        {
+          "id": "wathgrithr_arsenal_shield_3",
+          "title": "二级战斗圆盾加强",
+          "desc": "用战斗圆盾格挡一次攻击后，你在5秒内的下一次攻击将根据所格挡的伤害额外造成15至30伤害。",
+          "group": "arsenal",
+          "tags": [
+            "shield"
+          ],
+          "parents": [
+            "wathgrithr_arsenal_shield_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -13.5,
+          "y": 10
+        },
+        {
+          "id": "wathgrithr_beefalo_1",
+          "title": "一级尊贵坐骑",
+          "desc": "皮弗娄牛的驯化速度提高15%。",
+          "group": "beefalo",
+          "tags": [
+            "beefalodomestication"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 108,
+          "y": 180
+        },
+        {
+          "id": "wathgrithr_beefalo_2",
+          "title": "二级尊贵坐骑",
+          "desc": "骑乘皮弗娄牛的时间延长30%。",
+          "group": "beefalo",
+          "tags": [
+            "beefalobucktime"
+          ],
+          "parents": [
+            "wathgrithr_beefalo_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 108,
+          "y": 142
+        },
+        {
+          "id": "wathgrithr_beefalo_3",
+          "title": "三级尊贵坐骑",
+          "desc": "骑乘皮弗娄牛会缓慢恢复你的灵感至一半的标记。",
+          "group": "beefalo",
+          "tags": [
+            "beefaloinspiration"
+          ],
+          "parents": [
+            "wathgrithr_beefalo_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 108,
+          "y": 104
+        },
+        {
+          "id": "wathgrithr_beefalo_saddle",
+          "title": "战斗鞍具",
+          "desc": "学会制作全新的皮弗娄牛鞍具，保护你的皮弗娄牛。",
+          "group": "beefalo",
+          "tags": [
+            "saddle"
+          ],
+          "parents": [
+            "wathgrithr_beefalo_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 108,
+          "y": 65
+        },
+        {
+          "id": "wathgrithr_songs_instantsong_cd",
+          "title": "战斗之诵",
+          "desc": "战吼需要冷却，不再花费灵感。",
+          "group": "songs",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -177,
+          "y": 180
+        },
+        {
+          "id": "wathgrithr_songs_container",
+          "title": "战斗号子罐",
+          "desc": "学会制作战斗号子罐，这是一种储存战歌和战吼的解决方案。",
+          "group": "songs",
+          "tags": [],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minPoints": 6
+          },
+          "x": -177,
+          "y": 142
+        },
+        {
+          "id": "wathgrithr_songs_revivewarrior",
+          "title": "返场表演",
+          "desc": "学会制作战士重奏：复活你的盟友进行返场表演。",
+          "group": "songs",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -177,
+          "y": 104
+        },
+        {
+          "id": "wathgrithr_combat_defense",
+          "title": "神秘韧性",
+          "desc": "得到一个+5位面防御的神圣祝福。",
+          "group": "combat",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -193,
+          "y": 22
+        },
+        {
+          "id": "wathgrithr_allegiance_shadow",
+          "title": "暗影歌姬",
+          "desc": "女王会馈赠给你制作黑暗悲歌的能力来奖励你的忠诚。\n盟友受到暗影阵营敌人的伤害减少；对月亮阵营敌人的伤害增加。",
+          "group": "allegiance",
+          "tags": [
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minPoints": 12,
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 178,
+          "y": 43
+        },
+        {
+          "id": "wathgrithr_allegiance_lunar",
+          "title": "月曲歌唱家",
+          "desc": "神秘创始人会馈赠给你制作启迪摇篮曲的能力来奖励你的好奇心。\n盟友受到月亮阵营敌人的伤害减少；对暗影阵营敌人的伤害增加。",
+          "group": "allegiance",
+          "tags": [
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minPoints": 12,
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 225,
+          "y": 43
+        }
+      ]
+    },
+    {
+      "id": "winona",
+      "slug": "winona",
+      "name": "薇诺娜",
+      "title": "女工",
+      "image": "images/characters/winona.png",
+      "skills": [
+        {
+          "id": "winona_spotlight_heated",
+          "title": "热光灯",
+          "desc": "升级你的聚光灯，使其在温度低时散发热量。",
+          "group": "lowshelf",
+          "tags": [
+            "lowshelf"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -125,
+          "y": 5
+        },
+        {
+          "id": "winona_spotlight_range",
+          "title": "宽敞聚光灯",
+          "desc": "升级你的聚光灯，使其照亮更大的区域。",
+          "group": "lowshelf",
+          "tags": [
+            "lowshelf"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -75,
+          "y": 5
+        },
+        {
+          "id": "winona_portable_structures",
+          "title": "便携移动",
+          "desc": "轻松拆卸您的机器，学习如何制作称手遥控器来远程控制投石机。",
+          "group": "lowshelf",
+          "tags": [
+            "lowshelf"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 0,
+          "y": 5
+        },
+        {
+          "id": "winona_gadget_recharge",
+          "title": "快速充电",
+          "desc": "放在发电机或宝石发电机旁的小工具充电速度会加快100%。",
+          "group": "lowshelf",
+          "tags": [
+            "lowshelf"
+          ],
+          "parents": [
+            "winona_portable_structures"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 50,
+          "y": 5
+        },
+        {
+          "id": "winona_battery_idledrain",
+          "title": "节能模式",
+          "desc": "发电机和宝石发电机在不用时不再消耗能源。\n与发电机连接的机器在睡眠模式下不会耗电。",
+          "group": "lowshelf",
+          "tags": [
+            "lowshelf"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 125,
+          "y": 5
+        },
+        {
+          "id": "winona_catapult_speed_1",
+          "title": "一级快速开火",
+          "desc": "升级你的投石机，开火频率提高5%。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "lowshelf",
+                "count": 3
+              }
+            ]
+          },
+          "x": -100,
+          "y": 65
+        },
+        {
+          "id": "winona_catapult_speed_2",
+          "title": "二级快速开火",
+          "desc": "升级你的投石机，开火频率提高10%。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [
+            "winona_catapult_speed_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -150,
+          "y": 65
+        },
+        {
+          "id": "winona_catapult_speed_3",
+          "title": "三级快速开火",
+          "desc": "升级你的投石机，开火频率提高20%。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [
+            "winona_catapult_speed_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -200,
+          "y": 65
+        },
+        {
+          "id": "winona_catapult_aoe_1",
+          "title": "一级高爆弹",
+          "desc": "改装你的投石机，让它的伤害区域增加25%。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "lowshelf",
+                "count": 3
+              }
+            ]
+          },
+          "x": -100,
+          "y": 105
+        },
+        {
+          "id": "winona_catapult_aoe_2",
+          "title": "二级高爆弹",
+          "desc": "改装你的投石机，让它的伤害区域增加50%。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [
+            "winona_catapult_aoe_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -150,
+          "y": 105
+        },
+        {
+          "id": "winona_catapult_aoe_3",
+          "title": "三级高爆弹",
+          "desc": "改装你的投石机，让它的伤害区域增加100%。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [
+            "winona_catapult_aoe_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -200,
+          "y": 105
+        },
+        {
+          "id": "winona_battery_efficiency_1",
+          "title": "一级大发电机",
+          "desc": "提高发电机和宝石发电机25%的效率。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "lowshelf",
+                "count": 3
+              }
+            ]
+          },
+          "x": 100,
+          "y": 65
+        },
+        {
+          "id": "winona_battery_efficiency_2",
+          "title": "二级大发电机",
+          "desc": "提高发电机和宝石发电机50%的效率。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [
+            "winona_battery_efficiency_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 150,
+          "y": 65
+        },
+        {
+          "id": "winona_battery_efficiency_3",
+          "title": "三级大发电机",
+          "desc": "提高发电机和宝石发电机100%的效率。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [
+            "winona_battery_efficiency_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 200,
+          "y": 65
+        },
+        {
+          "id": "winona_catapult_volley_1",
+          "title": "精确瞄准",
+          "desc": "你的称手遥控器范围内的所有投石机都会朝你选定的目标开火。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "lowshelf",
+                "count": 3
+              }
+            ],
+            "requiredSkills": [
+              "winona_portable_structures"
+            ]
+          },
+          "x": -35,
+          "y": 65
+        },
+        {
+          "id": "winona_catapult_boost_1",
+          "title": "齐射",
+          "desc": "你的称手遥控器范围内的所有投石机会在短时间内提高开火频率。",
+          "group": "midshelf",
+          "tags": [
+            "midshelf"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "lowshelf",
+                "count": 3
+              }
+            ],
+            "requiredSkills": [
+              "winona_portable_structures"
+            ]
+          },
+          "x": 35,
+          "y": 65
+        },
+        {
+          "id": "winona_shadow_1",
+          "title": "噩梦发电机",
+          "desc": "了解如何利用噩梦燃料作为发电机的燃料来源。",
+          "group": "charlie",
+          "tags": [
+            "charlie"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTagSum": {
+              "tags": [
+                "lowshelf",
+                "midshelf"
+              ],
+              "count": 6
+            }
+          },
+          "x": -120,
+          "y": 165
+        },
+        {
+          "id": "winona_shadow_2",
+          "title": "纯粹恐惧发电机",
+          "desc": "了解如何利用纯粹恐惧作为发电机的燃料来源。",
+          "group": "charlie",
+          "tags": [
+            "charlie"
+          ],
+          "parents": [
+            "winona_shadow_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -110,
+          "y": 205
+        },
+        {
+          "id": "winona_shadow_3",
+          "title": "暗影袭击",
+          "desc": "用你的称手遥控器为灌注了暗影力量的投石机选择一个攻击的目标。",
+          "group": "charlie",
+          "tags": [
+            "charlie"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "requiredSkills": [
+              "winona_portable_structures",
+              "winona_shadow_2"
+            ],
+            "minTags": [
+              {
+                "tag": "lowshelf",
+                "count": 3
+              }
+            ]
+          },
+          "x": -60,
+          "y": 205
+        },
+        {
+          "id": "winona_charlie_1",
+          "title": "一级寻觅暗影",
+          "desc": "女王传授了一种附魔眼镜的设计，能显示隐藏的暗影魔法痕迹。她想让你找到她吗？",
+          "group": "charlie",
+          "tags": [
+            "charlie"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTagSum": {
+              "tags": [
+                "lowshelf",
+                "midshelf"
+              ],
+              "count": 6
+            }
+          },
+          "x": -170,
+          "y": 165
+        },
+        {
+          "id": "winona_charlie_2",
+          "title": "二级寻觅暗影",
+          "desc": "更善于寻找暗影魔法的踪迹。\n女王会守护着你。",
+          "group": "charlie",
+          "tags": [
+            "charlie"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "requiredSkills": [
+              "winona_charlie_1"
+            ],
+            "excludesSkills": [
+              "winona_wagstaff_2"
+            ]
+          },
+          "x": -220,
+          "y": 205
+        },
+        {
+          "id": "winona_lunar_1",
+          "title": "启迪宝石发电机",
+          "desc": "了解如何利用启迪碎片作为宝石发电机的燃料来源。",
+          "group": "wagstaff",
+          "tags": [
+            "wagstaff"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTagSum": {
+              "tags": [
+                "lowshelf",
+                "midshelf"
+              ],
+              "count": 6
+            }
+          },
+          "x": 120,
+          "y": 165
+        },
+        {
+          "id": "winona_lunar_2",
+          "title": "辉煌宝石发电机",
+          "desc": "了解如何利用纯粹辉煌作为宝石发电机的燃料来源。",
+          "group": "wagstaff",
+          "tags": [
+            "wagstaff"
+          ],
+          "parents": [
+            "winona_lunar_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 110,
+          "y": 205
+        },
+        {
+          "id": "winona_lunar_3",
+          "title": "启迪袭击",
+          "desc": "用你的称手遥控器为灌注了月亮精华的投石机选择一个攻击的目标。",
+          "group": "wagstaff",
+          "tags": [
+            "wagstaff"
+          ],
+          "parents": [
+            "winona_lunar_2"
+          ],
+          "root": false,
+          "requirements": {
+            "requiredSkills": [
+              "winona_portable_structures",
+              "winona_lunar_2"
+            ],
+            "minTags": [
+              {
+                "tag": "lowshelf",
+                "count": 3
+              }
+            ]
+          },
+          "x": 60,
+          "y": 205
+        },
+        {
+          "id": "winona_wagstaff_1",
+          "title": "一级创始人宝物猎人",
+          "desc": "从神秘的创始人的设计中汲取灵感，建造一个设备来寻找隐藏的补给藏物。\n获得对所有在藏物箱发现的技术的精通。",
+          "group": "wagstaff",
+          "tags": [
+            "wagstaff"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTagSum": {
+              "tags": [
+                "lowshelf",
+                "midshelf"
+              ],
+              "count": 6
+            }
+          },
+          "x": 170,
+          "y": 165
+        },
+        {
+          "id": "winona_wagstaff_2",
+          "title": "二级创始人宝物猎人",
+          "desc": "扩大检查专用镜的视野，寻找更高级的补给藏物。\n获得对所有在高级藏物箱发现的技术的精通。",
+          "group": "wagstaff",
+          "tags": [
+            "wagstaff"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "requiredSkills": [
+              "winona_wagstaff_1"
+            ],
+            "excludesSkills": [
+              "winona_charlie_2"
+            ]
+          },
+          "x": 220,
+          "y": 205
+        }
+      ]
+    },
+    {
+      "id": "wurt",
+      "slug": "wurt",
+      "name": "沃特",
+      "title": "半成年的鱼人",
+      "image": "images/characters/wurt.png",
+      "skills": [
+        {
+          "id": "wurt_amphibian_sanity_1",
+          "title": "一级精神流淌",
+          "desc": "在潮湿时慢慢回复部分理智值。你越潮湿，回复的理智值就越多。",
+          "group": "amphibian",
+          "tags": [
+            "amphibian",
+            "wetness_sanity"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -186,
+          "y": 172
+        },
+        {
+          "id": "wurt_amphibian_sanity_2",
+          "title": "二级精神流淌",
+          "desc": "在潮湿时慢慢回复一大部分理智值。",
+          "group": "amphibian",
+          "tags": [
+            "amphibian",
+            "wetness_sanity"
+          ],
+          "parents": [
+            "wurt_amphibian_sanity_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -186,
+          "y": 133
+        },
+        {
+          "id": "wurt_amphibian_temperature",
+          "title": "全天候鳞片",
+          "desc": "大大降低湿度对体温的影响。它还一定程度上减少了由于热源造成的湿度损失。",
+          "group": "amphibian",
+          "tags": [
+            "amphibian",
+            "wetness_temperature"
+          ],
+          "parents": [
+            "wurt_amphibian_sanity_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -186,
+          "y": 94
+        },
+        {
+          "id": "wurt_amphibian_thickskin_1",
+          "title": "一级光滑表皮",
+          "desc": "用潮湿作为保护。伤害会消耗潮湿度，而不是生命值。",
+          "group": "amphibian",
+          "tags": [
+            "amphibian",
+            "wetness_defense"
+          ],
+          "parents": [
+            "wurt_amphibian_temperature"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -205,
+          "y": 55
+        },
+        {
+          "id": "wurt_amphibian_thickskin_2",
+          "title": "二级光滑表皮",
+          "desc": "更有效地利用湿度作为保护。当你走过腐烂或变异的沼泽地皮时，它也会让你的湿度缓慢增加。",
+          "group": "amphibian",
+          "tags": [
+            "amphibian",
+            "wetness_defense",
+            "marsh_wetness"
+          ],
+          "parents": [
+            "wurt_amphibian_thickskin_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -205,
+          "y": 16
+        },
+        {
+          "id": "wurt_amphibian_healing_1",
+          "title": "一级水疗",
+          "desc": "在潮湿的环境中会慢慢回复生命值。你越潮湿，回复的生命值就越多。",
+          "group": "amphibian",
+          "tags": [
+            "amphibian",
+            "wetness_healing"
+          ],
+          "parents": [
+            "wurt_amphibian_temperature"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -167,
+          "y": 55
+        },
+        {
+          "id": "wurt_amphibian_healing_2",
+          "title": "二级水疗",
+          "desc": "潮湿时可以更有效地恢复生命值。当你走过腐烂或变异的沼泽地皮时，它也会让你的湿度缓慢增加。",
+          "group": "amphibian",
+          "tags": [
+            "amphibian",
+            "wetness_healing",
+            "marsh_wetness"
+          ],
+          "parents": [
+            "wurt_amphibian_healing_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -167,
+          "y": 16
+        },
+        {
+          "id": "wurt_mosquito_craft_1",
+          "title": "匿名蚊子",
+          "desc": "学习制作一个可爱的伙伴，让蚊子对你保持中立。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "mosquito"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -45,
+          "y": 172
+        },
+        {
+          "id": "wurt_mosquito_craft_2",
+          "title": "一级痒术",
+          "desc": "学习制作基于蚊子的物品：蚊子炸弹、嗡嗡肥料和蚊血注射液。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "mosquito"
+          ],
+          "parents": [
+            "wurt_mosquito_craft_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -45,
+          "y": 133
+        },
+        {
+          "id": "wurt_mosquito_craft_3",
+          "title": "二级痒术",
+          "desc": "精通基于蚊子类物品的使用方法。\n\n有了小痒痒的帮助，你就能从空气里抓蚊子。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "mosquito"
+          ],
+          "parents": [
+            "wurt_mosquito_craft_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -45,
+          "y": 94
+        },
+        {
+          "id": "wurt_civ_1",
+          "title": "一级集体喂食",
+          "desc": "学习制作食堂海带盘，以吸引鱼人更快增长并召唤鱼人采取行动。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "civ"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -30,
+          "y": 55
+        },
+        {
+          "id": "wurt_civ_1_2",
+          "title": "二级集体喂食",
+          "desc": "学习制作高级食堂海带盘，它装着更多的海带叶，以实现更快的增长并召唤鱼人采取行动。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "civ"
+          ],
+          "parents": [
+            "wurt_civ_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -30,
+          "y": 16
+        },
+        {
+          "id": "wurt_civ_2",
+          "title": "一级勤奋鱼人",
+          "desc": "学习制作一个劣质工具棚，为你的鱼人工人配备劣质工具。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "civ"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 8,
+          "y": 55
+        },
+        {
+          "id": "wurt_civ_2_2",
+          "title": "二级勤奋鱼人",
+          "desc": "学习制作一个不那么劣质的工具棚，提供不那么劣质的工具。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "civ"
+          ],
+          "parents": [
+            "wurt_civ_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 8,
+          "y": 16
+        },
+        {
+          "id": "wurt_civ_3",
+          "title": "一级硬脑袋",
+          "desc": "学习制作一个鱼人军械库，为你的忠诚鱼人守卫配备沼泽斗士头盔。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "civ"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 46,
+          "y": 55
+        },
+        {
+          "id": "wurt_civ_3_2",
+          "title": "二级硬脑袋",
+          "desc": "学习制作一个高级鱼人军械库，提供沼泽战士头盔。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "civ"
+          ],
+          "parents": [
+            "wurt_civ_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 46,
+          "y": 16
+        },
+        {
+          "id": "wurt_pathfinder",
+          "title": "沼泽探路人",
+          "desc": "沃特附近的冒险家将像她一样在沼泽上移动。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "pathfinder"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 95.2,
+          "y": 35.5
+        },
+        {
+          "id": "wurt_merm_king_hunger_1",
+          "title": "一级饱君",
+          "desc": "增加鱼人王的最大饥饿值。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "merm_king_max_hunger"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 61,
+          "y": 172
+        },
+        {
+          "id": "wurt_merm_king_hunger_2",
+          "title": "二级饱君",
+          "desc": "再增加鱼人王的最大饥饿值。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "merm_king_max_hunger"
+          ],
+          "parents": [
+            "wurt_merm_king_hunger_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 61,
+          "y": 133
+        },
+        {
+          "id": "wurt_merm_king_hunger_3",
+          "title": "三级饱君",
+          "desc": "减缓鱼人王的消化速度，这样他就会更久之后才能感到饥饿。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "merm_king_hunger_rate"
+          ],
+          "parents": [
+            "wurt_merm_king_hunger_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 61,
+          "y": 94
+        },
+        {
+          "id": "wurt_merm_flee",
+          "title": "理智的沼泽战士",
+          "desc": "鱼人守卫会在生命值较低时退出战斗，等待治疗。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "merm_flee"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -79.2,
+          "y": 35.5
+        },
+        {
+          "id": "wurt_mermkingshoulders",
+          "title": "国王的肩甲任务",
+          "desc": "为国王的雕塑般的肩膀上添加石甲，让你的鱼人士兵更加强壮。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "mermking_quest"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 8,
+          "y": 172
+        },
+        {
+          "id": "wurt_mermkingcrown",
+          "title": "国王的皇冠任务",
+          "desc": "给他一顶逝去已久的国王戴过的王冠，你的鱼人就会更聪明地战斗，从而活得更久。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "mermking_quest"
+          ],
+          "parents": [
+            "wurt_mermkingshoulders"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 8,
+          "y": 133
+        },
+        {
+          "id": "wurt_mermkingtrident",
+          "title": "国王的三叉戟任务",
+          "desc": "为国王献上这种最适合海上使用的武器，你的鱼人将以三连拍的方式灵巧攻击。",
+          "group": "swampmaster",
+          "tags": [
+            "swampmaser",
+            "mermking_quest"
+          ],
+          "parents": [
+            "wurt_mermkingcrown"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 8,
+          "y": 94
+        },
+        {
+          "id": "wurt_shadow_allegiance_1",
+          "title": "暗影复活鱼人",
+          "desc": "你的鱼人追随者可能会死去，但他们的暗影会继续存在。\n使用纯粹恐惧为堕落鱼人的暗影注入位面力量。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minPoints": 12,
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 221,
+          "y": 55
+        },
+        {
+          "id": "wurt_lunar_allegiance_1",
+          "title": "月亮变异鱼人",
+          "desc": "通过喂食月亮碎片，赐予你的鱼人月亮变异的美妙礼物。\n使用纯粹辉煌 赋予你的变异鱼人位面力量。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minPoints": 12,
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": 183,
+          "y": 55
+        },
+        {
+          "id": "wurt_lunar_allegiance_2",
+          "title": "大地变异",
+          "desc": "将任何一片土地变成甜美的沼泽。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "lunar"
+          ],
+          "parents": [
+            "wurt_lunar_allegiance_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 183,
+          "y": 16
+        },
+        {
+          "id": "wurt_shadow_allegiance_2",
+          "title": "大地腐蚀",
+          "desc": "没有一片土地能幸免于沼泽黑暗而美丽的腐蚀。",
+          "group": "allegiance",
+          "tags": [
+            "allegiance",
+            "shadow"
+          ],
+          "parents": [
+            "wurt_shadow_allegiance_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 221,
+          "y": 16
+        }
+      ]
+    },
+    {
+      "id": "walter",
+      "slug": "walter",
+      "name": "沃尔特",
+      "title": "无畏少年",
+      "image": "images/characters/walter.png",
+      "skills": [
+        {
+          "id": "walter_slingshot_modding",
+          "title": "基础改装",
+          "desc": "学习制作弹弓野外作业包，可以制作改装弹弓的一些基础配件。",
+          "group": "slingshotmods",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -12.67,
+          "y": 175.5
+        },
+        {
+          "id": "walter_slingshot_handles",
+          "title": "高级手柄",
+          "desc": "学习制作高级手柄，提高弹弓的开火速率、并附带额外增益效果。",
+          "group": "slingshotmods",
+          "tags": [],
+          "parents": [
+            "walter_slingshot_modding"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -56.37,
+          "y": 134.5
+        },
+        {
+          "id": "walter_slingshot_bands",
+          "title": "高级皮筋",
+          "desc": "学习制作高级皮筋，提高弹弓的射程和弹道速度，并可能附带额外增益效果。",
+          "group": "slingshotmods",
+          "tags": [],
+          "parents": [
+            "walter_slingshot_modding"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -12.67,
+          "y": 134.5
+        },
+        {
+          "id": "walter_slingshot_frames",
+          "title": "高级框架",
+          "desc": "学习制作高级框架，为弹弓启用一个间隔攻击的能力，并可能获得额外增益效果。",
+          "group": "slingshotmods",
+          "tags": [],
+          "parents": [
+            "walter_slingshot_modding"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 31.03,
+          "y": 134.5
+        },
+        {
+          "id": "walter_ammo_shattershots",
+          "title": "碎裂弹药",
+          "desc": "学习制作针刺弹和月亮弹。这些弹药碎裂后会造成一个伤害区域。",
+          "group": "slingshotammo",
+          "tags": [
+            "slingshotammo_crafting"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -219.5,
+          "y": 175.5
+        },
+        {
+          "id": "walter_ammo_lucky",
+          "title": "幸运弹药",
+          "desc": "学习制作轰轰弹和绝望小石。这些弹药依赖幸运射击造成额外伤害或不会破裂。",
+          "group": "slingshotammo",
+          "tags": [
+            "slingshotammo_crafting"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -143.5,
+          "y": 175.5
+        },
+        {
+          "id": "walter_ammo_utility",
+          "title": "市电弹药",
+          "desc": "学习制作黏黏弹和电击废料弹。黏黏弹会减慢被击中目标的速度，而 电击废料弹会造成电击伤害并提高眩晕率。",
+          "group": "slingshotammo",
+          "tags": [
+            "slingshotammo_crafting"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -181.5,
+          "y": 175.5
+        },
+        {
+          "id": "walter_ammo_efficiency",
+          "title": "弹药工匠",
+          "desc": "学习更高效的弹药制作方法，以提高产量并加快制作速度。",
+          "group": "slingshotammo",
+          "tags": [],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "slingshotammo_crafting",
+                "count": 2
+              }
+            ]
+          },
+          "x": -205.25,
+          "y": 14.5
+        },
+        {
+          "id": "walter_ammo_bag",
+          "title": "弹药囤积者",
+          "desc": "学习制作弹药袋，以存放多余的弹药。",
+          "group": "slingshotammo",
+          "tags": [],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "slingshotammo_crafting",
+                "count": 2
+              }
+            ]
+          },
+          "x": -159.15,
+          "y": 14.5
+        },
+        {
+          "id": "walter_ammo_shadow",
+          "title": "暗影弹弓兵",
+          "desc": "女王将通过教你制作恶液弹和纯粹恐惧弹药来奖励你的忠诚：这两种弹药分别专用于减速和伤害。",
+          "group": "slingshotammo",
+          "tags": [
+            "slingshotammo_crafting",
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "lunar_favor"
+            ],
+            "boss": "shadow"
+          },
+          "x": -209.05,
+          "y": 93.5
+        },
+        {
+          "id": "walter_ammo_lunar",
+          "title": "月亮弹弓兵",
+          "desc": "神秘创始人将通过教你制作纯粹辉煌弹药和亮茄外壳弹药来奖励你的好奇心：这两种弹药分别专用于减益和伤害。",
+          "group": "slingshotammo",
+          "tags": [
+            "slingshotammo_crafting",
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "excludesTags": [
+              "shadow_favor"
+            ],
+            "boss": "lunar"
+          },
+          "x": -150.15,
+          "y": 93.5
+        },
+        {
+          "id": "walter_woby_sprint",
+          "title": "炸毛狂奔",
+          "desc": "沃比在骑乘状态下持续奔跑3秒后，将开始更快的定速冲刺，直到被打断。",
+          "group": "woby",
+          "tags": [],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "woby_basics",
+                "count": 2
+              }
+            ]
+          },
+          "x": 197.85,
+          "y": 136.5
+        },
+        {
+          "id": "walter_woby_dash",
+          "title": "冲刺小狗",
+          "desc": "双击任意移动控制键指挥沃比进行冲刺。",
+          "group": "woby",
+          "tags": [
+            "woby_dash"
+          ],
+          "parents": [
+            "walter_woby_sprint"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 197.85,
+          "y": 95.5
+        },
+        {
+          "id": "walter_woby_shadow",
+          "title": "暗影沃比",
+          "desc": "沃比的冲刺变为短距离传送。",
+          "group": "woby",
+          "tags": [
+            "shadow",
+            "shadow_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "woby_basics",
+                "count": 2
+              },
+              {
+                "tag": "woby_dash",
+                "count": 1
+              }
+            ],
+            "excludesTags": [
+              "lunar_favor"
+            ],
+            "boss": "shadow"
+          },
+          "x": 176,
+          "y": 13.5
+        },
+        {
+          "id": "walter_woby_lunar",
+          "title": "月亮沃比",
+          "desc": "冲刺后，沃比可以立即以+1速度开始疾跑。当沃比在地表月光下或任何启迪区域时，她的疾跑或冲刺不会消耗额外饥饿值。",
+          "group": "woby",
+          "tags": [
+            "lunar",
+            "lunar_favor"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "woby_basics",
+                "count": 2
+              },
+              {
+                "tag": "woby_dash",
+                "count": 1
+              }
+            ],
+            "excludesTags": [
+              "shadow_favor"
+            ],
+            "boss": "lunar"
+          },
+          "x": 220.79,
+          "y": 13.5
+        },
+        {
+          "id": "walter_woby_endurance",
+          "title": "活力小狗",
+          "desc": "沃比在奔跑或疾跑时获得+1速度，且所有饥饿消耗减少20%。",
+          "group": "woby",
+          "tags": [
+            "woby_basics"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 128.5,
+          "y": 161.83
+        },
+        {
+          "id": "walter_woby_taskaid",
+          "title": "援助之角",
+          "desc": "沃比会用她结实的角帮你砍树和采矿。",
+          "group": "woby",
+          "tags": [
+            "woby_basics"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 128.5,
+          "y": 38.83
+        },
+        {
+          "id": "walter_woby_foraging",
+          "title": "毛茸觅食者",
+          "desc": "沃比会与你一起觅食，从你采集的植物中额外获得一份食物。",
+          "group": "woby",
+          "tags": [
+            "woby_basics"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 128.5,
+          "y": 79.83
+        },
+        {
+          "id": "walter_woby_itemfetcher",
+          "title": "漫游拾取者",
+          "desc": "沃比会为她的背包收集物品，并为你取回弹药。",
+          "group": "woby",
+          "tags": [
+            "woby_basics"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 128.5,
+          "y": 120.83
+        },
+        {
+          "id": "walter_camp_fire",
+          "title": "营火发烧友",
+          "desc": "学习制作便携营火。在任何营火旁讲故事都会更精彩。",
+          "group": "camping",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -33.78,
+          "y": 11.5
+        },
+        {
+          "id": "walter_camp_rope",
+          "title": "扭麻绳",
+          "desc": "学习如何以更低的成本更快更高效地制作绳子。",
+          "group": "camping",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -71.78,
+          "y": 52.5
+        },
+        {
+          "id": "walter_camp_firstaid",
+          "title": "野外医护员",
+          "desc": "学习更快地使用治疗物品、获得50%的效果加成，并学会制作扑腾绷带。",
+          "group": "camping",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -71.78,
+          "y": 11.5
+        },
+        {
+          "id": "walter_camp_walterhat",
+          "title": "先锋之范",
+          "desc": "提升松树先锋队帽子的属性，包括减少受伤时的理智损失。",
+          "group": "camping",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -33.78,
+          "y": 52.5
+        },
+        {
+          "id": "walter_camp_wobytreat",
+          "title": "特别零食",
+          "desc": "学习制作沃比零食，一种不会腐烂的沃比专属食物。",
+          "group": "camping",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 4.22,
+          "y": 52.5
+        },
+        {
+          "id": "walter_camp_wobyholder",
+          "title": "我们一起来挂滚",
+          "desc": "沃比的背包将配备一个晾肉架附件。",
+          "group": "camping",
+          "tags": [],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 4.22,
+          "y": 11.5
+        },
+        {
+          "id": "walter_camp_wobycourier",
+          "title": "沃比来这，沃比去那",
+          "desc": "派遣沃比前往其他玩家处，或将物品投放到指定位置附近的箱子中。",
+          "group": "camping",
+          "tags": [],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "camping",
+                "count": 3
+              }
+            ]
+          },
+          "x": 52.67,
+          "y": 11.5
+        }
+      ]
+    },
+    {
+      "id": "wortox",
+      "slug": "wortox",
+      "name": "沃拓克斯",
+      "title": "噬魂者",
+      "image": "images/characters/wortox.png",
+      "skills": [
+        {
+          "id": "wortox_lifebringer_1",
+          "title": "一级回生术",
+          "desc": "学习如何将灵魂注入双尾心来复活鬼魂朋友。",
+          "group": "nice",
+          "tags": [
+            "nice",
+            "nice1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -215,
+          "y": 32
+        },
+        {
+          "id": "wortox_lifebringer_2",
+          "title": "二级回生术",
+          "desc": "使用双尾心复活鬼魂朋友后，他们的生命值将不再受到惩罚。",
+          "group": "nice",
+          "tags": [
+            "nice",
+            "nice1"
+          ],
+          "parents": [
+            "wortox_lifebringer_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -215,
+          "y": 72
+        },
+        {
+          "id": "wortox_lifebringer_3",
+          "title": "三级回生术",
+          "desc": "允许他人使用双尾心，这将把他们从远处或近处拉向你。\n自己使用双尾心时会释放里面的灵魂。",
+          "group": "nice",
+          "tags": [
+            "nice"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "nice1",
+                "count": 5
+              }
+            ],
+            "requiredSkills": [
+              "wortox_lifebringer_2"
+            ]
+          },
+          "x": -215,
+          "y": 140
+        },
+        {
+          "id": "wortox_soulprotector_1",
+          "title": "一级灵魂触及",
+          "desc": "掉落的灵魂会在更大的范围进行治疗。",
+          "group": "nice",
+          "tags": [
+            "nice",
+            "nice1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -167,
+          "y": 21
+        },
+        {
+          "id": "wortox_soulprotector_2",
+          "title": "二级灵魂触及",
+          "desc": "掉落的灵魂会靠近受伤的玩家，并提高治疗距离。",
+          "group": "nice",
+          "tags": [
+            "nice",
+            "nice1"
+          ],
+          "parents": [
+            "wortox_soulprotector_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -167,
+          "y": 61
+        },
+        {
+          "id": "wortox_soulprotector_3",
+          "title": "一级灵魂堡垒",
+          "desc": "掉落的灵魂会在延迟后进行第二次治疗，治疗量较低。",
+          "group": "nice",
+          "tags": [
+            "nice"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "nice1",
+                "count": 5
+              }
+            ],
+            "requiredSkills": [
+              "wortox_soulprotector_2"
+            ]
+          },
+          "x": -167,
+          "y": 129
+        },
+        {
+          "id": "wortox_soulprotector_4",
+          "title": "二级灵魂堡垒",
+          "desc": "掉落的灵魂会更快靠近受伤的玩家，第二波治疗会更快到来，灵魂治疗多名玩家的效率也会提高。",
+          "group": "nice",
+          "tags": [
+            "nice"
+          ],
+          "parents": [
+            "wortox_soulprotector_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -167,
+          "y": 169
+        },
+        {
+          "id": "wortox_liftedspirits_1",
+          "title": "一级灵魂振奋",
+          "desc": "在灵魂回声中等待释放的灵魂会提高你的移动速度。\n",
+          "group": "nice",
+          "tags": [
+            "nice",
+            "nice1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": -107,
+          "y": 32
+        },
+        {
+          "id": "wortox_liftedspirits_2",
+          "title": "二级灵魂振奋",
+          "desc": "灵魂回声持续时间增加。",
+          "group": "nice",
+          "tags": [
+            "nice",
+            "nice1"
+          ],
+          "parents": [
+            "wortox_liftedspirits_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -107,
+          "y": 72
+        },
+        {
+          "id": "wortox_liftedspirits_3",
+          "title": "回响",
+          "desc": "会发生两次灵魂回声。\n这不会减少地图上的灵魂跳跃花费。",
+          "group": "nice",
+          "tags": [
+            "nice",
+            "nice1"
+          ],
+          "parents": [
+            "wortox_liftedspirits_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -125,
+          "y": 112
+        },
+        {
+          "id": "wortox_liftedspirits_4",
+          "title": "肆意移动",
+          "desc": "地图上进行灵魂跳跃的花费将根据当前世界陆地的探索程度而减少。",
+          "group": "nice",
+          "tags": [
+            "nice",
+            "nice1"
+          ],
+          "parents": [
+            "wortox_liftedspirits_2"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -89,
+          "y": 112
+        },
+        {
+          "id": "wortox_panflute_playing",
+          "title": "即兴排箫手",
+          "desc": "你会定期感受到音乐召唤你吹奏排箫。感受到吹奏冲动后，吹奏一次排箫不会丢失耐久度。",
+          "group": "neutral",
+          "tags": [
+            "neutral",
+            "nice1",
+            "naughty1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "wortox_panflute_soulcaller",
+          "title": "悦耳牧歌",
+          "desc": "吹奏排箫发出悦耳音符，会让附近迷失的灵魂前来聆听。",
+          "group": "neutral",
+          "tags": [
+            "neutral",
+            "nice1",
+            "naughty1"
+          ],
+          "parents": [
+            "wortox_panflute_playing"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": -50,
+          "y": 0
+        },
+        {
+          "id": "wortox_panflute_forget",
+          "title": "迷魂曲",
+          "desc": "你吹奏排箫唤醒的东西在短时间内不会对你产生敌意。",
+          "group": "neutral",
+          "tags": [
+            "neutral",
+            "nice1",
+            "naughty1"
+          ],
+          "parents": [
+            "wortox_panflute_playing"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 50,
+          "y": 0
+        },
+        {
+          "id": "wortox_nabbag",
+          "title": "强抢贼",
+          "desc": "在坎普斯身边那么久总算没白混，你终于做出了一个强抢袋，可以满足自己盗窃物品的欲望了。它的威力取决于你的库存有多满。",
+          "group": "naughty",
+          "tags": [
+            "naughty",
+            "naughty1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 116.8,
+          "y": 32
+        },
+        {
+          "id": "wortox_souljar_1",
+          "title": "灵魂罐",
+          "desc": "学习如何制作和使用灵魂罐来储存灵魂以供之后使用。\n没有带在身上的灵魂罐会随着时间的推移泄漏灵魂。",
+          "group": "naughty",
+          "tags": [
+            "naughty",
+            "naughty1"
+          ],
+          "parents": [
+            "wortox_nabbag"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 116.8,
+          "y": 72
+        },
+        {
+          "id": "wortox_souljar_2",
+          "title": "贪欲泛滥",
+          "desc": "持有一个灵魂罐会增加5个可持有的灵魂上限，可以防止灵魂力量的过载。",
+          "group": "naughty",
+          "tags": [
+            "naughty",
+            "naughty1"
+          ],
+          "parents": [
+            "wortox_souljar_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 98,
+          "y": 112
+        },
+        {
+          "id": "wortox_souljar_3",
+          "title": "贪心收藏家",
+          "desc": "持有的灵魂和灵魂罐中的灵魂会同时增加强抢袋的伤害和灵魂的伤害，至多可收集100个灵魂。",
+          "group": "naughty",
+          "tags": [
+            "naughty",
+            "naughty1"
+          ],
+          "parents": [
+            "wortox_souljar_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 134,
+          "y": 112
+        },
+        {
+          "id": "wortox_thief_1",
+          "title": "一级灵魂窃贼",
+          "desc": "灵魂会从更远的距离被创造并吸引到你身边。",
+          "group": "naughty",
+          "tags": [
+            "naughty",
+            "naughty1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 174,
+          "y": 21
+        },
+        {
+          "id": "wortox_thief_2",
+          "title": "二级灵魂窃贼",
+          "desc": "灵魂被你吸引后存在的时间会更长。",
+          "group": "naughty",
+          "tags": [
+            "naughty",
+            "naughty1"
+          ],
+          "parents": [
+            "wortox_thief_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 174,
+          "y": 61
+        },
+        {
+          "id": "wortox_thief_3",
+          "title": "一级灵魂穿刺",
+          "desc": "被你吸引过来的灵魂会伤害沿途其他拥有灵魂的生物。",
+          "group": "naughty",
+          "tags": [
+            "naughty"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "naughty1",
+                "count": 5
+              }
+            ],
+            "requiredSkills": [
+              "wortox_thief_2"
+            ]
+          },
+          "x": 174,
+          "y": 129
+        },
+        {
+          "id": "wortox_thief_4",
+          "title": "二级灵魂穿刺",
+          "desc": "被你吸引过来的灵魂会先反飞，然后再飞向你。",
+          "group": "naughty",
+          "tags": [
+            "naughty"
+          ],
+          "parents": [
+            "wortox_thief_3"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 174,
+          "y": 169
+        },
+        {
+          "id": "wortox_souldecoy_1",
+          "title": "一级灵魂诱饵",
+          "desc": "灵魂跳跃会制造一个灵魂诱饵，吸引拥有灵魂的生物攻击。灵魂回响不会制造诱饵。",
+          "group": "naughty",
+          "tags": [
+            "naughty",
+            "naughty1"
+          ],
+          "parents": [],
+          "root": true,
+          "requirements": {},
+          "x": 222,
+          "y": 32
+        },
+        {
+          "id": "wortox_souldecoy_2",
+          "title": "二级灵魂诱饵",
+          "desc": "如果灵魂诱饵没有受到伤害，它们会存在更长时间，并对攻击诱饵的人造成伤害。",
+          "group": "naughty",
+          "tags": [
+            "naughty",
+            "naughty1"
+          ],
+          "parents": [
+            "wortox_souldecoy_1"
+          ],
+          "root": false,
+          "requirements": {},
+          "x": 222,
+          "y": 72
+        },
+        {
+          "id": "wortox_souldecoy_3",
+          "title": "三级灵魂诱饵",
+          "desc": "灵魂诱饵造成会在时间耗尽或被击毁后爆炸，对受引诱或攻击你的敌人造成伤害。",
+          "group": "naughty",
+          "tags": [
+            "naughty"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "minTags": [
+              {
+                "tag": "naughty1",
+                "count": 5
+              }
+            ],
+            "requiredSkills": [
+              "wortox_souldecoy_2"
+            ]
+          },
+          "x": 222,
+          "y": 140
+        },
+        {
+          "id": "wortox_allegiance_lunar",
+          "title": "月亮骗徒",
+          "desc": "神秘创始人会向你展示戴上亮茄头盔或亮茄盔甲的力量，来奖励你的好奇心。在灵魂回声中等待释放的灵魂会吸收袭来的伤害，并使计时器失效。",
+          "group": "allegiance",
+          "tags": [
+            "lunar_favor",
+            "neutral",
+            "allegiance"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "lunar",
+            "excludesTags": [
+              "shadow_favor"
+            ]
+          },
+          "x": -16,
+          "y": 129.9
+        },
+        {
+          "id": "wortox_allegiance_shadow",
+          "title": "暗影收获者",
+          "desc": "女王会馈赠给你释放暗影收割者的力量来奖励你的忠诚。在灵魂回声中等待释放的灵魂会让造成的伤害分散到附近的敌人身上，或者两次击中一个目标，并使计时器失效。",
+          "group": "allegiance",
+          "tags": [
+            "shadow_favor",
+            "neutral",
+            "allegiance"
+          ],
+          "parents": [],
+          "root": false,
+          "requirements": {
+            "boss": "shadow",
+            "excludesTags": [
+              "lunar_favor"
+            ]
+          },
+          "x": 24,
+          "y": 129.9
+        }
+      ]
+    }
+  ]
+}

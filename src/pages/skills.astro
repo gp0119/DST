@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SkillTreeExplorer from "../components/SkillTreeExplorer.vue";
+import skillTrees from "../data/skills.json";
+
+const description =
+  "《饥荒联机版》角色技能树模拟器：为 12 位角色分配至多 15 点洞察，检查前置、分支、阵营与首领解锁条件。";
+---
+
+<BaseLayout title="角色技能树模拟器 · 饥荒联机版" description={description}>
+  <main id="main" class="container skills-main">
+    <SkillTreeExplorer
+      client:load
+      characters={skillTrees.characters}
+      maxPoints={skillTrees.maxPoints}
+      source={skillTrees.source}
+    />
+  </main>
+</BaseLayout>

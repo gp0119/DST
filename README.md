@@ -4,6 +4,7 @@
 
 - `/`：料理食谱
 - `/farming/`：按春、夏、秋、冬整理的巨大作物配比
+- `/skills/`：12 位角色的技能树与 15 点洞察模拟器
 
 ## 本地运行
 
@@ -21,4 +22,5 @@ pnpm test
 
 食谱数据位于 `src/data/cookbook.json`；四季作物和 79 组完整配比位于
 `src/data/farming.json`；PDF 中转录的 52 张种植卡位于
-`src/data/farming-examples.json`；图片位于 `public/images`。
+`src/data/farming-examples.json`；角色技能树位于 `src/data/skills.json`；
+图片位于 `public/images`。
