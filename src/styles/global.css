@@ -2145,6 +2145,10 @@ img {
   opacity: 0.35;
   cursor: default;
 }
+.skill-canvas-scroll {
+  width: 100%;
+  overflow-x: hidden;
+}
 .skill-canvas-shell {
   position: relative;
   width: 100%;
@@ -2177,7 +2181,7 @@ img {
   height: 100%;
   outline: 0;
   cursor: pointer;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x pan-y pinch-zoom;
 }
 .skill-canvas-shell canvas:focus-visible {
   box-shadow: inset 0 0 0 2px #d5aa56;
@@ -2414,6 +2418,17 @@ img {
   }
   .canvas-actions {
     justify-content: flex-start;
+  }
+  .skill-canvas-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-color: rgba(213, 170, 86, 0.6) rgba(255, 255, 255, 0.05);
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  .skill-canvas-shell {
+    width: 960px;
   }
 }
 

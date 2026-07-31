@@ -125,6 +125,7 @@
   const NODE_RADIUS = 23
 
   const canvas = ref(null)
+  const canvasScroll = ref(null)
   const canvasShell = ref(null)
   const dialogCloseButton = ref(null)
   const mobileCharactersOpen = ref(false)
@@ -412,6 +413,11 @@
     canvas.value.style.width = `${viewport.width}px`
     canvas.value.style.height = `${viewport.height}px`
     fitTree()
+  }
+
+  function centerCanvasScroll() {
+    if (!canvasScroll.value) return
+    canvasScroll.value.scrollLeft = Math.max(0, (canvasScroll.value.scrollWidth - canvasScroll.value.clientWidth) / 2)
   }
 
   function drawPolygon(context, x, y, radius, sides = 8, rotation = Math.PI / 8) {
@@ -743,6 +749,7 @@
     resizeObserver = new ResizeObserver(resizeCanvas)
     resizeObserver.observe(canvasShell.value)
     resizeCanvas()
+    nextTick(centerCanvasScroll)
   })
 
   onBeforeUnmount(() => {
@@ -865,33 +872,35 @@
           </div>
         </div>
 
-        <div ref="canvasShell" class="skill-canvas-shell">
-          <img class="canvas-character-mark" :src="assetUrl(activeCharacter.image)" alt="" aria-hidden="true" />
-          <canvas
-            ref="canvas"
-            tabindex="0"
-            :aria-label="`${activeCharacter.name}技能树画布。已分配 ${selectedCount} 点洞察。点击技能点选择，或使用方向键浏览节点并按回车选择。`"
-            aria-describedby="canvas-feedback"
-            @pointerdown="onPointerDown"
-            @pointermove="onPointerMove"
-            @pointerup="onPointerUp"
-            @pointercancel="onPointerCancel"
-            @pointerleave="onPointerLeave"
-            @contextmenu.prevent="onContextMenu"
-            @keydown="onKeydown"
-          ></canvas>
+        <div ref="canvasScroll" class="skill-canvas-scroll">
+          <div ref="canvasShell" class="skill-canvas-shell">
+            <img class="canvas-character-mark" :src="assetUrl(activeCharacter.image)" alt="" aria-hidden="true" />
+            <canvas
+              ref="canvas"
+              tabindex="0"
+              :aria-label="`${activeCharacter.name}技能树画布。已分配 ${selectedCount} 点洞察。点击技能点选择，或使用方向键浏览节点并按回车选择。`"
+              aria-describedby="canvas-feedback"
+              @pointerdown="onPointerDown"
+              @pointermove="onPointerMove"
+              @pointerup="onPointerUp"
+              @pointercancel="onPointerCancel"
+              @pointerleave="onPointerLeave"
+              @contextmenu.prevent="onContextMenu"
+              @keydown="onKeydown"
+            ></canvas>
 
-          <div v-if="tooltip.visible && hoveredSkill" class="canvas-tooltip" :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }">
-            <small>{{ groupLabels[groupAliases[hoveredSkill.group] ?? hoveredSkill.group] ?? hoveredSkill.group }}</small>
-            <strong>{{ hoveredSkill.title }}</strong>
-            <p>{{ hoveredSkill.desc }}</p>
-            <footer>
-              <span>{{ skillStatus(hoveredSkill) }}</span>
-              <i v-for="label in conditionLabels(hoveredSkill)" :key="label">{{ label }}</i>
-            </footer>
+            <div v-if="tooltip.visible && hoveredSkill" class="canvas-tooltip" :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }">
+              <small>{{ groupLabels[groupAliases[hoveredSkill.group] ?? hoveredSkill.group] ?? hoveredSkill.group }}</small>
+              <strong>{{ hoveredSkill.title }}</strong>
+              <p>{{ hoveredSkill.desc }}</p>
+              <footer>
+                <span>{{ skillStatus(hoveredSkill) }}</span>
+                <i v-for="label in conditionLabels(hoveredSkill)" :key="label">{{ label }}</i>
+              </footer>
+            </div>
+
+            <p id="canvas-feedback" class="canvas-feedback" role="status">{{ feedback }}</p>
           </div>
-
-          <p id="canvas-feedback" class="canvas-feedback" role="status">{{ feedback }}</p>
         </div>
       </section>
     </div>
