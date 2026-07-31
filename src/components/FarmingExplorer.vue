@@ -1,8 +1,7 @@
 <script setup>
   import { computed, nextTick, ref } from 'vue'
   import { assetUrl } from '../lib/assets.js'
-  import { generateRatioGroups } from '../lib/farmingCatalog.js'
-  import { buildExampleFormations } from '../lib/farmingLayouts.js'
+  import { buildExampleFormations, formatReducedRatio } from '../lib/farmingLayouts.js'
 
   const props = defineProps({
     seasons: {
@@ -13,10 +12,6 @@
       type: Array,
       required: true,
     },
-    ratioCatalog: {
-      type: Object,
-      required: true,
-    },
     examples: {
       type: Array,
       required: true,
@@ -25,23 +20,18 @@
 
   const activeSeasonId = ref(props.seasons[0]?.id ?? 'spring')
   const cropFilter = ref('all')
+  const plotCounts = [1, 2, 4]
+  const activePlotCount = ref(1)
   const activeSeason = computed(() => props.seasons.find((season) => season.id === activeSeasonId.value) ?? props.seasons[0])
   const cropsById = computed(() => Object.fromEntries(props.crops.map((crop) => [crop.id, crop])))
   const seasonCrops = computed(() => activeSeason.value.cropIds.map((id) => cropsById.value[id]))
-  const completeRatioGroups = computed(() => generateRatioGroups(activeSeason.value, props.crops, props.ratioCatalog))
-  const completeRatioCount = computed(() => completeRatioGroups.value.reduce((count, group) => count + group.entries.length, 0))
   const seasonExamples = computed(() => props.examples.filter((example) => example.seasonIds.includes(activeSeason.value.id)))
   const filteredExamples = computed(() =>
     seasonExamples.value
       .filter((example) => cropFilter.value === 'all' || example.items.some((item) => item.cropId === cropFilter.value || item.alternatives?.includes(cropFilter.value)))
-      .sort((left, right) => left.plotCount - right.plotCount)
   )
   function crop(id) {
     return cropsById.value[id]
-  }
-
-  function startsPlotGroup(index) {
-    return index === 0 || filteredExamples.value[index - 1].plotCount !== filteredExamples.value[index].plotCount
   }
 
   async function selectSeason(id) {
@@ -70,9 +60,6 @@
     return [item.cropId, ...(item.alternatives ?? [])]
   }
 
-  function combinationLabel(entry) {
-    return entry.items.map((item) => `${crop(item.cropId).name}${item.count > 1 ? ` ${item.count} 份` : ''}`).join('加')
-  }
 </script>
 
 <template>
@@ -114,11 +101,22 @@
 
       <section class="pdf-examples" aria-labelledby="pdf-examples-title">
         <header class="pdf-examples-heading">
+          <div class="plot-count-switch" aria-label="选择示例农田数量">
+            <button
+              v-for="count in plotCounts"
+              :key="count"
+              type="button"
+              :aria-pressed="activePlotCount === count"
+              @click="activePlotCount = count"
+            >
+              {{ count }} 块地
+            </button>
+          </div>
           <span>{{ filteredExamples.length }} / {{ seasonExamples.length }} 组</span>
         </header>
 
         <div v-if="filteredExamples.length" class="pdf-example-grid">
-          <article v-for="(example, exampleIndex) in filteredExamples" :key="example.id" class="pdf-example-card" :class="{ 'plot-group-start': startsPlotGroup(exampleIndex) }">
+          <article v-for="example in filteredExamples" :key="example.id" class="pdf-example-card">
             <header>
               <div>
                 <h4>
@@ -133,20 +131,20 @@
                   </template>
                 </h4>
               </div>
-              <strong>{{ example.ratio }}</strong>
+              <strong>{{ formatReducedRatio(example.items) }}</strong>
             </header>
 
             <div
               class="pdf-example-plots"
               :class="{
-                'combined-fields': example.gridSize === 9,
-                'single-ten-field': example.gridSize === 10 && example.plotCount === 1,
-                'multiple-ten-fields': example.gridSize === 10 && example.plotCount > 1,
+                'single-field': activePlotCount === 1,
+                'two-fields': activePlotCount === 2,
+                'four-fields': activePlotCount === 4,
               }"
             >
-              <div v-for="formation in buildExampleFormations(example)" :key="formation.id" class="plot-unit pdf-example-plot" :class="formation.className">
+              <div v-for="formation in buildExampleFormations(example, activePlotCount)" :key="formation.id" class="plot-unit pdf-example-plot" :class="formation.className">
                 <span class="plot-number">▦ {{ formation.label }}</span>
-                <div class="plot-grid" :class="formation.className" :style="{ '--field-columns': formation.columns }">
+                <div class="plot-grid" :class="[formation.className, { 'vertical-mirror': formation.verticalMirror }]" :style="{ '--field-columns': formation.columns }">
                   <span v-for="(cropId, slotIndex) in formation.slots" :key="slotIndex" class="plot-cell" :class="{ empty: !cropId }">
                     <img v-if="cropId" :src="assetUrl(crop(displayedCropId(example, cropId)).image)" :alt="crop(displayedCropId(example, cropId)).name" loading="lazy" />
                     <i v-else aria-hidden="true"></i>
@@ -164,46 +162,13 @@
             </div>
 
             <footer>
-              <span>{{ example.plotCount }} 块地</span>
+              <span>{{ activePlotCount }} 块地</span>
               <span>每块 {{ example.gridSize }} 格</span>
             </footer>
           </article>
         </div>
 
-        <p v-else class="pdf-example-empty">当前筛选没有示例，请切换农田数量或单田规格。</p>
-      </section>
-
-      <section class="ratio-catalog" aria-labelledby="complete-ratios-title">
-        <header class="ratio-catalog-heading">
-          <div>
-            <p>COMPLETE RATIOS</p>
-            <h3 id="complete-ratios-title">{{ activeSeason.name }}完整配比</h3>
-          </div>
-          <span>{{ completeRatioCount }} 组</span>
-        </header>
-
-        <div class="ratio-group-grid">
-          <article v-for="group in completeRatioGroups" :key="group.ratio" class="ratio-group">
-            <header>
-              <strong>{{ group.ratio }}</strong>
-              <span>{{ group.entries.length }} 组</span>
-            </header>
-            <ul>
-              <li v-for="entry in group.entries" :key="entry.id" :aria-label="combinationLabel(entry)">
-                <template v-for="(item, itemIndex) in entry.items" :key="item.cropId">
-                  <span v-if="itemIndex" class="ratio-plus" aria-hidden="true"> + </span>
-                  <span class="ratio-crop">
-                    <span class="ratio-crop-images" aria-hidden="true">
-                      <img v-for="copy in item.count" :key="copy" :src="assetUrl(crop(item.cropId).image)" alt="" loading="lazy" />
-                    </span>
-                    <span>{{ crop(item.cropId).name }}</span>
-                  </span>
-                </template>
-              </li>
-            </ul>
-          </article>
-        </div>
-
+        <p v-else class="pdf-example-empty">当前筛选没有示例，请选择其他作物。</p>
       </section>
     </section>
   </div>

@@ -1,112 +1,54 @@
-const combinedNineGridLayouts = {
-  "1|4,4": {
-    columns: 3,
-    className: "single-nine",
-    slots: [
-      0, 0, 0,
-      0, null, 1,
-      1, 1, 1,
-    ],
-  },
-  "2|3,3,3": {
-    columns: 6,
-    className: "combined-two",
-    slots: [
-      0, 0, 0, 0, 0, 0,
-      1, 1, 1, 1, 1, 1,
-      2, 2, 2, 2, 2, 2,
-    ],
-  },
-  "2|4,2,2": {
-    columns: 6,
-    className: "combined-two",
-    slots: [
-      0, 0, 0, 0, 0, 0,
-      0, 1, 1, 1, 1, 0,
-      null, 2, 2, 2, 2, null,
-    ],
-  },
-  "2|6,3": {
-    columns: 6,
-    className: "combined-two",
-    slots: [
-      1, 1, 1, 1, 1, 1,
-      0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0,
-    ],
-  },
-  "4|5,3,1": {
-    columns: 6,
-    className: "combined-four",
-    slots: [
-      0, 0, 0, 0, 0, 0,
-      0, 1, 1, 1, 1, 0,
-      0, 1, 2, 2, 1, 0,
-      0, 1, 2, 2, 1, 0,
-      0, 1, 1, 1, 1, 0,
-      0, 0, 0, 0, 0, 0,
-    ],
-  },
-  "4|2,2,2,1": {
-    columns: 6,
-    className: "combined-four",
-    slots: [
-      null, 0, 0, 0, 0, null,
-      null, 1, 1, 1, 1, null,
-      2, 2, 3, 3, 2, 2,
-      2, 2, 3, 3, 2, 2,
-      null, 1, 1, 1, 1, null,
-      null, 0, 0, 0, 0, null,
-    ],
-  },
-  "4|2,2,2,2": {
-    columns: 6,
-    className: "combined-four",
-    slots: [
-      null, 0, 0, 0, 0, null,
-      1, 2, 3, 3, 2, 1,
-      1, 2, 3, 3, 2, 1,
-      1, 2, 3, 3, 2, 1,
-      1, 2, 3, 3, 2, 1,
-      null, 0, 0, 0, 0, null,
-    ],
-  },
-  "4|3,2,2,2": {
-    columns: 6,
-    className: "combined-four",
-    slots: [
-      0, 0, 0, 0, 0, 0,
-      1, 2, 3, 3, 2, 1,
-      1, 2, 3, 3, 2, 1,
-      1, 2, 3, 3, 2, 1,
-      1, 2, 3, 3, 2, 1,
-      0, 0, 0, 0, 0, 0,
-    ],
-  },
-  "4|4,2,2,1": {
-    columns: 6,
-    className: "combined-four",
-    slots: [
-      0, 0, 1, 1, 0, 0,
-      0, 0, 1, 1, 0, 0,
-      2, 2, 3, 3, 2, 2,
-      2, 2, 3, 3, 2, 2,
-      0, 0, 1, 1, 0, 0,
-      0, 0, 1, 1, 0, 0,
-    ],
-  },
-  "4|4,3,1,1": {
-    columns: 6,
-    className: "combined-four",
-    slots: [
-      1, 0, 0, 0, 0, 1,
-      1, 0, 0, 0, 0, 1,
-      1, 2, 3, 3, 2, 1,
-      1, 2, 3, 3, 2, 1,
-      1, 0, 0, 0, 0, 1,
-      1, 0, 0, 0, 0, 1,
-    ],
-  },
+const nineGridLayouts = {
+  "4,4": [
+    0, 0, 0,
+    0, null, 1,
+    1, 1, 1,
+  ],
+  "3,3,3": [
+    0, 0, 0,
+    1, 1, 1,
+    2, 2, 2,
+  ],
+  "4,2,2": [
+    0, 0, 0,
+    0, 1, 1,
+    null, 2, 2,
+  ],
+  "6,3": [
+    1, 1, 1,
+    0, 0, 0,
+    0, 0, 0,
+  ],
+  "5,3,1": [
+    0, 0, 0,
+    0, 1, 1,
+    0, 1, 2,
+  ],
+  "2,2,2,1": [
+    null, 0, 0,
+    null, 1, 1,
+    2, 2, 3,
+  ],
+  "2,2,2,2": [
+    null, 0, 0,
+    1, 2, 3,
+    1, 2, 3,
+  ],
+  "3,2,2,2": [
+    0, 0, 0,
+    1, 2, 3,
+    1, 2, 3,
+  ],
+  "4,2,2,1": [
+    0, 0, 1,
+    0, 0, 1,
+    2, 2, 3,
+  ],
+  "4,3,1,1": [
+    1, 0, 0,
+    1, 0, 0,
+    1, 2, 3,
+  ],
 };
 
 const tenGridLayouts = {
@@ -122,6 +64,36 @@ const tenGridLayouts = {
     1, 1, 2,
     1, 1,
   ],
+  "4,2,2,2": [
+    0, 0, 1,
+    0, 1,
+    0, 2, 2,
+    3, 3,
+  ],
+  "4,3,2,1": [
+    0, 0, 1,
+    0, 1,
+    0, 2, 1,
+    2, 3,
+  ],
+  "4,2,2,1,1": [
+    0, 0, 1,
+    0, 1,
+    0, 2, 3,
+    2, 4,
+  ],
+  "5,2,2,1": [
+    0, 0, 0,
+    0, 0,
+    2, 1, 1,
+    2, 3,
+  ],
+  "6,2,2": [
+    0, 0, 0,
+    0, 0,
+    0, 1, 1,
+    2, 2,
+  ],
 };
 
 function mirrorTenGridSlots(slots) {
@@ -130,6 +102,22 @@ function mirrorTenGridSlots(slots) {
     slots[4], slots[3],
     slots[7], slots[6], slots[5],
     slots[9], slots[8],
+  ];
+}
+
+function mirrorNineGridSlots(slots) {
+  return [
+    slots[2], slots[1], slots[0],
+    slots[5], slots[4], slots[3],
+    slots[8], slots[7], slots[6],
+  ];
+}
+
+function flipNineGridSlots(slots) {
+  return [
+    slots[6], slots[7], slots[8],
+    slots[3], slots[4], slots[5],
+    slots[0], slots[1], slots[2],
   ];
 }
 
@@ -143,42 +131,45 @@ function cropSlots(template, items) {
   );
 }
 
-export function buildExampleFormations(example) {
+function greatestCommonDivisor(left, right) {
+  return right === 0 ? left : greatestCommonDivisor(right, left % right);
+}
+
+export function formatReducedRatio(items) {
+  const counts = items
+    .map((item) => item.count)
+    .sort((left, right) => right - left);
+  const divisor = counts.reduce(greatestCommonDivisor);
+
+  return counts.map((count) => count / divisor).join(":");
+}
+
+export function buildExampleFormations(example, plotCount = example.plotCount) {
   const items = sortedItems(example);
   const counts = items.map((item) => item.count).join(",");
+  const isTenGrid = example.gridSize === 10;
+  const template = isTenGrid
+    ? tenGridLayouts[counts]
+    : nineGridLayouts[counts];
+  const baseSlots = cropSlots(template, items);
 
-  if (example.gridSize === 10) {
-    const template = tenGridLayouts[counts];
+  return Array.from({ length: plotCount }, (_, index) => {
+    let slots = baseSlots;
 
-    return Array.from({ length: example.plotCount }, (_, index) => {
-      const slots = cropSlots(template, items);
+    if (isTenGrid && index % 2 === 1) {
+      slots = mirrorTenGridSlots(slots);
+    } else if (!isTenGrid) {
+      if (index >= 2) slots = flipNineGridSlots(slots);
+      if (index % 2 === 1) slots = mirrorNineGridSlots(slots);
+    }
 
-      return {
-        id: `plot-${index + 1}`,
-        label: `田 ${index + 1}`,
-        columns: 6,
-        className: "ten-grid",
-        slots:
-          counts === "4,4,2" && index % 2 === 1
-            ? mirrorTenGridSlots(slots)
-            : slots,
-      };
-    });
-  }
-
-  const layout = combinedNineGridLayouts[`${example.plotCount}|${counts}`];
-  const label =
-    example.plotCount === 1
-      ? "田 1"
-      : `${example.plotCount} 块相邻田 · ${layout.columns}×${layout.slots.length / layout.columns}`;
-
-  return [
-    {
-      id: "combined",
-      label,
-      columns: layout.columns,
-      className: layout.className,
-      slots: cropSlots(layout.slots, items),
-    },
-  ];
+    return {
+      id: `plot-${index + 1}`,
+      label: `田 ${index + 1}`,
+      columns: isTenGrid ? 6 : 3,
+      className: isTenGrid ? "ten-grid" : "nine-grid",
+      verticalMirror: isTenGrid && plotCount === 4 && index >= 2,
+      slots,
+    };
+  });
 }

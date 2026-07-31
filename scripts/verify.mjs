@@ -2,7 +2,10 @@ import { access, readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateRatioGroups } from "../src/lib/farmingCatalog.js";
-import { buildExampleFormations } from "../src/lib/farmingLayouts.js";
+import {
+  buildExampleFormations,
+  formatReducedRatio,
+} from "../src/lib/farmingLayouts.js";
 
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const dataPath = join(projectRoot, "src/data/cookbook.json");
@@ -66,6 +69,38 @@ for (const crop of farming.crops) imagePaths.add(crop.image);
 );
 
 const cropsById = Object.fromEntries(farming.crops.map((crop) => [crop.id, crop]));
+
+function exampleCoversRatio(example, entry) {
+  if (example.items.length !== entry.items.length) return false;
+
+  function match(targetIndex, usedIndexes, scale) {
+    if (targetIndex === entry.items.length) return true;
+
+    const target = entry.items[targetIndex];
+
+    for (const [exampleIndex, item] of example.items.entries()) {
+      if (
+        usedIndexes.has(exampleIndex) ||
+        ![item.cropId, ...(item.alternatives ?? [])].includes(target.cropId) ||
+        (scale && item.count * scale.ratioCount !== target.count * scale.exampleCount)
+      ) {
+        continue;
+      }
+
+      const nextIndexes = new Set(usedIndexes).add(exampleIndex);
+      const nextScale = scale ?? {
+        exampleCount: item.count,
+        ratioCount: target.count,
+      };
+      if (match(targetIndex + 1, nextIndexes, nextScale)) return true;
+    }
+
+    return false;
+  }
+
+  return match(0, new Set(), null);
+}
+
 let completeRatioCount = 0;
 for (const season of farming.seasons) {
   for (const cropId of season.cropIds) {
@@ -112,6 +147,14 @@ for (const season of farming.seasons) {
         balance.every((value) => value === 0),
         `${season.name}${group.ratio}“${entry.id}”养分不平衡：${balance.join("/")}`,
       );
+      check(
+        farmingExamples.examples.some(
+          (example) =>
+            example.seasonIds.includes(season.id) &&
+            exampleCoversRatio(example, entry),
+        ),
+        `${season.name}${group.ratio}“${entry.id}”缺少示例图`,
+      );
     }
   }
 }
@@ -136,11 +179,16 @@ const supportedLayouts = new Set([
   "9|3,2,2,2",
   "9|4,2,2,1",
   "10|4,4,2",
+  "10|4,2,2,2",
+  "10|4,3,2,1",
+  "10|4,2,2,1,1",
+  "10|5,2,2,1",
+  "10|6,2,2",
   "9|4,3,1,1",
 ]);
 
 for (const example of farmingExamples.examples) {
-  check(!exampleIds.has(example.id), `PDF 示例 ID 重复：${example.id}`);
+  check(!exampleIds.has(example.id), `示例 ID 重复：${example.id}`);
   exampleIds.add(example.id);
   check([1, 2, 4].includes(example.plotCount), `${example.id} 农田数量不是 1、2 或 4`);
   check([9, 10].includes(example.gridSize), `${example.id} 单田规格不是 9 或 10 格`);
@@ -159,32 +207,39 @@ for (const example of farmingExamples.examples) {
     supportedLayouts.has(`${example.gridSize}|${counts.join(",")}`),
     `${example.id} 缺少对应的示例田布局模板`,
   );
-  check(
-    example.items.every((item) => item.count * example.plotCount >= 4),
-    `${example.id} 扩种后仍有作物不足 4 株`,
-  );
-
-  const formations = buildExampleFormations(example);
-  const formationSlots = formations.flatMap((formation) => formation.slots);
-  const renderedCounts = formationSlots.reduce((countsByCrop, cropId) => {
-    if (cropId) countsByCrop[cropId] = (countsByCrop[cropId] ?? 0) + 1;
-    return countsByCrop;
-  }, {});
-  check(
-    formationSlots.length === example.gridSize * example.plotCount,
-    `${example.id} 最终示例图孔位数量不正确`,
-  );
-  check(
-    example.gridSize === 9
-      ? formations.length === 1
-      : formations.length === example.plotCount,
-    `${example.id} 最终示例图没有按相邻农田合并`,
-  );
-  for (const item of example.items) {
+  for (const plotCount of [1, 2, 4]) {
+    const formations = buildExampleFormations(example, plotCount);
+    const formationSlots = formations.flatMap((formation) => formation.slots);
+    const renderedCounts = formationSlots.reduce((countsByCrop, cropId) => {
+      if (cropId) countsByCrop[cropId] = (countsByCrop[cropId] ?? 0) + 1;
+      return countsByCrop;
+    }, {});
     check(
-      renderedCounts[item.cropId] === item.count * example.plotCount,
-      `${example.id} 最终示例图中的 ${item.cropId} 数量不正确`,
+      formationSlots.length === example.gridSize * plotCount,
+      `${example.id} 的 ${plotCount} 块地示例图孔位数量不正确`,
     );
+    check(
+      formations.length === plotCount,
+      `${example.id} 没有生成 ${plotCount} 块独立农田`,
+    );
+    if (example.gridSize === 10 && plotCount === 4) {
+      check(
+        formations.map((formation) => Boolean(formation.verticalMirror)).join(",") ===
+          "false,false,true,true",
+        `${example.id} 的四块 10 格农田没有按上下镜像排列`,
+      );
+      check(
+        JSON.stringify(formations[0].slots) === JSON.stringify(formations[2].slots) &&
+          JSON.stringify(formations[1].slots) === JSON.stringify(formations[3].slots),
+        `${example.id} 的四块 10 格农田上下两排内容不对应`,
+      );
+    }
+    for (const item of example.items) {
+      check(
+        renderedCounts[item.cropId] === item.count * plotCount,
+        `${example.id} 的 ${plotCount} 块地示例图中 ${item.cropId} 数量不正确`,
+      );
+    }
   }
 
   for (const seasonId of example.seasonIds) {
@@ -226,6 +281,14 @@ for (const example of farmingExamples.examples) {
 
 const effectLayoutCases = [
   {
+    id: "spring-03",
+    slots: [
+      "potato", "potato", "potato",
+      "corn", "corn", "corn",
+      "carrot", "carrot", "carrot",
+    ],
+  },
+  {
     id: "spring-01",
     slots: [
       "potato", "potato", "potato",
@@ -245,75 +308,65 @@ const effectLayoutCases = [
   {
     id: "spring-07",
     slots: [
-      "potato", "potato", "potato", "potato", "potato", "potato",
-      "potato", "onion", "onion", "onion", "onion", "potato",
-      null, "garlic", "garlic", "garlic", "garlic", null,
+      "potato", "potato", "potato",
+      "potato", "onion", "onion",
+      null, "garlic", "garlic",
+    ],
+  },
+  {
+    id: "summer-02",
+    slots: [
+      "dragonfruit", "dragonfruit", "dragonfruit",
+      "toma", "toma", "toma",
+      "toma", "toma", "toma",
     ],
   },
   {
     id: "spring-10",
     slots: [
-      "toma", "toma", "toma", "toma", "toma", "toma",
-      "toma", "potato", "potato", "potato", "potato", "toma",
-      "toma", "potato", "dragonfruit", "dragonfruit", "potato", "toma",
-      "toma", "potato", "dragonfruit", "dragonfruit", "potato", "toma",
-      "toma", "potato", "potato", "potato", "potato", "toma",
-      "toma", "toma", "toma", "toma", "toma", "toma",
+      "toma", "toma", "toma",
+      "toma", "potato", "potato",
+      "toma", "potato", "dragonfruit",
     ],
   },
   {
     id: "spring-11",
     slots: [
-      null, "onion", "onion", "onion", "onion", null,
-      null, "garlic", "garlic", "garlic", "garlic", null,
-      "potato", "potato", "dragonfruit", "dragonfruit", "potato", "potato",
-      "potato", "potato", "dragonfruit", "dragonfruit", "potato", "potato",
-      null, "garlic", "garlic", "garlic", "garlic", null,
-      null, "onion", "onion", "onion", "onion", null,
+      null, "onion", "onion",
+      null, "garlic", "garlic",
+      "potato", "potato", "dragonfruit",
     ],
   },
   {
     id: "spring-13",
     slots: [
-      null, "watermelon", "watermelon", "watermelon", "watermelon", null,
-      "potato", "corn", "onion", "onion", "corn", "potato",
-      "potato", "corn", "onion", "onion", "corn", "potato",
-      "potato", "corn", "onion", "onion", "corn", "potato",
-      "potato", "corn", "onion", "onion", "corn", "potato",
-      null, "watermelon", "watermelon", "watermelon", "watermelon", null,
+      null, "watermelon", "watermelon",
+      "potato", "corn", "onion",
+      "potato", "corn", "onion",
     ],
   },
   {
     id: "spring-15",
     slots: [
-      "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit",
-      "toma", "onion", "garlic", "garlic", "onion", "toma",
-      "toma", "onion", "garlic", "garlic", "onion", "toma",
-      "toma", "onion", "garlic", "garlic", "onion", "toma",
-      "toma", "onion", "garlic", "garlic", "onion", "toma",
-      "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit", "dragonfruit",
+      "dragonfruit", "dragonfruit", "dragonfruit",
+      "toma", "onion", "garlic",
+      "toma", "onion", "garlic",
     ],
   },
   {
     id: "spring-17",
     slots: [
-      "corn", "corn", "carrot", "carrot", "corn", "corn",
-      "corn", "corn", "carrot", "carrot", "corn", "corn",
-      "dragonfruit", "dragonfruit", "onion", "onion", "dragonfruit", "dragonfruit",
-      "dragonfruit", "dragonfruit", "onion", "onion", "dragonfruit", "dragonfruit",
-      "corn", "corn", "carrot", "carrot", "corn", "corn",
-      "corn", "corn", "carrot", "carrot", "corn", "corn",
+      "corn", "corn", "carrot",
+      "corn", "corn", "carrot",
+      "dragonfruit", "dragonfruit", "onion",
     ],
   },
   {
     id: "spring-special-4",
     slots: [
-      "dragonfruit", "toma", "toma", "toma", "toma", "dragonfruit",
-      "dragonfruit", "toma", "toma", "toma", "toma", "dragonfruit",
-      "dragonfruit", "garlic", "onion", "onion", "garlic", "dragonfruit",
-      "dragonfruit", "garlic", "onion", "onion", "garlic", "dragonfruit",
-      "dragonfruit", "toma", "toma", "toma", "toma", "dragonfruit",
-      "dragonfruit", "toma", "toma", "toma", "toma", "dragonfruit",
+      "dragonfruit", "toma", "toma",
+      "dragonfruit", "toma", "toma",
+      "dragonfruit", "garlic", "onion",
     ],
   },
   {
@@ -323,17 +376,58 @@ const effectLayoutCases = [
       "potato", "potato",
       "carrot", "carrot", "garlic",
       "carrot", "carrot",
-      "garlic", "potato", "potato",
+    ],
+  },
+  {
+    id: "advanced-4-2-2-2-spring-autumn",
+    slots: [
+      "potato", "potato", "toma",
+      "potato", "toma",
+      "potato", "carrot", "carrot",
+      "corn", "corn",
+    ],
+  },
+  {
+    id: "advanced-4-3-2-1-spring",
+    slots: [
+      "watermelon", "watermelon", "onion",
+      "watermelon", "onion",
+      "watermelon", "potato", "onion",
+      "potato", "garlic",
+    ],
+  },
+  {
+    id: "advanced-4-2-2-1-1-spring",
+    slots: [
+      "corn", "corn", "potato",
+      "corn", "potato",
+      "corn", "carrot", "onion",
+      "carrot", "dragonfruit",
+    ],
+  },
+  {
+    id: "advanced-5-2-2-1-spring-autumn",
+    slots: [
+      "potato", "potato", "potato",
       "potato", "potato",
-      "garlic", "carrot", "carrot",
-      "carrot", "carrot",
+      "onion", "garlic", "garlic",
+      "onion", "toma",
+    ],
+  },
+  {
+    id: "advanced-6-2-2-spring",
+    slots: [
+      "toma", "toma", "toma",
+      "toma", "toma",
+      "toma", "dragonfruit", "dragonfruit",
+      "potato", "potato",
     ],
   },
 ];
 
 for (const expected of effectLayoutCases) {
   const example = farmingExamples.examples.find(({ id }) => id === expected.id);
-  const slots = buildExampleFormations(example).flatMap((formation) => formation.slots);
+  const slots = buildExampleFormations(example, 1)[0].slots;
   check(
     JSON.stringify(slots) === JSON.stringify(expected.slots),
     `${expected.id} 示例图与效果图阵型不一致`,
@@ -348,20 +442,31 @@ for (const season of farming.seasons) {
   seasonalExampleCount += count;
   check(
     count === farmingExamples.expectedCounts[season.id],
-    `${season.name} PDF 示例应为 ${farmingExamples.expectedCounts[season.id]} 组，实际为 ${count} 组`,
+    `${season.name}示例应为 ${farmingExamples.expectedCounts[season.id]} 组，实际为 ${count} 组`,
   );
 }
 check(
   [1, 2, 4].every((count) =>
     farmingExamples.examples.some((example) => example.plotCount === count),
   ),
-  "PDF 示例缺少 1、2 或 4 块农田筛选数据",
+  "示例缺少 1、2 或 4 块农田筛选数据",
 );
 check(
   [9, 10].every((size) =>
     farmingExamples.examples.some((example) => example.gridSize === size),
   ),
-  "PDF 示例缺少 9 或 10 格筛选数据",
+  "示例缺少 9 或 10 格筛选数据",
+);
+const exampleRatios = new Set(
+  farmingExamples.examples.map((example) => formatReducedRatio(example.items)),
+);
+check(
+  farmingExamples.expectedRatios.every((ratio) => exampleRatios.has(ratio)),
+  `约分比例缺失：${farmingExamples.expectedRatios.filter((ratio) => !exampleRatios.has(ratio)).join("、")}`,
+);
+check(
+  exampleRatios.size === farmingExamples.expectedRatios.length,
+  `示例包含未登记的约分比例：${[...exampleRatios].filter((ratio) => !farmingExamples.expectedRatios.includes(ratio)).join("、")}`,
 );
 
 for (const imagePath of imagePaths) {
@@ -425,5 +530,5 @@ if (failures.length) {
 }
 
 console.log(
-  `验证通过：${data.recipes.length} 道料理、${farming.seasons.length} 个季节、${farmingExamples.examples.length} 张 PDF 示例卡、${seasonalExampleCount} 个季节示例、${completeRatioCount} 组完整配比、${imagePaths.size} 个本地图片引用。`,
+  `验证通过：${data.recipes.length} 道料理、${farming.seasons.length} 个季节、${farmingExamples.examples.length} 张示例卡、${seasonalExampleCount} 个季节示例、${completeRatioCount} 组完整配比、${imagePaths.size} 个本地图片引用。`,
 );
