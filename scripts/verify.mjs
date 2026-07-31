@@ -14,7 +14,7 @@ const farmingExamplesPath = join(projectRoot, "src/data/farming-examples.json");
 const skillDataPath = join(projectRoot, "src/data/skills.json");
 const publicRoot = join(projectRoot, "public");
 const sourceRoot = join(projectRoot, "src");
-const distRoot = join(projectRoot, "dist");
+const distRoot = join(projectRoot, "dist/client");
 const data = JSON.parse(await readFile(dataPath, "utf8"));
 const farming = JSON.parse(await readFile(farmingDataPath, "utf8"));
 const farmingExamples = JSON.parse(await readFile(farmingExamplesPath, "utf8"));
@@ -546,8 +546,10 @@ check(
 
 await access(join(distRoot, "index.html"));
 await access(join(distRoot, "data.json"));
+await access(join(distRoot, "recipes/index.html"));
 await access(join(distRoot, "farming/index.html"));
 await access(join(distRoot, "skills/index.html"));
+await access(join(projectRoot, "dist/server/index.js"));
 const distFiles = await walk(distRoot);
 const builtCss = await Promise.all(
   distFiles

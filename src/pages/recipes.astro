@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RecipeExplorer from "../components/RecipeExplorer.vue";
+import FavoriteCard from "../components/FavoriteCard.astro";
+import cookbook from "../data/cookbook.json";
+
+const description =
+  "《饥荒联机版》81 道烹饪锅料理速查：数值、保鲜、烹饪时间、制作条件、两套常用配料、特殊效果、沃利专属料理与角色最爱食物。";
+---
+
+<BaseLayout
+  title="饥荒联机版食谱大全 · 81 道料理离线速查"
+  description={description}
+>
+  <main id="main" class="container">
+    <RecipeExplorer client:load recipes={cookbook.recipes} />
+
+    <section id="favorites" class="section">
+      <p class="section-kicker">Character Favorites</p>
+      <h2>人物最爱食物</h2>
+      <p class="section-intro">
+        角色吃到最爱食物时，会额外回复 15
+        点饱食度；额外回复受食物新鲜度影响。沃利没有最爱食物，芜猴是特殊形态而非普通可选角色。
+      </p>
+      <div
+        class="favorite-grid grid grid-cols-[repeat(auto-fill,minmax(205px,1fr))] gap-3"
+      >
+        {cookbook.favorites.map((item) => <FavoriteCard item={item} />)}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

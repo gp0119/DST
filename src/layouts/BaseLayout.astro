@@ -7,12 +7,19 @@ const {
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const basePath = base.replace(/\/+$/, "") || "/";
+const ogImage = `__SITE_ORIGIN__${base}og.png`;
 const links = [
   {
     href: base,
+    label: "总览",
+    active: currentPath === basePath,
+  },
+  {
+    href: `${base}recipes/`,
     label: "料理食谱",
-    active: currentPath === base,
+    active: currentPath === `${basePath === "/" ? "" : basePath}/recipes`,
   },
   {
     href: `${base}farming/`,
@@ -35,6 +42,14 @@ const links = [
     <meta name="theme-color" content="#171914" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link
       rel="icon"
       type="image/png"

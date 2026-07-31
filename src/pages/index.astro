@@ -1,33 +1,95 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import RecipeExplorer from "../components/RecipeExplorer.vue";
-import FavoriteCard from "../components/FavoriteCard.astro";
-import cookbook from "../data/cookbook.json";
 
-const description =
-  "《饥荒联机版》81 道烹饪锅料理速查：数值、保鲜、烹饪时间、制作条件、两套常用配料、特殊效果、沃利专属料理与角色最爱食物。";
+const base = import.meta.env.BASE_URL;
+const tools = [
+  {
+    href: `${base}recipes/`,
+    eyebrow: "Cookbook",
+    title: "料理食谱",
+    description:
+      "按名称、食材与属性筛选 81 道烹饪锅料理，查看常用配方、角色偏好和特殊效果。",
+    stat: "81 道料理",
+    className: "recipes",
+    images: [
+      `${base}images/Meaty Stew.webp`,
+      `${base}images/Dragonpie.webp`,
+      `${base}images/Pierogi.webp`,
+    ],
+  },
+  {
+    href: `${base}farming/`,
+    eyebrow: "Farming",
+    title: "巨大化配比",
+    description:
+      "按季节查找自循环养分配比，并用单田、双田与四田布局快速安排作物位置。",
+    stat: "79 组配比",
+    className: "farming",
+    images: [
+      `${base}images/ingredients/dragonfruit.png`,
+      `${base}images/ingredients/pumpkin.png`,
+      `${base}images/ingredients/potato.png`,
+    ],
+  },
+  {
+    href: `${base}skills/`,
+    eyebrow: "Insight",
+    title: "角色技能树",
+    description:
+      "为 12 位角色分配洞察点，直观看清前置、互斥分支、阵营与首领解锁条件。",
+    stat: "12 位角色",
+    className: "skills",
+    images: [
+      `${base}images/characters/wilson.png`,
+      `${base}images/characters/wormwood.png`,
+      `${base}images/characters/wanda.png`,
+    ],
+  },
+];
 ---
 
 <BaseLayout
-  title="饥荒联机版食谱大全 · 81 道料理离线速查"
-  description={description}
+  title="饥荒联机版生存工具箱"
+  description="汇集料理食谱、巨大作物配比与角色技能树的《饥荒联机版》中文速查工具。"
 >
-  <main id="main" class="container">
-    <RecipeExplorer client:load recipes={cookbook.recipes} />
+  <main id="main" class="home-main">
+    <section class="home-tools" aria-labelledby="tools-title">
+      <div class="home-section-heading">
+        <div>
+          <p class="home-kicker">SURVIVAL NOTES</p>
+          <h1 id="tools-title">选择要查的内容</h1>
+        </div>
+      </div>
 
-    <section id="favorites" class="section">
-      <p class="section-kicker">Character Favorites</p>
-      <h2>人物最爱食物</h2>
-      <p class="section-intro">
-        角色吃到最爱食物时，会额外回复 15
-        点饱食度；额外回复受食物新鲜度影响。沃利没有最爱食物，芜猴是特殊形态而非普通可选角色。
-      </p>
-      <div
-        class="favorite-grid grid grid-cols-[repeat(auto-fill,minmax(205px,1fr))] gap-3"
-      >
-        {cookbook.favorites.map((item) => <FavoriteCard item={item} />)}
+      <div class="home-tool-grid">
+        {
+          tools.map((tool, index) => (
+            <a class={`home-tool-card ${tool.className}`} href={tool.href}>
+              <div class="home-card-topline">
+                <span>{tool.eyebrow}</span>
+                <small>0{index + 1}</small>
+              </div>
+              <div class="home-card-images" aria-hidden="true">
+                {tool.images.map((image) => <img src={image} alt="" loading="lazy" />)}
+              </div>
+              <div class="home-card-copy">
+                <span>{tool.stat}</span>
+                <h3>{tool.title}</h3>
+                <p>{tool.description}</p>
+              </div>
+              <span class="home-card-action">
+                打开工具
+                <b aria-hidden="true">→</b>
+              </span>
+            </a>
+          ))
+        }
       </div>
     </section>
 
+    <footer class="home-footer">
+      <span>KEEP THE FIRE BURNING</span>
+      <span>饥荒联机版 · 中文速查</span>
+    </footer>
   </main>
 </BaseLayout>
