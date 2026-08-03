@@ -161,7 +161,7 @@ img {
 }
 .home-tool-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
 .home-tool-card {
@@ -199,6 +199,11 @@ img {
   background:
     radial-gradient(circle at 82% 22%, rgba(124, 92, 71, 0.2), transparent 15rem),
     linear-gradient(155deg, #25251d, #10110e 70%);
+}
+.home-tool-card.quests {
+  background:
+    radial-gradient(circle at 82% 22%, rgba(112, 91, 126, 0.2), transparent 15rem),
+    linear-gradient(155deg, #24231e, #10110e 70%);
 }
 .home-card-topline {
   display: flex;
@@ -315,6 +320,10 @@ img {
 .container {
   width: min(1240px, calc(100% - 28px));
   margin: 0 auto;
+}
+
+.quests-main {
+  padding-top: 1px;
 }
 
 .toolbar-wrap {
@@ -1436,6 +1445,12 @@ img {
 }
 [hidden] {
   display: none !important;
+}
+
+@media (max-width: 1100px) {
+  .home-tool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 700px) {

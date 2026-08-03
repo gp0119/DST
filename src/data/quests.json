@@ -1,0 +1,594 @@
+{
+  "updated": "2026-08-03",
+  "quests": [
+    {
+      "id": "pearl",
+      "arc": "side",
+      "eyebrow": "HERMIT ISLAND",
+      "title": "奶奶岛 · 珍珠好感任务",
+      "summary": "找到隐士小岛，完成 10 点好感并把房屋升满，取得珍珠的珍珠。",
+      "difficulty": "中等",
+      "duration": "至少跨 2–3 个季节",
+      "status": "完整任务线",
+      "goal": "17 个好感目标中完成任意 10 个；三次房屋升级必须全部完成。",
+      "targetCount": 10,
+      "requiredStepIds": ["house-1", "house-2", "house-3"],
+      "prerequisites": [
+        "准备航海科技与可靠的船",
+        "通过瓶中信标记隐士小岛",
+        "部分任务只在下雨、下雪或特定季节出现"
+      ],
+      "inventoryGroups": [
+        {
+          "label": "三次修屋必需",
+          "items": [
+            { "name": "饼干切割机壳", "count": "10" },
+            { "name": "木板", "count": "10" },
+            { "name": "萤火虫", "count": "1" },
+            { "name": "大理石", "count": "10" },
+            { "name": "石砖", "count": "5" },
+            { "name": "荧光果", "count": "3" },
+            { "name": "月岩", "count": "10" },
+            { "name": "绳子", "count": "5" },
+            { "name": "地毯地板", "count": "5" }
+          ]
+        },
+        {
+          "label": "容易凑齐的可选任务",
+          "note": "下面不必全部带齐，任选 7 点即可。",
+          "items": [
+            { "name": "蝴蝶", "count": "10" },
+            { "name": "浆果丛", "count": "8" },
+            { "name": "肥料", "count": "8" },
+            { "name": "可晾晒食物", "count": "6" },
+            { "name": "雨具", "count": "1" },
+            { "name": "保暖上衣", "count": "1" },
+            { "name": "花沙拉", "count": "1" },
+            { "name": "空瓶子", "count": "3+" }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "find-island",
+          "title": "定位隐士小岛",
+          "summary": "航海捞取瓶中信并阅读，地图会标出隐士小岛。白天与珍珠交互；先完成任意一点好感，就能开启瓶罐交易。",
+          "credit": false,
+          "items": [
+            { "name": "船与航海装备" },
+            { "name": "瓶中信", "count": "1" }
+          ],
+          "tip": "用空瓶子换夹夹绞盘蓝图，后面打捞岛边垃圾和天体贡品都要用。"
+        },
+        {
+          "id": "house-1",
+          "title": "修理房屋 · 第一级",
+          "summary": "把第一批材料交给隐士之家，获得 1 点好感。",
+          "items": [
+            { "name": "饼干切割机壳", "count": "10" },
+            { "name": "木板", "count": "10" },
+            { "name": "萤火虫", "count": "1" }
+          ]
+        },
+        {
+          "id": "house-2",
+          "title": "修理房屋 · 第二级",
+          "summary": "完成第一级后继续升级，获得 1 点好感。",
+          "items": [
+            { "name": "大理石", "count": "10" },
+            { "name": "石砖", "count": "5" },
+            { "name": "荧光果", "count": "3" }
+          ]
+        },
+        {
+          "id": "house-3",
+          "title": "修理房屋 · 第三级",
+          "summary": "完成房屋最终升级，获得 1 点好感；这是取得珍珠的必做条件。",
+          "items": [
+            { "name": "月岩", "count": "10" },
+            { "name": "绳子", "count": "5" },
+            { "name": "地毯地板", "count": "5" }
+          ]
+        },
+        {
+          "id": "chair",
+          "title": "制作一把合格的木椅",
+          "summary": "先在岛上放置仿制遗物椅，让珍珠评判并取得锯马蓝图；制作锯马，再原型一把木椅交她评判。",
+          "items": [
+            { "name": "仿制遗物椅" },
+            { "name": "锯马材料" },
+            { "name": "木椅材料" }
+          ],
+          "tip": "仿制遗物椅的知识可从沉睡恐惧处取得。"
+        },
+        {
+          "id": "flowers",
+          "title": "种下 10 朵花",
+          "summary": "在隐士小岛上种满 10 朵花。蝴蝶直接种下会变成花。",
+          "items": [{ "name": "蝴蝶", "count": "10" }]
+        },
+        {
+          "id": "berries",
+          "title": "种植并施肥 8 株浆果丛",
+          "summary": "移植普通或多汁浆果丛，并确保 8 株都已施肥、没有枯萎。",
+          "items": [
+            { "name": "浆果丛", "count": "8" },
+            { "name": "肥料", "count": "8" }
+          ]
+        },
+        {
+          "id": "lureplant",
+          "title": "清理天然食人花",
+          "summary": "春季岛上会自然长出食人花；击杀天然生成的母体。玩家自己种下的不计入。",
+          "items": [{ "name": "武器", "note": "等待春季自然生成" }]
+        },
+        {
+          "id": "salvage",
+          "title": "打捞岛边全部垃圾",
+          "summary": "在岛屿周围用夹夹绞盘捞完所有水下可打捞物，最后一个被捞起时计入好感。",
+          "items": [
+            { "name": "夹夹绞盘" },
+            { "name": "空瓶子", "count": "3", "note": "换取蓝图" }
+          ]
+        },
+        {
+          "id": "drying",
+          "title": "填满 6 个晾肉架",
+          "summary": "同时在岛上的 6 个寄居蟹晾肉架挂上肉、鱼或海带，确保没有空架。",
+          "items": [{ "name": "可晾晒食物", "count": "6" }]
+        },
+        {
+          "id": "rain",
+          "title": "雨天赠送雨具",
+          "summary": "正在下雨时，把花伞、雨伞或眼球伞交给珍珠。",
+          "items": [{ "name": "花伞 / 雨伞 / 眼球伞", "count": "1" }]
+        },
+        {
+          "id": "snow",
+          "title": "下雪时赠送保暖上衣",
+          "summary": "正在下雪时，交给珍珠一件身体栏保暖衣物；帽子不算。",
+          "items": [{ "name": "松软背心等身体栏保暖衣", "count": "1" }]
+        },
+        {
+          "id": "salad",
+          "title": "赠送花沙拉",
+          "summary": "夏季准备花沙拉交给珍珠；重复赠送有 10 天冷却，但好感只记第一次。",
+          "items": [{ "name": "花沙拉", "count": "1" }]
+        },
+        {
+          "id": "heavy-fish",
+          "title": "赠送 5 条重型普通海鱼",
+          "summary": "累计交付 5 条达到该鱼种最大重量 70% 以上的非季节海鱼。",
+          "items": [
+            { "name": "重型非季节海鱼", "count": "5" },
+            { "name": "弹簧秤", "note": "用于确认重量" }
+          ]
+        },
+        {
+          "id": "fallounder",
+          "title": "秋季鱼 · 落叶比目鱼",
+          "summary": "交付一条足够重的落叶比目鱼，同时取得对应鱼饵广告。",
+          "items": [{ "name": "重型落叶比目鱼", "count": "1" }]
+        },
+        {
+          "id": "ice-bream",
+          "title": "冬季鱼 · 冰鲷鱼",
+          "summary": "交付一条足够重的冰鲷鱼，同时取得对应鱼饵广告。",
+          "items": [{ "name": "重型冰鲷鱼", "count": "1" }]
+        },
+        {
+          "id": "bloomfin",
+          "title": "春季鱼 · 花朵金枪鱼",
+          "summary": "交付一条足够重的花朵金枪鱼，同时取得对应鱼饵广告。",
+          "items": [{ "name": "重型花朵金枪鱼", "count": "1" }]
+        },
+        {
+          "id": "sunfish",
+          "title": "夏季鱼 · 炽热太阳鱼",
+          "summary": "交付一条足够重的炽热太阳鱼，同时取得对应鱼饵广告。",
+          "items": [{ "name": "重型炽热太阳鱼", "count": "1" }]
+        }
+      ],
+      "rewards": ["珍珠的珍珠", "夹夹绞盘蓝图", "瓶罐交易栏配方", "鱼饵广告与感谢礼包"],
+      "sources": [
+        { "label": "珍珠任务与当前材料", "url": "https://dontstarve.wiki.gg/wiki/Crabby_Hermit" }
+      ]
+    },
+    {
+      "id": "shadow-main",
+      "arc": "shadow",
+      "eyebrow": "A NEW REIGN",
+      "title": "暗影主线 · 远古织影者",
+      "summary": "收集暗影中庭、远古钥匙和化石，在中庭召唤并击败远古织影者。",
+      "difficulty": "困难",
+      "duration": "约 1–2 个季节",
+      "status": "主线首领",
+      "goal": "击败远古织影者，解锁暗影裂隙的开启条件。",
+      "targetCount": 5,
+      "prerequisites": ["能稳定探索洞穴与远古遗迹", "准备降理智和快速回理智手段", "建议先找到中庭入口"],
+      "inventoryGroups": [
+        {
+          "label": "召唤必需",
+          "items": [
+            { "name": "暗影中庭", "count": "1" },
+            { "name": "远古钥匙", "count": "1" },
+            { "name": "化石碎片", "count": "8" }
+          ]
+        },
+        {
+          "label": "战斗建议",
+          "items": [
+            { "name": "梦魇护符", "count": "1+" },
+            { "name": "瞬间回理智食物", "count": "若干" },
+            { "name": "范围伤害手段", "count": "1套" },
+            { "name": "护甲、武器、照明", "count": "充足" }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "shadow-pieces",
+          "title": "准备三座暗影棋子雕像",
+          "summary": "找到并修复骑士、主教和战车大理石雕像；也可以用陶轮制作对应雕像。等到新月再开始。",
+          "items": [{ "name": "三种可疑大理石或对应雕像", "count": "各 1" }]
+        },
+        {
+          "id": "shadow-atrium",
+          "title": "新月击杀三级暗影棋子",
+          "summary": "新月敲碎三座雕像并安排击杀顺序，让最后一种棋子升到三级；击败它取得暗影中庭。",
+          "items": [
+            { "name": "锤子", "count": "1" },
+            { "name": "暗影中庭", "count": "产物" }
+          ],
+          "tip": "三种棋子都要出现；最后存活的种类会升到三级。"
+        },
+        {
+          "id": "ancient-key",
+          "title": "击败远古守护者",
+          "summary": "深入遗迹迷宫击败远古守护者，从大型华丽箱子取得远古钥匙。",
+          "items": [{ "name": "远古钥匙", "count": "1", "note": "战利品" }]
+        },
+        {
+          "id": "odd-skeleton",
+          "title": "在中庭拼好奇怪的骨架",
+          "summary": "通过大触手或遗迹通道抵达中庭，在远古大门附近用 8 个化石碎片拼出完整、正确形态的奇怪骨架。",
+          "items": [{ "name": "化石碎片", "count": "8" }],
+          "tip": "如果形态不正确，锤掉后重新拼装。"
+        },
+        {
+          "id": "fuelweaver",
+          "title": "启动远古大门并击败织影者",
+          "summary": "将远古钥匙插入远古大门，再把暗影中庭放入完整骨架。战斗中清掉编织暗影，并在低理智时击破无形之手的护盾。",
+          "items": [
+            { "name": "远古钥匙", "count": "1" },
+            { "name": "暗影中庭", "count": "1" }
+          ],
+          "warning": "召唤后会封闭场地；离开或团灭会让首领解体。"
+        }
+      ],
+      "rewards": ["骨头盔甲", "骨头头盔", "暗影香炉", "遗迹重置", "暗影裂隙前置完成"],
+      "sources": [
+        { "label": "远古织影者召唤机制", "url": "https://dontstarve.wiki.gg/wiki/Ancient_Fuelweaver" }
+      ]
+    },
+    {
+      "id": "lunar-main",
+      "arc": "lunar",
+      "eyebrow": "RETURN OF THEM",
+      "title": "月亮主线 · 天体英雄",
+      "summary": "集齐三座天体祭坛、完成月亮风暴实验，在月岛召唤天体英雄。",
+      "difficulty": "很困难",
+      "duration": "通常跨越一年",
+      "status": "主线首领",
+      "goal": "完成月亮虹吸器并击败天体英雄。",
+      "targetCount": 8,
+      "prerequisites": ["完成奶奶岛任务取得珍珠", "能探索遗迹与远古档案馆", "准备长期航海和首领战"],
+      "inventoryGroups": [
+        {
+          "label": "关键任务物品",
+          "items": [
+            { "name": "珍珠的珍珠", "count": "1" },
+            { "name": "彩虹宝石", "count": "1" },
+            { "name": "月岩", "count": "1", "note": "星象探测仪" },
+            { "name": "铥矿", "count": "1", "note": "星象探测仪" },
+            { "name": "普通宝石", "count": "8", "note": "加珍珠共 9 个插槽" },
+            { "name": "夹夹绞盘", "count": "1" }
+          ]
+        },
+        {
+          "label": "月亮虹吸器总材料",
+          "items": [
+            { "name": "受约束静电", "count": "1" },
+            { "name": "废料", "count": "8" },
+            { "name": "月熠", "count": "15" },
+            { "name": "注能月亮碎片", "count": "30" },
+            { "name": "电子元件", "count": "2" },
+            { "name": "天体宝球", "count": "1" }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "pearl-dependency",
+          "title": "完成珍珠任务并准备绞盘",
+          "summary": "奶奶岛达到 10 点好感且完成三次修屋，取得珍珠的珍珠；至少完成 1 点好感后，用空瓶换夹夹绞盘蓝图。",
+          "items": [
+            { "name": "珍珠的珍珠", "count": "1" },
+            { "name": "夹夹绞盘", "count": "1" }
+          ]
+        },
+        {
+          "id": "astral-detector",
+          "title": "启动远古档案馆并制作星象探测仪",
+          "summary": "满月把唤星者魔杖插入月台，守住事件后得到唤月者魔杖；用拆解魔杖拆出彩虹宝石，启动档案馆、解开蓝色蒸馏知识，再制作星象探测仪。",
+          "items": [
+            { "name": "唤星者魔杖", "count": "1" },
+            { "name": "拆解魔杖", "count": "1" },
+            { "name": "彩虹宝石", "count": "1" },
+            { "name": "月岩", "count": "1" },
+            { "name": "铥矿", "count": "1" }
+          ]
+        },
+        {
+          "id": "celestial-altar",
+          "title": "找到天体祭坛三部件",
+          "summary": "在月岛用星象探测仪定位三处诱人的结构，挖出天体祭坛底座、宝珠和神像。",
+          "items": [
+            { "name": "星象探测仪" },
+            { "name": "镐", "count": "1+" }
+          ]
+        },
+        {
+          "id": "celestial-sanctum",
+          "title": "找到天体圣殿两部件",
+          "summary": "回到大陆继续用星象探测仪定位两件埋藏部件，用船运往月岛。",
+          "items": [
+            { "name": "星象探测仪" },
+            { "name": "可靠的大船", "count": "1" }
+          ]
+        },
+        {
+          "id": "celestial-tribute",
+          "title": "珍珠帝王蟹与天体贡品",
+          "summary": "定位帝王蟹，在 9 个插槽中放入珍珠和另外 8 颗宝石后击败它，再用夹夹绞盘捞起海底的天体贡品。",
+          "items": [
+            { "name": "珍珠的珍珠", "count": "1" },
+            { "name": "其他宝石", "count": "8" },
+            { "name": "夹夹绞盘", "count": "1" }
+          ],
+          "tip": "混放不同颜色宝石，避免把单一能力强化得过高。"
+        },
+        {
+          "id": "assemble-altars",
+          "title": "在月岛组装三座祭坛",
+          "summary": "把天体祭坛、天体圣殿和天体贡品分别放在三处裂隙上，组成大致三角形，中央会出现神秘能量并开启月亮风暴。",
+          "items": [{ "name": "三套天体祭坛部件", "count": "各 1 套" }]
+        },
+        {
+          "id": "moonstorm",
+          "title": "协助瓦格斯塔夫并收集风暴材料",
+          "summary": "在月亮风暴找到瓦格斯塔夫，制作天文护目镜，按提示递交工具并守住实验，获得受约束静电；同时捕捉月熠、开采注能月亮碎片。",
+          "items": [
+            { "name": "捕虫网", "count": "若干" },
+            { "name": "镐", "count": "若干" },
+            { "name": "受约束静电", "count": "1" },
+            { "name": "月熠", "count": "15" },
+            { "name": "注能月亮碎片", "count": "30" }
+          ],
+          "warning": "注能月亮碎片会腐坏，建议用捆绑包装保存。"
+        },
+        {
+          "id": "lunar-siphonator",
+          "title": "完成月亮虹吸器并击败天体英雄",
+          "summary": "在神秘能量上建造实验装置，分三阶段投入全部材料。完成后陨石落下并出现天体英雄，连续击败三种形态。",
+          "items": [
+            { "name": "废料", "count": "8" },
+            { "name": "月熠", "count": "15" },
+            { "name": "注能月亮碎片", "count": "30" },
+            { "name": "电子元件", "count": "2" },
+            { "name": "受约束静电", "count": "1" },
+            { "name": "天体宝球", "count": "1" }
+          ]
+        }
+      ],
+      "rewards": ["启迪之冠", "升级后的天体宝球", "月亮裂隙开启资格", "三套天体祭坛部件返还"],
+      "sources": [
+        { "label": "天体英雄召唤流程", "url": "https://dontstarve.wiki.gg/wiki/Guides/Summoning_Celestial_Champion" },
+        { "label": "月亮虹吸器当前材料", "url": "https://dontstarve.wiki.gg/wiki/Lunar_Siphonator" }
+      ]
+    },
+    {
+      "id": "lunar-rift",
+      "arc": "lunar",
+      "eyebrow": "HOSTILE TAKEOVER",
+      "title": "月亮裂隙 · W.A.R.B.O.T.",
+      "summary": "开启月亮裂隙，完成三只变异首领、珍珠搬迁与岛屿扩建，击败天体化身。",
+      "difficulty": "终局",
+      "duration": "至少跨越四季",
+      "status": "月亮线结局",
+      "goal": "击败启迪 W.A.R.B.O.T. 与其内部的天体化身。",
+      "targetCount": 7,
+      "prerequisites": ["已经击败天体英雄", "奶奶岛保持可用", "月亮裂隙会永久改变世界"],
+      "inventoryGroups": [
+        {
+          "label": "推进必需",
+          "items": [
+            { "name": "启迪碎片", "count": "1" },
+            { "name": "地图卷轴", "count": "1" },
+            { "name": "石砖", "count": "19" },
+            { "name": "废料", "count": "19", "note": "76 块基质扩展器" },
+            { "name": "幻象封装器", "count": "6" },
+            { "name": "火花柜", "count": "1", "note": "三变异首领奖励" }
+          ]
+        },
+        {
+          "label": "战斗与探索",
+          "items": [
+            { "name": "位面防御装备", "count": "1套" },
+            { "name": "航海装备", "count": "1套" },
+            { "name": "制图桌", "count": "1" },
+            { "name": "暗影系武器", "count": "推荐" }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "activate-lunar-rift",
+          "title": "把启迪碎片交给瓦格斯塔夫",
+          "summary": "击败天体英雄后，在月亮精华提取器附近找到投影瓦格斯塔夫，展示并交出启迪碎片，确认永久开启月亮裂隙。",
+          "items": [{ "name": "启迪碎片", "count": "1" }],
+          "warning": "开启不可逆：世界会周期生成月亮裂隙、月雹和亮茄威胁。"
+        },
+        {
+          "id": "mutated-bosses",
+          "title": "击败三只月亮变异首领",
+          "summary": "分别击败晶体独眼巨鹿、装甲熊獾和附身座狼。全部首次击败后，瓦格斯塔夫会交付火花柜并前往隐士小岛。",
+          "items": [
+            { "name": "晶体独眼巨鹿", "count": "1" },
+            { "name": "装甲熊獾", "count": "1" },
+            { "name": "附身座狼", "count": "1" }
+          ]
+        },
+        {
+          "id": "relocate-pearl",
+          "title": "探索月亮码头并搬迁珍珠",
+          "summary": "完整探索月亮码头，在制图桌制作包含该岛的地图卷轴，交给瓦格斯塔夫加工；再把“完全无人岛地图”交给珍珠。",
+          "items": [
+            { "name": "地图卷轴", "count": "1" },
+            { "name": "制图桌", "count": "1" }
+          ],
+          "warning": "珍珠及其房屋会搬到月亮码头，隐士小岛随后成为首领场地。"
+        },
+        {
+          "id": "expand-island",
+          "title": "放置 76 块基质扩展器",
+          "summary": "在概念制造器制造基质扩展器，并铺满隐士小岛周围全部标记海格。配方每次产出 4 块，共制作 19 次。",
+          "items": [
+            { "name": "石砖", "count": "19" },
+            { "name": "废料", "count": "19" },
+            { "name": "基质扩展器", "count": "76" }
+          ]
+        },
+        {
+          "id": "capture-gestalts",
+          "title": "封装 6 个月灵",
+          "summary": "扩建完成后解锁幻象封装器。捕捉 6 个目标交给瓦格斯塔夫，其中至少 1 个普通月灵用于生成穴居螨，至少 1 个大月灵或食草兽用于生成鸣禽。",
+          "items": [{ "name": "幻象封装器", "count": "6" }]
+        },
+        {
+          "id": "celestial-revenant",
+          "title": "击败并封装天体亡魂",
+          "summary": "交完第六个封装体后，天体亡魂坠落。击败它并在复活前用瓦格斯塔夫补给的封装器捕获，再交回。",
+          "items": [{ "name": "幻象封装器", "count": "1", "note": "首次由瓦格斯塔夫补给" }]
+        },
+        {
+          "id": "warbot-scion",
+          "title": "击败 W.A.R.B.O.T. 与天体化身",
+          "summary": "启动全权选择器迎战启迪 W.A.R.B.O.T.。机体被击破后天体化身出现；利用遗留的三条机械腿躲避超新星，完成月亮线结局。",
+          "items": [
+            { "name": "位面防御装备", "count": "充足" },
+            { "name": "暗影阵营武器", "count": "推荐" }
+          ]
+        }
+      ],
+      "rewards": ["天体珠宝", "瓦格斯塔夫手套与写字板", "概念制造器四级配方", "可重复建造 W.A.R.B.O.T."],
+      "sources": [
+        { "label": "瓦格斯塔夫任务线", "url": "https://dontstarve.wiki.gg/wiki/Grainy_Transmission" },
+        { "label": "W.A.R.B.O.T. 与天体化身", "url": "https://dontstarve.wiki.gg/wiki/W.A.R.B.O.T." }
+      ]
+    },
+    {
+      "id": "shadow-rift",
+      "arc": "shadow",
+      "eyebrow": "CURSED CONFRONTATION · PART 1",
+      "title": "暗影裂隙 · 圣殿钥石",
+      "summary": "向查理献上恐怖石开启暗影裂隙，深入圣殿完成谜题与守卫战，取得钥石。",
+      "difficulty": "终局",
+      "duration": "数次洞穴远征",
+      "status": "暗影线当前章节",
+      "goal": "取得钥石；截至 2026-08-03，交回钥石只会重置圣殿，后续仍待 Part 2。",
+      "targetCount": 7,
+      "prerequisites": ["已经击败远古织影者", "已经启动远古档案馆", "暗影裂隙会永久改变世界"],
+      "inventoryGroups": [
+        {
+          "label": "推进必需",
+          "items": [
+            { "name": "恐怖石", "count": "5" },
+            { "name": "彩虹宝石", "count": "1", "note": "启动档案馆" },
+            { "name": "绳子", "count": "1", "note": "圣殿裂谷返程" },
+            { "name": "方向标罗盘", "count": "1", "note": "圣殿内取得" },
+            { "name": "安全脉冲", "count": "4" }
+          ]
+        },
+        {
+          "label": "探索建议",
+          "items": [
+            { "name": "火花柜", "count": "可选", "note": "携带安全脉冲" },
+            { "name": "铥矿徽章", "count": "可选", "note": "显示钥石" },
+            { "name": "暗影裂隙装备", "count": "1套" },
+            { "name": "照明与恢复品", "count": "充足" }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "dreadstone",
+          "title": "取得 5 块恐怖石",
+          "summary": "击败梦魇疯猪等来源收集恐怖石。远古织影者首次死亡后，远古大门旁会出现招手暗影。",
+          "items": [{ "name": "恐怖石", "count": "5" }]
+        },
+        {
+          "id": "activate-shadow-rift",
+          "title": "向招手暗影献祭",
+          "summary": "把 5 块恐怖石交给远古大门旁的招手暗影并确认，查理会修复大门，暗影裂隙从此周期出现。",
+          "items": [{ "name": "恐怖石", "count": "5" }],
+          "warning": "开启不可逆：洞穴将周期出现瘴气、酸雨和暗影裂隙生物。"
+        },
+        {
+          "id": "enter-sanctum",
+          "title": "启动档案馆并进入圣殿",
+          "summary": "确认远古档案馆开关已用彩虹宝石启动，从巨型漩涡进入圣殿大厅；在裂谷处使用绳子可建立返回档案馆的路线。",
+          "items": [
+            { "name": "彩虹宝石", "count": "1" },
+            { "name": "绳子", "count": "1" }
+          ]
+        },
+        {
+          "id": "sanctum-puzzles",
+          "title": "穿过圣殿房间与两类谜题",
+          "summary": "利用传送路标探索房间：在追随者谜题中规划不重复落脚路线，在九火焰谜题中同时点亮全部火焰，并通过净化室屏障。",
+          "items": [{ "name": "方向标罗盘", "count": "1", "note": "雕像室或发电机房取得" }],
+          "tip": "多人必须同时站上同一个传送路标才能前往下一房间。"
+        },
+        {
+          "id": "security-pulses",
+          "title": "把 4 个安全脉冲带到钥匙房",
+          "summary": "用方向标罗盘吸引安全脉冲跟随，或用火花柜储存脉冲；把 4 个脉冲分别送入钥匙房中央的脉冲摇篮。",
+          "items": [
+            { "name": "安全脉冲", "count": "4" },
+            { "name": "方向标罗盘 / 火花柜", "count": "1" }
+          ]
+        },
+        {
+          "id": "guard-towers",
+          "title": "击败 4 座远古守卫塔",
+          "summary": "第四个脉冲就位后，四座守卫塔同时苏醒。逐个压制；生命低于一半时它们会短暂瘫痪并承受额外伤害。",
+          "items": [{ "name": "位面武器与护甲", "count": "充足" }]
+        },
+        {
+          "id": "keystone",
+          "title": "从圣物匣取得钥石",
+          "summary": "完成守卫战后从圣物匣拿走钥石。可带到远古大门交给第二只招手暗影，但当前版本确认后只会重置圣殿。",
+          "items": [{ "name": "钥石", "count": "1", "note": "不能带到地表" }],
+          "warning": "重置会清除留在圣殿里的玩家建筑和物品。"
+        }
+      ],
+      "rewards": ["钥石", "守卫塔部件", "圣殿锻造相关战利品", "后续暗影章节前置"],
+      "sources": [
+        { "label": "暗影裂隙开启条件", "url": "https://dontstarve.wiki.gg/wiki/Shadow_Rift" },
+        { "label": "圣殿房间与钥石流程", "url": "https://dontstarve.wiki.gg/wiki/Sanctum" },
+        { "label": "Cursed Confrontation Part 1 官方更新", "url": "https://forums.kleientertainment.com/game-updates/dst/736805-r2749/" }
+      ]
+    }
+  ]
+}

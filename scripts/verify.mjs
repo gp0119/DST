@@ -12,6 +12,7 @@ const dataPath = join(projectRoot, "src/data/cookbook.json");
 const farmingDataPath = join(projectRoot, "src/data/farming.json");
 const farmingExamplesPath = join(projectRoot, "src/data/farming-examples.json");
 const skillDataPath = join(projectRoot, "src/data/skills.json");
+const questDataPath = join(projectRoot, "src/data/quests.json");
 const publicRoot = join(projectRoot, "public");
 const sourceRoot = join(projectRoot, "src");
 const distRoot = join(projectRoot, "dist");
@@ -19,6 +20,7 @@ const data = JSON.parse(await readFile(dataPath, "utf8"));
 const farming = JSON.parse(await readFile(farmingDataPath, "utf8"));
 const farmingExamples = JSON.parse(await readFile(farmingExamplesPath, "utf8"));
 const skillTrees = JSON.parse(await readFile(skillDataPath, "utf8"));
+const quests = JSON.parse(await readFile(questDataPath, "utf8"));
 const packageJson = JSON.parse(await readFile(join(projectRoot, "package.json"), "utf8"));
 const failures = [];
 
@@ -48,6 +50,24 @@ check(farming.seasons.length === 4, "巨大作物页面应包含春夏秋冬 4 �
 check(farming.crops.length === 14, `农作物应为 14 种，实际为 ${farming.crops.length}`);
 check(skillTrees.maxPoints === 15, `角色技能点上限应为 15，实际为 ${skillTrees.maxPoints}`);
 check(skillTrees.characters.length === 12, `技能树角色应为 12 位，实际为 ${skillTrees.characters.length}`);
+check(quests.quests.length === 5, `任务路线应为 5 条，实际为 ${quests.quests.length}`);
+
+const questIds = new Set();
+for (const quest of quests.quests) {
+  check(!questIds.has(quest.id), `任务路线 ID 重复：${quest.id}`);
+  questIds.add(quest.id);
+  const stepIds = new Set(quest.steps.map((step) => step.id));
+  check(stepIds.size === quest.steps.length, `${quest.title}存在重复步骤 ID`);
+  check(quest.targetCount > 0, `${quest.title}缺少有效完成目标`);
+  check(
+    quest.targetCount <= quest.steps.filter((step) => step.credit !== false).length,
+    `${quest.title}的完成目标超过可计数步骤`,
+  );
+  for (const requiredId of quest.requiredStepIds ?? []) {
+    check(stepIds.has(requiredId), `${quest.title}引用了未知必做步骤：${requiredId}`);
+  }
+  check(quest.sources.length > 0, `${quest.title}缺少资料来源`);
+}
 
 const imagePaths = new Set();
 let skillCount = 0;
@@ -560,6 +580,7 @@ await access(join(distRoot, "data.json"));
 await access(join(distRoot, "recipes/index.html"));
 await access(join(distRoot, "farming/index.html"));
 await access(join(distRoot, "skills/index.html"));
+await access(join(distRoot, "quests/index.html"));
 const distFiles = await walk(distRoot);
 const builtCss = await Promise.all(
   distFiles
@@ -577,5 +598,5 @@ if (failures.length) {
 }
 
 console.log(
-  `验证通过：${data.recipes.length} 道料理、${farming.seasons.length} 个季节、${farmingExamples.examples.length} 张示例卡、${seasonalExampleCount} 个季节示例、${completeRatioCount} 组完整配比、${skillTrees.characters.length} 位技能树角色、${skillCount} 项技能、${imagePaths.size} 个本地图片引用。`,
+  `验证通过：${data.recipes.length} 道料理、${farming.seasons.length} 个季节、${farmingExamples.examples.length} 张示例卡、${seasonalExampleCount} 个季节示例、${completeRatioCount} 组完整配比、${skillTrees.characters.length} 位技能树角色、${skillCount} 项技能、${quests.quests.length} 条任务路线、${imagePaths.size} 个本地图片引用。`,
 );
