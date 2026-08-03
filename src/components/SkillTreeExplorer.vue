@@ -641,7 +641,7 @@
         ...path.locks,
         target,
       ]
-      const open = path.locks.every(gateIsOpen)
+      const open = path.locks.every((lock) => gateIsOpen(lock))
       for (let index = 1; index < points.length; index += 1) {
         drawConnection(
           context,
