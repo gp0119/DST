@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import crafting from "../data/crafting.json";
 
 const base = import.meta.env.BASE_URL;
 const tools = [
@@ -12,9 +13,9 @@ const tools = [
     stat: "81 道料理",
     className: "recipes",
     images: [
-      `${base}images/Meaty Stew.webp`,
-      `${base}images/Dragonpie.webp`,
-      `${base}images/Pierogi.webp`,
+      `${base}images/food/Meaty Stew.webp`,
+      `${base}images/food/Dragonpie.webp`,
+      `${base}images/food/Pierogi.webp`,
     ],
   },
   {
@@ -29,6 +30,20 @@ const tools = [
       `${base}images/ingredients/dragonfruit.png`,
       `${base}images/ingredients/pumpkin.png`,
       `${base}images/ingredients/potato.png`,
+    ],
+  },
+  {
+    href: `${base}crafting/`,
+    eyebrow: "Crafting",
+    title: "全部制作",
+    description:
+      "先选制作分类，再查看物品与材料；冒险家物品可继续按人物进入专属列表。",
+    stat: `${crafting.meta.itemCount} 项制作`,
+    className: "crafting",
+    images: [
+      `${base}images/crafting/axe.png`,
+      `${base}images/crafting/torch.png`,
+      `${base}images/crafting/researchlab.png`,
     ],
   },
   {
@@ -64,7 +79,7 @@ const tools = [
 
 <BaseLayout
   title="饥荒联机版生存工具箱"
-  description="汇集料理食谱、巨大作物配比与角色技能树的《饥荒联机版》中文速查工具。"
+  description="汇集料理食谱、全部制作、巨大作物配比、角色技能树与任务路线的《饥荒联机版》中文速查工具。"
 >
   <main id="main" class="home-main">
     <section class="home-tools" aria-labelledby="tools-title">

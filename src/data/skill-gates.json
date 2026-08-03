@@ -1,0 +1,641 @@
+{
+  "wilson": [
+    {
+      "id": "wilson_torch_lock_1",
+      "x": -196,
+      "y": 58,
+      "targets": ["wilson_torch_7"],
+      "minTags": [{ "tag": "torch1", "count": 3 }],
+      "desc": "学习3项火炬技能后解锁。"
+    },
+    {
+      "id": "wilson_beard_lock_1",
+      "x": 84,
+      "y": 58,
+      "targets": ["wilson_beard_7"],
+      "minTags": [{ "tag": "beard1", "count": 3 }],
+      "desc": "学习3项胡须技能后解锁。"
+    },
+    {
+      "id": "wilson_allegiance_lock_1",
+      "x": 206,
+      "y": 176,
+      "targets": ["wilson_allegiance_shadow", "wilson_allegiance_lunar"],
+      "minPoints": 12,
+      "desc": "学习12项技能后解锁。"
+    },
+    {
+      "id": "wilson_allegiance_lock_2",
+      "x": 184,
+      "y": 128,
+      "targets": ["wilson_allegiance_shadow"],
+      "alwaysOpen": true,
+      "desc": "找到并击败远古织影者。"
+    },
+    {
+      "id": "wilson_allegiance_lock_4",
+      "x": 184,
+      "y": 84,
+      "targets": ["wilson_allegiance_shadow"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "没有月亮亲和。"
+    },
+    {
+      "id": "wilson_allegiance_lock_3",
+      "x": 228,
+      "y": 128,
+      "targets": ["wilson_allegiance_lunar"],
+      "alwaysOpen": true,
+      "desc": "找到并击败天体英雄。"
+    },
+    {
+      "id": "wilson_allegiance_lock_5",
+      "x": 228,
+      "y": 84,
+      "targets": ["wilson_allegiance_lunar"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "没有暗影亲和。"
+    }
+  ],
+  "willow": [
+    {
+      "id": "willow_bernie_lock",
+      "x": -45,
+      "y": 84,
+      "targets": ["willow_berniehealth_1"],
+      "minTags": [{ "tag": "bernie4", "count": 4 }],
+      "desc": "学习至少4项伯尼技能后解锁。"
+    },
+    {
+      "id": "willow_bernie_lock_2",
+      "x": 43,
+      "y": 84,
+      "targets": ["willow_burnignbernie"],
+      "minTags": [{ "tag": "bernie8", "count": 8 }],
+      "desc": "学习至少8项伯尼技能后解锁。"
+    },
+    {
+      "id": "willow_allegiance_lock_1",
+      "x": 180,
+      "y": 174,
+      "targets": ["willow_allegiance_shadow_fire", "willow_allegiance_shadow_bernie"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "找到并击败远古织影者，且没有月亮阵营技能。"
+    },
+    {
+      "id": "willow_allegiance_lock_2",
+      "x": 146,
+      "y": 144,
+      "targets": ["willow_allegiance_shadow_bernie"],
+      "minTags": [{ "tag": "bernie", "count": 6 }],
+      "desc": "学习6项伯尼技能后解锁。"
+    },
+    {
+      "id": "willow_allegiance_lock_3",
+      "x": 214,
+      "y": 144,
+      "targets": ["willow_allegiance_shadow_fire"],
+      "minTags": [{ "tag": "lighter", "count": 7 }],
+      "desc": "学习7项打火机技能后解锁。"
+    },
+    {
+      "id": "willow_allegiance_lock_4",
+      "x": 180,
+      "y": 73,
+      "targets": ["willow_allegiance_lunar_fire", "willow_allegiance_lunar_bernie"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "找到并击败天体英雄，且没有暗影阵营技能。"
+    },
+    {
+      "id": "willow_allegiance_lock_5",
+      "x": 214,
+      "y": 43,
+      "targets": ["willow_allegiance_lunar_fire"],
+      "minTags": [{ "tag": "lighter", "count": 7 }],
+      "desc": "学习7项打火机技能后解锁。"
+    },
+    {
+      "id": "willow_allegiance_lock_6",
+      "x": 146,
+      "y": 43,
+      "targets": ["willow_allegiance_lunar_bernie"],
+      "minTags": [{ "tag": "bernie", "count": 6 }],
+      "desc": "学习6项伯尼技能后解锁。"
+    }
+  ],
+  "wolfgang": [
+    {
+      "id": "wolfgang_allegiance_lock_1",
+      "x": 181,
+      "y": 170,
+      "targets": ["wolfgang_allegiance_shadow_1"],
+      "alwaysOpen": true,
+      "desc": "找到并击败远古织影者。"
+    },
+    {
+      "id": "wolfgang_allegiance_lock_3",
+      "x": 181,
+      "y": 132,
+      "targets": ["wolfgang_allegiance_shadow_1"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "没有月亮亲和。"
+    },
+    {
+      "id": "wolfgang_allegiance_lock_2",
+      "x": 219,
+      "y": 170,
+      "targets": ["wolfgang_allegiance_lunar_1"],
+      "alwaysOpen": true,
+      "desc": "找到并击败天体英雄。"
+    },
+    {
+      "id": "wolfgang_allegiance_lock_4",
+      "x": 219,
+      "y": 132,
+      "targets": ["wolfgang_allegiance_lunar_1"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "没有暗影亲和。"
+    }
+  ],
+  "wendy": [
+    {
+      "id": "wendy_shadow_lock_1",
+      "x": -89,
+      "y": 40,
+      "targets": ["wendy_shadow_1"],
+      "alwaysOpen": true,
+      "desc": "找到并击败远古织影者。"
+    },
+    {
+      "id": "wendy_shadow_lock_2",
+      "x": -51,
+      "y": 40,
+      "targets": ["wendy_shadow_1"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "没有月亮亲和。"
+    },
+    {
+      "id": "wendy_lunar_lock_1",
+      "x": -89,
+      "y": 78,
+      "targets": ["wendy_lunar_1"],
+      "alwaysOpen": true,
+      "desc": "找到并击败天体英雄。"
+    },
+    {
+      "id": "wendy_lunar_lock_2",
+      "x": -51,
+      "y": 78,
+      "targets": ["wendy_lunar_1"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "没有暗影亲和。"
+    }
+  ],
+  "wx78": [
+    {
+      "id": "wx78_allegiance_chassis_lock",
+      "x": 174,
+      "y": 223,
+      "targets": ["wx78_allegiance_lunar", "wx78_allegiance_shadow"],
+      "minTags": [{ "tag": "wx78_maxbody", "count": 1 }],
+      "desc": "能够制作备份底盘后解锁。"
+    },
+    {
+      "id": "wx78_allegiance_lunar_lock",
+      "x": 158,
+      "y": 184,
+      "targets": ["wx78_allegiance_lunar"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "找到并击败天体英雄，且没有暗影亲和。"
+    },
+    {
+      "id": "wx78_allegiance_shadow_lock",
+      "x": 184,
+      "y": 184,
+      "targets": ["wx78_allegiance_shadow"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "找到并击败远古织影者，且没有月亮亲和。"
+    }
+  ],
+  "woodie": [
+    {
+      "id": "woodie_curse_master_lock",
+      "x": -205,
+      "y": 58,
+      "targets": ["woodie_curse_master"],
+      "minTags": [{ "tag": "curse", "count": 6 }],
+      "desc": "学习6个诅咒技能后解锁。"
+    },
+    {
+      "id": "woodie_curse_beaver_lock",
+      "x": -140,
+      "y": 58,
+      "sourceId": "woodie_curse_beaver_3",
+      "targets": ["woodie_curse_epic_beaver"],
+      "minTags": [{ "tag": "beaver", "count": 3 }],
+      "excludesTags": ["moose_epic", "goose_epic"],
+      "desc": "精通海狸人分支，且没有精通其他动物形态。"
+    },
+    {
+      "id": "woodie_curse_moose_lock",
+      "x": -95.5,
+      "y": 58,
+      "sourceId": "woodie_curse_moose_3",
+      "targets": ["woodie_curse_epic_moose"],
+      "minTags": [{ "tag": "moose", "count": 3 }],
+      "excludesTags": ["beaver_epic", "goose_epic"],
+      "desc": "精通鹿人分支，且没有精通其他动物形态。"
+    },
+    {
+      "id": "woodie_curse_goose_lock",
+      "x": -52,
+      "y": 58,
+      "sourceId": "woodie_curse_goose_3",
+      "targets": ["woodie_curse_epic_goose"],
+      "minTags": [{ "tag": "goose", "count": 3 }],
+      "excludesTags": ["beaver_epic", "moose_epic"],
+      "desc": "精通鹅人分支，且没有精通其他动物形态。"
+    },
+    {
+      "id": "woodie_allegiance_lock_1",
+      "x": 202,
+      "y": 172,
+      "targets": ["woodie_allegiance_shadow", "woodie_allegiance_lunar"],
+      "minPoints": 12,
+      "desc": "学习12项技能后解锁。"
+    },
+    {
+      "id": "woodie_allegiance_lock_2",
+      "x": 179,
+      "y": 128,
+      "targets": ["woodie_allegiance_shadow"],
+      "alwaysOpen": true,
+      "desc": "找到并击败远古织影者。"
+    },
+    {
+      "id": "woodie_allegiance_lock_4",
+      "x": 179,
+      "y": 84,
+      "targets": ["woodie_allegiance_shadow"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "没有月亮亲和。"
+    },
+    {
+      "id": "woodie_allegiance_lock_3",
+      "x": 226,
+      "y": 128,
+      "targets": ["woodie_allegiance_lunar"],
+      "alwaysOpen": true,
+      "desc": "找到并击败天体英雄。"
+    },
+    {
+      "id": "woodie_allegiance_lock_5",
+      "x": 226,
+      "y": 84,
+      "targets": ["woodie_allegiance_lunar"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "没有暗影亲和。"
+    }
+  ],
+  "wormwood": [
+    {
+      "id": "wormwood_allegiance_lock_lunar_1",
+      "x": -201,
+      "y": 130,
+      "targets": ["wormwood_allegiance_lunar_mutations_1"],
+      "alwaysOpen": true,
+      "desc": "找到并击败天体英雄。"
+    },
+    {
+      "id": "wormwood_allegiance_count_lock_1",
+      "x": -201,
+      "y": 160,
+      "targets": ["wormwood_allegiance_lunar_mutations_1"],
+      "minTags": [{ "tag": "crafting", "count": 5 }],
+      "desc": "学习5项左分支技能后解锁。"
+    },
+    {
+      "id": "wormwood_allegiance_lock_lunar_2",
+      "x": 224.5,
+      "y": 131,
+      "targets": ["wormwood_allegiance_lunar_plant_gear_1"],
+      "alwaysOpen": true,
+      "desc": "找到并击败天体英雄。"
+    },
+    {
+      "id": "wormwood_allegiance_count_lock_2",
+      "x": 224.5,
+      "y": 164,
+      "targets": ["wormwood_allegiance_lunar_plant_gear_1"],
+      "minTags": [{ "tag": "blooming", "count": 5 }],
+      "desc": "学习5项右分支技能后解锁。"
+    }
+  ],
+  "wigfrid": [
+    {
+      "id": "wathgrithr_songs_instantsong_cd_lock",
+      "x": -218,
+      "y": 180,
+      "targets": ["wathgrithr_songs_instantsong_cd"],
+      "alwaysOpen": true,
+      "desc": "施展10次战吼后解锁。"
+    },
+    {
+      "id": "wathgrithr_songs_container_lock",
+      "x": -218,
+      "y": 142,
+      "targets": ["wathgrithr_songs_container"],
+      "alwaysOpen": true,
+      "desc": "拥有6首不同的战斗号子后解锁。"
+    },
+    {
+      "id": "wathgrithr_songs_revivewarrior_lock",
+      "x": -218,
+      "y": 104,
+      "targets": ["wathgrithr_songs_revivewarrior"],
+      "alwaysOpen": true,
+      "desc": "演奏皮弗娄牛角后解锁。"
+    },
+    {
+      "id": "wathgrithr_allegiance_lock_1",
+      "x": 202,
+      "y": 180,
+      "targets": ["wathgrithr_allegiance_shadow", "wathgrithr_allegiance_lunar"],
+      "minPoints": 12,
+      "desc": "学习12项技能后解锁。"
+    },
+    {
+      "id": "wathgrithr_allegiance_shadow_lock_1",
+      "x": 178,
+      "y": 141,
+      "targets": ["wathgrithr_allegiance_shadow"],
+      "alwaysOpen": true,
+      "desc": "找到并击败远古织影者。"
+    },
+    {
+      "id": "wathgrithr_allegiance_shadow_lock_2",
+      "x": 178,
+      "y": 96,
+      "targets": ["wathgrithr_allegiance_shadow"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "没有月亮亲和。"
+    },
+    {
+      "id": "wathgrithr_allegiance_lunar_lock_1",
+      "x": 225,
+      "y": 141,
+      "targets": ["wathgrithr_allegiance_lunar"],
+      "alwaysOpen": true,
+      "desc": "找到并击败天体英雄。"
+    },
+    {
+      "id": "wathgrithr_allegiance_lunar_lock_2",
+      "x": 225,
+      "y": 96,
+      "targets": ["wathgrithr_allegiance_lunar"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "没有暗影亲和。"
+    }
+  ],
+  "winona": [
+    {
+      "id": "winona_lowshelf_lock",
+      "x": -220,
+      "y": 35,
+      "targets": [
+        "winona_catapult_speed_1",
+        "winona_catapult_aoe_1",
+        "winona_battery_efficiency_1",
+        "winona_catapult_volley_1",
+        "winona_catapult_boost_1"
+      ],
+      "minTags": [{ "tag": "lowshelf", "count": 3 }],
+      "desc": "学习3项底层技能后解锁。"
+    },
+    {
+      "id": "winona_portable_structures_lock",
+      "x": 0,
+      "y": 85,
+      "targets": ["winona_catapult_volley_1", "winona_catapult_boost_1", "winona_shadow_3", "winona_lunar_3"],
+      "minTags": [{ "tag": "lowshelf", "count": 3 }],
+      "requiredSkills": ["winona_portable_structures"],
+      "desc": "学习便携移动技能并打开中层架子后解锁。"
+    },
+    {
+      "id": "winona_midshelf_lock",
+      "x": -220,
+      "y": 135,
+      "targets": ["winona_shadow_1", "winona_charlie_1", "winona_lunar_1", "winona_wagstaff_1"],
+      "minTagSum": { "tags": ["lowshelf", "midshelf"], "count": 6 },
+      "desc": "学习6项底层或中层技能后解锁。"
+    },
+    {
+      "id": "winona_shadow_3_lock",
+      "x": -60,
+      "y": 165,
+      "targets": ["winona_shadow_3"],
+      "requiredSkills": ["winona_portable_structures", "winona_shadow_2"],
+      "desc": "需要便携移动和二级纯粹恐惧发电机。"
+    },
+    {
+      "id": "winona_charlie_2_lock",
+      "x": -210,
+      "y": 165,
+      "targets": ["winona_charlie_2"],
+      "requiredSkills": ["winona_charlie_1"],
+      "excludesSkills": ["winona_wagstaff_2"],
+      "desc": "需要一级寻觅暗影，且没有二级创始人宝物猎人。"
+    },
+    {
+      "id": "winona_lunar_3_lock",
+      "x": 60,
+      "y": 165,
+      "targets": ["winona_lunar_3"],
+      "requiredSkills": ["winona_portable_structures", "winona_lunar_2"],
+      "desc": "需要便携移动和二级辉煌宝石发电机。"
+    },
+    {
+      "id": "winona_wagstaff_2_lock",
+      "x": 210,
+      "y": 165,
+      "targets": ["winona_wagstaff_2"],
+      "requiredSkills": ["winona_wagstaff_1"],
+      "excludesSkills": ["winona_charlie_2"],
+      "desc": "需要一级创始人宝物猎人，且没有二级寻觅暗影。"
+    }
+  ],
+  "wurt": [
+    {
+      "id": "wurt_allegiance_lock_1",
+      "x": 203.5,
+      "y": 172,
+      "targets": ["wurt_shadow_allegiance_1", "wurt_lunar_allegiance_1"],
+      "minPoints": 12,
+      "desc": "学习12项技能后解锁。"
+    },
+    {
+      "id": "wurt_allegiance_lock_2",
+      "x": 222.5,
+      "y": 134,
+      "targets": ["wurt_shadow_allegiance_1"],
+      "alwaysOpen": true,
+      "desc": "找到并击败远古织影者。"
+    },
+    {
+      "id": "wurt_allegiance_lock_4",
+      "x": 222.5,
+      "y": 96,
+      "targets": ["wurt_shadow_allegiance_1"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "没有月亮亲和。"
+    },
+    {
+      "id": "wurt_allegiance_lock_3",
+      "x": 184.5,
+      "y": 134,
+      "targets": ["wurt_lunar_allegiance_1"],
+      "alwaysOpen": true,
+      "desc": "找到并击败天体英雄。"
+    },
+    {
+      "id": "wurt_allegiance_lock_5",
+      "x": 184.5,
+      "y": 96,
+      "targets": ["wurt_lunar_allegiance_1"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "没有暗影亲和。"
+    }
+  ],
+  "walter": [
+    {
+      "id": "walter_ammo_lock",
+      "x": -181.5,
+      "y": 53,
+      "targets": ["walter_ammo_efficiency", "walter_ammo_bag"],
+      "minTags": [{ "tag": "slingshotammo_crafting", "count": 2 }],
+      "desc": "学习2项弹药技能后解锁。"
+    },
+    {
+      "id": "walter_ammo_shadow_lock",
+      "x": -209.05,
+      "y": 132.5,
+      "targets": ["walter_ammo_shadow"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "找到并击败远古织影者，且没有月亮阵营技能。"
+    },
+    {
+      "id": "walter_ammo_lunar_lock",
+      "x": -150.15,
+      "y": 132.5,
+      "targets": ["walter_ammo_lunar"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "找到并击败天体英雄，且没有暗影阵营技能。"
+    },
+    {
+      "id": "walter_woby_lock",
+      "x": 197.85,
+      "y": 176.5,
+      "targets": ["walter_woby_sprint", "walter_woby_shadow", "walter_woby_lunar"],
+      "minTags": [{ "tag": "woby_basics", "count": 2 }],
+      "desc": "学习2项沃比技能后解锁。"
+    },
+    {
+      "id": "walter_woby_shadow_lock",
+      "x": 176,
+      "y": 54.5,
+      "targets": ["walter_woby_shadow"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "找到并击败远古织影者，且没有月亮阵营技能。"
+    },
+    {
+      "id": "walter_woby_lunar_lock",
+      "x": 220.7925,
+      "y": 54.5,
+      "targets": ["walter_woby_lunar"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "找到并击败天体英雄，且没有暗影阵营技能。"
+    },
+    {
+      "id": "walter_camp_lock",
+      "x": 52.6722222222,
+      "y": 52.5,
+      "targets": ["walter_camp_wobycourier"],
+      "minTags": [{ "tag": "camping", "count": 3 }],
+      "desc": "学习3项童子军技能后解锁。"
+    }
+  ],
+  "wortox": [
+    {
+      "id": "wortox_lifebringer_lock",
+      "x": -215,
+      "y": 106,
+      "sourceId": "wortox_lifebringer_2",
+      "targets": ["wortox_lifebringer_3"],
+      "requiredSkills": ["wortox_lifebringer_2"],
+      "minTags": [{ "tag": "nice1", "count": 5 }],
+      "desc": "需要下方技能和5个友善技能。"
+    },
+    {
+      "id": "wortox_soulprotector_lock",
+      "x": -167,
+      "y": 95,
+      "sourceId": "wortox_soulprotector_2",
+      "targets": ["wortox_soulprotector_3"],
+      "requiredSkills": ["wortox_soulprotector_2"],
+      "minTags": [{ "tag": "nice1", "count": 5 }],
+      "desc": "需要下方技能和5个友善技能。"
+    },
+    {
+      "id": "wortox_thief_lock",
+      "x": 174,
+      "y": 95,
+      "sourceId": "wortox_thief_2",
+      "targets": ["wortox_thief_3"],
+      "requiredSkills": ["wortox_thief_2"],
+      "minTags": [{ "tag": "naughty1", "count": 5 }],
+      "desc": "需要下方技能和5个淘气技能。"
+    },
+    {
+      "id": "wortox_souldecoy_lock",
+      "x": 222,
+      "y": 106,
+      "sourceId": "wortox_souldecoy_2",
+      "targets": ["wortox_souldecoy_3"],
+      "requiredSkills": ["wortox_souldecoy_2"],
+      "minTags": [{ "tag": "naughty1", "count": 5 }],
+      "desc": "需要下方技能和5个淘气技能。"
+    },
+    {
+      "id": "wortox_allegiance_lunar_lock_1",
+      "x": -16,
+      "y": 61.9,
+      "targets": ["wortox_allegiance_lunar"],
+      "alwaysOpen": true,
+      "desc": "找到并击败天体英雄。"
+    },
+    {
+      "id": "wortox_allegiance_lunar_lock_2",
+      "x": -16,
+      "y": 95.9,
+      "targets": ["wortox_allegiance_lunar"],
+      "excludesTags": ["shadow_favor"],
+      "desc": "没有暗影亲和。"
+    },
+    {
+      "id": "wortox_allegiance_shadow_lock_1",
+      "x": 24,
+      "y": 61.9,
+      "targets": ["wortox_allegiance_shadow"],
+      "alwaysOpen": true,
+      "desc": "找到并击败远古织影者。"
+    },
+    {
+      "id": "wortox_allegiance_shadow_lock_2",
+      "x": 24,
+      "y": 95.9,
+      "targets": ["wortox_allegiance_shadow"],
+      "excludesTags": ["lunar_favor"],
+      "desc": "没有月亮亲和。"
+    }
+  ]
+}

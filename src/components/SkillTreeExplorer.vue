@@ -1,5 +1,6 @@
 <script setup>
   import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+  import skillGateLocks from '../data/skill-gates.json'
   import { assetUrl } from '../lib/assets.js'
 
   const props = defineProps({
@@ -124,6 +125,7 @@
   const POSITION_SCALE_Y = 2.15
   const NODE_RADIUS = 23
   const NODE_SIZE = 56
+  const GATE_LOCK_SIZE = 36
 
   const skillTreeImagePaths = {
     locked: 'images/skill-tree/locked.png',
@@ -134,6 +136,8 @@
     selectedHover: 'images/skill-tree/selected-hover.png',
     unselected: 'images/skill-tree/unselected.png',
     unselectedHover: 'images/skill-tree/unselected-hover.png',
+    unlocked: 'images/skill-tree/unlocked.png',
+    unlockedHover: 'images/skill-tree/unlocked-hover.png',
   }
 
   const canvas = ref(null)
@@ -185,6 +189,33 @@
       wy: (topY - skill.y) * POSITION_SCALE_Y,
     }))
     const nodeById = Object.fromEntries(nodes.map((node) => [node.id, node]))
+    const gateLocks = (skillGateLocks[activeCharacter.value.slug] ?? []).map((lock) => ({
+      ...lock,
+      wx: lock.x * POSITION_SCALE_X,
+      wy: (topY - lock.y) * POSITION_SCALE_Y,
+    }))
+    const targetLocks = new Map()
+
+    for (const lock of gateLocks) {
+      for (const targetId of lock.targets) {
+        if (!nodeById[targetId]) continue
+        if (!targetLocks.has(targetId)) targetLocks.set(targetId, [])
+        targetLocks.get(targetId).push(lock)
+      }
+    }
+
+    const gatePaths = [...targetLocks.entries()].map(([targetId, locks]) => {
+      const target = nodeById[targetId]
+      return {
+        targetId,
+        sourceId: locks.find((lock) => lock.sourceId)?.sourceId,
+        locks: [...locks].sort((left, right) => (
+          Math.hypot(right.wx - target.wx, right.wy - target.wy)
+          - Math.hypot(left.wx - target.wx, left.wy - target.wy)
+        )),
+      }
+    })
+    const layoutPoints = [...nodes, ...gateLocks]
     const groupMap = new Map()
     const titleOverrides = groupTitleOverrides[activeCharacter.value.slug] ?? {}
 
@@ -209,11 +240,13 @@
       nodes,
       nodeById,
       groups,
+      gateLocks,
+      gatePaths,
       bounds: {
-        minX: Math.min(...nodes.map((node) => node.wx)) - 58,
-        maxX: Math.max(...nodes.map((node) => node.wx)) + 58,
-        minY: Math.min(...nodes.map((node) => node.wy)) - 78,
-        maxY: Math.max(...nodes.map((node) => node.wy)) + 72,
+        minX: Math.min(...layoutPoints.map((point) => point.wx)) - 58,
+        maxX: Math.max(...layoutPoints.map((point) => point.wx)) + 58,
+        minY: Math.min(...layoutPoints.map((point) => point.wy)) - 78,
+        maxY: Math.max(...layoutPoints.map((point) => point.wy)) + 72,
       },
     }
   })
@@ -267,7 +300,8 @@
   function countTag(tag, ids) {
     let count = 0
     for (const id of ids) {
-      if (skillsById.value[id]?.tags.includes(tag)) count += 1
+      const skill = skillsById.value[id]
+      if (skill?.tags.includes(tag) || skill?.group === tag) count += 1
     }
     return count
   }
@@ -306,6 +340,8 @@
         return tag === 'lunar_favor' ? '不能与月亮阵营技能同时选择' : '不能与暗影阵营技能同时选择'
       }
     }
+    const closedGate = gateLocksForTarget(skill.id).find((lock) => !gateIsOpen(lock, comparisonIds))
+    if (closedGate) return closedGate.desc ?? '需要先解锁技能门槛'
     return ''
   }
 
@@ -488,12 +524,48 @@
     return focused ? skillTreeImagePaths.unselectedHover : skillTreeImagePaths.unselected
   }
 
+  function gateLocksForTarget(targetId) {
+    return (skillGateLocks[activeCharacter.value.slug] ?? []).filter((lock) => lock.targets.includes(targetId))
+  }
+
+  function gateIsOpen(lock, ids = selectedIds.value) {
+    if (lock.alwaysOpen) return true
+    if (lock.minPoints && ids.size < lock.minPoints) return false
+    for (const rule of lock.minTags ?? []) {
+      if (countTag(rule.tag, ids) < rule.count) return false
+    }
+    if (lock.minTagSum) {
+      const count = lock.minTagSum.tags.reduce((total, tag) => total + countTag(tag, ids), 0)
+      if (count < lock.minTagSum.count) return false
+    }
+    for (const id of lock.requiredSkills ?? []) {
+      if (!ids.has(id)) return false
+    }
+    for (const id of lock.excludesSkills ?? []) {
+      if (ids.has(id)) return false
+    }
+    for (const tag of lock.excludesTags ?? []) {
+      if (countTag(tag, ids)) return false
+    }
+    return true
+  }
+
+  function drawConnection(context, from, to, selected, available, scale) {
+    context.beginPath()
+    context.moveTo(from.wx, from.wy)
+    context.lineTo(to.wx, to.wy)
+    context.lineWidth = (selected ? 4 : 3) / scale
+    context.strokeStyle = selected ? '#f0ce78' : available ? 'rgba(228, 215, 180, 0.78)' : 'rgba(117, 115, 99, 0.42)'
+    context.stroke()
+  }
+
   function drawTree() {
     const element = canvas.value
     if (!element || !viewport.width || !viewport.height) return
     const context = element.getContext('2d')
     const { width, height, dpr, x, y, scale } = viewport
-    const { nodes, nodeById, groups } = treeLayout.value
+    const { nodes, nodeById, groups, gateLocks, gatePaths } = treeLayout.value
+    const gatedTargets = new Set(gatePaths.map((path) => path.targetId))
 
     context.setTransform(dpr, 0, 0, dpr, 0, 0)
     context.clearRect(0, 0, width, height)
@@ -552,16 +624,33 @@
       for (const parentId of nodeLinkIds(node)) {
         const parent = nodeById[parentId]
         if (!parent) continue
+        const gatePath = gatePaths.find((path) => path.targetId === node.id && path.sourceId === parentId)
+        if (gatePath) continue
         const bothSelected = selectedIds.value.has(node.id) && selectedIds.value.has(parent.id)
         const available = canSelect(node)
 
-        context.beginPath()
-        context.moveTo(parent.wx, parent.wy)
-        context.lineTo(node.wx, node.wy)
-        context.lineWidth = (bothSelected ? 4 : 3) / scale
-        context.strokeStyle = bothSelected ? '#f0ce78' : available ? 'rgba(228, 215, 180, 0.78)' : 'rgba(117, 115, 99, 0.42)'
-        context.setLineDash([])
-        context.stroke()
+        drawConnection(context, parent, node, bothSelected, available, scale)
+      }
+    }
+
+    for (const path of gatePaths) {
+      const target = nodeById[path.targetId]
+      if (!target) continue
+      const points = [
+        ...(path.sourceId && nodeById[path.sourceId] ? [nodeById[path.sourceId]] : []),
+        ...path.locks,
+        target,
+      ]
+      const open = path.locks.every(gateIsOpen)
+      for (let index = 1; index < points.length; index += 1) {
+        drawConnection(
+          context,
+          points[index - 1],
+          points[index],
+          open && selectedIds.value.has(target.id),
+          open,
+          scale,
+        )
       }
     }
 
@@ -602,13 +691,25 @@
         context.fillText(nodeGlyph(node.title), node.wx, node.wy + 0.5)
       }
 
-      if (!available && !selected) {
+      if (!available && !selected && !gatedTargets.has(node.id)) {
         const lockImage = cachedImage(focused ? skillTreeImagePaths.lockedHover : skillTreeImagePaths.locked)
         if (lockImage) context.drawImage(lockImage, node.wx + 8, node.wy - 29, 23, 23)
       }
 
       drawNodeLabel(context, node, focused ? '#f2dfb7' : selected ? '#dbc28d' : available ? '#b7b39f' : '#6c6c61')
       context.restore()
+    }
+
+    for (const lock of gateLocks) {
+      const lockImage = cachedImage(gateIsOpen(lock) ? skillTreeImagePaths.unlocked : skillTreeImagePaths.locked)
+      if (!lockImage) continue
+      context.drawImage(
+        lockImage,
+        lock.wx - GATE_LOCK_SIZE / 2,
+        lock.wy - GATE_LOCK_SIZE / 2,
+        GATE_LOCK_SIZE,
+        GATE_LOCK_SIZE,
+      )
     }
 
     context.restore()

@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { craftingCharacters } from "../../../lib/crafting.js";
+
+const base = import.meta.env.BASE_URL;
+const itemCount = craftingCharacters.reduce((total, character) => total + character.count, 0);
+const description = `《饥荒联机版》${craftingCharacters.length} 位冒险家的 ${itemCount} 项专属制作配方。`;
+---
+
+<BaseLayout title="冒险家专属制作 · 饥荒联机版" description={description}>
+  <main id="main" class="container crafting-main">
+    <nav class="crafting-breadcrumb" aria-label="面包屑">
+      <a href={`${base}crafting/`}>全部制作</a>
+      <span aria-hidden="true">/</span>
+      <strong>冒险家物品</strong>
+    </nav>
+
+    <header class="crafting-hero crafting-detail-hero">
+      <div>
+        <p>CHARACTER CRAFTING</p>
+        <h1>冒险家物品</h1>
+        <span>选择冒险家，查看该人物的专属制作、技能树解锁物品与材料需求。</span>
+      </div>
+      <aside aria-label="人物制作摘要">
+        <strong>{craftingCharacters.length}</strong>
+        <span>位冒险家</span>
+        <small>{itemCount} 项人物专属制作</small>
+      </aside>
+    </header>
+
+    <section class="crafting-directory" aria-labelledby="crafting-characters-title">
+      <header>
+        <p>STEP 2</p>
+        <h2 id="crafting-characters-title">选择人物</h2>
+        <span>只显示拥有专属制作配方的人物。</span>
+      </header>
+      <div class="crafting-character-grid">
+        {
+          craftingCharacters.map((character) => (
+            <a
+              class="crafting-character-card"
+              href={`${base}crafting/character/${character.id}/`}
+            >
+              <img src={`${base}${character.image}`} alt={character.name} loading="lazy" />
+              <div>
+                <span>冒险家</span>
+                <h2>{character.name}</h2>
+                <p>{character.count} 项专属制作</p>
+              </div>
+              <b aria-hidden="true">→</b>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</BaseLayout>

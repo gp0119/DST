@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import CraftingExplorer from "../../../components/CraftingExplorer.vue";
+import {
+  craftingCharacters,
+  getCharacterItems,
+  makeScopedCraftingData,
+} from "../../../lib/crafting.js";
+
+export function getStaticPaths() {
+  return craftingCharacters.map((character) => ({
+    params: { character: character.id },
+    props: { character },
+  }));
+}
+
+const { character } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const items = getCharacterItems(character.id);
+const pageData = makeScopedCraftingData(items);
+const description = `《饥荒联机版》${character.name}的 ${items.length} 项专属制作配方、材料与解锁条件。`;
+---
+
+<BaseLayout title={`${character.name}专属制作 · 饥荒联机版`} description={description}>
+  <main id="main" class="container crafting-main">
+    <nav class="crafting-breadcrumb" aria-label="面包屑">
+      <a href={`${base}crafting/`}>全部制作</a>
+      <span aria-hidden="true">/</span>
+      <a href={`${base}crafting/character/`}>冒险家物品</a>
+      <span aria-hidden="true">/</span>
+      <strong>{character.name}</strong>
+    </nav>
+
+    <header class="crafting-hero crafting-detail-hero">
+      <div class="crafting-character-heading">
+        <img src={`${base}${character.image}`} alt="" aria-hidden="true" />
+        <div>
+          <p>CHARACTER CRAFTING</p>
+          <h1>{character.name}</h1>
+          <span>专属制作、技能树解锁物品与对应材料需求。</span>
+        </div>
+      </div>
+      <aside aria-label="人物摘要">
+        <strong>{items.length}</strong>
+        <span>项专属制作</span>
+        <small><a href={`${base}crafting/character/`}>更换人物</a></small>
+      </aside>
+    </header>
+
+    <CraftingExplorer client:load data={pageData} />
+  </main>
+</BaseLayout>

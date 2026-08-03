@@ -6,6 +6,7 @@ import {
   buildExampleFormations,
   formatReducedRatio,
 } from "../src/lib/farmingLayouts.js";
+import { questItemImages } from "../src/lib/questItemImages.js";
 
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const dataPath = join(projectRoot, "src/data/cookbook.json");
@@ -13,6 +14,7 @@ const farmingDataPath = join(projectRoot, "src/data/farming.json");
 const farmingExamplesPath = join(projectRoot, "src/data/farming-examples.json");
 const skillDataPath = join(projectRoot, "src/data/skills.json");
 const questDataPath = join(projectRoot, "src/data/quests.json");
+const craftingDataPath = join(projectRoot, "src/data/crafting.json");
 const publicRoot = join(projectRoot, "public");
 const sourceRoot = join(projectRoot, "src");
 const distRoot = join(projectRoot, "dist");
@@ -21,6 +23,7 @@ const farming = JSON.parse(await readFile(farmingDataPath, "utf8"));
 const farmingExamples = JSON.parse(await readFile(farmingExamplesPath, "utf8"));
 const skillTrees = JSON.parse(await readFile(skillDataPath, "utf8"));
 const quests = JSON.parse(await readFile(questDataPath, "utf8"));
+const crafting = JSON.parse(await readFile(craftingDataPath, "utf8"));
 const packageJson = JSON.parse(await readFile(join(projectRoot, "package.json"), "utf8"));
 const failures = [];
 
@@ -51,6 +54,12 @@ check(farming.crops.length === 14, `农作物应为 14 种，实际为 ${farming
 check(skillTrees.maxPoints === 15, `角色技能点上限应为 15，实际为 ${skillTrees.maxPoints}`);
 check(skillTrees.characters.length === 12, `技能树角色应为 12 位，实际为 ${skillTrees.characters.length}`);
 check(quests.quests.length === 5, `任务路线应为 5 条，实际为 ${quests.quests.length}`);
+check(
+  crafting.items.length === crafting.meta.itemCount,
+  `制作数据条数与摘要不一致：${crafting.items.length} / ${crafting.meta.itemCount}`,
+);
+check(crafting.items.length >= 950, `制作数据疑似不完整，实际仅 ${crafting.items.length} 项`);
+check(crafting.categories.length >= 25, `制作分类疑似不完整，实际仅 ${crafting.categories.length} 项`);
 
 const questIds = new Set();
 for (const quest of quests.quests) {
@@ -67,9 +76,47 @@ for (const quest of quests.quests) {
     check(stepIds.has(requiredId), `${quest.title}引用了未知必做步骤：${requiredId}`);
   }
   check(quest.sources.length > 0, `${quest.title}缺少资料来源`);
+  for (const item of quest.inventoryGroups.flatMap((group) => group.items)) {
+    check(Boolean(questItemImages[item.name]), `${quest.title}的${item.name}缺少物品图片`);
+  }
 }
 
 const imagePaths = new Set();
+Object.values(questItemImages).forEach((path) => imagePaths.add(path));
+const craftingItemIds = new Set();
+const craftingCategoryIds = new Set(crafting.categories.map((category) => category.id));
+const craftingStationIds = new Set(crafting.stations.map((station) => station.id));
+const craftingCharacterIds = new Set(crafting.characters.map((character) => character.id));
+const craftingCategoryCounts = new Map();
+const craftingCharacterCounts = new Map();
+for (const item of crafting.items) {
+  check(!craftingItemIds.has(item.id), `制作物 ID 重复：${item.id}`);
+  craftingItemIds.add(item.id);
+  imagePaths.add(item.image);
+  item.materials.forEach((material) => imagePaths.add(material.image));
+  item.categoryIds.forEach((categoryId) => {
+    check(craftingCategoryIds.has(categoryId), `${item.name}引用了未知制作分类：${categoryId}`);
+    craftingCategoryCounts.set(categoryId, (craftingCategoryCounts.get(categoryId) ?? 0) + 1);
+  });
+  check(craftingStationIds.has(item.stationId), `${item.name}引用了未知制作站：${item.stationId}`);
+  check(
+    !item.characterId || craftingCharacterIds.has(item.characterId),
+    `${item.name}引用了未知角色：${item.characterId}`,
+  );
+  if (item.characterId) {
+    check(item.categoryIds.includes("character"), `${item.name}未归入冒险家物品分类`);
+    craftingCharacterCounts.set(
+      item.characterId,
+      (craftingCharacterCounts.get(item.characterId) ?? 0) + 1,
+    );
+  }
+}
+for (const category of crafting.categories) {
+  if ((craftingCategoryCounts.get(category.id) ?? 0) > 0) {
+    check(Boolean(category.image), `${category.name}缺少游戏原版分类图标`);
+    imagePaths.add(category.image);
+  }
+}
 let skillCount = 0;
 for (const character of skillTrees.characters) {
   const skillIds = new Set(character.skills.map((skill) => skill.id));
@@ -578,6 +625,17 @@ check(
 await access(join(distRoot, "index.html"));
 await access(join(distRoot, "data.json"));
 await access(join(distRoot, "recipes/index.html"));
+await access(join(distRoot, "crafting/index.html"));
+for (const category of crafting.categories) {
+  if ((craftingCategoryCounts.get(category.id) ?? 0) > 0) {
+    await access(join(distRoot, `crafting/${category.id}/index.html`));
+  }
+}
+for (const character of crafting.characters) {
+  if ((craftingCharacterCounts.get(character.id) ?? 0) > 0) {
+    await access(join(distRoot, `crafting/character/${character.id}/index.html`));
+  }
+}
 await access(join(distRoot, "farming/index.html"));
 await access(join(distRoot, "skills/index.html"));
 await access(join(distRoot, "quests/index.html"));
@@ -598,5 +656,5 @@ if (failures.length) {
 }
 
 console.log(
-  `验证通过：${data.recipes.length} 道料理、${farming.seasons.length} 个季节、${farmingExamples.examples.length} 张示例卡、${seasonalExampleCount} 个季节示例、${completeRatioCount} 组完整配比、${skillTrees.characters.length} 位技能树角色、${skillCount} 项技能、${quests.quests.length} 条任务路线、${imagePaths.size} 个本地图片引用。`,
+  `验证通过：${data.recipes.length} 道料理、${crafting.items.length} 项制作、${farming.seasons.length} 个季节、${farmingExamples.examples.length} 张示例卡、${seasonalExampleCount} 个季节示例、${completeRatioCount} 组完整配比、${skillTrees.characters.length} 位技能树角色、${skillCount} 项技能、${quests.quests.length} 条任务路线、${imagePaths.size} 个本地图片引用。`,
 );

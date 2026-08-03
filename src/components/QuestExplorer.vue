@@ -1,5 +1,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
+import { assetUrl } from "../lib/assets.js";
+import { questItemImages } from "../lib/questItemImages.js";
 
 const props = defineProps({
   quests: {
@@ -69,6 +71,10 @@ function stepNumber(quest, step) {
   if (step.credit === false) return "准备";
   const index = creditedSteps(quest).findIndex((candidate) => candidate.id === step.id);
   return String(index + 1).padStart(2, "0");
+}
+
+function itemImage(name) {
+  return assetUrl(questItemImages[name]);
 }
 
 function isChecked(questId, stepId) {
@@ -236,9 +242,12 @@ onMounted(() => {
               </header>
               <ul>
                 <li v-for="item in group.items" :key="`${item.name}-${item.count}`">
-                  <span>{{ item.name }}</span>
+                  <img :src="itemImage(item.name)" :alt="item.name" loading="lazy" />
+                  <span class="material-copy">
+                    <span>{{ item.name }}</span>
+                    <small v-if="item.note">{{ item.note }}</small>
+                  </span>
                   <b v-if="item.count">× {{ item.count }}</b>
-                  <small v-if="item.note">{{ item.note }}</small>
                 </li>
               </ul>
             </div>
@@ -745,28 +754,44 @@ onMounted(() => {
 
 .material-group li {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 2px 6px;
-  padding: 8px;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  gap: 7px;
+  align-items: center;
+  min-height: 54px;
+  padding: 6px 8px 6px 6px;
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.16);
 }
 
-.material-group li span {
+.material-group li > img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.45));
+}
+
+.material-copy {
+  display: grid;
+  gap: 2px;
   min-width: 0;
+}
+
+.material-copy > span {
   color: #bbb39f;
   font-size: 10px;
+  line-height: 1.35;
 }
 
 .material-group li b {
   color: #e2c37e;
   font-size: 10px;
+  white-space: nowrap;
 }
 
-.material-group li small {
-  grid-column: 1 / -1;
+.material-copy small {
   color: #707568;
   font-size: 8px;
+  line-height: 1.35;
 }
 
 .process-heading {
