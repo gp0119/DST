@@ -123,6 +123,18 @@
   const POSITION_SCALE_X = 1.72
   const POSITION_SCALE_Y = 2.15
   const NODE_RADIUS = 23
+  const NODE_SIZE = 56
+
+  const skillTreeImagePaths = {
+    locked: 'images/skill-tree/locked.png',
+    lockedHover: 'images/skill-tree/locked-hover.png',
+    selectable: 'images/skill-tree/selectable.png',
+    selectableHover: 'images/skill-tree/selectable-hover.png',
+    selected: 'images/skill-tree/selected.png',
+    selectedHover: 'images/skill-tree/selected-hover.png',
+    unselected: 'images/skill-tree/unselected.png',
+    unselectedHover: 'images/skill-tree/unselected-hover.png',
+  }
 
   const canvas = ref(null)
   const canvasScroll = ref(null)
@@ -154,6 +166,7 @@
   let resizeObserver
   let drawFrame = 0
   let gesture = null
+  const imageCache = new Map()
 
   const activeCharacter = computed(() => props.characters.find((character) => character.id === activeCharacterId.value) ?? props.characters[0])
   const skillsById = computed(() => Object.fromEntries(activeCharacter.value.skills.map((skill) => [skill.id, skill])))
@@ -228,6 +241,27 @@
 
   function skillName(id) {
     return skillsById.value[id]?.title ?? id
+  }
+
+  function skillIconPath(skill) {
+    return `images/skills/${skill.id}.png`
+  }
+
+  function cachedImage(path) {
+    if (!path) return null
+    if (!imageCache.has(path)) {
+      const image = new Image()
+      image.addEventListener('load', scheduleDraw, { once: true })
+      image.src = assetUrl(path)
+      imageCache.set(path, image)
+    }
+    const image = imageCache.get(path)
+    return image.complete && image.naturalWidth ? image : null
+  }
+
+  function preloadActiveImages() {
+    Object.values(skillTreeImagePaths).forEach(cachedImage)
+    activeCharacter.value.skills.forEach((skill) => cachedImage(skillIconPath(skill)))
   }
 
   function countTag(tag, ids) {
@@ -444,6 +478,16 @@
     })
   }
 
+  function nodeLinkIds(node) {
+    return [...new Set([...node.parents, ...(node.requirements.requiredSkills ?? [])])]
+  }
+
+  function nodeFramePath(selected, available, focused) {
+    if (selected) return focused ? skillTreeImagePaths.selectedHover : skillTreeImagePaths.selected
+    if (available) return focused ? skillTreeImagePaths.selectableHover : skillTreeImagePaths.selectable
+    return focused ? skillTreeImagePaths.unselectedHover : skillTreeImagePaths.unselected
+  }
+
   function drawTree() {
     const element = canvas.value
     if (!element || !viewport.width || !viewport.height) return
@@ -505,81 +549,65 @@
 
     context.lineCap = 'round'
     for (const node of nodes) {
-      for (const parentId of node.parents) {
+      for (const parentId of nodeLinkIds(node)) {
         const parent = nodeById[parentId]
         if (!parent) continue
         const bothSelected = selectedIds.value.has(node.id) && selectedIds.value.has(parent.id)
         const available = canSelect(node)
-        const middleY = parent.wy + (node.wy - parent.wy) * 0.52
 
         context.beginPath()
-        context.moveTo(parent.wx, parent.wy + NODE_RADIUS - 2)
-        context.bezierCurveTo(parent.wx, middleY, node.wx, middleY, node.wx, node.wy - NODE_RADIUS + 2)
-        context.lineWidth = (bothSelected ? 3.2 : 2) / scale
-        context.strokeStyle = bothSelected ? '#ddb35d' : available ? 'rgba(196, 164, 97, 0.48)' : 'rgba(102, 107, 94, 0.3)'
-        context.setLineDash(available || bothSelected ? [] : [5 / scale, 5 / scale])
+        context.moveTo(parent.wx, parent.wy)
+        context.lineTo(node.wx, node.wy)
+        context.lineWidth = (bothSelected ? 4 : 3) / scale
+        context.strokeStyle = bothSelected ? '#f0ce78' : available ? 'rgba(228, 215, 180, 0.78)' : 'rgba(117, 115, 99, 0.42)'
+        context.setLineDash([])
         context.stroke()
       }
     }
-    context.setLineDash([])
 
     for (const node of nodes) {
       const selected = selectedIds.value.has(node.id)
       const available = canSelect(node)
       const focused = focusedSkillId.value === node.id
-      const shadow = node.tags.includes('shadow_favor')
-      const lunar = node.tags.includes('lunar_favor')
-      const accent = shadow ? '#9f73a5' : lunar ? '#71acb8' : '#d3aa5a'
+      const frameImage = cachedImage(nodeFramePath(selected, available, focused))
+      const iconImage = cachedImage(skillIconPath(node))
 
       context.save()
       if (selected || focused) {
-        context.shadowColor = selected ? `${accent}aa` : 'rgba(226, 193, 122, 0.42)'
+        context.shadowColor = selected ? 'rgba(239, 203, 113, 0.7)' : 'rgba(226, 193, 122, 0.42)'
         context.shadowBlur = selected ? 18 / scale : 11 / scale
       }
 
-      drawPolygon(context, node.wx, node.wy + 2, NODE_RADIUS + 4, 8)
-      context.fillStyle = selected ? accent : available ? '#33392e' : '#20241e'
-      context.fill()
-      context.lineWidth = (focused ? 3 : 2) / scale
-      context.strokeStyle = focused ? '#f3d899' : selected ? '#f0cf83' : available ? '#747966' : '#44483f'
-      context.stroke()
-      context.shadowBlur = 0
-
-      context.beginPath()
-      context.arc(node.wx, node.wy, NODE_RADIUS - 5, 0, Math.PI * 2)
-      const inner = context.createRadialGradient(node.wx - 6, node.wy - 7, 1, node.wx, node.wy, NODE_RADIUS)
-      if (selected) {
-        inner.addColorStop(0, 'rgba(255, 246, 205, 0.62)')
-        inner.addColorStop(1, shadow ? '#65436a' : lunar ? '#3f7480' : '#96702f')
+      if (frameImage) {
+        context.drawImage(frameImage, node.wx - NODE_SIZE / 2, node.wy - NODE_SIZE / 2, NODE_SIZE, NODE_SIZE)
       } else {
-        inner.addColorStop(0, available ? '#4b5143' : '#30332d')
-        inner.addColorStop(1, '#181b17')
-      }
-      context.fillStyle = inner
-      context.fill()
-      context.lineWidth = 1 / scale
-      context.strokeStyle = selected ? 'rgba(255, 238, 183, 0.8)' : 'rgba(225, 209, 169, 0.16)'
-      context.stroke()
-
-      context.fillStyle = selected ? '#fff3cf' : available ? '#d4c8ad' : '#707567'
-      context.font = '900 10px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif'
-      context.textAlign = 'center'
-      context.textBaseline = 'middle'
-      context.fillText(available || selected ? nodeGlyph(node.title) : '锁', node.wx, node.wy + 0.5)
-
-      if (selected) {
-        context.beginPath()
-        context.arc(node.wx + 18, node.wy - 17, 7, 0, Math.PI * 2)
-        context.fillStyle = '#171a14'
+        drawPolygon(context, node.wx, node.wy + 2, NODE_RADIUS + 4, 8)
+        context.fillStyle = selected ? '#d3aa5a' : available ? '#806238' : '#25251f'
         context.fill()
-        context.strokeStyle = '#f0ce7a'
+        context.lineWidth = (focused ? 3 : 2) / scale
+        context.strokeStyle = focused ? '#f3d899' : selected ? '#f0cf83' : '#55574d'
         context.stroke()
-        context.fillStyle = '#f4d68d'
-        context.font = '900 8px sans-serif'
-        context.fillText('✓', node.wx + 18, node.wy - 16.5)
       }
 
-      drawNodeLabel(context, node, focused ? '#f2dfb7' : selected ? '#dbc28d' : available ? '#a9aa98' : '#65695e')
+      context.shadowBlur = 0
+      if (iconImage) {
+        context.globalAlpha = available || selected ? 1 : 0.42
+        context.drawImage(iconImage, node.wx - 23, node.wy - 23, 46, 46)
+        context.globalAlpha = 1
+      } else {
+        context.fillStyle = selected ? '#332619' : available ? '#2f291f' : '#777568'
+        context.font = '900 10px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif'
+        context.textAlign = 'center'
+        context.textBaseline = 'middle'
+        context.fillText(nodeGlyph(node.title), node.wx, node.wy + 0.5)
+      }
+
+      if (!available && !selected) {
+        const lockImage = cachedImage(focused ? skillTreeImagePaths.lockedHover : skillTreeImagePaths.locked)
+        if (lockImage) context.drawImage(lockImage, node.wx + 8, node.wy - 29, 23, 23)
+      }
+
+      drawNodeLabel(context, node, focused ? '#f2dfb7' : selected ? '#dbc28d' : available ? '#b7b39f' : '#6c6c61')
       context.restore()
     }
 
@@ -740,12 +768,14 @@
 
   watch(activeCharacterId, () => {
     nextTick(() => {
+      preloadActiveImages()
       fitTree()
       scheduleDraw()
     })
   })
 
   onMounted(() => {
+    preloadActiveImages()
     resizeObserver = new ResizeObserver(resizeCanvas)
     resizeObserver.observe(canvasShell.value)
     resizeCanvas()
@@ -915,7 +945,10 @@
         @keydown.esc="closeSkillDialog"
       >
         <header>
-          <span class="skill-dialog-glyph">{{ nodeGlyph(dialogSkill.title) }}</span>
+          <span class="skill-dialog-glyph">
+            <img class="skill-dialog-frame" :src="assetUrl(skillTreeImagePaths.selectable)" alt="" />
+            <img class="skill-dialog-icon" :src="assetUrl(skillIconPath(dialogSkill))" alt="" />
+          </span>
           <div>
             <small>{{ groupLabels[groupAliases[dialogSkill.group] ?? dialogSkill.group] ?? dialogSkill.group }}</small>
             <h2 id="skill-dialog-title">{{ dialogSkill.title }}</h2>

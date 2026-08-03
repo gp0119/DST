@@ -60,6 +60,7 @@ for (const character of skillTrees.characters) {
     `${character.name}存在重复技能 ID`,
   );
   for (const skill of character.skills) {
+    imagePaths.add(`images/skills/${skill.id}.png`);
     check(Boolean(skill.title), `${character.name}的 ${skill.id} 缺少中文名称`);
     check(Boolean(skill.desc), `${character.name}的 ${skill.id} 缺少中文说明`);
     check(Boolean(skill.group), `${character.name}的 ${skill.id} 缺少分组`);
@@ -79,6 +80,16 @@ for (const character of skillTrees.characters) {
   }
 }
 check(skillCount === 308, `角色技能应为 308 项，实际为 ${skillCount}`);
+[
+  "images/skill-tree/locked.png",
+  "images/skill-tree/locked-hover.png",
+  "images/skill-tree/selectable.png",
+  "images/skill-tree/selectable-hover.png",
+  "images/skill-tree/selected.png",
+  "images/skill-tree/selected-hover.png",
+  "images/skill-tree/unselected.png",
+  "images/skill-tree/unselected-hover.png",
+].forEach((path) => imagePaths.add(path));
 
 for (const recipe of data.recipes) {
   check(recipe.combos.length === 2, `${recipe.zh} 应有 2 套常用配料`);

@@ -2292,19 +2292,25 @@ img {
   gap: 10px;
 }
 .skill-dialog-glyph {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  color: #2c2419;
-  border: 2px solid #654b26;
-  border-radius: 44% 56% 48% 52% / 53% 47% 53% 47%;
-  background: #d8b15a;
-  box-shadow:
-    inset 0 0 0 3px rgba(255, 238, 186, 0.28),
-    0 4px 0 #6b4c26;
-  font-size: 11px;
-  font-weight: 900;
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.38));
+}
+.skill-dialog-frame,
+.skill-dialog-icon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.skill-dialog-icon {
+  inset: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
 }
 .skill-dialog small {
   color: #8e907f;
