@@ -1,35 +1,47 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import CraftingSearch from "../components/CraftingSearch.vue";
 import { crafting, craftingCategories } from "../lib/crafting.js";
 
 const base = import.meta.env.BASE_URL;
 const characterCategory = craftingCategories.find((category) => category.id === "character");
+const stationById = new Map(crafting.stations.map((station) => [station.id, station.name]));
+const categoryById = new Map(crafting.categories.map((category) => [category.id, category.name]));
+const characterById = new Map(crafting.characters.map((character) => [character.id, character.name]));
+const searchItems = crafting.items.map((item) => {
+  const categoryNames = item.categoryIds.map((id) => categoryById.get(id)).filter(Boolean);
+  return {
+    id: item.id,
+    name: item.name,
+    englishName: item.englishName,
+    image: item.image,
+    characterId: item.characterId,
+    characterName: item.characterId ? characterById.get(item.characterId) : undefined,
+    categoryId: item.categoryIds.find((id) => id !== "character"),
+    categoryNames,
+    stationName: stationById.get(item.stationId),
+    searchText: [
+      item.id,
+      item.name,
+      item.englishName,
+      item.description,
+      stationById.get(item.stationId),
+      item.characterId ? characterById.get(item.characterId) : undefined,
+      ...categoryNames,
+      ...item.materials.flatMap((material) => [material.id, material.name, material.englishName]),
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLocaleLowerCase("zh-CN"),
+  };
+});
 const description = `《饥荒联机版》${crafting.meta.itemCount} 项制作配方中文速查：先选分类，再查看制作材料与解锁条件。`;
 ---
 
 <BaseLayout title="饥荒联机版全部制作配方" description={description}>
   <main id="main" class="container crafting-main">
-    <header class="crafting-hero">
-      <div>
-        <p>CRAFTING COMPENDIUM</p>
-        <h1>全部制作</h1>
-        <span>
-          先选择制作分类，再查看该分类下的物品、材料与解锁条件；冒险家物品还可继续按人物选择。
-        </span>
-      </div>
-      <aside aria-label="数据摘要">
-        <strong>{craftingCategories.length}</strong>
-        <span>个制作分类</span>
-        <small>{crafting.meta.itemCount} 项配方 · Patch {crafting.meta.chineseDataPatch}</small>
-      </aside>
-    </header>
-
     <section class="crafting-directory" aria-labelledby="crafting-categories-title">
-      <header>
-        <p>STEP 1</p>
-        <h2 id="crafting-categories-title">选择分类</h2>
-        <span>每件物品会出现在游戏对应的制作分类中。</span>
-      </header>
+      <CraftingSearch client:load items={searchItems} />
       <div class="crafting-directory-grid">
         {
           craftingCategories.map((category) => (
@@ -54,20 +66,5 @@ const description = `《饥荒联机版》${crafting.meta.itemCount} 项制作�
         }
       </div>
     </section>
-
-    <footer class="crafting-source-note">
-      <p>
-        配方清单、中文名称与制作描述按 Patch {crafting.meta.chineseDataPatch} 的游戏数据整理。
-        分类和本地图标参考 Steam Build {crafting.meta.steamBuildId}（{crafting.meta.gameDataUpdatedAt}）的资源快照。
-      </p>
-      <p>
-        结构化数据参考
-        <a href={crafting.meta.sourceRepository} target="_blank" rel="noreferrer">dst-craft 公开仓库</a>
-        · 分类交叉核对
-        <a href={crafting.meta.wikiSource} target="_blank" rel="noreferrer">Don't Starve Wiki</a>
-        · 简中数据
-        <a href={crafting.meta.chineseItemSource} target="_blank" rel="noreferrer">饥荒维基 ItemTable</a>
-      </p>
-    </footer>
   </main>
 </BaseLayout>

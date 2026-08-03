@@ -28,19 +28,6 @@ const description = `《饥荒联机版》${category.name}分类共 ${items.leng
       <strong>{category.name}</strong>
     </nav>
 
-    <header class="crafting-hero crafting-detail-hero">
-      <div>
-        <p>CRAFTING CATEGORY</p>
-        <h1>{category.name}</h1>
-        <span>搜索本分类中的物品或材料，也可以继续按制作站筛选。</span>
-      </div>
-      <aside aria-label="分类摘要">
-        <strong>{items.length}</strong>
-        <span>项制作配方</span>
-        <small><a href={`${base}crafting/`}>返回分类选择</a></small>
-      </aside>
-    </header>
-
     <CraftingExplorer client:load data={pageData} />
   </main>
 </BaseLayout>

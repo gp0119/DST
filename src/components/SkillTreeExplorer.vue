@@ -272,6 +272,11 @@
     mobileCharacterButton.value?.focus()
   }
 
+  async function selectMobileCharacter(id) {
+    selectCharacter(id)
+    await closeMobileCharacters()
+  }
+
   function skillName(id) {
     return skillsById.value[id]?.title ?? id
   }
@@ -943,7 +948,7 @@
               :key="character.id"
               type="button"
               :aria-pressed="activeCharacter.id === character.id"
-              @click="selectCharacter(character.id)"
+              @click="selectMobileCharacter(character.id)"
             >
               <img :src="assetUrl(character.image)" alt="" />
               <strong>{{ character.name }}</strong>
@@ -952,15 +957,6 @@
           </div>
         </div>
 
-        <footer>
-          <button
-            type="button"
-            class="mobile-filter-apply"
-            @click="closeMobileCharacters"
-          >
-            查看{{ activeCharacter.name }}技能树
-          </button>
-        </footer>
         </section>
       </div>
     </Transition>

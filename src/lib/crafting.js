@@ -3,7 +3,9 @@ import crafting from "../data/crafting.json";
 export { crafting };
 
 export function getCategoryItems(categoryId) {
-  return crafting.items.filter((item) => item.categoryIds.includes(categoryId));
+  return crafting.items.filter(
+    (item) => item.categoryIds.includes(categoryId) && (categoryId === "character" || !item.characterId),
+  );
 }
 
 export function getCharacterItems(characterId) {

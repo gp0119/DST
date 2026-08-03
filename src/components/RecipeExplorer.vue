@@ -24,7 +24,6 @@ const activeFilter = ref("all");
 const mobileFiltersOpen = ref(false);
 const mobileFilterButton = ref(null);
 const mobileFilterCloseButton = ref(null);
-const mobileSearchInput = ref(null);
 
 const filteredRecipes = computed(() => {
   const needle = query.value.trim().toLocaleLowerCase("zh-CN");
@@ -42,20 +41,13 @@ const filteredRecipes = computed(() => {
 const activeFilterLabel = computed(
   () => filters.find((filter) => filter.value === activeFilter.value)?.label ?? "全部",
 );
-const mobileFilterSummary = computed(() => {
-  const label = activeFilter.value === "all" ? "全部料理" : activeFilterLabel.value;
-  return query.value.trim() ? `“${query.value.trim()}” · ${label}` : label;
-});
+const mobileFilterSummary = computed(() =>
+  activeFilter.value === "all" ? "全部料理" : activeFilterLabel.value,
+);
 
 function clearSearch() {
   query.value = "";
   document.querySelector("#search")?.focus();
-}
-
-async function clearMobileSearch() {
-  query.value = "";
-  await nextTick();
-  mobileSearchInput.value?.focus();
 }
 
 async function openMobileFilters() {
@@ -69,6 +61,11 @@ async function closeMobileFilters() {
   await nextTick();
   mobileFilterButton.value?.focus();
 }
+
+async function selectMobileFilter(value) {
+  activeFilter.value = value;
+  await closeMobileFilters();
+}
 </script>
 
 <template>
@@ -80,7 +77,7 @@ async function closeMobileFilters() {
         type="button"
         aria-controls="mobile-recipe-filter-drawer"
         :aria-expanded="mobileFiltersOpen"
-        :aria-label="`打开搜索与筛选：${mobileFilterSummary}，${filteredRecipes.length} 道`"
+        :aria-label="`打开分类筛选：${mobileFilterSummary}，${filteredRecipes.length} 道`"
         @click="openMobileFilters"
       >
         <svg class="mobile-filter-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -106,7 +103,7 @@ async function closeMobileFilters() {
         <header>
           <div>
             <small>FILTERS</small>
-            <h2 id="mobile-recipe-filter-title">搜索与筛选</h2>
+            <h2 id="mobile-recipe-filter-title">分类筛选</h2>
           </div>
           <button
             ref="mobileFilterCloseButton"
@@ -120,28 +117,6 @@ async function closeMobileFilters() {
 
         <div class="mobile-filter-content">
           <fieldset class="mobile-filter-group">
-            <legend>料理名称</legend>
-            <div class="mobile-recipe-search">
-              <input
-                ref="mobileSearchInput"
-                v-model="query"
-                type="search"
-                lang="zh-CN"
-                autocomplete="off"
-                aria-label="按中文料理名称搜索"
-                placeholder="输入中文料理名称…"
-              />
-              <button
-                type="button"
-                :disabled="!query"
-                @click="clearMobileSearch"
-              >
-                清除
-              </button>
-            </div>
-          </fieldset>
-
-          <fieldset class="mobile-filter-group">
             <legend>分类</legend>
             <div class="mobile-recipe-options">
               <button
@@ -149,7 +124,7 @@ async function closeMobileFilters() {
                 :key="filter.value"
                 type="button"
                 :aria-pressed="activeFilter === filter.value"
-                @click="activeFilter = filter.value"
+                @click="selectMobileFilter(filter.value)"
               >
                 {{ filter.label }}
               </button>
@@ -157,15 +132,6 @@ async function closeMobileFilters() {
           </fieldset>
         </div>
 
-        <footer>
-          <button
-            type="button"
-            class="mobile-filter-apply"
-            @click="closeMobileFilters"
-          >
-            查看 {{ filteredRecipes.length }} 道料理
-          </button>
-        </footer>
         </section>
       </div>
     </Transition>

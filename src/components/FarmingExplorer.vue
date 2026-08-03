@@ -65,6 +65,21 @@
     mobileFilterButton.value?.focus()
   }
 
+  async function selectMobileSeason(id) {
+    updateSeason(id)
+    await closeMobileFilters()
+  }
+
+  async function selectMobileCrop(id) {
+    cropFilter.value = id
+    await closeMobileFilters()
+  }
+
+  async function selectMobilePlotCount(count) {
+    activePlotCount.value = count
+    await closeMobileFilters()
+  }
+
   function cropFilterCount(cropId) {
     return seasonExamples.value.filter((example) => example.items.some((item) => item.cropId === cropId || item.alternatives?.includes(cropId))).length
   }
@@ -124,7 +139,7 @@
                 :key="season.id"
                 type="button"
                 :aria-pressed="activeSeasonId === season.id"
-                @click="updateSeason(season.id)"
+                @click="selectMobileSeason(season.id)"
               >
                 {{ season.name }}
               </button>
@@ -134,7 +149,7 @@
           <fieldset class="mobile-filter-group">
             <legend>作物</legend>
             <div class="mobile-crop-options">
-              <button type="button" :aria-pressed="cropFilter === 'all'" @click="cropFilter = 'all'">
+              <button type="button" :aria-pressed="cropFilter === 'all'" @click="selectMobileCrop('all')">
                 <strong>全部</strong>
                 <small>{{ seasonExamples.length }} 组</small>
               </button>
@@ -144,7 +159,7 @@
                 type="button"
                 :aria-pressed="cropFilter === item.id"
                 :disabled="cropFilterCount(item.id) === 0"
-                @click="cropFilter = item.id"
+                @click="selectMobileCrop(item.id)"
               >
                 <img :src="assetUrl(item.image)" alt="" />
                 <strong>{{ item.name }}</strong>
@@ -161,7 +176,7 @@
                 :key="count"
                 type="button"
                 :aria-pressed="activePlotCount === count"
-                @click="activePlotCount = count"
+                @click="selectMobilePlotCount(count)"
               >
                 {{ count }} 块地
               </button>
@@ -169,11 +184,6 @@
           </fieldset>
         </div>
 
-        <footer>
-          <button type="button" class="mobile-filter-apply" @click="closeMobileFilters">
-            查看 {{ filteredExamples.length }} 组配比
-          </button>
-        </footer>
         </section>
       </div>
     </Transition>

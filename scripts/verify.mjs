@@ -79,7 +79,18 @@ for (const quest of quests.quests) {
   for (const item of quest.inventoryGroups.flatMap((group) => group.items)) {
     check(Boolean(questItemImages[item.name]), `${quest.title}的${item.name}缺少物品图片`);
   }
+  for (const item of quest.steps.flatMap((step) => step.items ?? [])) {
+    check(Boolean(questItemImages[item.name]), `${quest.title}流程中的${item.name}缺少物品图片`);
+  }
 }
+
+const pearlQuest = quests.quests.find((quest) => quest.id === "pearl");
+const pearlDryingStep = pearlQuest?.steps.find((step) => step.id === "drying");
+check(
+  pearlDryingStep?.items.some((item) => item.name === "肉类食物" && item.count === "6") &&
+    pearlDryingStep.summary.includes("海带不再计入"),
+  "奶奶岛晾晒任务应要求 6 个肉类食物，并明确排除海带",
+);
 
 const imagePaths = new Set();
 Object.values(questItemImages).forEach((path) => imagePaths.add(path));
