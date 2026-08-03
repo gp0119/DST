@@ -31,22 +31,6 @@ const description = `《饥荒联机版》${character.name}的 ${items.length} �
       <strong>{character.name}</strong>
     </nav>
 
-    <header class="crafting-hero crafting-detail-hero">
-      <div class="crafting-character-heading">
-        <img src={`${base}${character.image}`} alt="" aria-hidden="true" />
-        <div>
-          <p>CHARACTER CRAFTING</p>
-          <h1>{character.name}</h1>
-          <span>专属制作、技能树解锁物品与对应材料需求。</span>
-        </div>
-      </div>
-      <aside aria-label="人物摘要">
-        <strong>{items.length}</strong>
-        <span>项专属制作</span>
-        <small><a href={`${base}crafting/character/`}>更换人物</a></small>
-      </aside>
-    </header>
-
     <CraftingExplorer client:load data={pageData} />
   </main>
 </BaseLayout>

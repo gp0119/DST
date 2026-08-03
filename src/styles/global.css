@@ -2483,117 +2483,11 @@ img {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.crafting-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 28px;
-  margin-bottom: 28px;
-  padding: clamp(24px, 4vw, 46px);
-  border: 1px solid rgba(217, 170, 89, 0.2);
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 86% 18%, rgba(191, 105, 48, 0.18), transparent 20rem),
-    linear-gradient(145deg, rgba(38, 42, 31, 0.96), rgba(15, 17, 13, 0.98));
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.25);
-}
-.crafting-hero p {
-  margin: 0 0 10px;
-  color: #d5a75a;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.22em;
-}
-.crafting-hero h1 {
-  margin: 0 0 10px;
-  color: #f0e2c4;
-  font-size: clamp(36px, 6vw, 66px);
-  letter-spacing: -0.06em;
-  line-height: 0.95;
-}
-.crafting-hero > div > span {
-  display: block;
-  max-width: 720px;
-  color: #aaa18d;
-  font-size: 14px;
-  line-height: 1.8;
-}
-.crafting-hero aside {
-  display: grid;
-  min-width: 190px;
-  padding: 18px 20px;
-  border-left: 1px solid rgba(215, 171, 91, 0.22);
-}
-.crafting-hero aside strong {
-  color: #e5b85f;
-  font:
-    700 42px/1 Georgia,
-    serif;
-}
-.crafting-hero aside span {
-  margin-top: 6px;
-  color: #e9ddc0;
-  font-size: 12px;
-  font-weight: 800;
-}
-.crafting-hero aside small {
-  margin-top: 14px;
-  color: #777a6c;
-  font-size: 10px;
-}
-.crafting-detail-hero aside a {
-  color: #a88b54;
-}
-.crafting-character-heading {
-  display: flex;
-  align-items: center;
-  gap: clamp(18px, 3vw, 32px);
-}
-.crafting-character-heading > img {
-  width: clamp(88px, 10vw, 126px);
-  height: clamp(88px, 10vw, 126px);
-  object-fit: contain;
-  filter: drop-shadow(0 12px 9px rgba(0, 0, 0, 0.45));
-}
-.crafting-character-heading > div > span {
-  display: block;
-  color: #aaa18d;
-  font-size: 14px;
-  line-height: 1.8;
-}
 .crafting-directory {
   margin-top: 28px;
 }
 .crafting-main > .crafting-directory:first-child {
   margin-top: 0;
-}
-.crafting-directory > header {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: end;
-  gap: 3px 12px;
-  margin-bottom: 15px;
-}
-.crafting-directory > header p {
-  grid-row: 1 / 3;
-  align-self: stretch;
-  margin: 0;
-  padding: 8px 10px;
-  color: #291f13;
-  border-radius: 8px;
-  background: #d4a751;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-}
-.crafting-directory > header h2 {
-  margin: 0;
-  color: #e9dec5;
-  font-size: 22px;
-}
-.crafting-directory > header span {
-  color: #77796c;
-  font-size: 11px;
 }
 .crafting-directory-grid,
 .crafting-character-grid {
@@ -2620,7 +2514,7 @@ img {
     transform 150ms ease;
 }
 .crafting-directory-card {
-  grid-template-columns: 112px minmax(0, 1fr) auto;
+  grid-template-columns: 112px minmax(0, 1fr);
   min-height: 150px;
 }
 .crafting-directory-card.featured {
@@ -2676,13 +2570,8 @@ img {
   color: #777b6e;
   font-size: 10px;
 }
-.crafting-directory-card > b,
-.crafting-character-card > b {
-  color: #866f47;
-  font-size: 18px;
-}
 .crafting-character-card {
-  grid-template-columns: 82px minmax(0, 1fr) auto;
+  grid-template-columns: 82px minmax(0, 1fr);
   min-height: 116px;
 }
 .crafting-character-card > img {
@@ -2870,9 +2759,6 @@ img {
   border: 1px solid rgba(220, 177, 91, 0.2);
   border-radius: 50%;
   background: rgba(15, 17, 13, 0.92);
-}
-.crafting-item-category-icons span + span {
-  margin-left: -9px;
 }
 .crafting-item-category-icons span:hover {
   z-index: 1;
@@ -3099,26 +2985,6 @@ img {
     width: min(100% - 16px, 1240px);
     padding-top: 12px;
   }
-  .crafting-hero {
-    grid-template-columns: 1fr;
-    gap: 22px;
-    padding: 24px 20px;
-  }
-  .crafting-hero aside {
-    grid-template-columns: auto 1fr;
-    align-items: end;
-    min-width: 0;
-    gap: 0 10px;
-    padding: 14px 0 0;
-    border-top: 1px solid rgba(215, 171, 91, 0.18);
-    border-left: 0;
-  }
-  .crafting-hero aside small {
-    grid-column: 1 / -1;
-  }
-  .crafting-character-heading {
-    align-items: flex-start;
-  }
   .crafting-grid {
     grid-template-columns: 1fr;
   }
@@ -3136,7 +3002,7 @@ img {
 
 @media (max-width: 390px) {
   .crafting-directory-card {
-    grid-template-columns: 88px minmax(0, 1fr) auto;
+    grid-template-columns: 88px minmax(0, 1fr);
   }
   .crafting-directory-image {
     width: 88px;
@@ -3146,7 +3012,7 @@ img {
     height: 82px;
   }
   .crafting-character-card {
-    grid-template-columns: 70px minmax(0, 1fr) auto;
+    grid-template-columns: 70px minmax(0, 1fr);
   }
   .crafting-character-card > img {
     width: 70px;
