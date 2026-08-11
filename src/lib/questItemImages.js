@@ -7,7 +7,7 @@ export const questItemImages = {
   保暖上衣: "images/crafting/trunkvest_winter.png",
   其他宝石: "images/crafting/redgem.png",
   制图桌: "images/crafting/cartographydesk.png",
-  化石碎片: "images/crafting/boneshard.png",
+  化石碎片: "images/crafting/fossil_piece.png",
   受约束静电: "images/crafting/moonstorm_static_item.png",
   可靠的大船: "images/crafting/boat_item.png",
   肉类食物: "images/crafting/meat.png",
