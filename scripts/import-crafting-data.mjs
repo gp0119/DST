@@ -326,7 +326,7 @@ const output = {
   })),
   characters: usedCharacterIds.map((id) => ({
     id,
-    name: locale.characters[id]?.name ?? id,
+    name: id === "wilson" ? "威尔逊" : locale.characters[id]?.name ?? id,
   })),
   items: normalizedItems,
 };
