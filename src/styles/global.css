@@ -2838,7 +2838,7 @@ img {
 }
 .crafting-tags {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 4px;
   margin-top: 6px;
 }
@@ -2849,6 +2849,7 @@ img {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.035);
   font-size: 9px;
+  white-space: nowrap;
 }
 .crafting-tags span.character {
   color: #d9b474;
