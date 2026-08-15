@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-03",
+  "updated": "2026-08-15",
   "quests": [
     {
       "id": "pearl",
@@ -193,6 +193,185 @@
       "sources": [
         { "label": "珍珠任务与当前材料", "url": "https://dontstarve.wiki.gg/wiki/Crabby_Hermit" },
         { "label": "灰机 Wiki · 好感度任务", "url": "https://dontstarve.huijiwiki.com/wiki/%E5%AF%84%E5%B1%85%E8%9F%B9%E9%9A%90%E5%A3%AB#%E5%A5%BD%E6%84%9F%E5%BA%A6%E4%BB%BB%E5%8A%A1" }
+      ]
+    },
+    {
+      "id": "pearl-decoration",
+      "arc": "side",
+      "eyebrow": "HERMIT DECORATION",
+      "title": "奶奶岛 · 珍珠装饰度任务",
+      "summary": "把珍珠迁到主大陆，在领地内布置有效装饰，将装饰度提高到 90 点。",
+      "difficulty": "终局建设",
+      "duration": "按资源储备",
+      "status": "可选后期任务",
+      "goal": "达到 90 点装饰度，解锁珍珠的灯柱、茶店、温泉和晾肉巨架。",
+      "targetCount": 10,
+      "prerequisites": [
+        "珍珠好感度达到 10 级",
+        "开启月亮裂隙并击败三只月亮变异首领",
+        "把完全无人岛地图交给珍珠，让她先搬到月亮码头",
+        "使用隐士迁居套装把隐士之家迁到主大陆；只有领地范围内的有效装饰计分"
+      ],
+      "inventoryGroups": [
+        {
+          "label": "常规加分项",
+          "items": [
+            { "name": "装有物品的桌子", "count": "3", "note": "每张 +5，桌子类共享 15 分上限" },
+            { "name": "椅子", "count": "4", "note": "每把 +2，上限 8 分" },
+            { "name": "晾肉架", "count": "3", "note": "每个 +3，与晾肉巨架共享 9 分上限" },
+            { "name": "蕨类盆栽", "count": "10", "note": "每个 +1，与多肉盆栽共享 10 分上限" },
+            { "name": "蜂箱", "count": "5", "note": "每个 +1，隐士蜂箱不计分" },
+            { "name": "贝壳海滩地皮", "count": "100", "note": "每格 +0.15，三种海滩地皮共享 15 分上限" }
+          ]
+        },
+        {
+          "label": "建筑与高分项",
+          "items": [
+            { "name": "钓具容器", "count": "1", "note": "+3 分" },
+            { "name": "盐晶组合机", "count": "1", "note": "+3 分；需先归还开裂珍珠" },
+            { "name": "风铃", "count": "4", "note": "每个 +2，上限 8 分" },
+            { "name": "珍珠的灯柱", "count": "10", "note": "放入光源后每个 +1，上限 10 分" },
+            { "name": "珍珠的茶店", "count": "1", "note": "+10 分" },
+            { "name": "珍珠的温泉", "count": "1", "note": "+10 分" },
+            { "name": "鱼类计重器", "count": "16", "note": "放入 16 种不同海鱼额外 +20 分；各鱼种最重鱼另计分" }
+          ]
+        },
+        {
+          "label": "扣分项",
+          "note": "推荐流程的累计分数以领地内没有以下扣分项为前提。",
+          "items": [
+            { "name": "生物生成点", "note": "每个 -1；与坟墓合计最多 -33。蜂箱、隐士蜂箱和空心树桩不扣分" },
+            { "name": "坟墓", "note": "每个 -3；与生物生成点合计最多 -33" },
+            { "name": "领地垃圾", "note": "每个 -0.5，最多 -50；贝壳钟、餐桌花瓶、雪球、冰和冰帽不扣分" },
+            { "name": "被阻塞的钓鱼点", "note": "每处 -4，最多 -64；附近码头或船只可能造成阻塞" }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "move-mainland",
+          "title": "把珍珠迁到主大陆",
+          "summary": "在月亮码头附近制作隐士迁居套装，把珍珠和隐士之家搬到主大陆，装饰度系统才会启用。",
+          "credit": false,
+          "items": [{ "name": "隐士迁居套装", "count": "1" }],
+          "tip": "PC 控制台查看当前装饰度：c_announce(c_find(\"hermithouse2\").components.pearldecorationscore:GetScore())。房屋尚未升到五级时，把 hermithouse2 改为 hermithouse；下面的累计分数按领地内没有扣分项计算。",
+          "warning": "这些建筑只能在珍珠领地内使用；搬离后会失效，除温泉外即使搬回也不会恢复。"
+        },
+        {
+          "id": "decor-tables",
+          "title": "摆 3 张有装饰的桌子 · +15",
+          "summary": "每张桌子放一件桌面装饰，累计约 15 点，解锁珍珠的灯柱。",
+          "items": [{ "name": "装有物品的桌子", "count": "3" }]
+        },
+        {
+          "id": "decor-chairs",
+          "title": "摆 4 把椅子 · +8",
+          "summary": "木椅成本低，每把 2 点，累计约 23 点。",
+          "items": [{ "name": "椅子", "count": "4" }]
+        },
+        {
+          "id": "decor-dock-pilings",
+          "title": "摆 20 个码头桩 · +10",
+          "summary": "每个码头桩 0.5 点，累计约 33 点，解锁珍珠的茶店。",
+          "items": [{ "name": "码头桩", "count": "20" }]
+        },
+        {
+          "id": "decor-tea-shop",
+          "title": "建造珍珠的茶店 · +10",
+          "summary": "茶店在 25 点解锁，建好后累计约 43 点，同时解锁盐晶组合机二级配方。",
+          "items": [{ "name": "珍珠的茶店" }]
+        },
+        {
+          "id": "decor-stations",
+          "title": "摆盐晶组合机和钓具容器 · +6",
+          "summary": "两座建筑各 3 点，累计约 49 点。盐晶组合机需先归还开裂珍珠；未解锁时可先用 3 个蜂箱补足 3 点。",
+          "items": [
+            { "name": "盐晶组合机", "count": "1", "note": "未解锁时用 3 个蜂箱替代" },
+            { "name": "钓具容器", "count": "1" },
+            { "name": "蜂箱", "count": "3", "note": "仅作替代" }
+          ]
+        },
+        {
+          "id": "decor-flowers",
+          "title": "种 10 朵花 · +5",
+          "summary": "每朵花 0.5 点，累计约 54 点，并触发茶饮首次降价。",
+          "items": [{ "name": "蝴蝶", "count": "10", "note": "种下后变成花" }]
+        },
+        {
+          "id": "decor-pickables",
+          "title": "移植 20 株可采摘植物 · +10",
+          "summary": "浆果丛、草丛或树苗每株 0.5 点，累计约 64 点，解锁珍珠的温泉。",
+          "items": [{ "name": "浆果丛", "count": "20", "note": "草丛或树苗也可" }]
+        },
+        {
+          "id": "decor-drying-racks",
+          "title": "摆 3 个晾肉架 · +9",
+          "summary": "普通晾肉架每个 3 点，累计约 73 点；珍珠自带的晾肉架不计分。",
+          "items": [{ "name": "晾肉架", "count": "3" }]
+        },
+        {
+          "id": "decor-potted-ferns",
+          "title": "摆 10 个蕨类盆栽 · +10",
+          "summary": "每个蕨类盆栽 1 点，累计约 83 点，并触发茶饮再次降价。",
+          "items": [{ "name": "蕨类盆栽", "count": "10" }]
+        },
+        {
+          "id": "decor-house-charms",
+          "title": "升级五级房屋并保留初始风铃 · +7",
+          "summary": "五级隐士之家提供 5 点，默认的一枚风铃提供 2 点，累计约 90 点，解锁 9 格晾肉巨架。",
+          "items": [{ "name": "风铃", "count": "1" }]
+        },
+        {
+          "id": "optional-light-posts",
+          "title": "点亮 10 根珍珠的灯柱 · +10",
+          "summary": "灯柱放入光源后每根 1 点；灯柱分数超过 6.67 时，珍珠黄昏也会留在屋外。",
+          "credit": false,
+          "marker": "可选",
+          "badge": "替代任务",
+          "items": [{ "name": "珍珠的灯柱", "count": "10" }]
+        },
+        {
+          "id": "optional-hot-spring",
+          "title": "建造珍珠的温泉 · +10",
+          "summary": "装饰度达到 60 点后解锁；可直接替换推荐流程中的一项 10 分任务。",
+          "credit": false,
+          "marker": "可选",
+          "badge": "替代任务",
+          "items": [{ "name": "珍珠的温泉", "count": "1" }]
+        },
+        {
+          "id": "optional-bee-boxes",
+          "title": "摆放 5 个蜂箱 · +5",
+          "summary": "普通蜂箱每个 1 点；珍珠自带的隐士蜂箱不计分。",
+          "credit": false,
+          "marker": "可选",
+          "badge": "替代任务",
+          "items": [{ "name": "蜂箱", "count": "5" }]
+        },
+        {
+          "id": "optional-shell-turf",
+          "title": "铺 100 格贝壳海滩地皮 · +15",
+          "summary": "每格 0.15 点，三种海滩地皮共享 15 分上限。",
+          "credit": false,
+          "marker": "可选",
+          "badge": "替代任务",
+          "items": [{ "name": "贝壳海滩地皮", "count": "100" }]
+        },
+        {
+          "id": "optional-fish",
+          "title": "展示 16 种不同海鱼 · +20",
+          "summary": "在鱼类计重器中展示 16 种不同海鱼额外获得 20 点，各鱼种最重鱼还会另行计分。",
+          "credit": false,
+          "marker": "可选",
+          "badge": "替代任务",
+          "items": [{ "name": "鱼类计重器", "count": "16" }]
+        }
+      ],
+      "rewards": ["珍珠的灯柱", "珍珠的茶店与茶饮折扣", "盐晶组合机二级配方", "珍珠的温泉", "9 格晾肉巨架"],
+      "sources": [
+        { "label": "珍珠装饰度、计分与解锁阈值", "url": "https://dontstarve.wiki.gg/wiki/Crabby_Hermit#Decoration" },
+        { "label": "灰机 Wiki · 装饰度与控制台查询", "url": "https://dontstarve.huijiwiki.com/wiki/%E5%AF%84%E5%B1%85%E8%9F%B9%E9%9A%90%E5%A3%AB#%E8%A3%85%E9%A5%B0%E5%BA%A6" },
+        { "label": "Klei · 2025 冬季盛宴珍珠内容更新", "url": "https://forums.kleientertainment.com/game-updates/dst/704870-r2646/" }
       ]
     },
     {

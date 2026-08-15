@@ -53,7 +53,7 @@ check(farming.seasons.length === 4, "巨大作物页面应包含春夏秋冬 4 �
 check(farming.crops.length === 14, `农作物应为 14 种，实际为 ${farming.crops.length}`);
 check(skillTrees.maxPoints === 15, `角色技能点上限应为 15，实际为 ${skillTrees.maxPoints}`);
 check(skillTrees.characters.length === 12, `技能树角色应为 12 位，实际为 ${skillTrees.characters.length}`);
-check(quests.quests.length === 5, `任务路线应为 5 条，实际为 ${quests.quests.length}`);
+check(quests.quests.length === 6, `任务路线应为 6 条，实际为 ${quests.quests.length}`);
 check(
   crafting.items.length === crafting.meta.itemCount,
   `制作数据条数与摘要不一致：${crafting.items.length} / ${crafting.meta.itemCount}`,
@@ -90,6 +90,25 @@ check(
   pearlDryingStep?.items.some((item) => item.name === "肉类食物" && item.count === "6") &&
     pearlDryingStep.summary.includes("海带不再计入"),
   "奶奶岛晾晒任务应要求 6 个肉类食物，并明确排除海带",
+);
+
+const pearlDecorationQuest = quests.quests.find((quest) => quest.id === "pearl-decoration");
+const pearlDecorationPenaltyGroup = pearlDecorationQuest?.inventoryGroups.find(
+  (group) => group.label === "扣分项",
+);
+const pearlDecorationMoveStep = pearlDecorationQuest?.steps.find(
+  (step) => step.id === "move-mainland",
+);
+const pearlDecorationOptionalSteps = pearlDecorationQuest?.steps.filter(
+  (step) => step.badge === "替代任务",
+);
+check(
+  pearlDecorationQuest?.targetCount === 10 &&
+    pearlDecorationQuest.steps.find((step) => step.id === "decor-house-charms")?.summary.includes("累计约 90 点") &&
+    pearlDecorationOptionalSteps?.length === 5 &&
+    pearlDecorationPenaltyGroup?.items.length === 4 &&
+    pearlDecorationMoveStep?.tip.includes("pearldecorationscore:GetScore()"),
+  "奶奶岛装饰度任务应提供推荐步骤、扣分项和装饰度查询代码",
 );
 
 const imagePaths = new Set();

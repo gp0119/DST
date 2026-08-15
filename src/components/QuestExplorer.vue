@@ -46,7 +46,7 @@
   }
 
   function stepNumber(quest, step) {
-    if (step.credit === false) return '准备'
+    if (step.credit === false) return step.marker ?? '准备'
     const index = creditedSteps(quest).findIndex((candidate) => candidate.id === step.id)
     return String(index + 1).padStart(2, '0')
   }
@@ -259,7 +259,12 @@
                 <span v-if="group.note">{{ group.note }}</span>
               </header>
               <ul>
-                <li v-for="item in group.items" :key="`${item.name}-${item.count}`" :title="[item.name, item.note].filter(Boolean).join(' · ')">
+                <li
+                  v-for="item in group.items"
+                  :key="`${item.name}-${item.count}`"
+                  :class="{ 'has-note': item.note }"
+                  :title="[item.name, item.note].filter(Boolean).join(' · ')"
+                >
                   <div class="quest-material-image">
                     <img :src="itemImage(item.name)" :alt="item.name" loading="lazy" />
                     <b v-if="item.count">×{{ item.count }}</b>
@@ -293,7 +298,7 @@
               <div class="step-body">
                 <div class="step-title-row">
                   <h4>{{ step.title }}</h4>
-                  <em v-if="step.credit === false">不计任务点</em>
+                  <em v-if="step.credit === false">{{ step.badge ?? '不计任务点' }}</em>
                 </div>
                 <p>{{ step.summary }}</p>
                 <div v-if="step.items?.length" class="step-items">
@@ -676,6 +681,14 @@
     gap: 3px;
   }
 
+  .material-group li.has-note {
+    grid-column: span 3;
+    grid-template-columns: 40px minmax(0, 1fr);
+    width: 100%;
+    align-items: start;
+    gap: 7px;
+  }
+
   .quest-material-image {
     position: relative;
     display: grid;
@@ -737,6 +750,18 @@
     font-size: 8px;
     line-height: 1.35;
     text-align: center;
+  }
+
+  .material-group li.has-note .material-copy {
+    width: 100%;
+    justify-items: stretch;
+  }
+
+  .material-group li.has-note .material-copy > span,
+  .material-group li.has-note .material-copy small {
+    width: 100%;
+    text-align: left;
+    white-space: normal;
   }
 
   .process-heading {
