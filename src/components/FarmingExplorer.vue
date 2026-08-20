@@ -1,7 +1,7 @@
 <script setup>
   import { computed, nextTick, ref } from 'vue'
   import { assetUrl } from '../lib/assets.js'
-  import { buildExampleFormations, formatReducedRatio } from '../lib/farmingLayouts.js'
+  import { buildExampleFormations, formatReducedRatio, formatSeedRatio } from '../lib/farmingLayouts.js'
 
   const props = defineProps({
     seasons: {
@@ -20,8 +20,6 @@
 
   const activeSeasonId = ref(props.seasons[0]?.id ?? 'spring')
   const cropFilter = ref('all')
-  const plotCounts = [1, 2, 4]
-  const activePlotCount = ref(1)
   const mobileFiltersOpen = ref(false)
   const mobileFilterButton = ref(null)
   const mobileFilterCloseButton = ref(null)
@@ -32,10 +30,11 @@
   const filteredExamples = computed(() =>
     seasonExamples.value
       .filter((example) => cropFilter.value === 'all' || example.items.some((item) => item.cropId === cropFilter.value || item.alternatives?.includes(cropFilter.value)))
+      .sort((left, right) => left.plotCount - right.plotCount)
   )
   const mobileFilterSummary = computed(() => {
     const selectedCrop = cropFilter.value === 'all' ? '全部作物' : crop(cropFilter.value)?.name
-    return `${activeSeason.value.name} · ${selectedCrop} · ${activePlotCount.value} 块地`
+    return `${activeSeason.value.name} · ${selectedCrop}`
   })
 
   function crop(id) {
@@ -72,11 +71,6 @@
 
   async function selectMobileCrop(id) {
     cropFilter.value = id
-    await closeMobileFilters()
-  }
-
-  async function selectMobilePlotCount(count) {
-    activePlotCount.value = count
     await closeMobileFilters()
   }
 
@@ -168,20 +162,6 @@
             </div>
           </fieldset>
 
-          <fieldset class="mobile-filter-group">
-            <legend>地块数量</legend>
-            <div class="mobile-plot-options">
-              <button
-                v-for="count in plotCounts"
-                :key="count"
-                type="button"
-                :aria-pressed="activePlotCount === count"
-                @click="selectMobilePlotCount(count)"
-              >
-                {{ count }} 块地
-              </button>
-            </div>
-          </fieldset>
         </div>
 
         </section>
@@ -225,17 +205,6 @@
 
       <section class="pdf-examples" aria-labelledby="pdf-examples-title">
         <header class="pdf-examples-heading">
-          <div class="plot-count-switch" aria-label="选择示例农田数量">
-            <button
-              v-for="count in plotCounts"
-              :key="count"
-              type="button"
-              :aria-pressed="activePlotCount === count"
-              @click="activePlotCount = count"
-            >
-              {{ count }} 块地
-            </button>
-          </div>
           <span>{{ filteredExamples.length }} / {{ seasonExamples.length }} 组</span>
         </header>
 
@@ -255,18 +224,18 @@
                   </template>
                 </h4>
               </div>
-              <strong>{{ formatReducedRatio(example.items) }}</strong>
+              <strong>{{ formatReducedRatio(example.items) }} · {{ formatSeedRatio(example) }}</strong>
             </header>
 
             <div
               class="pdf-example-plots"
               :class="{
-                'single-field': activePlotCount === 1,
-                'two-fields': activePlotCount === 2,
-                'four-fields': activePlotCount === 4,
+                'single-field': example.plotCount === 1,
+                'two-fields': example.plotCount === 2,
+                'four-fields': example.plotCount === 4,
               }"
             >
-              <div v-for="formation in buildExampleFormations(example, activePlotCount)" :key="formation.id" class="plot-unit pdf-example-plot" :class="formation.className">
+              <div v-for="formation in buildExampleFormations(example)" :key="formation.id" class="plot-unit pdf-example-plot" :class="formation.className">
                 <span class="plot-number">▦ {{ formation.label }}</span>
                 <div class="plot-grid" :class="[formation.className, { 'vertical-mirror': formation.verticalMirror }]" :style="{ '--field-columns': formation.columns }">
                   <span v-for="(cropId, slotIndex) in formation.slots" :key="slotIndex" class="plot-cell" :class="{ empty: !cropId }">
@@ -286,7 +255,7 @@
             </div>
 
             <footer>
-              <span>{{ activePlotCount }} 块地</span>
+              <span>{{ example.plotCount }} 块地</span>
               <span>每块 {{ example.gridSize }} 格</span>
             </footer>
           </article>

@@ -144,6 +144,10 @@ export function formatReducedRatio(items) {
   return counts.map((count) => count / divisor).join(":");
 }
 
+export function formatSeedRatio(example) {
+  return sortedItems(example).map((item) => item.count * example.plotCount).join(":");
+}
+
 export function buildExampleFormations(example, plotCount = example.plotCount) {
   const items = sortedItems(example);
   const counts = items.map((item) => item.count).join(",");

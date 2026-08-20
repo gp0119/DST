@@ -973,34 +973,9 @@ img {
 .pdf-examples-heading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 18px;
   gap: 18px;
-}
-.plot-count-switch {
-  display: inline-grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  background: rgba(5, 7, 5, 0.42);
-}
-.plot-count-switch button {
-  padding: 6px 10px;
-  color: #96998a;
-  border: 0;
-  border-radius: 7px;
-  background: transparent;
-  font: 900 10px/1 var(--font-sans);
-  white-space: nowrap;
-}
-.plot-count-switch button:hover {
-  color: #e6d9ba;
-  background: rgba(255, 255, 255, 0.05);
-}
-.plot-count-switch button[aria-pressed='true'] {
-  color: #171914;
-  background: var(--season-accent);
 }
 .pdf-examples-heading p {
   margin: 0 0 3px;
@@ -1669,8 +1644,7 @@ img {
     overflow: hidden;
   }
   .farming-explorer > .season-tabs,
-  .season-panel > .season-crop-strip,
-  .pdf-examples-heading > .plot-count-switch {
+  .season-panel > .season-crop-strip {
     display: none;
   }
   .mobile-filter-bar {
@@ -1781,19 +1755,14 @@ img {
     color: #8f9384;
     font: 900 10px/1 var(--font-sans);
   }
-  .mobile-season-options,
-  .mobile-plot-options {
+  .mobile-season-options {
     display: grid;
     gap: 6px;
   }
   .mobile-season-options {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
-  .mobile-plot-options {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .mobile-season-options button,
-  .mobile-plot-options button {
+  .mobile-season-options button {
     padding: 10px 5px;
     color: #a7aa9a;
     border: 0;
@@ -1801,8 +1770,7 @@ img {
     background: rgba(5, 7, 5, 0.42);
     font: 900 11px/1 var(--font-sans);
   }
-  .mobile-season-options button[aria-pressed='true'],
-  .mobile-plot-options button[aria-pressed='true'] {
+  .mobile-season-options button[aria-pressed='true'] {
     color: #171914;
     background: var(--season-accent);
   }

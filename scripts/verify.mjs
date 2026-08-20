@@ -5,6 +5,7 @@ import { generateRatioGroups } from "../src/lib/farmingCatalog.js";
 import {
   buildExampleFormations,
   formatReducedRatio,
+  formatSeedRatio,
 } from "../src/lib/farmingLayouts.js";
 import { questItemImages } from "../src/lib/questItemImages.js";
 
@@ -342,12 +343,20 @@ for (const example of farmingExamples.examples) {
     .map((item) => item.count)
     .sort((left, right) => right - left);
   check(
+    formatSeedRatio(example) === counts.map((count) => count * example.plotCount).join(":"),
+    `${example.id} 的实际种子数比例不正确`,
+  );
+  check(
     counts.join(":") === example.ratio,
     `${example.id} 的比例 ${example.ratio} 与作物数量 ${counts.join(":")} 不一致`,
   );
   check(
     supportedLayouts.has(`${example.gridSize}|${counts.join(",")}`),
     `${example.id} 缺少对应的示例田布局模板`,
+  );
+  check(
+    example.items.every((item) => item.count * example.plotCount >= 4),
+    `${example.id} 按自身地块数种植时有作物不足 4 株，无法满足家庭需求`,
   );
   for (const plotCount of [1, 2, 4]) {
     const formations = buildExampleFormations(example, plotCount);
@@ -591,7 +600,7 @@ check(
   [1, 2, 4].every((count) =>
     farmingExamples.examples.some((example) => example.plotCount === count),
   ),
-  "示例缺少 1、2 或 4 块农田筛选数据",
+  "示例缺少 1、2 或 4 块农田布局数据",
 );
 check(
   [9, 10].every((size) =>
