@@ -40,7 +40,7 @@ export const questItemImages = {
   晾肉架: "images/crafting/meatrack.png",
   码头桩: "images/crafting/dock_woodposts_item.png",
   普通宝石: "images/crafting/redgem.png",
-  暗影中庭: "images/quests/shadow-atrium.png",
+  暗影心房: "images/quests/shadow-atrium.png",
   暗影系武器: "images/crafting/nightsword.png",
   暗影裂隙装备: "images/crafting/armor_voidcloth.png",
   月岩: "images/crafting/moonrocknugget.png",
