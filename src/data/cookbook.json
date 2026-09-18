@@ -4,9 +4,9 @@
       "en": "Amberosia",
       "zh": "琥珀美食",
       "imageFile": "Amberosia.png",
-      "hunger": "12",
-      "health": "10",
-      "sanity": "0",
+      "hunger": "12.5",
+      "health": "0",
+      "sanity": "12.5",
       "perish": "不腐烂",
       "cook": "40 秒",
       "condition": "尘土块 ≥ 1；其余任意填充物",
@@ -88,7 +88,7 @@
       "sanity": "5",
       "perish": "15 天",
       "cook": "10 秒",
-      "condition": "芦笋 ≥ 1 + 菜度 ≥ 1.5；禁用肉度、不可食用度",
+      "condition": "芦笋 ≥ 1 + 菜度 > 2；禁用肉度、不可食用度",
       "effect": "无特殊效果",
       "warly": false,
       "tags": [],
@@ -172,13 +172,13 @@
       ],
       "combos": [
         {
-          "text": "怪物肉 ×2 + 鸟蛋 ×2",
+          "text": "怪物肉 ×1 + 肉 ×1 + 鸟蛋 ×2",
           "items": [
             {
-              "id": "monstermeat",
-              "name": "怪物肉",
-              "imageFile": "monstermeat.png",
-              "image": "images/ingredients/monstermeat.png"
+              "id": "meat",
+              "name": "肉",
+              "imageFile": "meat.png",
+              "image": "images/ingredients/meat.png"
             },
             {
               "id": "monstermeat",
@@ -201,11 +201,11 @@
           ]
         },
         {
-          "text": "大肉 ×1 + 小肉 ×1 + 鸟蛋 ×2",
+          "text": "肉 ×1 + 小肉 ×1 + 鸟蛋 ×2",
           "items": [
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
@@ -604,7 +604,7 @@
           ]
         },
         {
-          "text": "藤壶 ×1 + 红蘑菇 ×1 + 冰 ×2",
+          "text": "藤壶 ×1 + 采摘的红蘑菇 ×1 + 冰 ×2",
           "items": [
             {
               "id": "barnacle",
@@ -614,7 +614,7 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
@@ -839,7 +839,7 @@
           ]
         },
         {
-          "text": "鸟蛋 ×1 + 红蘑菇 ×2 + 冰 ×1",
+          "text": "鸟蛋 ×1 + 采摘的红蘑菇 ×2 + 冰 ×1",
           "items": [
             {
               "id": "bird_egg",
@@ -849,13 +849,13 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
@@ -993,7 +993,7 @@
           ]
         },
         {
-          "text": "蝴蝶翅膀 ×1 + 红蘑菇 ×1 + 冰 ×2",
+          "text": "蝴蝶翅膀 ×1 + 采摘的红蘑菇 ×1 + 冰 ×2",
           "items": [
             {
               "id": "butterflywings",
@@ -1003,7 +1003,7 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
@@ -1971,7 +1971,7 @@
       "sanity": "5",
       "perish": "6 天",
       "cook": "10 秒",
-      "condition": "仙人掌花 ≥ 1 + 菜度 ≥ 1.5；禁用水果度、肉度、蛋度、甜味剂度、不可食用度",
+      "condition": "仙人掌花 ≥ 1 + 菜度 ≥ 2；禁用水果度、肉度、蛋度、甜味剂度、不可食用度",
       "effect": "无特殊效果",
       "warly": false,
       "tags": [
@@ -2084,7 +2084,7 @@
           ]
         },
         {
-          "text": "蛙腿 ×1 + 红蘑菇 ×1 + 冰 ×2",
+          "text": "蛙腿 ×1 + 采摘的红蘑菇 ×1 + 冰 ×2",
           "items": [
             {
               "id": "froglegs",
@@ -2094,7 +2094,7 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
@@ -2368,7 +2368,7 @@
       ],
       "combos": [
         {
-          "text": "蜂蜜 ×1 + 大肉 ×1 + 怪物肉 ×1 + 冰 ×1",
+          "text": "蜂蜜 ×1 + 肉 ×1 + 怪物肉 ×1 + 冰 ×1",
           "items": [
             {
               "id": "honey",
@@ -2378,7 +2378,7 @@
             },
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
@@ -2397,7 +2397,7 @@
           ]
         },
         {
-          "text": "蜂蜜 ×1 + 大肉 ×1 + 小肉 ×2",
+          "text": "蜂蜜 ×1 + 肉 ×1 + 小肉 ×2",
           "items": [
             {
               "id": "honey",
@@ -2407,7 +2407,7 @@
             },
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
@@ -2529,7 +2529,7 @@
       ],
       "combos": [
         {
-          "text": "冰 ×1 + 电羊奶 ×1 + 蜂蜜 ×1 + 浆果 ×1",
+          "text": "冰 ×1 + 带电的羊奶 ×1 + 蜂蜜 ×1 + 浆果 ×1",
           "items": [
             {
               "id": "ice",
@@ -2539,7 +2539,7 @@
             },
             {
               "id": "goatmilk",
-              "name": "电羊奶",
+              "name": "带电的羊奶",
               "imageFile": "goatmilk.png",
               "image": "images/ingredients/goatmilk.png"
             },
@@ -2720,7 +2720,7 @@
           ]
         },
         {
-          "text": "叶肉 ×2 + 蜂蜜 ×1 + 蜂巢 ×1",
+          "text": "叶肉 ×2 + 蜂蜜 ×1 + 蜜脾 ×1",
           "items": [
             {
               "id": "plantmeat",
@@ -2742,7 +2742,7 @@
             },
             {
               "id": "honeycomb",
-              "name": "蜂巢",
+              "name": "蜜脾",
               "imageFile": "honeycomb.png",
               "image": "images/ingredients/honeycomb.png"
             }
@@ -3003,23 +3003,23 @@
       ],
       "combos": [
         {
-          "text": "大肉 ×3 + 冰 ×1",
+          "text": "肉 ×3 + 冰 ×1",
           "items": [
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
@@ -3032,17 +3032,17 @@
           ]
         },
         {
-          "text": "大肉 ×2 + 怪物肉 ×1 + 浆果 ×1",
+          "text": "肉 ×2 + 怪物肉 ×1 + 浆果 ×1",
           "items": [
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
@@ -3073,7 +3073,7 @@
       "sanity": "20",
       "perish": "3 天",
       "cook": "10 秒",
-      "condition": "西瓜 ≥ 1 + 冰 ≥ 1 + 树枝 = 1；禁用肉度、蛋度、菜度",
+      "condition": "西瓜 ≥ 1 + 冰 ≥ 1 + 树枝 ≥ 1；禁用肉度、蛋度、菜度",
       "effect": "降温料理：体感温度每秒降低 1°，持续 10 秒。",
       "warly": false,
       "tags": [
@@ -3162,7 +3162,7 @@
       ],
       "combos": [
         {
-          "text": "裸露鼻孔 ×1 + 海带叶 ×1 + 电羊奶 ×1 + 冰 ×1",
+          "text": "裸露鼻孔 ×1 + 海带叶 ×1 + 带电的羊奶 ×1 + 冰 ×1",
           "items": [
             {
               "id": "batnose",
@@ -3178,7 +3178,7 @@
             },
             {
               "id": "goatmilk",
-              "name": "电羊奶",
+              "name": "带电的羊奶",
               "imageFile": "goatmilk.png",
               "image": "images/ingredients/goatmilk.png"
             },
@@ -3308,7 +3308,7 @@
       "sanity": "10",
       "perish": "15 天",
       "cook": "20 秒",
-      "condition": "月亮蘑菇、红蘑菇、蓝蘑菇、绿蘑菇各 1 个；必须使用生蘑菇",
+      "condition": "月亮蘑菇、采摘的红蘑菇、采摘的蓝蘑菇、采摘的绿蘑菇各 1 个；必须使用生蘑菇",
       "effect": "清空困倦值，并大幅提高睡眠抗性 1 天；不等于完全免疫困倦。",
       "warly": false,
       "tags": [
@@ -3316,7 +3316,7 @@
       ],
       "combos": [
         {
-          "text": "月亮蘑菇、红蘑菇、蓝蘑菇、绿蘑菇各 ×1",
+          "text": "月亮蘑菇、采摘的红蘑菇、采摘的蓝蘑菇、采摘的绿蘑菇各 ×1",
           "items": [
             {
               "id": "moon_cap",
@@ -3326,19 +3326,19 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
             {
               "id": "blue_cap",
-              "name": "蓝蘑菇",
+              "name": "采摘的蓝蘑菇",
               "imageFile": "blue_cap.png",
               "image": "images/ingredients/blue_cap.png"
             },
             {
               "id": "green_cap",
-              "name": "绿蘑菇",
+              "name": "采摘的绿蘑菇",
               "imageFile": "green_cap.png",
               "image": "images/ingredients/green_cap.png"
             }
@@ -3355,19 +3355,19 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
             {
               "id": "blue_cap",
-              "name": "蓝蘑菇",
+              "name": "采摘的蓝蘑菇",
               "imageFile": "blue_cap.png",
               "image": "images/ingredients/blue_cap.png"
             },
             {
               "id": "green_cap",
-              "name": "绿蘑菇",
+              "name": "采摘的绿蘑菇",
               "imageFile": "green_cap.png",
               "image": "images/ingredients/green_cap.png"
             }
@@ -3499,7 +3499,7 @@
           ]
         },
         {
-          "text": "鸟蛋 ×1 + 小肉 ×1 + 红蘑菇 ×1 + 冰 ×1",
+          "text": "鸟蛋 ×1 + 小肉 ×1 + 采摘的红蘑菇 ×1 + 冰 ×1",
           "items": [
             {
               "id": "bird_egg",
@@ -3515,7 +3515,7 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
@@ -3616,7 +3616,7 @@
       "sanity": "0",
       "perish": "18750 天",
       "cook": "10 秒",
-      "condition": "玉米 ≥ 1 + 蜂蜜 ≥ 1 + 树枝 = 1",
+      "condition": "玉米 ≥ 1 + 蜂蜜 ≥ 1 + 树枝 ≥ 1",
       "effect": "无特殊效果",
       "warly": false,
       "tags": [],
@@ -3803,11 +3803,11 @@
           ]
         },
         {
-          "text": "红蘑菇 ×1 + 冰 ×3",
+          "text": "采摘的红蘑菇 ×1 + 冰 ×3",
           "items": [
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
@@ -3922,7 +3922,7 @@
       "sanity": "20",
       "perish": "10 天",
       "cook": "20 秒",
-      "condition": "鳗鱼 ≥ 1 + 鱼度 > 1",
+      "condition": "鱼度 > 2",
       "effect": "无特殊效果",
       "warly": false,
       "tags": [
@@ -4087,11 +4087,11 @@
       ],
       "combos": [
         {
-          "text": "大肉 ×1 + 小肉 ×1 + 胡萝卜 ×1 + 红蘑菇 ×1",
+          "text": "肉 ×1 + 小肉 ×1 + 胡萝卜 ×1 + 采摘的红蘑菇 ×1",
           "items": [
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
@@ -4109,14 +4109,14 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             }
           ]
         },
         {
-          "text": "怪物肉 ×1 + 小肉 ×1 + 胡萝卜 ×1 + 红蘑菇 ×1",
+          "text": "怪物肉 ×1 + 小肉 ×1 + 胡萝卜 ×1 + 采摘的红蘑菇 ×1",
           "items": [
             {
               "id": "monstermeat",
@@ -4138,7 +4138,7 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             }
@@ -4280,7 +4280,7 @@
           ]
         },
         {
-          "text": "茄子 ×1 + 红蘑菇 ×2 + 冰 ×1",
+          "text": "茄子 ×1 + 采摘的红蘑菇 ×2 + 冰 ×1",
           "items": [
             {
               "id": "eggplant",
@@ -4290,13 +4290,13 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
@@ -4594,17 +4594,17 @@
           ]
         },
         {
-          "text": "大肉 ×2 + 鱼肉 ×2",
+          "text": "肉 ×2 + 鱼肉 ×2",
           "items": [
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
             {
               "id": "meat",
-              "name": "大肉",
+              "name": "肉",
               "imageFile": "meat.png",
               "image": "images/ingredients/meat.png"
             },
@@ -4761,7 +4761,7 @@
           ]
         },
         {
-          "text": "高脚鸟蛋 ×1 + 红蘑菇 ×2 + 冰 ×1",
+          "text": "高脚鸟蛋 ×1 + 采摘的红蘑菇 ×2 + 冰 ×1",
           "items": [
             {
               "id": "tallbirdegg",
@@ -4771,13 +4771,13 @@
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
             {
               "id": "red_cap",
-              "name": "红蘑菇",
+              "name": "采摘的红蘑菇",
               "imageFile": "red_cap.png",
               "image": "images/ingredients/red_cap.png"
             },
@@ -4802,7 +4802,7 @@
       "sanity": "5",
       "perish": "15 天",
       "cook": "10 秒",
-      "condition": "烤桦栗果 ≥ 1 + 浆果 ≥ 1 + 水果度 ≥ 0.5；禁用肉度、蛋度、菜度、乳制品度",
+      "condition": "桦栗果或烤桦栗果 ≥ 1 + 浆果 ≥ 1 + 水果度 ≥ 1；禁用肉度、蛋度、菜度、乳制品度",
       "effect": "无特殊效果",
       "warly": false,
       "tags": [
@@ -5126,7 +5126,7 @@
       "sanity": "33",
       "perish": "15 天",
       "cook": "10 秒",
-      "condition": "番茄或芦笋 ≥ 1 + 冰 ≥ 1 + 菜度 ≥ 1.5；禁用肉度、蛋度、不可食用度",
+      "condition": "番茄或芦笋 ≥ 1 + 冰 ≥ 1 + 菜度 > 2；禁用肉度、蛋度、不可食用度",
       "effect": "无特殊效果",
       "warly": false,
       "tags": [
@@ -5872,7 +5872,7 @@
       "health": "3",
       "sanity": "10",
       "perish": "8 天",
-      "condition": "发光浆果 ≥ 1 或小发光浆果 ≥ 2 + 水果度 ≥ 1；禁用肉度、不可食用度",
+      "condition": "发光浆果 ≥ 1 或小发光浆果 ≥ 2 + 水果度 ≥ 2；禁用肉度、不可食用度",
       "effect": "角色发光 2 天，照明范围会逐渐缩小。",
       "imageFile": "Glow Berry Mousse.png",
       "cook": "20 秒",
