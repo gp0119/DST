@@ -324,7 +324,10 @@
           <div>
             <p>主要奖励</p>
             <ul>
-              <li v-for="reward in activeQuest.rewards" :key="reward">{{ reward }}</li>
+              <li v-for="reward in activeQuest.rewards" :key="reward.name" class="quest-reward">
+                <img :src="itemImage(reward.name)" :alt="reward.name" width="48" height="48" loading="lazy" />
+                <div><strong>{{ reward.name }}</strong><span>{{ reward.note }}</span></div>
+              </li>
             </ul>
           </div>
         </footer>
@@ -968,12 +971,25 @@
 
   .quest-detail-footer {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
     padding: 28px clamp(18px, 4vw, 38px) 34px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     background: rgba(0, 0, 0, 0.12);
   }
+
+  .quest-detail-footer li.quest-reward {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 220px;
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .quest-reward img { object-fit: contain; flex-shrink: 0; }
+  .quest-reward strong { display: block; color: #e4d8bb; font-size: 13px; }
+  .quest-reward span { display: block; margin-top: 5px; line-height: 1.6; }
 
   .quest-sources {
     display: grid;
