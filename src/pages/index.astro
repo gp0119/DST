@@ -1,103 +1,57 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import crafting from "../data/crafting.json";
+import quests from "../data/quests.json";
 
 const base = import.meta.env.BASE_URL;
 const tools = [
   {
-    href: `${base}recipes/`,
-    eyebrow: "Cookbook",
-    title: "料理食谱",
-    description:
-      "按名称、食材与属性筛选 81 道烹饪锅料理，查看常用配方、角色偏好和特殊效果。",
-    stat: "81 道料理",
-    className: "recipes",
-    images: [
-      `${base}images/food/Meaty Stew.webp`,
-      `${base}images/food/Dragonpie.webp`,
-      `${base}images/food/Pierogi.webp`,
-    ],
+    path: "recipes", title: "料理食谱", stat: "81 道料理",
+    description: "查询配方与料理效果", image: "images/food/Dragonpie.webp",
   },
   {
-    href: `${base}farming/`,
-    eyebrow: "Farming",
-    title: "巨大化配比",
-    description:
-      "按季节查找自循环养分配比，并用单田、双田与四田布局快速安排作物位置。",
-    stat: "79 组配比",
-    className: "farming",
-    images: [
-      `${base}images/ingredients/dragonfruit.png`,
-      `${base}images/ingredients/pumpkin.png`,
-      `${base}images/ingredients/potato.png`,
-    ],
+    path: "crafting", title: "全部制作", stat: `${crafting.meta.itemCount} 项制作`,
+    description: "查找物品与制作材料", image: "images/crafting/torch.png",
   },
   {
-    href: `${base}crafting/`,
-    eyebrow: "Crafting",
-    title: "全部制作",
-    description:
-      "先选制作分类，再查看物品与材料；冒险家物品可继续按人物进入专属列表。",
-    stat: `${crafting.meta.itemCount} 项制作`,
-    className: "crafting",
-    images: [
-      `${base}images/crafting/axe.png`,
-      `${base}images/crafting/torch.png`,
-      `${base}images/crafting/researchlab.png`,
-    ],
+    path: "farming", title: "巨大化配比", stat: "79 组配比",
+    description: "季节配比与种植布局", image: "images/ingredients/pumpkin.png",
   },
   {
-    href: `${base}skills/`,
-    eyebrow: "Insight",
-    title: "角色技能树",
-    description:
-      "为 12 位角色分配洞察点，直观看清前置、互斥分支、阵营与首领解锁条件。",
-    stat: "12 位角色",
-    className: "skills",
-    images: [
-      `${base}images/characters/wilson.png`,
-      `${base}images/characters/wormwood.png`,
-      `${base}images/characters/wanda.png`,
-    ],
+    path: "skills", title: "角色技能树", stat: "12 位角色",
+    description: "洞察分配与解锁条件", image: "images/characters/wormwood.png",
   },
   {
-    href: `${base}quests/`,
-    eyebrow: "Questlines",
-    title: "任务路线",
-    description:
-      "查看奶奶岛、远古织影者、天体英雄与裂隙终局的前置物品、流程和可保存进度。",
-    stat: "5 条路线",
-    className: "quests",
-    images: [
-      `${base}images/characters/maxwell.png`,
-      `${base}images/ingredients/nightmarefuel.png`,
-      `${base}images/characters/wanda.png`,
-    ],
+    path: "quests", title: "任务路线", stat: `${quests.quests.length} 条路线`,
+    description: "前置物品与任务流程", image: "images/ingredients/nightmarefuel.png",
+  },
+  {
+    path: "sequitor", title: "追随者谜题", stat: "3 种谜题",
+    description: "挑战谜题，逐步解法", image: "static/quests/Glove.png",
   },
 ];
 ---
 
 <BaseLayout
-  title="饥荒联机版生存工具箱"
-  description="汇集料理食谱、全部制作、巨大作物配比、角色技能树与任务路线的《饥荒联机版》中文速查工具。"
+  title="饥荒联机版手册"
+  description="汇集料理食谱、全部制作、巨大作物配比、角色技能树、任务路线与追随者谜题的《饥荒联机版》中文速查工具。"
 >
   <main id="main" class="home-main">
     <section class="home-tools" aria-labelledby="tools-title">
-
+      <header class="home-section-heading">
+        <p class="home-kicker">DST MANUAL</p>
+        <h1 id="tools-title">饥荒联机版手册</h1>
+      </header>
       <div class="home-tool-grid">
         {
-          tools.map((tool, index) => (
-            <a class={`home-tool-card ${tool.className}`} href={tool.href}>
+          tools.map((tool) => (
+            <a class={`home-tool-card ${tool.path}`} href={`${base}${tool.path}/`}>
               <div class="home-card-topline">
-                <span>{tool.eyebrow}</span>
-                <small>0{index + 1}</small>
-              </div>
-              <div class="home-card-images" aria-hidden="true">
-                {tool.images.map((image) => <img src={image} alt="" loading="lazy" />)}
+                <img src={`${base}${tool.image}`} alt="" width="56" height="56" />
+                <span>{tool.stat}</span>
               </div>
               <div class="home-card-copy">
-                <span>{tool.stat}</span>
-                <h3>{tool.title}</h3>
+                <h2>{tool.title}</h2>
                 <p>{tool.description}</p>
               </div>
             </a>
@@ -105,7 +59,6 @@ const tools = [
         }
       </div>
     </section>
-
     <footer class="home-footer">
       <span>KEEP THE FIRE BURNING</span>
       <span>饥荒联机版 · 中文速查</span>

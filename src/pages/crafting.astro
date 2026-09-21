@@ -4,7 +4,6 @@ import CraftingSearch from "../components/CraftingSearch.vue";
 import { crafting, craftingCategories } from "../lib/crafting.js";
 
 const base = import.meta.env.BASE_URL;
-const characterCategory = craftingCategories.find((category) => category.id === "character");
 const stationById = new Map(crafting.stations.map((station) => [station.id, station.name]));
 const categoryById = new Map(crafting.categories.map((category) => [category.id, category.name]));
 const characterById = new Map(crafting.characters.map((character) => [character.id, character.name]));
@@ -41,24 +40,22 @@ const description = `《饥荒联机版》${crafting.meta.itemCount} 项制作�
 <BaseLayout title="饥荒联机版全部制作配方" description={description}>
   <main id="main" class="container crafting-main">
     <section class="crafting-directory" aria-labelledby="crafting-categories-title">
+      <h1 id="crafting-categories-title" class="crafting-directory-title">全部制作</h1>
       <CraftingSearch client:load items={searchItems} />
       <div class="crafting-directory-grid">
         {
           craftingCategories.map((category) => (
             <a
-              class:list={{
-                "crafting-directory-card": true,
-                featured: category.id === characterCategory?.id,
-              }}
+              class="crafting-directory-card"
               href={`${base}crafting/${category.id}/`}
             >
               <div class="crafting-directory-image">
                 <img src={`${base}${category.image}`} alt={`${category.name}分类`} loading="lazy" />
               </div>
               <div>
-                <span>{category.id === "character" ? "下一步选择人物" : "制作分类"}</span>
                 <h2>{category.name}</h2>
-                <p>{category.count} 项制作</p>
+                <span lang="en">{category.englishName}</span>
+                <p>{category.count} 项</p>
               </div>
             </a>
           ))

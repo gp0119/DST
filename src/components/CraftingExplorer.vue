@@ -1,5 +1,5 @@
 <script setup>
-  import { computed, nextTick, onMounted, ref } from 'vue'
+  import { computed, nextTick, onMounted, ref, watch } from 'vue'
   import { assetUrl } from '../lib/assets.js'
 
   const props = defineProps({
@@ -10,6 +10,9 @@
   })
 
   const visibleLimit = ref(72)
+  const query = ref('')
+  const station = ref('')
+  const unlock = ref('')
 
   const stationById = new Map(props.data.stations.map((station) => [station.id, station.name]))
   const categoryById = new Map(props.data.categories.map((category) => [category.id, category.name]))
@@ -21,7 +24,25 @@
       `images/characters/${character.id === 'wx-78' ? 'wx78' : character.id}.png`,
     ]),
   )
-  const visibleItems = computed(() => props.data.items.slice(0, visibleLimit.value))
+  const searchTextById = new Map(props.data.items.map((item) => [item.id, [
+    item.id, item.name, item.englishName, item.description,
+    stationById.get(item.stationId), characterById.get(item.characterId),
+    ...item.categoryIds.map((id) => categoryById.get(id)),
+    ...item.materials.flatMap((material) => [material.id, material.name, material.englishName]),
+  ].filter(Boolean).join(' ').toLocaleLowerCase('zh-CN')]))
+  const filteredItems = computed(() => {
+    const needle = query.value.trim().toLocaleLowerCase('zh-CN')
+    return props.data.items.filter((item) =>
+      (!needle || searchTextById.get(item.id).includes(needle)) &&
+      (!station.value || item.stationId === station.value) &&
+      (!unlock.value || Boolean(item[unlock.value])))
+  })
+  const visibleItems = computed(() => filteredItems.value.slice(0, visibleLimit.value))
+  watch([query, station, unlock], () => { visibleLimit.value = 72 })
+
+  function clearFilters() {
+    query.value = ''; station.value = ''; unlock.value = ''
+  }
 
   onMounted(() => {
     const itemId = new URLSearchParams(window.location.search).get('item')
@@ -43,6 +64,30 @@
 
 <template>
   <div class="crafting-explorer">
+    <div class="crafting-category-search">
+      <label for="crafting-filter-query">筛选当前制作列表</label>
+      <div class="crafting-category-search-controls">
+        <input id="crafting-filter-query" v-model="query" type="search" placeholder="物品、材料、制作站或英文名…" />
+        <button v-if="query || station || unlock" type="button" @click="clearFilters">清除筛选</button>
+      </div>
+      <div class="crafting-filter-options">
+        <label>制作站
+          <select v-model="station">
+            <option value="">全部制作站</option>
+            <option v-for="entry in data.stations" :key="entry.id" :value="entry.id">{{ entry.name }}</option>
+          </select>
+        </label>
+        <label>解锁条件
+          <select v-model="unlock">
+            <option value="">全部条件</option>
+            <option value="blueprint">蓝图解锁</option>
+            <option value="builderSkill">技能树解锁</option>
+            <option value="noUnlock">需靠近制作站</option>
+          </select>
+        </label>
+      </div>
+      <p aria-live="polite">找到 <strong>{{ filteredItems.length }}</strong> / {{ data.items.length }} 项制作</p>
+    </div>
     <section class="crafting-results" aria-label="制作物列表">
       <div v-if="visibleItems.length" class="crafting-grid">
         <article v-for="item in visibleItems" :id="`craft-${item.id}`" :key="item.id" class="crafting-card">
@@ -107,11 +152,12 @@
       </div>
 
       <div v-else class="crafting-empty">
-        <strong>暂无制作物</strong>
+        <strong>没有符合条件的制作物</strong>
+        <p>试试其他关键词，或清除筛选。</p>
       </div>
 
-      <button v-if="visibleItems.length < data.items.length" class="crafting-load-more" type="button" @click="showMore">
-        再显示 {{ Math.min(72, data.items.length - visibleItems.length) }} 项
+      <button v-if="visibleItems.length < filteredItems.length" class="crafting-load-more" type="button" @click="showMore">
+        再显示 {{ Math.min(72, filteredItems.length - visibleItems.length) }} 项
       </button>
     </section>
   </div>

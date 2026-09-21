@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SequitorPuzzle from "../components/sequitor/SequitorPuzzle.vue";
+---
+
+<BaseLayout title="追随者谜题 · 饥荒联机版" description="练习三种追随者谜题及镜像布局，使用下一步提示穿过石柱，抵达对岸。">
+  <main id="main" class="sequitor-main">
+    <h1>追随者谜题</h1>
+    <p>点击相邻石柱或使用方向键跳跃，抵达对岸出口。灯泡可开启下一步提示。</p>
+    <SequitorPuzzle client:load />
+  </main>
+</BaseLayout>
+
+<style>
+  .sequitor-main { width: min(100% - 24px, 680px); margin: 0 auto 24px; }
+  @media (min-width: 900px) {
+    .sequitor-main { width: min(100% - 48px, 1000px); }
+  }
+  h1 { margin: 0 0 6px; text-align: center; font-size: 24px; }
+  p { margin: 0 0 12px; color: #9fa391; text-align: center; font-size: 13px; }
+</style>

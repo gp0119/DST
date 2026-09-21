@@ -16,6 +16,7 @@ const description = `《饥荒联机版》${craftingCharacters.length} 位冒险
     </nav>
 
     <section class="crafting-directory" aria-labelledby="crafting-characters-title">
+      <h1 id="crafting-characters-title" class="crafting-directory-title">冒险家物品</h1>
       <div class="crafting-character-grid">
         {
           craftingCharacters.map((character) => (
@@ -25,9 +26,8 @@ const description = `《饥荒联机版》${craftingCharacters.length} 位冒险
             >
               <img src={`${base}${character.image}`} alt={character.name} loading="lazy" />
               <div>
-                <span>冒险家</span>
                 <h2>{character.name}</h2>
-                <p>{character.count} 项专属制作</p>
+                <p>{character.count} 项</p>
               </div>
             </a>
           ))

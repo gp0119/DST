@@ -1,0 +1,52 @@
+{
+  "abyss_pillar-idle_a-255": {
+    "file": "abyss_pillar-idle_a-255-sheet.png",
+    "count": 4,
+    "duration": 133
+  },
+  "abyss_pillar-occupied_warning-255": {
+    "file": "abyss_pillar-occupied_warning-255-sheet.png",
+    "count": 8,
+    "duration": 533
+  },
+  "abyss_pillar-collapse-255": {
+    "file": "abyss_pillar-collapse-255-sheet.png",
+    "count": 10,
+    "duration": 833
+  },
+  "abyss_pillar-place_a-255": {
+    "file": "abyss_pillar-place_a-255-sheet.png",
+    "count": 16,
+    "duration": 1567
+  },
+  "abyss_pillar_minion-idle_on-2": {
+    "file": "abyss_pillar_minion-idle_on-2-sheet.png",
+    "count": 8,
+    "duration": 767
+  },
+  "abyss_pillar_minion-jump_loop-2": {
+    "file": "abyss_pillar_minion-jump_loop-2-sheet.png",
+    "count": 8,
+    "duration": 533
+  },
+  "abyss_pillar_minion-idle_on-5": {
+    "file": "abyss_pillar_minion-idle_on-5-sheet.png",
+    "count": 8,
+    "duration": 767
+  },
+  "abyss_pillar_minion-jump_loop-5": {
+    "file": "abyss_pillar_minion-jump_loop-5-sheet.png",
+    "count": 8,
+    "duration": 533
+  },
+  "abyss_pillar_minion-idle_on-8": {
+    "file": "abyss_pillar_minion-idle_on-8-sheet.png",
+    "count": 8,
+    "duration": 767
+  },
+  "abyss_pillar_minion-jump_loop-8": {
+    "file": "abyss_pillar_minion-jump_loop-8-sheet.png",
+    "count": 8,
+    "duration": 533
+  }
+}

@@ -130,9 +130,9 @@ img {
   display: flex;
   flex: 1;
   flex-direction: column;
-  width: min(1320px, calc(100% - 28px));
+  width: min(1080px, calc(100% - 32px));
   margin: 0 auto;
-  padding: clamp(32px, 5vw, 64px) 0 28px;
+  padding: clamp(24px, 4vw, 48px) 0 24px;
 }
 .home-kicker {
   margin: 0 0 16px;
@@ -142,37 +142,35 @@ img {
   letter-spacing: 0.22em;
 }
 .home-tools {
-  padding: 0 0 54px;
+  padding: 0 0 32px;
 }
 .home-section-heading {
-  display: flex;
-  align-items: end;
-  margin-bottom: 28px;
-  padding: 0 4px;
+  margin-bottom: 24px;
 }
 .home-section-heading .home-kicker {
-  margin-bottom: 9px;
+  margin-bottom: 6px;
 }
 .home-section-heading h1 {
   margin: 0;
   color: #eee1c3;
-  font-size: clamp(30px, 4vw, 48px);
-  letter-spacing: -0.05em;
+  font-size: clamp(24px, 3vw, 36px);
+  letter-spacing: -0.04em;
 }
 .home-tool-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 .home-tool-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 18px;
+  min-width: 0;
+  padding: 24px;
   overflow: hidden;
   color: #e9dec5;
   border: 1px solid rgba(228, 187, 99, 0.16);
-  border-radius: 22px;
+  border-radius: 16px;
   background: radial-gradient(circle at 82% 22%, rgba(211, 170, 89, 0.12), transparent 15rem), linear-gradient(155deg, #20271c, #10130e 70%);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
   text-decoration: none;
@@ -199,81 +197,33 @@ img {
 .home-tool-card.quests {
   background: radial-gradient(circle at 82% 22%, rgba(112, 91, 126, 0.2), transparent 15rem), linear-gradient(155deg, #24231e, #10110e 70%);
 }
+.home-tool-card:focus-visible {
+  outline: 2px solid #e4bb63;
+  outline-offset: 4px;
+}
 .home-card-topline {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #aa9b7d;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  gap: 8px;
+  color: #c8a86e;
+  font-size: 13px;
 }
-.home-card-topline small {
-  color: #6e715f;
-  font:
-    700 12px/1 Georgia,
-    serif;
-}
-.home-card-images {
-  position: relative;
-  height: 170px;
-  margin: 28px 0 22px;
-}
-.home-card-images::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 138px;
-  height: 138px;
-  border: 1px dashed rgba(228, 187, 99, 0.16);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-.home-card-images img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 122px;
-  height: 122px;
+.home-card-topline img {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
   object-fit: contain;
-  filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.5));
-  transform: translate(-50%, -50%);
-  transition: transform 0.24s ease;
 }
-.home-card-images img:first-child {
-  margin-left: -76px;
-  transform: translate(-50%, -50%) rotate(-8deg) scale(0.78);
-}
-.home-card-images img:last-child {
-  margin-left: 76px;
-  transform: translate(-50%, -50%) rotate(8deg) scale(0.78);
-}
-.home-tool-card:hover .home-card-images img {
-  transform: translate(-50%, -54%) scale(1.05);
-}
-.home-tool-card:hover .home-card-images img:first-child {
-  transform: translate(-50%, -54%) rotate(-11deg) scale(0.8);
-}
-.home-tool-card:hover .home-card-images img:last-child {
-  transform: translate(-50%, -54%) rotate(11deg) scale(0.8);
-}
-.home-card-copy > span {
-  color: #c8a45e;
-  font-size: 11px;
-  font-weight: 800;
-}
-.home-card-copy h3 {
-  margin: 7px 0 10px;
+.home-card-copy h2 {
+  margin: 16px 0 6px;
   color: #eee1c3;
-  font-size: 30px;
-  letter-spacing: -0.04em;
+  font-size: 22px;
 }
 .home-card-copy p {
   margin: 0;
-  color: #929786;
-  font-size: 13px;
+  color: #b4ad96;
+  font-size: 14px;
   line-height: 1.75;
 }
 .home-card-action {
@@ -1498,9 +1448,18 @@ img {
     padding: 6px 7px 6px 10px;
     border-radius: 12px;
   }
+  .site-links {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
   .site-links a {
+    flex: 1 0 auto;
     padding: 6px 8px;
     font-size: 11px;
+    text-align: center;
+    white-space: nowrap;
   }
   .season-tabs {
     top: 5px;
@@ -2330,14 +2289,17 @@ img {
   .home-main {
     padding-top: 24px;
   }
-  .home-section-heading {
-    display: block;
-  }
+  .home-section-heading { margin-bottom: 16px; }
+  .home-card-topline { font-size: 12px; }
+  .home-card-topline img { width: 40px; height: 40px; }
+  .home-card-copy h2 { margin-top: 10px; font-size: 16px; }
+  .home-card-copy p { font-size: 12px; }
   .home-tool-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
   .home-tool-card {
-    min-height: 450px;
+    padding: 14px;
   }
   .canvas-toolbar {
     grid-template-columns: minmax(160px, 1fr) auto;
@@ -2376,24 +2338,10 @@ img {
   .site-nav-inner {
     padding: 6px;
   }
-  .site-links {
-    width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .site-links a {
-    flex: 1 0 auto;
-    text-align: center;
-  }
   .home-main {
-    width: min(100% - 16px, 1320px);
+    width: calc(100% - 32px);
   }
-  .home-tool-card {
-    min-height: 430px;
-  }
-  .home-card-images {
-    transform: scale(0.88);
-  }
+  .home-tool-card { padding: 12px; }
   .home-footer {
     display: grid;
     gap: 8px;
@@ -2482,14 +2430,10 @@ img {
     transform 150ms ease;
 }
 .crafting-directory-card {
-  grid-template-columns: 112px minmax(0, 1fr);
-  min-height: 150px;
-}
-.crafting-directory-card.featured {
-  border-color: rgba(219, 166, 75, 0.42);
-  background:
-    radial-gradient(circle at 14% 20%, rgba(207, 135, 56, 0.15), transparent 11rem),
-    linear-gradient(145deg, rgba(48, 43, 29, 0.98), rgba(20, 22, 17, 0.98));
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  text-align: center;
+  min-height: 180px;
 }
 .crafting-directory-card:hover,
 .crafting-character-card:hover {
@@ -2503,13 +2447,13 @@ img {
 }
 .crafting-directory-image {
   display: grid;
-  width: 112px;
-  height: 104px;
+  width: 64px;
+  height: 64px;
   place-items: center;
 }
 .crafting-directory-image img {
-  width: 104px;
-  height: 104px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
   filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.45));
 }
@@ -2519,10 +2463,9 @@ img {
 }
 .crafting-directory-card span,
 .crafting-character-card span {
-  color: #aa8247;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
+  display: block;
+  color: #a7a18e;
+  font-size: 11px;
 }
 .crafting-directory-card h2,
 .crafting-character-card h2 {
@@ -2534,13 +2477,16 @@ img {
 }
 .crafting-directory-card p,
 .crafting-character-card p {
-  margin: 0;
-  color: #777b6e;
-  font-size: 10px;
+  margin: 8px 0 0;
+  color: #d3aa59;
+  font-size: 12px;
+  font-weight: 800;
 }
 .crafting-character-card {
-  grid-template-columns: 82px minmax(0, 1fr);
-  min-height: 116px;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  text-align: center;
+  min-height: 180px;
 }
 .crafting-character-card > img {
   width: 82px;
@@ -2958,7 +2904,7 @@ img {
   }
   .crafting-directory-grid,
   .crafting-character-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .crafting-search-results {
     grid-template-columns: 1fr;
@@ -2969,23 +2915,8 @@ img {
 }
 
 @media (max-width: 390px) {
-  .crafting-directory-card {
-    grid-template-columns: 88px minmax(0, 1fr);
-  }
-  .crafting-directory-image {
-    width: 88px;
-  }
-  .crafting-directory-image img {
-    width: 82px;
-    height: 82px;
-  }
-  .crafting-character-card {
-    grid-template-columns: 70px minmax(0, 1fr);
-  }
-  .crafting-character-card > img {
-    width: 70px;
-    height: 70px;
-  }
+  .crafting-directory-card, .crafting-character-card { padding: 12px; }
+  .crafting-directory-card h2, .crafting-character-card h2 { font-size: 16px; }
   .crafting-card {
     padding: 13px;
   }
@@ -3061,3 +2992,9 @@ img {
     border-color: #bbb;
   }
 }
+
+.crafting-directory-title { margin: 0 0 16px; font-size: 24px; color: #eee1c3; }
+.crafting-filter-options { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+.crafting-filter-options label { display: flex; flex: 1 1 180px; align-items: center; gap: 8px; color: #b4ad96; font-size: 12px; }
+.crafting-filter-options select { flex: 1; min-width: 0; padding: 10px; border: 1px solid rgba(207, 169, 91, 0.25); border-radius: 8px; background: #1d2419; color: #efe3ca; font: inherit; }
+.crafting-filter-options select:focus-visible { outline: 2px solid #e4bb63; outline-offset: 2px; }
