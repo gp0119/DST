@@ -10,5 +10,5 @@
 
 图片统一放在 `public/images/sequitor/`，威尔逊头像复用 `public/images/characters/wilson.png`，
 Vue 通过项目共用的 `assetUrl` 引用，支持部署路径前缀。
-石柱、追随者与拉杆素材来自游戏动画包，`static/audio` 中声音来自 `rifts6.fsb`，
+石柱、追随者与拉杆素材来自游戏动画包，`public/images/sequitor/audio/` 中声音来自 `rifts6.fsb`，
 原始素材归 Klei 所有。所有素材均为本地资源，无远程依赖。

@@ -1,8 +1,7 @@
-import collapse from './static/audio/collapse.wav'
-import form from './static/audio/form.wav'
-import jump from './static/audio/jump.wav'
-import land from './static/audio/land.wav'
-import lever from './static/audio/lever.wav'
-import warning from './static/audio/warning.wav'
+import { assetUrl } from '../../lib/assets.js'
 
-export const soundSources = { collapse, form, jump, land, lever, warning }
+const names = ['collapse', 'form', 'jump', 'land', 'lever', 'warning']
+
+export const soundSources = Object.fromEntries(
+  names.map(name => [name, assetUrl(`images/sequitor/audio/${name}.wav`)])
+)
